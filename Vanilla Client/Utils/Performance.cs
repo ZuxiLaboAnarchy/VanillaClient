@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class Performance
     {

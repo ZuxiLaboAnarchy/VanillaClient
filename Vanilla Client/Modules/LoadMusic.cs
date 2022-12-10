@@ -4,7 +4,7 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace VanillaClient.Modules
+namespace Vanilla.Modules
 {
     internal class LoadMusic : VanillaModule
     {

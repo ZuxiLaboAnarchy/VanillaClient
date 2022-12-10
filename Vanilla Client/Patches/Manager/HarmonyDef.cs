@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using System.Reflection;
-namespace VanillaClient.Patches
+namespace Vanilla.Patches
 {
     public abstract class VanillaPatches
     {

@@ -1,8 +1,8 @@
 ﻿
-using VanillaClient.Modules;
-using VanillaClient.Patches;
+using Vanilla.Modules;
+using Vanilla.Patches;
 using System.Runtime.CompilerServices;
-using static VanillaClient.Utils.Performance;
+using static Vanilla.Utils.Performance;
 
 
 namespace VanillaClient

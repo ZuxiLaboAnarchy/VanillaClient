@@ -1,12 +1,12 @@
-﻿using VanillaClient.Config;
+﻿using Vanilla.Config;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using static VanillaClient.Utils.ServerHelper;
+using static Vanilla.Utils.ServerHelper;
 
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class Server
     {

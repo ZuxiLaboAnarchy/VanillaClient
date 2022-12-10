@@ -1,11 +1,11 @@
-﻿using VanillaClient.Modules;
+﻿using Vanilla.Modules;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace VanillaClient.Helpers
+namespace Vanilla.Helpers
 {
     internal class ProtectionHelper : VanillaModule
     {
@@ -80,7 +80,7 @@ namespace VanillaClient.Helpers
             try
             {
 
-                // VanillaClient.Protections.CAntiReverse.AntiDump();
+                // Vanilla.Protections.CAntiReverse.AntiDump();
 
             }
             catch (Exception e) { ExceptionHandler("Erase", e); }

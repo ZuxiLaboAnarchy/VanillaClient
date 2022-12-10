@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using System.Collections.Concurrent;
 
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class LogHandler
     {

@@ -5,7 +5,7 @@ using MelonLoader;
 //using MunchenClient.Core.Compatibility;
 using UnhollowerBaseLib;
 
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class UnmanagedUtils
     {

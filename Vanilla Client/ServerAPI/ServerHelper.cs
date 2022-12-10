@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
 using System.IO;
-using static VanillaClient.Utils.FileHelper;
+using static Vanilla.Utils.FileHelper;
 
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class ServerHelper
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VanillaClient.Patches.Harmony
+namespace Vanilla.Patches.Harmony
 {
     internal class CurserPatch : VanillaPatches
     {

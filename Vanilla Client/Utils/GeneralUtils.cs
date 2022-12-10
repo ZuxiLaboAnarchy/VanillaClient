@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Utils
+﻿namespace Vanilla.Utils
 {
     internal class GeneralUtils
     {

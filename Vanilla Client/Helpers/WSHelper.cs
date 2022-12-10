@@ -1,8 +1,8 @@
-﻿using VanillaClient.Modules;
-using VanillaClient.ServerAPI;
+﻿using Vanilla.Modules;
+using Vanilla.ServerAPI;
 using UnityEngine;
 
-namespace VanillaClient.Helpers
+namespace Vanilla.Helpers
 {
     internal class WSHelper : VanillaModule
     {

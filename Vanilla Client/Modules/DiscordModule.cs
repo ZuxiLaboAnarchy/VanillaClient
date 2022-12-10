@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Modules
+﻿namespace Vanilla.Modules
 {
 
     internal class DiscordManager : VanillaModule

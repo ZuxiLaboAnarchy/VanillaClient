@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace VanillaClient.Protections
+namespace Vanilla.Protections
 {
     internal class Memory
     {

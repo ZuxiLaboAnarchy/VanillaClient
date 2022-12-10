@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Helpers
+﻿namespace Vanilla.Helpers
 {
     internal class UnityExplorerHelper
     {

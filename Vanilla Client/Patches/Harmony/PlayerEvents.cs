@@ -15,7 +15,7 @@ using VRC.SDKBase;
 using static MelonLoader.MelonLogger;
 using static VRC.SDKBase.VRC_SpecialLayer;
 
-namespace VanillaClient.Patches.Harmony
+namespace Vanilla.Patches.Harmony
 {
     internal class PlayerEvents : VanillaPatches
     {

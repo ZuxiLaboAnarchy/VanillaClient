@@ -168,6 +168,7 @@
     <None Include="Resources\BuildTime.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Libs\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

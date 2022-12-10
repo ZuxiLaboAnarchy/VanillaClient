@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Config
+﻿namespace Vanilla.Config
 {
 
     internal class ServerResponce

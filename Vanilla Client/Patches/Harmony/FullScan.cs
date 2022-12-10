@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Patches.Harmony;
+﻿namespace Vanilla.Patches.Harmony;
 
 internal class Scanner : VanillaPatches
 {

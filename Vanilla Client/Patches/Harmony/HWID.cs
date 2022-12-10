@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace VanillaClient.Patches.Harmony
+namespace Vanilla.Patches.Harmony
 {
     internal class HWIDPatch : VanillaPatches
     {

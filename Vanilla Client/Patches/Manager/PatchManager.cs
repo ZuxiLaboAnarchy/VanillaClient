@@ -1,11 +1,11 @@
-﻿using VanillaClient.Patches.Harmony;
+﻿using Vanilla.Patches.Harmony;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using VRC.Steam;
 
-namespace VanillaClient.Patches
+namespace Vanilla.Patches
 {
     internal class PatchManager
     {

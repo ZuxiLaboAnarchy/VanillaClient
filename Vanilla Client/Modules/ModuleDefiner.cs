@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Modules
+﻿namespace Vanilla.Modules
 {
     public abstract class VanillaModule
     {

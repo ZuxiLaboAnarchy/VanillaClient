@@ -1,11 +1,11 @@
-﻿using VanillaClient.Modules;
+﻿using Vanilla.Modules;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using WebSocketSharp;
 
-namespace VanillaClient.ServerAPI
+namespace Vanilla.ServerAPI
 {
     internal class WSBase : VanillaModule
     {

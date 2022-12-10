@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VanillaClient.Patches.Harmony
+namespace Vanilla.Patches.Harmony
 {
     internal class Ani : VanillaPatches
     {

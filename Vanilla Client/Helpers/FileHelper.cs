@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace VanillaClient.Utils
+namespace Vanilla.Utils
 {
     internal class FileHelper
     {

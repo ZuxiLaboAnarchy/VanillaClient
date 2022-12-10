@@ -1,8 +1,8 @@
-﻿using VanillaClient.Helpers;
-using VanillaClient.ServerAPI;
+﻿using Vanilla.Helpers;
+using Vanilla.ServerAPI;
 using System.Collections.Generic;
 
-namespace VanillaClient.Modules
+namespace Vanilla.Modules
 {
     internal class ModuleManager
     {

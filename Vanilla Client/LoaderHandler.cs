@@ -1,8 +1,8 @@
 ﻿using MelonLoader;
 using System.Runtime.InteropServices;
-using static VanillaClient.Main;
-using static VanillaClient.Utils.Performance;
-using static VanillaClient.Utils.Server;
+using static Vanilla.Main;
+using static Vanilla.Utils.Performance;
+using static Vanilla.Utils.Server;
 
 namespace Cypher
 {
@@ -41,7 +41,7 @@ namespace Cypher
 
 
 
-                ShouldLoad = VanillaClient.Protections.LoaderProtections.CheckLoader(LoaderID);
+                ShouldLoad = Vanilla.Protections.LoaderProtections.CheckLoader(LoaderID);
                 if (!ShouldLoad) return;
 
                 if (MelonLoader.InternalUtils.UnityInformationHandler.GameName != "VRChat")
@@ -72,7 +72,7 @@ namespace Cypher
                 try
                 {
                     window = FindWindow(null, "VRChat");
-                    string strCompTime = VanillaClient.Properties.Resources.BuildTime.Replace("\n", "").Replace("  ", " ");
+                    string strCompTime = Vanilla.Properties.Resources.BuildTime.Replace("\n", "").Replace("  ", " ");
 
                     SetWindowText(window, $"Vanilla Client {ReleaseID} | Build Time: {strCompTime} ");
                     Console.Title = $"Vanilla Client {ReleaseID} | Build Time: " + strCompTime;

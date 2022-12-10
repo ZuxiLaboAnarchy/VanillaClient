@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace VanillaClient.Modules
+namespace Vanilla.Modules
 {
     internal class KeybindManager : VanillaModule
     {

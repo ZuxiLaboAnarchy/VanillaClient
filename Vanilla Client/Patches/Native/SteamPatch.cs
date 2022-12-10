@@ -2,7 +2,7 @@
 using MelonLoader;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
-namespace VanillaClient.Patches
+namespace Vanilla.Patches
 {
     internal class SteamworksPatch : VanillaPatches
 

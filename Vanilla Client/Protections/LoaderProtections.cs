@@ -1,4 +1,4 @@
-﻿namespace VanillaClient.Protections
+﻿namespace Vanilla.Protections
 {
     internal class LoaderProtections
     {
