@@ -18,9 +18,7 @@ namespace Vanilla.Config
         internal static int Theme { get => _theme; set { _theme = value; Save(); } }
 
         private static bool _TestBool = true;
-        internal static bool AutoUpdateInstaller { get => _TestBool; set { _TestBool = value; Save(); } }
-
-       
+        internal static bool TestBool { get => _TestBool; set { _TestBool = value; Save(); } }
 
         internal static void Load()
         {
@@ -51,7 +49,7 @@ namespace Vanilla.Config
             DocumentSyntax doc = new DocumentSyntax();
             TableSyntax tbl = new TableSyntax("Main");
             //tbl.Items.Add(new KeyValueSyntax("Theme", new IntegerValueSyntax(_theme)));
-            tbl.Items.Add(new KeyValueSyntax("AutoUpdateInstaller", new BooleanValueSyntax(_TestBool)));
+            tbl.Items.Add(new KeyValueSyntax("TestBool", new BooleanValueSyntax(_TestBool)));
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);
             File.WriteAllText(FilePath, doc.ToString());
