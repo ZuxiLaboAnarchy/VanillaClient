@@ -40,7 +40,7 @@ namespace Vanilla.Config
                 return;
            
             if (installertbl.ContainsKey("TestBool"))
-                Boolean.TryParse(installertbl["AutoUpdateInstaller"].ToString(), out _TestBool);
+                Boolean.TryParse(installertbl["TestBool"].ToString(), out _TestBool);
 
             Dev("Config", "Loaded...");
 
