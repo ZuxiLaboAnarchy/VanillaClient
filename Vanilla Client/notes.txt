@@ -1,0 +1,3 @@
+﻿MonoBehaviourPrivateAc1AcOb2AcInStHa2Unique  => NetworkManager
+MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique => VRC.Player
+MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique => VRCPlayer

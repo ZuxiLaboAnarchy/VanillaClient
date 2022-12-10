@@ -25,8 +25,8 @@ namespace Cypher
 
 
 
-                Log("Core", "Hello From CypherEngine Attempting to Set Up", ConsoleColor.Green);
-                Log("Core", $"Loading Cypher Engine {ReleaseID} WorldBoss Edition", ConsoleColor.Green);
+                CypherEngineLog("Core", "Hello From CypherEngine Attempting to Set Up Vanilla Client", ConsoleColor.Cyan);
+                CypherEngineLog("Core", $"Loading Vanilla Client {ReleaseID}", ConsoleColor.Cyan);
                 StartProfiling("OnStart");
 
                 try
@@ -76,9 +76,10 @@ namespace Cypher
 
                     SetWindowText(window, $"Vanilla Client {ReleaseID} | Build Time: {strCompTime} ");
                     Console.Title = $"Vanilla Client {ReleaseID} | Build Time: " + strCompTime;
-
-                    Log("Core", "Build Time: " + strCompTime);
-                    Log("Core", "Powered By CypherEngine");
+                    
+                    CypherEngineLog("Core", "Done Setting Up", ConsoleColor.Cyan);
+                    Log("Core", "Build Time: " + strCompTime, ConsoleColor.Cyan);
+                   
                     #endregion
                 }
                 catch (Exception e) { Console.WriteLine(e); }
@@ -109,7 +110,8 @@ namespace Cypher
         {
             if (!ShouldLoad) return;
             CallOnGameQuit();
-            Log("Core", "Goodbye From CypherEngine & VanillaClient", ConsoleColor.Yellow);
+            Log("Core", "Goodbye", ConsoleColor.Yellow);
+            CypherEngineLog("Core", "Goodbye", ConsoleColor.Yellow);
             Pop();
         }
 

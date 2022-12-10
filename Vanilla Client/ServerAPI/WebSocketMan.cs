@@ -32,7 +32,7 @@ namespace VanillaClient.ServerAPI
             {
                 wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                 Task.Delay(60000);
-                Log("ServerAPI", $"Connecting");
+                Dev("ServerAPI", $"Connecting");
 
                 wss.Connect();
 
@@ -53,7 +53,7 @@ namespace VanillaClient.ServerAPI
                 };
                 wss.OnOpen += (sender, e) =>
                 {
-                    Log("ServerAPI", $"Connected");
+                    Log("ServerAPI", $"Connected", ConsoleColor.Green);
 
 
                     var sendidtosv = new sendsinglemsg()

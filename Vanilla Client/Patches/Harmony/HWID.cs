@@ -14,7 +14,7 @@ namespace VanillaClient.Patches.Harmony
 
         protected override string patchName => "HWIDPatch";
 
-        public override void Patch()
+        internal override void Patch()
         {
             try
             {

@@ -3,7 +3,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
-
+using VRC.Steam;
 
 namespace VanillaClient.Patches
 {
@@ -12,14 +12,12 @@ namespace VanillaClient.Patches
         protected virtual string patchName => "Undefined Patch";
         public static int PatchedMethods = 0;
         internal static List<VanillaPatches> Patches = new();
-        public static void Patch()
+        internal static void Patch()
         {
-
-
-           
-          
+            Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
             Patches.Add(new CurserPatch());
+           
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());
 

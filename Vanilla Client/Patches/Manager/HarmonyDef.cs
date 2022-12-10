@@ -8,7 +8,7 @@ namespace VanillaClient.Patches
 
         protected virtual string patchName => "Undefined Patch";
 
-        public virtual void Patch() { }
+        internal virtual void Patch() { }
 
         public virtual void Unpatch() { }
 

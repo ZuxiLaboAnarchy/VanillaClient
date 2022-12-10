@@ -10,7 +10,7 @@ namespace VanillaClient.Modules
     {
         public override void Start()
         {
-            Log("LoadMusic", "Loading Music");
+            Dev("LoadMusic", "Loading Music");
             MelonCoroutines.Start(Starter());
         }
 

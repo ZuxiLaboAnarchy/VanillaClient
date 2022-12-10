@@ -16,7 +16,7 @@ namespace VanillaClient.Modules
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
 
-            Log("Script Manager", "Script Manager Initilized =)");
+            Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
         }
 
 

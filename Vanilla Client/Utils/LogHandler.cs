@@ -16,9 +16,13 @@ namespace VanillaClient.Utils
         private static readonly ConcurrentQueue<ConsoleLog> WrittenToConsole = new ConcurrentQueue<ConsoleLog>();
 
         private static readonly MelonLogger.Instance loggerInstance = new MelonLogger.Instance("VanillaClient");
+        private static readonly MelonLogger.Instance CypherEngineLogger = new MelonLogger.Instance("CypherEngine");
 
-
-
+        internal static void CypherEngineLog(string Identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
+        {
+            CypherEngineLogger.Msg(color, "[" + Identify + "] "  + message);
+            
+        }
         internal static void Log(string Identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
         {
             WrittenToConsole.Enqueue(new ConsoleLog
@@ -75,7 +79,7 @@ namespace VanillaClient.Utils
         }
 
 
-        internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.DarkGreen)
+        internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.DarkMagenta)
         {
             if (DevMode)
             {

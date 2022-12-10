@@ -8,9 +8,9 @@ namespace VanillaClient.Patches.Harmony
 {
     internal class Ani : VanillaPatches
     {
-        public override void Patch()
+        internal override void Patch()
         {
-            PatchMethod(typeof(Analytics).GetMethod(nameof(Analytics.Update)), GetPatch(nameof(ReturnFalse)), null);
+         ///   PatchMethod(typeof(Analytics).GetMethod(nameof(Analytics.Update)), GetPatch(nameof(ReturnFalse)), null);
         }
     }
 }

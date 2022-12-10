@@ -9,7 +9,7 @@
 
         //    ExitGames.Client.Photon.
 
-        public override void Patch()
+        internal override void Patch()
         {
             try
             {

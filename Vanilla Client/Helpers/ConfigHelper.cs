@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VanillaClient.Helpers
 {
-    internal class WSHelper : VanillaModule
+    internal class ConfigHelper : VanillaModule
     {
 
         private float nextPop = 0f;
@@ -49,10 +49,7 @@ namespace VanillaClient.Helpers
         {
             if (Time.realtimeSinceStartup >= nextPop)
             {
-                nextPop = Time.realtimeSinceStartup + 15f;
-                LogHandler.Dev("WSHelper", "Poping WS Bubble");
-                WSBase.Pop();
-               // WSBase.sendmessage("Test", "1", false);
+              MainConfig.Save();
             }
 
         }
