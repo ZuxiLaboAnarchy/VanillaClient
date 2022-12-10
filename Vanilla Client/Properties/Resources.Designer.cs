@@ -61,7 +61,7 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sat 12/10/2022  4:36:51.81
+        ///   Looks up a localized string similar to Sat 12/10/2022 17:59:11.87
         ///.
         /// </summary>
         internal static string BuildTime {

@@ -9,6 +9,7 @@ namespace Vanilla.Modules
         internal static List<VanillaModule> Modules = new();
         public static void InitModules()
         {
+            Modules.Add(new ConfigHelper());
             Modules.Add(new WSBase());
             Modules.Add(new WSHelper());
             Modules.Add(new ProtectionHelper());
