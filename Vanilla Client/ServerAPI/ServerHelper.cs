@@ -1,0 +1,51 @@
+﻿using Microsoft.Win32;
+using System.IO;
+using static VanillaClient.Utils.FileHelper;
+
+namespace VanillaClient.Utils
+{
+    internal class ServerHelper
+    {
+
+        internal static string GetKey()
+        {
+            if (!File.Exists(GetMainFolder() + "\\HyperVoid.Auth"))
+            {
+                throw new Exception("HyperVoid Auth File Not Found");
+            }
+            if (new FileInfo(GetMainFolder() + "\\HyperVoid.Auth").Length <= 0)
+            {
+                throw new Exception("No Key Found");
+            }
+            return File.ReadAllText(GetMainFolder() + "\\HyperVoid.Auth").Trim();
+        }
+
+        public static string GetHWID()
+        {
+            string HWID = "";
+
+            string name = "SOFTWARE\\Microsoft\\Cryptography";
+            string name2 = "MachineGuid";
+            using (RegistryKey registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            {
+                using (RegistryKey registryKey2 = registryKey.OpenSubKey(name))
+                {
+                    if (registryKey2 != null)
+                    {
+                        object value = registryKey2.GetValue(name2);
+                        if (value != null)
+                            HWID = value.ToString();
+
+                    }
+                }
+                return HWID;
+            }
+        }
+
+        internal static long GetCurrentTimeInEpoch()
+        { return Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds); }
+
+
+
+    }
+}
