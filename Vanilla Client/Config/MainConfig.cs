@@ -1,6 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
+using Vanilla.Tomlyn;
+using Vanilla.Tomlyn.Model;
+using Vanilla.Tomlyn.Syntax;
 using Vanilla.Utils;
+
 namespace Vanilla.Config
 {
 
@@ -13,23 +17,10 @@ namespace Vanilla.Config
         private static int _theme = 0;
         internal static int Theme { get => _theme; set { _theme = value; Save(); } }
 
-        private static bool _autoupdateinstaller = true;
-        internal static bool AutoUpdateInstaller { get => _autoupdateinstaller; set { _autoupdateinstaller = value; Save(); } }
+        private static bool _TestBool = true;
+        internal static bool AutoUpdateInstaller { get => _TestBool; set { _TestBool = value; Save(); } }
 
-        private static bool _closeaftercompletion = true;
-        internal static bool CloseAfterCompletion { get => _closeaftercompletion; set { _closeaftercompletion = value; Save(); } }
-
-        private static bool _showalphaprereleases = false;
-        internal static bool ShowAlphaPreReleases { get => _showalphaprereleases; set { _showalphaprereleases = value; Save(); } }
-
-        private static bool _rememberlastselectedgame = false;
-        internal static bool RememberLastSelectedGame { get => _rememberlastselectedgame; set { _rememberlastselectedgame = value; Save(); } }
-
-        private static string _lastselectedgamepath = null;
-        internal static string LastSelectedGamePath { get => _lastselectedgamepath; set { _lastselectedgamepath = value; Save(); } }
-
-        private static bool _highlightlogfilelocation = true;
-        internal static bool HighlightLogFileLocation { get => _highlightlogfilelocation; set { _highlightlogfilelocation = value; Save(); } }
+       
 
         internal static void Load()
         {
@@ -42,28 +33,14 @@ namespace Vanilla.Config
             if ((doc == null) || doc.HasErrors)
                 return;
             TomlTable tbl = doc.ToModel();
-            if ((tbl.Count <= 0) || !tbl.ContainsKey("Installer"))
+            if ((tbl.Count <= 0) || !tbl.ContainsKey("Main"))
                 return;
-            TomlTable installertbl = (TomlTable)tbl["Installer"];
+            TomlTable installertbl = (TomlTable)tbl["Main"];
             if ((installertbl == null) || (installertbl.Count <= 0))
                 return;
-            if (installertbl.ContainsKey("Theme"))
-                Int32.TryParse(installertbl["Theme"].ToString(), out _theme);
-            if (installertbl.ContainsKey("AutoUpdateInstaller"))
-                Boolean.TryParse(installertbl["AutoUpdateInstaller"].ToString(), out _autoupdateinstaller);
-            if (installertbl.ContainsKey("CloseAfterCompletion"))
-                Boolean.TryParse(installertbl["CloseAfterCompletion"].ToString(), out _closeaftercompletion);
-            if (installertbl.ContainsKey("ShowAlphaPreReleases"))
-                Boolean.TryParse(installertbl["ShowAlphaPreReleases"].ToString(), out _showalphaprereleases);
-            if (installertbl.ContainsKey("RememberLastSelectedGame"))
-                Boolean.TryParse(installertbl["RememberLastSelectedGame"].ToString(), out _rememberlastselectedgame);
-            if (installertbl.ContainsKey("LastSelectedGamePath"))
-                _lastselectedgamepath = installertbl["LastSelectedGamePath"].ToString();
-            if (installertbl.ContainsKey("HighlightLogFileLocation"))
-                Boolean.TryParse(installertbl["HighlightLogFileLocation"].ToString(), out _highlightlogfilelocation);
-
-
-
+           
+            if (installertbl.ContainsKey("TestBool"))
+                Boolean.TryParse(installertbl["AutoUpdateInstaller"].ToString(), out _TestBool);
 
             Dev("Config", "Loaded...");
 
@@ -72,14 +49,10 @@ namespace Vanilla.Config
         internal static void Save()
         {
             DocumentSyntax doc = new DocumentSyntax();
-            TableSyntax tbl = new TableSyntax("Installer");
-            tbl.Items.Add(new KeyValueSyntax("Theme", new IntegerValueSyntax(_theme)));
-            tbl.Items.Add(new KeyValueSyntax("AutoUpdateInstaller", new BooleanValueSyntax(_autoupdateinstaller)));
-            tbl.Items.Add(new KeyValueSyntax("CloseAfterCompletion", new BooleanValueSyntax(_closeaftercompletion)));
-            tbl.Items.Add(new KeyValueSyntax("ShowAlphaPreReleases", new BooleanValueSyntax(_showalphaprereleases)));
-            tbl.Items.Add(new KeyValueSyntax("RememberLastSelectedGame", new BooleanValueSyntax(_rememberlastselectedgame)));
-            tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
-            tbl.Items.Add(new KeyValueSyntax("HighlightLogFileLocation", new BooleanValueSyntax(_highlightlogfilelocation)));
+            TableSyntax tbl = new TableSyntax("Main");
+            //tbl.Items.Add(new KeyValueSyntax("Theme", new IntegerValueSyntax(_theme)));
+            tbl.Items.Add(new KeyValueSyntax("AutoUpdateInstaller", new BooleanValueSyntax(_TestBool)));
+            //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);
             File.WriteAllText(FilePath, doc.ToString());
 
