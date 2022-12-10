@@ -8,8 +8,8 @@
     <OutputType>Library</OutputType>
     <LangVersion>10</LangVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VanillaClient</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>Vanilla</RootNamespace>
+    <AssemblyName>core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

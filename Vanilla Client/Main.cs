@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using static Vanilla.Utils.Performance;
 
 
-namespace VanillaClient
+namespace Vanilla
 {
     internal class Main
     {
