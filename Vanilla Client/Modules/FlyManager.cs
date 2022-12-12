@@ -11,10 +11,10 @@ namespace Vanilla.Modules
 {
     internal class FlyManager : VanillaModule
     {
+
+        private Transform camera() => GameObject.Find("Camera (eye)").transform;
         public override void Update()
         {
-            private Transform camera() => GameObject.Find("Camera (eye)").transform;
-            
             if (!Nig.flytoggle) return;
 
             if (VRC.Player.prop_Player_0 == null) return;
