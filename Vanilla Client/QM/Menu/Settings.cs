@@ -24,7 +24,14 @@ namespace Vanilla.QM.Menu
                 MainConfig.Save();
                 GeneralUtils.Restart();
             }, "Restart Game");
-          
+
+            var closeGame = new QMSingleButton(settingsmenu, 1, 4, "Close Game", delegate
+            {
+                MainConfig.Save();
+                GeneralUtils.CloseGame();
+            }, "Close Game");
+
+
             var LoadMusicToggle = new QMToggleButton(miscsettings, 2, 0, "LoadMusic", delegate
 
             {
