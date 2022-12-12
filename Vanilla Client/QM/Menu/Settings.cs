@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using Vanilla.Buttons.QM;
 using Vanilla.Config;
 using Vanilla.Modules;
+using static Vanilla.Main;
 
 namespace Vanilla.QM.Menu
 {
@@ -44,7 +46,22 @@ namespace Vanilla.QM.Menu
                 MainConfig.Save();
             }, "Toggle Load Music");
 
+            /* Fly
+            new NToggle("Flying Apple", Menu.GetMenu(), () =>
+            {
+                MelonLogger.Msg("On");
+                Console.WriteLine("----");
+                Nig.flytoggle = true;
+                VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = false;
+            }, () =>
+            {
+                MelonLogger.Msg("Off");
+                Console.WriteLine("----");
+                Nig.flytoggle = false;
+                VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = true;
 
+            }, Nig.flytoggle, true, 1, 7);
+            */
 
 
 
