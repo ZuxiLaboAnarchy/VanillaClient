@@ -13,7 +13,7 @@
             eventHandlers.errorCallback = delegate (int code, string message) { };
             presence.state = $".gg/hvl";
 
-            presence.details = "Encrypted";
+            presence.details = "Sweet Like Candy";
             presence.largeImageKey = largeImage;
             presence.largeImageText = "by Cypher";
             presence.smallImageKey = "<3";
@@ -56,7 +56,7 @@
 
         }
 
-        public static string largeImage = "https://files.hvls.cloud/Cypher/KEzARUlo09.png";
+        public static string largeImage = "https://files.hvls.cloud/Cypher/JeFibEWO39.jpg";
 
         public static string largeImageText = "By Cypher";
 
@@ -64,7 +64,7 @@
 
         public static string smallImageText = "";
 
-        public static string details = $"World Boss ({Cypher.CoreMain.ReleaseID})";
+        public static string details = $"Not A Modifyed Client";
 
         public static string state = "hvl.gg/discord";
     }

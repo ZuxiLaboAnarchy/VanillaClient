@@ -24,6 +24,7 @@ namespace Vanilla.QM.Menu
                 MainConfig.Save();
                 GeneralUtils.Restart();
             }, "Restart Game");
+          
             var LoadMusicToggle = new QMToggleButton(miscsettings, 2, 0, "LoadMusic", delegate
 
             {
@@ -35,6 +36,17 @@ namespace Vanilla.QM.Menu
                 MainConfig.LoadMusic = false;
                 MainConfig.Save();
             }, "Toggle Load Music");
+
+
+
+
+
+
+
+
+            if (MainConfig.LoadMusic == true)
+            { LoadMusicToggle.ClickMe(); }
+
         }
 
      

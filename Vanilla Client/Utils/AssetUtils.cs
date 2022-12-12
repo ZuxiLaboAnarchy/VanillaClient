@@ -15,6 +15,7 @@ namespace Vanilla.Utils
         {
             cachedAssetBundle = AssetBundle.LoadFromMemory_Internal(Properties.Resources.ClientBundle, 0u); //File.ReadAllBytes(filePath), 0u);
             cachedAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            Dev("Assets", "Assets Loaded Successfully");
         }
 
         internal static Texture2D LoadTexture(string textureName)

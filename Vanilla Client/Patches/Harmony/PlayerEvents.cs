@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MelonLoader;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
+using Vanilla.Config;
+using Vanilla.ServerAPI;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
@@ -81,6 +84,56 @@ namespace Vanilla.Patches.Harmony
                   }
               }
           }*/
+
+
+
+
+        private static void OnAvatarChanged(VRCPlayer __instance)
+        {
+
+            if (__instance == null) return;
+            //__instance.Method_Public_add_Void_MulticastDelegateNPublicSealedVoUnique_0(new Action(() =>
+
+            __instance.Method_Private_Void_GameObject_VRC_AvatarDescriptor_PDM_0(new Action(() =>
+            {
+                if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
+                {
+
+                    try
+                    {
+                        var a = __instance.field_Private_ApiAvatar_0;
+
+                        var senda = new AvatarLog()
+                        {
+                            AvatarName = a.name,
+
+                            Author = a.authorName,
+
+                            Authorid = a.authorId,
+
+                            Avatarid = a.id,
+
+                            Description = a.description,
+
+                            Asseturl = a.assetUrl,
+
+                            Image = a.imageUrl,
+
+                            Platform = a.platform,
+
+                            Status = a.releaseStatus,
+
+                            code = "9",
+
+                        };
+                         WSBase.sendmsg($"{JsonConvert.SerializeObject(senda)}");
+                    }
+                    catch { }
+
+                }
+            }));
+        }
+
 
 
         private static void VRCPlayer_Awake(VRCPlayer __instance)

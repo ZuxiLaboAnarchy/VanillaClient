@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+using Vanilla.Config;
 
 namespace Vanilla.Modules
 {
@@ -21,6 +22,7 @@ namespace Vanilla.Modules
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
                 LogHandler.RePop();
+                MainConfig.Load();
             }
 
 

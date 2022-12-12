@@ -20,6 +20,7 @@ namespace Vanilla
 
             AssetLoader.LoadAssetBundle();
 
+
             
             try { for (int i = 0; i < PatchManager.Patches.Count; i++) PatchManager.Patches[i].Patch(); } catch (Exception e) { ExceptionHandler("Patches", e); }
 

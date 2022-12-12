@@ -1,6 +1,5 @@
 ﻿using MelonLoader;
 using System.Collections;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,7 +9,7 @@ namespace Vanilla.Modules
     {
         public override void Start()
         {
-           // Dev("LoadMusic", "Loading Music");
+            // Dev("LoadMusic", "Loading Music");
             MelonCoroutines.Start(Starter());
         }
 
@@ -18,19 +17,29 @@ namespace Vanilla.Modules
 
         public static IEnumerator Starter()
         {
-           
+
             if (Config.MainConfig.LoadMusic)
             {
-                var clip = UnityWebRequest.Get(MusicPath);
+                AudioClip audioclip = null;
 
-                clip.SendWebRequest();
-                while (!clip.isDone) yield return null;
-                if (clip.isHttpError) yield break;
 
-                var audioclip = WebRequestWWW.InternalCreateAudioClipUsingDH(clip.downloadHandler, clip.url, false, false, AudioType.UNKNOWN);
 
-                audioclip.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
+                if (MusicPath == string.Empty)
+                { Dev("Audio Handler", "Loading Local Audio");  audioclip = AssetLoader.LoadAudio("LoadMusic"); }
+
+                else
+                {
+                    var clip = UnityWebRequest.Get(MusicPath);
+
+                    clip.SendWebRequest();
+                    while (!clip.isDone) yield return null;
+                    if (clip.isHttpError) yield break;
+
+                    audioclip = WebRequestWWW.InternalCreateAudioClipUsingDH(clip.downloadHandler, clip.url, false, false, AudioType.UNKNOWN);
+
+                    audioclip.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                }
                 //load screen when the game first starts
 
                 while (GameObject.Find("LoadingBackground_TealGradient_Music") == null) yield return null;
@@ -57,24 +66,24 @@ namespace Vanilla.Modules
 
 
 
-     /*   public static void LoadSkyWhenever()
-        {
+        /*   public static void LoadSkyWhenever()
+           {
 
-            SkyBoxAssetBundle = AssetBundle.LoadFromFile($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");
-            skyBoxMaterial = SkyBoxAssetBundle.LoadAsset_Internal("Load.mat", Il2CppType.Of<Material>()).Cast<Material>();
-            UnityEngine.Object.Instantiate<Material>(skyBoxMaterial);
-            bool flag = skyBoxMaterial == null;
-            if (flag)
-            {
-                API.LogHandler.Error("SkyBox Mat was null ping Hyper", "Skyboxes");
-            }
-            RenderSettings.skybox = skyBoxMaterial;
-            SkyBoxAssetBundle.Unload(false);
-            firstload = false;
-        }*/
+               SkyBoxAssetBundle = AssetBundle.LoadFromFile($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");
+               skyBoxMaterial = SkyBoxAssetBundle.LoadAsset_Internal("Load.mat", Il2CppType.Of<Material>()).Cast<Material>();
+               UnityEngine.Object.Instantiate<Material>(skyBoxMaterial);
+               bool flag = skyBoxMaterial == null;
+               if (flag)
+               {
+                   API.LogHandler.Error("SkyBox Mat was null ping Hyper", "Skyboxes");
+               }
+               RenderSettings.skybox = skyBoxMaterial;
+               SkyBoxAssetBundle.Unload(false);
+               firstload = false;
+           }*/
 
-    //    private static AssetBundle SkyBoxAssetBundle { get; set; }
-  //      private static Material skyBoxMaterial;
+        //    private static AssetBundle SkyBoxAssetBundle { get; set; }
+        //      private static Material skyBoxMaterial;
         public static bool firstload = true;
     }
 }

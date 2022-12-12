@@ -19,7 +19,7 @@ namespace Vanilla.Config
         private static bool _LoadMusic = true;
         internal static bool LoadMusic { get => _LoadMusic; set { _LoadMusic = value; Save(); } }
 
-        private static string _MusicPath = "https://files.hvls.cloud/Cypher/xUgEqIGa45.mp3";
+        private static string _MusicPath = "";
         internal static string MusicPath { get => _MusicPath; set { _MusicPath = value; Save(); } }
 
 

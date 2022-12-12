@@ -91,7 +91,7 @@ namespace Vanilla.ServerAPI
                 { continue; }
 
                 if (result.code == null)
-                { Log("Server API", "Failed To Send Message", ConsoleColor.Red, "OnClientReconnect"); }
+                { Log("Server API", "Failed To Send Message Message Identifyer wass Null", ConsoleColor.Red, "OnPop"); }
 
                 var PopMessage = new sendsinglemsg()
                 {
@@ -104,7 +104,7 @@ namespace Vanilla.ServerAPI
                     HWID = ServerHelper.GetHWID(),
                 };
 
-
+                Dev("ServerAPI(WS)", JsonConvert.SerializeObject(PopMessage));
 
 
                 sendmsg($"{JsonConvert.SerializeObject(PopMessage)}");
