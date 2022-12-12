@@ -38,7 +38,7 @@ namespace Vanilla.Modules
                 var source1 = GameObject.Find("LoadingBackground_TealGradient_Music").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source1.clip = audioclip;
                 source1.Play();
-                Log("LoadMusic", "Loading Music 1 Set Succes");
+
 
 
                 //every load screen after
@@ -50,7 +50,7 @@ namespace Vanilla.Modules
                 source2.Play();
                 GameObject.Find("MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
                 yield return new WaitForSeconds(0.5f);
-                Log("LoadMusic", "Loading Music 2 Set Succes");
+
 
             }
         }
