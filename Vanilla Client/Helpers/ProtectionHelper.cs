@@ -21,8 +21,10 @@ namespace Vanilla.Helpers
         {
 #if !PUBLIC
             return;
-#endif 
+#endif
+#pragma warning disable CS0162 // Unreachable code detected
             ProtectionHelperTimer = new System.Timers.Timer(1000);
+#pragma warning restore CS0162 // Unreachable code detected
             ProtectionHelperTimer.Elapsed += CheckConnection;
             ProtectionHelperTimer.AutoReset = true;
             ProtectionHelperTimer.Enabled = true;

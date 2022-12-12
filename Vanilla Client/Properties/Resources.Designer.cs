@@ -61,12 +61,22 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sat 12/10/2022 17:59:11.87
+        ///   Looks up a localized string similar to Mon 12/12/2022  5:11:31.72
         ///.
         /// </summary>
         internal static string BuildTime {
             get {
                 return ResourceManager.GetString("BuildTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ClientBundle {
+            get {
+                object obj = ResourceManager.GetObject("ClientBundle", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

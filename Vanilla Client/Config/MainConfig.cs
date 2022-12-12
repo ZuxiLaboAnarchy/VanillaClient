@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Vanilla.Modules;
 using Vanilla.Tomlyn;
 using Vanilla.Tomlyn.Model;
 using Vanilla.Tomlyn.Syntax;
@@ -13,6 +14,15 @@ namespace Vanilla.Config
        
 
         private static string FilePath = Path.Combine(FileHelper.GetCheatFolder(), "Vanilla.cfg");
+
+
+        private static bool _LoadMusic = true;
+        internal static bool LoadMusic { get => _LoadMusic; set { _LoadMusic = value; Save(); } }
+
+        private static string _MusicPath = "https://files.hvls.cloud/Cypher/xUgEqIGa45.mp3";
+        internal static string MusicPath { get => _MusicPath; set { _MusicPath = value; Save(); } }
+
+
 
         private static int _theme = 0;
         internal static int Theme { get => _theme; set { _theme = value; Save(); } }
@@ -40,6 +50,17 @@ namespace Vanilla.Config
             if (installertbl.ContainsKey("TestBool"))
                 Boolean.TryParse(installertbl["TestBool"].ToString(), out _TestBool);
 
+            if (installertbl.ContainsKey("LoadMusic"))
+                Boolean.TryParse(installertbl["LoadMusic"].ToString(), out _LoadMusic);
+
+         
+
+
+            if (installertbl.ContainsKey("MusicPath"))
+                _MusicPath = installertbl["MusicPath"].ToString();
+
+
+
             Dev("Config", "Loaded...");
 
         }
@@ -49,7 +70,13 @@ namespace Vanilla.Config
             DocumentSyntax doc = new DocumentSyntax();
             TableSyntax tbl = new TableSyntax("Main");
             //tbl.Items.Add(new KeyValueSyntax("Theme", new IntegerValueSyntax(_theme)));
-            tbl.Items.Add(new KeyValueSyntax("TestBool", new BooleanValueSyntax(_TestBool)));
+            //tbl.Items.Add(new KeyValueSyntax("TestBool", new BooleanValueSyntax(_TestBool)));
+            tbl.Items.Add(new KeyValueSyntax("LoadMusic", new BooleanValueSyntax(_LoadMusic)));
+            tbl.Items.Add(new KeyValueSyntax("MusicPath", new StringValueSyntax(_MusicPath)));
+
+
+
+
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);
             File.WriteAllText(FilePath, doc.ToString());

@@ -45,14 +45,15 @@ namespace Vanilla.ServerAPI
 
                     if (HasConn && HasConn)
                     {
-                        Log("ServerAPI", $"Disconnected", ConsoleColor.Red);
-                        Log("ServerAPI", $"Attempting Reconnect in 3 Seconds", ConsoleColor.Yellow);
+                     //   Log("ServerAPI", $"Disconnected", ConsoleColor.Red);
+                       // Log("ServerAPI", $"Attempting Reconnect in 3 Seconds", ConsoleColor.Yellow);
                     }
                     Task.Delay(3000);
                     tryrecconect();
                 };
                 wss.OnOpen += (sender, e) =>
                 {
+                    if (!HasConn)
                     Log("ServerAPI", $"Connected", ConsoleColor.Green);
 
 

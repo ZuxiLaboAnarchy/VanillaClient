@@ -10,7 +10,7 @@ namespace Vanilla.Modules
     {
         public override void Start()
         {
-            Dev("LoadMusic", "Loading Music");
+           // Dev("LoadMusic", "Loading Music");
             MelonCoroutines.Start(Starter());
         }
 
@@ -19,9 +19,9 @@ namespace Vanilla.Modules
         public static IEnumerator Starter()
         {
            
-            if (true)
+            if (Config.MainConfig.LoadMusic)
             {
-                var clip = UnityWebRequest.Get(@"C:\Users\Shadow\Downloads\SnapSave.io - Yuno Miles - First Day Of Christmas (Official Video) (Prod.YunoMarr) (128 kbps).mp3");
+                var clip = UnityWebRequest.Get(MusicPath);
 
                 clip.SendWebRequest();
                 while (!clip.isDone) yield return null;
@@ -33,22 +33,22 @@ namespace Vanilla.Modules
 
                 //load screen when the game first starts
 
-                while (GameObject.Find("UserInterface/LoadingBackground_TealGradient_Music") == null) yield return null;
+                while (GameObject.Find("LoadingBackground_TealGradient_Music") == null) yield return null;
 
-                var source1 = GameObject.Find("UserInterface/LoadingBackground_TealGradient_Music").transform.Find("LoadingSound").GetComponent<AudioSource>();
+                var source1 = GameObject.Find("LoadingBackground_TealGradient_Music").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source1.clip = audioclip;
                 source1.Play();
                 Log("LoadMusic", "Loading Music 1 Set Succes");
 
 
                 //every load screen after
-                while (GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup") == null) yield return null;
+                while (GameObject.Find("MenuContent/Popups/LoadingPopup") == null) yield return null;
 
 
-                var source2 = GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup").transform.Find("LoadingSound").GetComponent<AudioSource>();
+                var source2 = GameObject.Find("MenuContent/Popups/LoadingPopup").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source2.clip = audioclip;
                 source2.Play();
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
+                GameObject.Find("MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
                 yield return new WaitForSeconds(0.5f);
                 Log("LoadMusic", "Loading Music 2 Set Succes");
 
@@ -73,8 +73,8 @@ namespace Vanilla.Modules
             firstload = false;
         }*/
 
-        private static AssetBundle SkyBoxAssetBundle { get; set; }
-        private static Material skyBoxMaterial;
+    //    private static AssetBundle SkyBoxAssetBundle { get; set; }
+  //      private static Material skyBoxMaterial;
         public static bool firstload = true;
     }
 }

@@ -80,6 +80,9 @@ namespace Cypher
                     CypherEngineLog("Core", "Done Setting Up", ConsoleColor.Cyan);
                     Log("Core", "Build Time: " + strCompTime, ConsoleColor.Cyan);
                    
+
+
+                  
                     #endregion
                 }
                 catch (Exception e) { Console.WriteLine(e); }

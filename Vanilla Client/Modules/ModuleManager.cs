@@ -1,6 +1,7 @@
-﻿using Vanilla.Helpers;
+﻿using System.Collections.Generic;
+using Vanilla.Helpers;
+using Vanilla.QM;
 using Vanilla.ServerAPI;
-using System.Collections.Generic;
 
 namespace Vanilla.Modules
 {
@@ -16,14 +17,16 @@ namespace Vanilla.Modules
             Modules.Add(new DiscordManager());
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
+            Modules.Add(new ButtonLoader());
 
+            Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
         }
 
 
         public static void Update()
         {
-            for (int i = 0; i < Modules.Count; i++) Modules[i].Update();
+            for (int i = 0; i < Modules.Count; i++) { Modules[i].Update(); }
         }
 
         protected internal static void LateStart()

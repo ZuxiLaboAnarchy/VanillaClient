@@ -27,7 +27,9 @@ namespace Vanilla.Patches.Harmony
 
 
 
-           PatchMethod(typeof(VRC_Player).GetMethod(nameof(VRC_Player.Awake), AccessTools.all),null , GetLocalPatch("VRCPlayer_Awake")); // Post So It Exists.
+           PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake), AccessTools.all),null , GetLocalPatch("VRCPlayer_Awake")); // Post So It Exists.
+
+          
 
           // instance.Patch(typeof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique).GetMethod(nameof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique.OnDestroy), AccessTools.all), new HarmonyMethod(typeof(PlayerEvents).GetMethod(nameof(Player_OnDestroyM), BindingFlags.NonPublic | BindingFlags.Static)));
 
@@ -81,7 +83,7 @@ namespace Vanilla.Patches.Harmony
           }*/
 
 
-        private static void VRCPlayer_Awake(VRC_Player __instance)
+        private static void VRCPlayer_Awake(VRCPlayer __instance)
         {
             MelonCoroutines.Start(RunMe());
 

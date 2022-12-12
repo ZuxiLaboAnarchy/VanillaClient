@@ -68,6 +68,10 @@
     <Reference Include="UnhollowerRuntimeLib">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
     </Reference>
@@ -85,6 +89,10 @@
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
@@ -92,6 +100,13 @@
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.UI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.UI.Elements">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
     </Reference>
     <Reference Include="VRCCore-Standalone">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
@@ -105,8 +120,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
+    <Compile Include="QM\ButtonLoader.cs" />
+    <Compile Include="QM\Menu\Settings.cs" />
+    <Compile Include="QM\QMAPI\QMButtonBase.cs" />
+    <Compile Include="QM\QMAPI\QMMenuBase.cs" />
+    <Compile Include="QM\QMAPI\QMNestedButton.cs" />
+    <Compile Include="QM\QMAPI\QMSingleButton.cs" />
+    <Compile Include="QM\QMAPI\QMTabMenu.cs" />
+    <Compile Include="QM\QMAPI\QMToggleButton.cs" />
     <Compile Include="Config\MainConfig.cs" />
     <Compile Include="Config\ServerResConfig.cs" />
+    <Compile Include="QM\QMAPI\ButtonsHelperAPI.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DiscordHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
@@ -191,7 +216,6 @@
     <Compile Include="Modules\LoadMusic.cs" />
     <Compile Include="Modules\ModuleDefiner.cs" />
     <Compile Include="Modules\ModuleManager.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Patches\Harmony\Ani.cs" />
     <Compile Include="Patches\Harmony\Curser.cs" />
     <Compile Include="Patches\Harmony\FullScan.cs" />
@@ -212,10 +236,13 @@
     <Compile Include="Protections\AntiDebugger.cs" />
     <Compile Include="Protections\LoaderProtections.cs" />
     <Compile Include="Protections\MemeryHelper.cs" />
+    <Compile Include="QM\QMImage.cs" />
     <Compile Include="ServerAPI\ServerHelper.cs" />
     <Compile Include="ServerAPI\ServerRequest.cs" />
     <Compile Include="ServerAPI\WebSocketMan.cs" />
+    <Compile Include="Utils\AssetUtils.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
+    <Compile Include="Utils\ImgHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />
     <Compile Include="Utils\Performance.cs" />
     <Compile Include="Utils\UnmanagedUtils.cs" />
@@ -226,8 +253,6 @@
     </None>
     <None Include="Libs\Tomlyn\readme.md" />
     <None Include="Libs\Tomlyn\Syntax\Syntax.cd" />
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Debug\Vanilla Client.csproj.AssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -238,10 +263,9 @@
   <ItemGroup>
     <None Include="Resources\BuildTime.txt" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\ClientBundle" />
     <None Include="Resources\WSManager.dll" />
   </ItemGroup>
   <ItemGroup>
