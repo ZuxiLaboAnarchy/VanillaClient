@@ -20,6 +20,7 @@ namespace Vanilla.Modules
             Modules.Add(new ButtonLoader());
             Modules.Add(new FlyManager());
             Modules.Add(new MurderManager());
+            Modules.Add(new AmongUsManager());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);

@@ -66,22 +66,33 @@ namespace Vanilla.QM.Menu
 
             /* How to do the murder 4 hacks Implement soon 
              
-              GameObject Murder = submenu.Create("Murder 4", Xploitsubmenu);
-            new Submenubutton(Xploitsubmenu.GetMenu(), "Murder 4", Murder, Download_Images._XploitIcon, false, 3, 0);
-            new NToggle("Self Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergoldweapon = true, () => Defiance.Settings.ConfigVars.murdergoldweapon = false, Defiance.Settings.ConfigVars.murdergoldweapon);
-            new NToggle("Everyone Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonegoldgun = true, () => Defiance.Settings.ConfigVars.everyonegoldgun = false, Defiance.Settings.ConfigVars.everyonegoldgun);
-            new NToggle("God Mode", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergodmod = true, () => Defiance.Settings.ConfigVars.murdergodmod = false, Defiance.Settings.ConfigVars.murdergodmod);
-            new NToggle("Self No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.continuesfire = true, () => Defiance.Settings.ConfigVars.continuesfire = false, Defiance.Settings.ConfigVars.continuesfire);
-            new NToggle("Everyone No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonecontinuesfire = true, () => Defiance.Settings.ConfigVars.everyonecontinuesfire = false, Defiance.Settings.ConfigVars.everyonecontinuesfire);
-            new NButton(Murder.GetMenu(), "Start Game", () => Defiance.Exploits.MurderMisc.MurderMod("Btn_Start"));
-            new NButton(Murder.GetMenu(), "Throw Apples", () => Defiance.Exploits.MurderMisc.MurderMod("OnLocalPlayerBlinded"));
-            new NButton(Murder.GetMenu(), "Abort Game", () => Defiance.Exploits.MurderMisc.MurderMod("SyncAbort"));
-            new NButton(Murder.GetMenu(), "Good Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryB"));
-            new NButton(Murder.GetMenu(), "Bad Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryM"));
-
-
+                GameObject Murder = submenu.Create("Murder 4", Xploitsubmenu);
+                new Submenubutton(Xploitsubmenu.GetMenu(), "Murder 4", Murder, Download_Images._XploitIcon, false, 3, 0);
+                new NToggle("Self Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergoldweapon = true, () => Defiance.Settings.ConfigVars.murdergoldweapon = false, Defiance.Settings.ConfigVars.murdergoldweapon);
+                new NToggle("Everyone Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonegoldgun = true, () => Defiance.Settings.ConfigVars.everyonegoldgun = false, Defiance.Settings.ConfigVars.everyonegoldgun);
+                new NToggle("God Mode", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergodmod = true, () => Defiance.Settings.ConfigVars.murdergodmod = false, Defiance.Settings.ConfigVars.murdergodmod);
+                new NToggle("Self No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.continuesfire = true, () => Defiance.Settings.ConfigVars.continuesfire = false, Defiance.Settings.ConfigVars.continuesfire);
+                new NToggle("Everyone No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonecontinuesfire = true, () => Defiance.Settings.ConfigVars.everyonecontinuesfire = false, Defiance.Settings.ConfigVars.everyonecontinuesfire);
+                new NButton(Murder.GetMenu(), "Start Game", () => Defiance.Exploits.MurderMisc.MurderMod("Btn_Start"));
+                new NButton(Murder.GetMenu(), "Throw Apples", () => Defiance.Exploits.MurderMisc.MurderMod("OnLocalPlayerBlinded"));
+                new NButton(Murder.GetMenu(), "Abort Game", () => Defiance.Exploits.MurderMisc.MurderMod("SyncAbort"));
+                new NButton(Murder.GetMenu(), "Good Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryB"));
+                new NButton(Murder.GetMenu(), "Bad Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryM"));
 
             */
+
+            /* How to do the Among Us hacks Implement soon 
+             
+                GameObject Among = submenu.Create("AmongUs", Xploitsubmenu);
+                new Submenubutton(Xploitsubmenu.GetMenu(), "AmongUs", Among, Download_Images._XploitIcon, false, 4, 0);
+                new NButton(Among.GetMenu(), "Complete Task", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("OnLocalPlayerCompletedTask"));
+                new NButton(Among.GetMenu(), "Crew Win", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("Btn_Start"));
+                new NButton(Among.GetMenu(), "Sussy Wub", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("SyncVictoryM"));
+                new NButton(Among.GetMenu(), "Kill All", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("KillLocalPlayer"));
+                new NButton(Among.GetMenu(), "Start Game", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("SyncVictoryB"));
+                new NButton(Among.GetMenu(), "Force Meeting", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("StartMeeting"));
+            
+             */
 
 
 
