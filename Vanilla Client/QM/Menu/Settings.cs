@@ -95,6 +95,12 @@ namespace Vanilla.QM.Menu
              */
 
 
+            /* World History button Somthing like this 
+             
+            Nocturnal.Ui.qm.Worldhistory.worldhistorymenu = submenu.Create("World History", Menu);
+            new Submenubutton(Menu.GetMenu(), "World History", Nocturnal.Ui.qm.Worldhistory.worldhistorymenu, Download_Images._WorldIcon, true, 2, 6);
+            
+             */
 
 
 

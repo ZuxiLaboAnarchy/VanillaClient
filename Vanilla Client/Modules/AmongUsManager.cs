@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
-using VRC.Core.Pool;
 using VRC.SDKBase;
-using static VRC.SDKBase.VRC_SpecialLayer;
 
 namespace Vanilla.Modules
 {

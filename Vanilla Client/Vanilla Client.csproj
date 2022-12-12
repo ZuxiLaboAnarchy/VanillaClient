@@ -121,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="Config\Json.cs" />
+    <Compile Include="Modules\AmongUsManager.cs" />
+    <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
