@@ -18,6 +18,7 @@ namespace Vanilla.Modules
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
             Modules.Add(new ButtonLoader());
+            Modules.Add(new FlyManager());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
