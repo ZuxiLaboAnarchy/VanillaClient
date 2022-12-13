@@ -10,7 +10,7 @@ using Vanilla.Config;
 namespace Vanilla.Modules
 {
     // Your Gonna need to Change the Button Api on this to the one we use
-    internal class Worldhistory : VanillaModule
+   /* internal class Worldhistory : VanillaModule
     {
         internal static GameObject worldhistorymenu { get; set; }
         internal static List<jsonmanager.worldhistory> _WorldHistory { get; set; }
@@ -59,5 +59,5 @@ namespace Vanilla.Modules
                 }, true);
             }
         }
-    }
+    }*/
 }

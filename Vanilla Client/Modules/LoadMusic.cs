@@ -7,7 +7,7 @@ namespace Vanilla.Modules
 {
     internal class LoadMusic : VanillaModule
     {
-        public override void Start()
+        internal override void Start()
         {
             // Dev("LoadMusic", "Loading Music");
             MelonCoroutines.Start(Starter());
@@ -15,7 +15,7 @@ namespace Vanilla.Modules
 
 
 
-        public static IEnumerator Starter()
+        internal static IEnumerator Starter()
         {
 
             if (Config.MainConfig.LoadMusic)

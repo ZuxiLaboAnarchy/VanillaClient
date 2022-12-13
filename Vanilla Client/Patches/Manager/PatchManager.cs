@@ -16,8 +16,9 @@ namespace Vanilla.Patches
         {
             Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
-            Patches.Add(new CurserPatch());
-           
+            Patches.Add(new PhotonPatch());
+           /// Patches.Add(new CurserPatch());
+            Patches.Add(new PlayerEvents());
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());
 

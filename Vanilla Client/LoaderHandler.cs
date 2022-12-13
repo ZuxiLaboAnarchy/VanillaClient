@@ -109,6 +109,14 @@ namespace Cypher
         public static void OnUpdate()
         { if (!ShouldLoad) return; CallOnUpdate(); }
 
+      
+        public static void OnLevelWasInitialized(int Level)
+        {
+            if (!ShouldLoad) return;
+
+            CallOnLevelInit(Level);
+        }
+
         public static void OnApplicationQuit()
         {
             if (!ShouldLoad) return;
@@ -117,6 +125,9 @@ namespace Cypher
             CypherEngineLog("Core", "Goodbye", ConsoleColor.Yellow);
             Pop();
         }
+
+
+      
 
         #endregion
 

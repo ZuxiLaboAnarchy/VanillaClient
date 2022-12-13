@@ -33,10 +33,7 @@ namespace Vanilla
             Log("Performance", $"Client Init Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
 
         }
-        public class Nig
-        {
-            public static bool flytoggle = false;
-        }
+     
         internal protected static void CallOnGUI()
         {
             ModuleManager.OnGUI();
@@ -56,6 +53,13 @@ namespace Vanilla
             ModuleManager.Stop();
 
             LogHandler.Pop();
+
+
+        }
+
+        internal protected static void CallOnLevelInit(int level)
+        {
+            ModuleManager.LevelInit(level);
 
 
         }

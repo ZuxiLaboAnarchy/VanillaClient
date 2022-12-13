@@ -9,14 +9,14 @@ namespace Vanilla.QM
 {
     internal class ButtonLoader : VanillaModule
     {
-        public override void Start()
+        internal override void Start()
         {
             MelonCoroutines.Start(WaitForQMLoad());
         }
 
 
 
-        public static IEnumerator WaitForQMLoad()
+        internal static IEnumerator WaitForQMLoad()
         {
 
             while (GameObject.Find($"Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
@@ -25,7 +25,7 @@ namespace Vanilla.QM
             // GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners").SetActive(false); ;
             LoadButtons();
         }
-        public static void LoadButtons()
+        internal static void LoadButtons()
         {
 #if DEBUG
             Dev("QM", "QM Found Loading buttons");

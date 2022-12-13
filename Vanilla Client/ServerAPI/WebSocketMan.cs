@@ -10,12 +10,12 @@ namespace Vanilla.ServerAPI
     internal class WSBase : VanillaModule
     {
 
-        public override void Start()
+        internal override void Start()
         {
             Runsocket();
         }
 
-        public override void Stop()
+        internal override void Stop()
         {
 
             Pop();
@@ -26,7 +26,7 @@ namespace Vanilla.ServerAPI
 
 
 
-        public static void Runsocket()
+        internal static void Runsocket()
         {
             using (wss = new WebSocket("wss://hvl.gg"))
             {
@@ -103,10 +103,6 @@ namespace Vanilla.ServerAPI
 
                     HWID = ServerHelper.GetHWID(),
                 };
-
-                Dev("ServerAPI(WS)", JsonConvert.SerializeObject(PopMessage));
-
-
                 sendmsg($"{JsonConvert.SerializeObject(PopMessage)}");
             }
         }
@@ -131,7 +127,7 @@ namespace Vanilla.ServerAPI
 
         internal protected static void sendmsg(string text)
         {
-
+          
             if (wss.IsAlive && HasConn)
             { wss.Send(text); }
             else
@@ -215,7 +211,7 @@ namespace Vanilla.ServerAPI
 
         }
 
-        protected static bool HasConn = false;
+        internal static bool HasConn = false;
         internal protected static readonly ConcurrentQueue<WSSender> toSend = new ConcurrentQueue<WSSender>();
         internal protected static WebSocket wss;
         internal protected static bool ath = false;

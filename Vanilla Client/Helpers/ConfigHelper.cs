@@ -10,13 +10,13 @@ namespace Vanilla.Helpers
 
         private float nextPop = 0f;
 
-        public override void Start()
+        internal override void Start()
         {
             MainConfig.Load();
         }
 
 
-        public override void Update()
+        internal override void Update()
         {
             if (Time.realtimeSinceStartup >= nextPop)
             {

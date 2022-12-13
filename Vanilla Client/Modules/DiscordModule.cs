@@ -7,7 +7,7 @@
         internal static DiscordRPC.EventHandlers eventHandlers;
 
 
-        public override void Start()
+        internal override void Start()
         {
             eventHandlers = default(DiscordRPC.EventHandlers);
             eventHandlers.errorCallback = delegate (int code, string message) { };
@@ -34,7 +34,7 @@
 
 
 
-        public override void LateStart()
+        internal override void LateStart()
         {
             DiscordManager.presence.state = state;
             DiscordRPC.UpdatePresence(ref DiscordManager.presence);
@@ -51,7 +51,7 @@
 
         }
 
-        public override void WaitForPlayer()
+        internal override void WaitForPlayer()
         {
 
         }

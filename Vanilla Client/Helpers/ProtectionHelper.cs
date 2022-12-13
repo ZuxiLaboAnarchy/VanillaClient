@@ -11,13 +11,13 @@ namespace Vanilla.Helpers
     {
         private static System.Timers.Timer ProtectionHelperTimer;
 
-        public override void Start()
+        internal override void Start()
         {
             new Thread(() => { PThreadStart(); }).Start();
         }
 
         static Process p = new Process();
-        public static void PThreadStart()
+        internal static void PThreadStart()
         {
 #if !PUBLIC
             return;
@@ -76,7 +76,7 @@ namespace Vanilla.Helpers
 
         }
 
-        public override void LateStart()
+        internal override void LateStart()
         {
 
             try
@@ -90,8 +90,9 @@ namespace Vanilla.Helpers
 
         }
 
-        public override void Stop()
+        internal override void Stop()
         {
+            if (p != null)
             p.Kill();
         }
 

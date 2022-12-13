@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using MelonLoader;
+using System.Collections;
+using System.Collections.Generic;
 using Vanilla.Helpers;
 using Vanilla.QM;
 using Vanilla.ServerAPI;
+using VRC;
 
 namespace Vanilla.Modules
 {
@@ -20,7 +23,8 @@ namespace Vanilla.Modules
             Modules.Add(new ButtonLoader());
             Modules.Add(new FlyManager());
             Modules.Add(new MurderManager());
-            Modules.Add(new AmongUsManager());
+            Modules.Add(new CameraModule());
+            // Modules.Add(new AmongUsManager());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
@@ -35,6 +39,7 @@ namespace Vanilla.Modules
         protected internal static void LateStart()
         {
             for (int i = 0; i < Modules.Count; i++) Modules[i].LateStart();
+            MelonCoroutines.Start(WaitForPlayer());
         }
 
         protected internal static void OnGUI()
@@ -50,6 +55,21 @@ namespace Vanilla.Modules
             Pop();
 
         }
+
+        protected internal static void LevelInit(int level)
+        {
+            for (int i = 0; i < Modules.Count; i++) Modules[i].WorldLoad(level);
+
+        }
+
+        protected internal static IEnumerator WaitForPlayer()
+        {
+            while (Player.prop_Player_0 == null) yield return null;
+            Dev("ModuleManager", "Player Found");
+            for (int i = 0; i < Modules.Count; i++) Modules[i].WaitForPlayer();
+        }
+
+
 
 
 

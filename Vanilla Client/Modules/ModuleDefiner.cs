@@ -3,13 +3,15 @@
     public abstract class VanillaModule
     {
 
-        public virtual void UI() { }
-        public virtual void Start() { }
-        public virtual void Stop() { }
-        public virtual void Update() { }
-        public virtual void LateStart() { }
-        public virtual void WaitForPlayer() { }
-        public virtual void OnGUI() { }
+        internal virtual void UI() { }
+        internal virtual void Start() { }
+        internal virtual void Stop() { }
+        internal virtual void Update() { }
+        internal virtual void LateStart() { }
+        internal virtual void WaitForPlayer() { }
+        internal virtual void OnGUI() { }
+        internal virtual void PlayerEvent() { }
+        internal virtual void WorldLoad(int level) { }
   
     }
 }

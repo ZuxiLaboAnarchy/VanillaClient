@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Vanilla.Config;
 using VRC.SDKBase;
 using static Vanilla.Main;
 
@@ -13,9 +14,9 @@ namespace Vanilla.Modules
     {
 
         private Transform camera() => GameObject.Find("Camera (eye)").transform;
-        public override void Update()
+        internal override void Update()
         {
-            if (!Nig.flytoggle) return;
+            if (!RuntimeConfig.flytoggle) return;
 
             if (VRC.Player.prop_Player_0 == null) return;
 

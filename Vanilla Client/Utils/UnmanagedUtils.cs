@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using MelonLoader;
-//using MunchenClient.Core.Compatibility;
+
 using UnhollowerBaseLib;
 
 namespace Vanilla.Utils
