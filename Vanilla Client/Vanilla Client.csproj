@@ -254,7 +254,6 @@
     <Compile Include="ServerAPI\ServerRequest.cs" />
     <Compile Include="ServerAPI\WebSocketMan.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
-    <Compile Include="Utils\ReaddLogger.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\ImgHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />
