@@ -123,6 +123,8 @@
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
     <Compile Include="Modules\AmongUsManager.cs" />
+    <Compile Include="Modules\Readd.cs" />
+    <Compile Include="Modules\FriendLogger.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
@@ -246,6 +248,7 @@
     <Compile Include="ServerAPI\ServerRequest.cs" />
     <Compile Include="ServerAPI\WebSocketMan.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
+    <Compile Include="Utils\ReaddLogger.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\ImgHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />
