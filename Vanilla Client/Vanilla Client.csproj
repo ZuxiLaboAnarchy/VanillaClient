@@ -109,6 +109,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
+    <Reference Include="VRC.Udon, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.Udon.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.UI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
@@ -118,6 +126,10 @@
     </Reference>
     <Reference Include="VRCCore-Standalone">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
+    </Reference>
+    <Reference Include="VRCSDK3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDKBase">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
@@ -130,7 +142,10 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
+    <Compile Include="Config\RuntimeConfig.cs" />
     <Compile Include="Modules\AmongUsManager.cs" />
+    <Compile Include="Modules\CameraModule.cs" />
+    <Compile Include="Modules\FriendLogger.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
@@ -254,7 +269,6 @@
     <Compile Include="ServerAPI\ServerRequest.cs" />
     <Compile Include="ServerAPI\WebSocketMan.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
-    <Compile Include="Utils\ReaddLogger.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\ImgHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />

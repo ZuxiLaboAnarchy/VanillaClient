@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 using VRC.SDKBase;
+using VRC.Udon;
 
 namespace Vanilla.Modules
 {
