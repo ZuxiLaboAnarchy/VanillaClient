@@ -22,6 +22,7 @@ namespace Vanilla.Helpers
             {
                 nextPop = Time.realtimeSinceStartup + 15f;
                 MainConfig.Save();
+                if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
             }
 
         }

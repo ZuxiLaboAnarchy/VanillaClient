@@ -30,8 +30,6 @@ namespace Vanilla.Modules
 
         private static int cameraSetup = 0;
 
-        private bool lastApplicationFocusedState = true;
-
         private static Vector3 freezeCameraTargetPosition = Vector3.zero;
 
         private static Quaternion freezeCameraTargetRotation = Quaternion.identity;
