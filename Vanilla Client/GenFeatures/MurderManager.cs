@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vanilla.Modules
 {
-    internal class MurderManager : VanillaModule
+    internal class MurderManager
     {
         public static bool murdergoldweapon = false;
         public static bool murdergodmod = false;

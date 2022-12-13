@@ -22,7 +22,9 @@ namespace Vanilla.Config
         private static string _MusicPath = "";
         internal static string MusicPath { get => _MusicPath; set { _MusicPath = value; Save(); } }
 
+        internal static bool _AutoFriends = false;
 
+        internal static bool AutoFrends { get => _AutoFriends; set { _AutoFriends = value; Save(); } }
 
         private static int _theme = 0;
         internal static int Theme { get => _theme; set { _theme = value; Save(); } }
@@ -53,13 +55,11 @@ namespace Vanilla.Config
             if (installertbl.ContainsKey("LoadMusic"))
                 Boolean.TryParse(installertbl["LoadMusic"].ToString(), out _LoadMusic);
 
-         
-
-
             if (installertbl.ContainsKey("MusicPath"))
                 _MusicPath = installertbl["MusicPath"].ToString();
 
-
+            if (installertbl.ContainsKey("AutoSaveFriends"))
+                Boolean.TryParse(installertbl["AutoSaveFriends"].ToString(), out _AutoFriends);
 
             Dev("Config", "Loaded...");
 
@@ -73,7 +73,7 @@ namespace Vanilla.Config
             //tbl.Items.Add(new KeyValueSyntax("TestBool", new BooleanValueSyntax(_TestBool)));
             tbl.Items.Add(new KeyValueSyntax("LoadMusic", new BooleanValueSyntax(_LoadMusic)));
             tbl.Items.Add(new KeyValueSyntax("MusicPath", new StringValueSyntax(_MusicPath)));
-
+            tbl.Items.Add(new KeyValueSyntax("AutoSaveFriends", new BooleanValueSyntax(_AutoFriends)));
 
 
 

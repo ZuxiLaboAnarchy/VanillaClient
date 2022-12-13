@@ -5,7 +5,7 @@ using VRC.Udon;
 
 namespace Vanilla.Modules
 {
-    internal class AmongUsManager : VanillaModule
+    internal class AmongUsManager
     {
         public static bool Check()
         {

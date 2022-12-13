@@ -27,7 +27,7 @@ namespace Vanilla.QM.Menu
                 GeneralUtils.Restart();
             }, "Restart Game");
 
-            var closeGame = new QMSingleButton(settingsmenu, 1, 4, "Close Game", delegate
+            var closeGame = new QMSingleButton(settingsmenu, 2, 3, "Close Game", delegate
             {
                 MainConfig.Save();
                 GeneralUtils.CloseGame();
@@ -45,6 +45,22 @@ namespace Vanilla.QM.Menu
                 MainConfig.LoadMusic = false;
                 MainConfig.Save();
             }, "Toggle Load Music");
+
+            var FriendsToggle = new QMToggleButton(miscsettings, 3, 0, "Auto-Save Friends", delegate
+
+            {
+              MainConfig.AutoFrends = true;
+                MainConfig.Save();
+            }, delegate
+            {
+                MainConfig.AutoFrends = false;
+                MainConfig.Save();
+            }, "Toggle AutoFriendsList Saving");
+
+
+
+
+
 
             /* Fly
             new NToggle("Flying Apple", Menu.GetMenu(), () =>
