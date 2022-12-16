@@ -12,6 +12,7 @@ using Photon.Realtime;
 using UnityEngine;
 using Vanilla.Helpers;
 using VRC.Core;
+using VRC.SDKBase;
 using Object = UnityEngine.Object;
 using Random = System.Random;
 
@@ -28,7 +29,7 @@ namespace Vanilla.Patches.Harmony
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
 
                 PatchMethod(typeof(LoadBalancingClient).GetMethod("OnEvent"), GetLocalPatch("OnEvent"), null);
-
+             
                
 
                 //PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
@@ -46,16 +47,21 @@ namespace Vanilla.Patches.Harmony
 
         private static bool OnEvent(EventData __0)
         {
-            var eventCode = __0.Code;
-            switch (eventCode)
+            try
             {
-                case 42:
-                    return WSHelper.AvatarLogHandler();
-                case 223:
-                    return WSHelper.AvatarLogHandler();
-                default:
-                    return true;
+                var eventCode = __0.Code;
+
+                switch (eventCode)
+                {
+                    case 42:
+                        return MainHelper.AvatarLogHandler();
+                    case 223:
+                        return MainHelper.AvatarLogHandler();
+                    default:
+                        return true;
+                }
             }
+            catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
         }
 
       

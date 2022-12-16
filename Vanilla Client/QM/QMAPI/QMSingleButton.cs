@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Vanilla.Buttons.QM;
 
 namespace Vanilla.Buttons.QM
 {
@@ -55,9 +56,9 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip)
         {
-            button = UnityEngine.Object.Instantiate(Helpers.Buttons.GetQMButtonTemplate(), Helpers.Buttons.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
+            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
             button.transform.Find("Badge_MMJump").gameObject.SetActive(false);
-            button.name = $"{Helpers.Buttons.Identifier}-Single-Button-{Helpers.Buttons.RandomNumbers()}";
+            button.name = $"{APIUtils.Identifier}-Single-Button-{APIUtils.RandomNumbers()}";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 30;
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 176);
             button.GetComponent<RectTransform>().anchoredPosition = new Vector2(-68, -250);

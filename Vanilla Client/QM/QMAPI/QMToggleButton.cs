@@ -2,6 +2,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Vanilla.Buttons.QM;
+
 
 namespace Vanilla.Buttons.QM
 {
@@ -34,8 +36,9 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState)
         {
-            button = UnityEngine.Object.Instantiate(Helpers.Buttons.GetQMButtonTemplate(), Helpers.Buttons.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
-            button.name = $"{Helpers.Buttons.Identifier}-Toggle-Button-{Helpers.Buttons.RandomNumbers()}";
+            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
+            button.name = $"{APIUtils.Identifier}-Toggle-Button-{APIUtils.RandomNumbers()}";
+            button.transform.Find("Badge_MMJump").gameObject.SetActive(false);
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 176);
             button.GetComponent<RectTransform>().anchoredPosition = new Vector2(-68, -250);
             btnTextComp = button.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -53,7 +56,7 @@ namespace Vanilla.Buttons.QM
             SetActive(true);
 
             currentState = defaultState;
-            var tmpIcon = currentState ? Helpers.Buttons.OnIconSprite() : Helpers.Buttons.OffIconSprite();
+            var tmpIcon = currentState ? APIUtils.OnIconSprite() : APIUtils.OffIconSprite();
             btnImageComp.sprite = tmpIcon;
             btnImageComp.overrideSprite = tmpIcon;
         }
@@ -61,7 +64,7 @@ namespace Vanilla.Buttons.QM
         private void HandleClick()
         {
             currentState = !currentState;
-            var stateIcon = currentState ? Helpers.Buttons.OnIconSprite() : Helpers.Buttons.OffIconSprite();
+            var stateIcon = currentState ? APIUtils.OnIconSprite() : APIUtils.OffIconSprite();
             btnImageComp.sprite = stateIcon;
             btnImageComp.overrideSprite = stateIcon;
             if (currentState)
@@ -89,7 +92,7 @@ namespace Vanilla.Buttons.QM
         {
             try
             {
-                var newIcon = newState ? Helpers.Buttons.OnIconSprite() : Helpers.Buttons.OffIconSprite();
+                var newIcon = newState ? APIUtils.OnIconSprite() : APIUtils.OffIconSprite();
                 btnImageComp.sprite = newIcon;
                 btnImageComp.overrideSprite = newIcon;
                 currentState = newState;

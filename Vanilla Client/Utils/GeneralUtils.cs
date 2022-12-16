@@ -1,5 +1,8 @@
-﻿using System.Diagnostics;
+﻿using MelonLoader;
+using System.Collections;
+using System.Diagnostics;
 using System.IO;
+using UnityEngine;
 
 namespace Vanilla.Utils
 {
@@ -27,6 +30,19 @@ namespace Vanilla.Utils
             Process.GetCurrentProcess().Kill();
 
 
+        
+        }
+
+        public static void Delay(int time, Action action)
+            => MelonCoroutines.Start(WaitForDelayFinish(time, action));
+
+        private static IEnumerator WaitForDelayFinish(int time, Action action)
+        {
+            yield return new WaitForSecondsRealtime(time);
+            action.Invoke();
+            yield break;
         }
     }
+
+
 }

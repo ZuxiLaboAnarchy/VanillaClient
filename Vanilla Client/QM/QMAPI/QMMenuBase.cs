@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿
+using TMPro;
 using UnityEngine;
 using VRC.UI.Elements;
 

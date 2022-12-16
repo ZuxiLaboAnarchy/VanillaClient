@@ -1,13 +1,15 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.Helpers;
+using Vanilla.Buttons.QM;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 using VRC.UI.Elements.Tooltips;
+
 
 namespace Vanilla.Buttons.QM
 {
@@ -25,21 +27,22 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(string ToolTipText, string MenuTitle, Sprite ButtonImage)
         {
-            MenuName = $"{Helpers.Buttons.Identifier}-TabMenu";
-            MenuObject = UnityEngine.Object.Instantiate(Helpers.Buttons.GetQMMenuTemplate(), Helpers.Buttons.GetQMMenuTemplate().transform.parent);
+            MenuName = $"{APIUtils.Identifier}-TabMenu-{APIUtils.RandomNumbers()}";
+            MenuObject = UnityEngine.Object.Instantiate(APIUtils.GetQMMenuTemplate(), APIUtils.GetQMMenuTemplate().transform.parent);
             MenuObject.name = MenuName;
             MenuObject.SetActive(false);
-            UnityEngine.Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadMenuQM>());
+            UnityEngine.Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadQMMenu>());
             MenuPage = MenuObject.AddComponent<UIPage>();
             MenuPage.field_Public_String_0 = MenuName;
-            MenuPage.field_Protected_MenuStateController_0 = Helpers.Buttons.MenuStateControllerInstance;
+            MenuPage.field_Private_Boolean_1 = true;
+            MenuPage.field_Protected_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
             MenuPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
-            Helpers.Buttons.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
+            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
 
-            var tmpList = Helpers.Buttons.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
+            var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
             tmpList.Add(MenuPage);
-            Helpers.Buttons.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
+            APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
 
             MenuObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup").DestroyChildren();
             MenuTitleText = MenuObject.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -48,10 +51,10 @@ namespace Vanilla.Buttons.QM
             ClearChildren();
             MenuObject.transform.Find("ScrollRect").GetComponent<ScrollRect>().enabled = false;
 
-            MainButton = UnityEngine.Object.Instantiate(Helpers.Buttons.GetQMTabButtonTemplate(), Helpers.Buttons.GetQMTabButtonTemplate().transform.parent);
+            MainButton = UnityEngine.Object.Instantiate(APIUtils.GetQMTabButtonTemplate(), APIUtils.GetQMTabButtonTemplate().transform.parent);
             MainButton.name = MenuName;
             MenuTabComp = MainButton.GetComponent<MenuTab>();
-            MenuTabComp.field_Private_MenuStateController_0 = Helpers.Buttons.MenuStateControllerInstance;
+            MenuTabComp.field_Private_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
             MenuTabComp.field_Public_String_0 = MenuName;
             MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();
             BadgeObject = MainButton.transform.GetChild(0).gameObject;
@@ -79,7 +82,7 @@ namespace Vanilla.Buttons.QM
 
         public void SetToolTip(string newText)
         {
-            MainButton.GetComponent<UiTooltip>().field_Public_String_0 = newText;
+            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
         public void SetIndex(int newPosition)

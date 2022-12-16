@@ -1,8 +1,12 @@
 ﻿using MelonLoader;
 using Newtonsoft.Json;
 using System.Collections;
+using System.Linq;
+using System.Reflection;
+using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Vanilla.Config;
+using Vanilla.Modules;
 using Vanilla.ServerAPI;
 using VRC;
 using static BestHTTP.JSON.Json;
@@ -20,11 +24,19 @@ namespace Vanilla.Patches.Harmony
 
 
 
-        //    PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake)), GetLocalPatch("OnAvatarChanged"), null); // Post So It Exists.
+            //    PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake)), GetLocalPatch("OnAvatarChanged"), null); // Post So It Exists.
 
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)), GetLocalPatch("PlayerLeave"), null);
+            // PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)), GetLocalPatch("PlayerLeave"), null);
 
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch("PlayerJoin"), null);
+
+
+
+            //if (PlayerEvents.OnPlayerJoinedMethod != null)
+            //  PatchMethod(PlayerEvents._OnPlayerJoinedMethod, null, GetLocalPatch("PlayerJoin"));
+
+            //  if (PlayerEvents.OnPlayerLeftMethod != null)
+            //    PatchMethod(PlayerEvents._OnPlayerLeftMethod, null, GetLocalPatch("PlayerLeave"));
 
 
             // instance.Patch(typeof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique).GetMethod(nameof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique.OnDestroy), AccessTools.all), new HarmonyMethod(typeof(PlayerEvents).GetMethod(nameof(Player_OnDestroyM), BindingFlags.NonPublic | BindingFlags.Static)));
@@ -45,33 +57,16 @@ namespace Vanilla.Patches.Harmony
         {
             try
             {
-
-                string user = __0.field_Private_APIUser_0.displayName;
-                string UID = __0.field_Private_APIUser_0.id;
-                bool Quest = __0.field_Private_APIUser_0.IsOnMobile;
-
-                if (user == "orchestrapyro")
-                { user = "HyperV"; }
-
-                if (UID == "usr_e49984a4-14de-482d-9899-62d710c7ead8")
-                { UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL"; }
-
-                { Log("Player Join", $"{user} Joined at {DateTime.Now} UserID {UID}"); }
-                //   HudNotify.Msg($"{user} Joined", 4f);
-
-
-
-                return true;
+                ModuleManager.PlayerJoin(__0);
             }
             catch (Exception e)
             {
-                MelonLogger.Error("Player Join Patch Fail");
-                MelonLogger.Error(e);
-                return true;
+                ExceptionHandler("PJP", e);
+
             }
+            return true;
+
         }
-
-
 
         private static bool PlayerLeave(Player __0)
         {
@@ -102,9 +97,6 @@ namespace Vanilla.Patches.Harmony
                 return true;
             }
         }
-
-
-
 
         /*
         private static bool OnAvatarChanged(VRCPlayer __instance)
@@ -165,7 +157,6 @@ namespace Vanilla.Patches.Harmony
 
        */
 
-
         private static void VRCPlayer_Awake(VRCPlayer __instance)
         {
             MelonCoroutines.Start(RunMe());
@@ -185,9 +176,83 @@ namespace Vanilla.Patches.Harmony
         // {
         //  __0.field_Private_ApiAvatar_0
         //}
+        private static MethodInfo _OnPlayerJoinedMethod;
+        private static MethodInfo _OnPlayerLeftMethod;
 
+        internal static MethodInfo OnPlayerJoinedMethod
+        {
+            get
+            {
+                if (_OnPlayerJoinedMethod != null)
+                {
+                    return _OnPlayerJoinedMethod;
+                }
+                return _OnPlayerJoinedMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
+                {
+                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 && it.GetParameters()[0].ParameterType == typeof(VRC.Player))
+                    {
+                        return XrefScanner.XrefScan(it).Any(jt =>
+                        {
+                            if (jt.Type == XrefType.Global
+                            )
+                            {
+                                Il2CppSystem.Object @object = jt.ReadAsObject();
+                                if (@object != null)
+                                {
+                                    if (@object.ToString().Contains("OnPlayerJoined"))
+                                    {
+                                        _OnPlayerJoinedMethod = it;
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            }
+                            return false;
+                        });
+                    }
+                    return false;
+                });
+            }
+        }
+        internal static MethodInfo OnPlayerLeftMethod
+        {
+            get
+            {
+                if (_OnPlayerLeftMethod != null)
+                {
+                    return _OnPlayerLeftMethod;
+                }
+                return _OnPlayerLeftMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
+                {
+                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 && it.GetParameters()[0].ParameterType == typeof(VRC.Player))
+                    {
+                        return XrefScanner.XrefScan(it).Any(jt =>
+                        {
+                            if (jt.Type == XrefType.Global
+                            )
+                            {
+                                Il2CppSystem.Object @object = jt.ReadAsObject();
+                                if (@object != null)
+                                {
+                                    if (@object.ToString().Contains("OnPlayerLeft"))
+                                    {
+                                        _OnPlayerLeftMethod = it;
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            }
+                            return false;
+                        });
+                    }
+                    return false;
+                });
+            }
+        }
 
     }
+
+
 
 
 }

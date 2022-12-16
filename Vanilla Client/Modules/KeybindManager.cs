@@ -40,22 +40,22 @@ namespace Vanilla.Modules
                 GeneralUtils.Restart();
             }
 
-            if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.O) || (Input.GetKey(KeyCode.O) && Input.GetKeyDown(KeyCode.LeftControl))))
+            if ((UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.E) || (UnityEngine.Input.GetKey(KeyCode.E) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl))))
             {
                 CameraModule.ChangeCameraState();
             }
-            else if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P)) || (Input.GetKey(KeyCode.P) && Input.GetKeyDown(KeyCode.LeftControl)))
+            else if ((UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P)) || (UnityEngine.Input.GetKey(KeyCode.P) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl)))
             {
                 CameraModule.UseFreezeCamera();
             }
-            float axis = Input.GetAxis("Mouse ScrollWheel");
+            float axis = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
             if (axis != 0f)
             {
                 CameraModule.ApplyThirdpersonSmoothZoom(axis > 0f);
             }
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (UnityEngine.Input.GetKey(KeyCode.LeftControl))
             {
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(1))
+                if (UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetMouseButtonDown(1))
                 {
                     Ray ray = new Ray(GeneralWrappers.GetPlayerCamera().transform.position, GeneralWrappers.GetPlayerCamera().transform.forward);
                     if (Physics.Raycast(ray, out var hitInfo))
@@ -63,7 +63,7 @@ namespace Vanilla.Modules
                      //   PlayerWrapper.GetLocalPlayerInformation().vrcPlayer.transform.position = hitInfo.point;
                     }
                 }
-                if (Input.GetMouseButtonDown(2))
+                if (UnityEngine.Input.GetMouseButtonDown(2))
                 {
                     CameraModule.ApplyCameraSmoothZoom(incremental: false, 60f);
                 }
@@ -72,11 +72,11 @@ namespace Vanilla.Modules
                     CameraModule.ApplyCameraSmoothZoom(incremental: true, axis * 30f);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.U))
+            else if (UnityEngine.Input.GetKeyDown(KeyCode.LeftAlt))
             {
                 CameraModule.ChangeCameraActualZoomState(zoom: true);
             }
-            else if (Input.GetKeyUp(KeyCode.U))
+            else if (UnityEngine.Input.GetKeyUp(KeyCode.LeftAlt))
             {
                 CameraModule.ChangeCameraActualZoomState(zoom: false);
             }

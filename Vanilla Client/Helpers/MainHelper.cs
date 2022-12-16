@@ -1,16 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using MelonLoader;
+using Newtonsoft.Json;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using Vanilla.Config;
 using Vanilla.Modules;
+using Vanilla.Patches.Harmony;
 using Vanilla.ServerAPI;
 
 namespace Vanilla.Helpers
 {
-    internal class WSHelper : VanillaModule
+    internal class MainHelper : VanillaModule
     {
-
+        internal static int SentAvatarCount = 0;
         private float nextPop = 0f;
-
+        static List<string> AvatarList = new List<string>();
 
 
 
@@ -43,7 +48,9 @@ namespace Vanilla.Helpers
 
         internal override void Start()
         {
+            MainConfig.Load();
             WSBase.Pop();
+            MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
@@ -51,10 +58,14 @@ namespace Vanilla.Helpers
         {
             if (Time.realtimeSinceStartup >= nextPop)
             {
-                nextPop = Time.realtimeSinceStartup + 15f;
-                LogHandler.Dev("WSHelper", "Poping WS Bubble");
-                WSBase.Pop();
-                PopAvatarLog();
+                nextPop = Time.realtimeSinceStartup + 20f;
+                LogHandler.Dev("MainHelper", "Saving Config");
+                MainConfig.Save();
+                LogHandler.Dev("MainHelper", "Poping WS Bubble");
+                new Thread(() => { WSBase.Pop(); }).Start()  ;
+                LogHandler.Dev("MainHelper", "Poping Avatar Log");
+                new Thread(() => { PopAvatarLog(); }).Start();
+                if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
                 // WSBase.sendmessage("Test", "1", false);
             }
 
@@ -69,9 +80,17 @@ namespace Vanilla.Helpers
                 {
                     if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                     {
+
+
+
+
                         try
                         {
                             var a = __instance.field_Private_ApiAvatar_0;
+                           
+                                
+
+
 
                             AvatarLog.Enqueue(new AvatarLog
                             {
@@ -95,18 +114,20 @@ namespace Vanilla.Helpers
 
                                 code = "9",
                             });
+                            
+
                             //WSBase.sendmsg($"{JsonConvert.SerializeObject(senda)}");
                         }
                         catch { }
 
+                        Pop();
+
+
+
+
+
+                        ///Logging.ExecuteLog(player._player, true);
                     }
-
-
-
-
-
-
-                    ///Logging.ExecuteLog(player._player, true);
                 }
             }
             catch (Exception e)
@@ -134,8 +155,11 @@ namespace Vanilla.Helpers
 
                 if (a.code == null)
                 { Log("Server API", "Failed To Send Message Message Identifyer wass Null", ConsoleColor.Red, "OnPop"); }
+                if (AvatarList.Contains(a.Avatarid))
+                { continue; }
 
-                var PopMessage = new AvatarSender()
+
+                    var PopMessage = new AvatarSender()
                 {
                     AvatarName = a.AvatarName,
 
@@ -162,15 +186,14 @@ namespace Vanilla.Helpers
                     HWID = ServerHelper.GetHWID(),
                 };
 
-              
-
+                AvatarList.Add(a.Avatarid);
+                  SentAvatarCount++;   
                 WSBase.sendmsg(JsonConvert.SerializeObject(PopMessage));
             }
 
-
+            Dev("Avatar", "Send Count: " + SentAvatarCount);
 
         }
-
 
         internal protected static readonly ConcurrentQueue<AvatarLog> AvatarLog = new ConcurrentQueue<AvatarLog>();
 

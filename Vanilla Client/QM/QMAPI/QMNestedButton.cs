@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.Helpers;
+using Vanilla.Buttons.QM;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 using static VRC.UI.Elements.UIPage;
@@ -29,25 +30,25 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(bool isRoot, string btnText, float btnPosX, float btnPosY, string btnToolTipText, string menuTitle, bool halfButton)
         {
-            MenuName = $"{Helpers.Buttons.Identifier}-Menu-{Helpers.Buttons.RandomNumbers()}";
-            MenuObject = UnityEngine.Object.Instantiate(Helpers.Buttons.GetQMMenuTemplate(), Helpers.Buttons.GetQMMenuTemplate().transform.parent);
+            MenuName = $"{APIUtils.Identifier}-Menu-{APIUtils.RandomNumbers()}";
+            MenuObject = UnityEngine.Object.Instantiate(APIUtils.GetQMMenuTemplate(), APIUtils.GetQMMenuTemplate().transform.parent);
             MenuObject.name = MenuName;
             MenuObject.SetActive(false);
-            UnityEngine.Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadMenuQM>());
+            UnityEngine.Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadQMMenu>());
             MenuPage = MenuObject.AddComponent<UIPage>();
             MenuPage.field_Public_String_0 = MenuName;
-            MenuPage.field_Protected_MenuStateController_0 = Helpers.Buttons.MenuStateControllerInstance;
+            MenuPage.field_Protected_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
             MenuPage.field_Private_List_1_UIPage_0 = new();
             MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
-            Helpers.Buttons.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
+            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
 
             IsMenuRoot = isRoot;
 
             if (IsMenuRoot)
             {
-                var list = Helpers.Buttons.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
+                var list = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
                 list.Add(MenuPage);
-                Helpers.Buttons.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = list.ToArray();
+                APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
 
             MenuObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup").DestroyChildren();
@@ -62,10 +63,10 @@ namespace Vanilla.Buttons.QM
                 {
                     if (btnQMLoc.StartsWith("Menu_"))
                     {
-                        Helpers.Buttons.MenuStateControllerInstance.Method_Public_Void_String_Boolean_Boolean_0("QuickMenu" + btnQMLoc.Remove(0, 5));
+                        APIUtils.MenuStateControllerInstance.Method_Public_Void_String_Boolean_Boolean_0("QuickMenu" + btnQMLoc.Remove(0, 5));
                         return;
                     }
-                    Helpers.Buttons.MenuStateControllerInstance.Method_Public_Void_String_Boolean_Boolean_0(btnQMLoc);
+                    APIUtils.MenuStateControllerInstance.Method_Public_Void_String_Boolean_Boolean_0(btnQMLoc);
                     return;
                 }
                 MenuPage.Method_Protected_Virtual_New_Void_0();
@@ -80,8 +81,7 @@ namespace Vanilla.Buttons.QM
         public void OpenMe()
         {
             MenuObject.SetActive(true);
-            Helpers.Buttons.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, TransitionType.Left);
-            
+            APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, TransitionType.Left);
         }
 
         public void CloseMe()

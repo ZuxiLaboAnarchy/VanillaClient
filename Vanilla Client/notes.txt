@@ -1,3 +1,50 @@
 ﻿MonoBehaviourPrivateAc1AcOb2AcInStHa2Unique  => NetworkManager
 MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique => VRC.Player
 MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique => VRCPlayer
+
+
+
+internal bool OverrideVideoPlayers(string url)
+		{
+			string value = url.Trim();
+			if (string.IsNullOrEmpty(value))
+			{
+				ConsoleUtils.Info("Video Player", "Can't override video players (URL is null)", System.ConsoleColor.Gray, "OverrideVideoPlayers", 274);
+				return false;
+			}
+			foreach (SyncVideoPlayer item in UnityEngine.Object.FindObjectsOfType<SyncVideoPlayer>())
+			{
+				if (item != null)
+				{
+					Networking.LocalPlayer.TakeOwnership(item.gameObject);
+					VRC_SyncVideoPlayer field_Private_VRC_SyncVideoPlayer_ = item.field_Private_VRC_SyncVideoPlayer_0;
+					field_Private_VRC_SyncVideoPlayer_.Stop();
+					field_Private_VRC_SyncVideoPlayer_.Clear();
+					field_Private_VRC_SyncVideoPlayer_.AddURL(url);
+					field_Private_VRC_SyncVideoPlayer_.Next();
+					field_Private_VRC_SyncVideoPlayer_.Play();
+				}
+			}
+			foreach (SyncVideoStream item2 in UnityEngine.Object.FindObjectsOfType<SyncVideoStream>())
+			{
+				if (item2 != null)
+				{
+					Networking.LocalPlayer.TakeOwnership(item2.gameObject);
+					VRC_SyncVideoStream field_Private_VRC_SyncVideoStream_ = item2.field_Private_VRC_SyncVideoStream_0;
+					field_Private_VRC_SyncVideoStream_.Stop();
+					field_Private_VRC_SyncVideoStream_.Clear();
+					field_Private_VRC_SyncVideoStream_.AddURL(url);
+					field_Private_VRC_SyncVideoStream_.Next();
+					field_Private_VRC_SyncVideoStream_.Play();
+				}
+			}
+			foreach (VRCUrlInputField item3 in UnityEngine.Object.FindObjectsOfType<VRCUrlInputField>())
+			{
+				if (item3 != null)
+				{
+					item3.text = url;
+					item3.onEndEdit.Invoke(url);
+				}
+			}
+			return true;
+		}

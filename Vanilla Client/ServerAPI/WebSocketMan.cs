@@ -59,7 +59,7 @@ namespace Vanilla.ServerAPI
 
                     var sendidtosv = new sendsinglemsg()
                     {
-                        Custommsg = "VanillaClientWorldBossLogin",
+                        Custommsg = "VanillaClientLogin",
 
                         code = "1",
 
@@ -127,6 +127,7 @@ namespace Vanilla.ServerAPI
 
         internal protected static void sendmsg(string text)
         {
+           
           
             if (wss.IsAlive && HasConn)
             { wss.Send(text); }

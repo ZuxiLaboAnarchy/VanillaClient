@@ -12,7 +12,8 @@
         internal virtual void OnGUI() { }
         internal virtual void PlayerEvent() { }
         internal virtual void WorldLoad(int level) { }
-  
+        internal virtual void WorldUnload(int level) { }
+        internal virtual void PlayerJoin(VRC.Player __User) { }
     }
 }
 

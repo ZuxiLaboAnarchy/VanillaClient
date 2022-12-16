@@ -13,9 +13,9 @@ namespace Vanilla.Modules
         internal static List<VanillaModule> Modules = new();
         public static void InitModules()
         {
-            Modules.Add(new ConfigHelper());
+         
             Modules.Add(new WSBase());
-            Modules.Add(new WSHelper());
+            Modules.Add(new MainHelper());
             Modules.Add(new ProtectionHelper());
             Modules.Add(new DiscordManager());
             Modules.Add(new LoadMusic());
@@ -23,6 +23,8 @@ namespace Vanilla.Modules
             Modules.Add(new ButtonLoader());
             Modules.Add(new FlyManager());
             Modules.Add(new CameraModule());
+            Modules.Add(new JoinLoggerModule());
+            Modules.Add(new ESPModule());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
@@ -59,6 +61,13 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) Modules[i].WorldLoad(level);
 
         }
+
+        protected internal static void PlayerJoin(Player __0)
+        {
+            for (int i = 0; i < Modules.Count; i++) Modules[i].PlayerJoin(__0);
+
+        }
+
 
         protected internal static IEnumerator WaitForPlayer()
         {

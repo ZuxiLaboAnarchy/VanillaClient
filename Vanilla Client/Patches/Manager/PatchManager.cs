@@ -19,6 +19,7 @@ namespace Vanilla.Patches
             Patches.Add(new PhotonPatch());
            /// Patches.Add(new CurserPatch());
             Patches.Add(new PlayerEvents());
+            Patches.Add(new PlayerPatch());
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());
 
@@ -40,6 +41,7 @@ namespace Vanilla.Patches
             EncryptedPatch.Patch(targetMethod, preMethod, postMethod);
             patchedMethods.Add(targetMethod);
             PatchedMethods++;
+            Dev("Patches", "Successfully Patched: " + targetMethod.Name);
         }
 
         internal static void UnpatchAllMethods()

@@ -32,6 +32,15 @@ namespace Vanilla.Config
         private static bool _TestBool = true;
         internal static bool TestBool { get => _TestBool; set { _TestBool = value; Save(); } }
 
+        private static string _PCCrashID = "avtr_8041ce5a-eb39-41cf-a234-1f50da3ccd7b";
+        internal static string PCCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
+
+        private static bool _ESP = true;
+        internal static bool ESP { get => _ESP; set { _ESP  = value; Save(); } }
+
+        private static bool _JoinLogger = true;
+        internal static bool JoinLogger { get => _JoinLogger; set { _JoinLogger = value; Save(); } }
+
         internal static void Load()
         {
             if (!File.Exists(FilePath))
@@ -61,6 +70,15 @@ namespace Vanilla.Config
             if (installertbl.ContainsKey("AutoSaveFriends"))
                 Boolean.TryParse(installertbl["AutoSaveFriends"].ToString(), out _AutoFriends);
 
+            if (installertbl.ContainsKey("PCCrashID"))
+                _PCCrashID = installertbl["PCCrashID"].ToString();
+
+            if (installertbl.ContainsKey("ESP"))
+                Boolean.TryParse(installertbl["ESP"].ToString(), out _ESP);
+            
+            if (installertbl.ContainsKey("JoinEvents"))
+                Boolean.TryParse(installertbl["JoinEvents"].ToString(), out _ESP);
+
             Dev("Config", "Loaded...");
 
         }
@@ -74,8 +92,9 @@ namespace Vanilla.Config
             tbl.Items.Add(new KeyValueSyntax("LoadMusic", new BooleanValueSyntax(_LoadMusic)));
             tbl.Items.Add(new KeyValueSyntax("MusicPath", new StringValueSyntax(_MusicPath)));
             tbl.Items.Add(new KeyValueSyntax("AutoSaveFriends", new BooleanValueSyntax(_AutoFriends)));
-
-
+            tbl.Items.Add(new KeyValueSyntax("PCCrashID", new StringValueSyntax(_PCCrashID)));
+            tbl.Items.Add(new KeyValueSyntax("ESP", new BooleanValueSyntax(_ESP)));
+            tbl.Items.Add(new KeyValueSyntax("JoinLogger", new BooleanValueSyntax(_JoinLogger)));
 
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);
