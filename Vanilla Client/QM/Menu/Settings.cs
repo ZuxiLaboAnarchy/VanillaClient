@@ -15,7 +15,7 @@ namespace Vanilla.QM.Menu
 {
     internal class Settings
     {
-        public static void SettingsMenu(QMTabMenu tabMenu)
+        internal static void SettingsMenu(QMTabMenu tabMenu)
         {
             var settingsmenu = new QMNestedButton(tabMenu, 1, 3, "Vanilla Settings", "Vanilla", "Vanilla Client");
 

@@ -2,7 +2,7 @@
 {
     internal class UnityExplorerHelper
     {
-        /*  public static void CheckLegacyExplorerFolder()
+        /*  internal static void CheckLegacyExplorerFolder()
           {
               string legacyPath = Path.Combine(Loader.ExplorerFolderDestination, "UnityExplorer");
               if (Directory.Exists(legacyPath))

@@ -5,7 +5,7 @@ internal class Scanner : VanillaPatches
 #if DEBUG1
     protected override string patchName => "Scanner";
 
-    public override void Patch()
+    internal override void Patch()
     {
         try
         {

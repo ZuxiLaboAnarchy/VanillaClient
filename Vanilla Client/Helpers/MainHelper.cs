@@ -20,13 +20,13 @@ namespace Vanilla.Helpers
 
 
         /*private static System.Timers.Timer WSHelperTimer;
-           public override void Start()
+           internal override void Start()
            {
                new Thread(() => { ThreadStart(); }).Start();
            }
 
 
-           public static void ThreadStart()
+           internal static void ThreadStart()
            {
                WSHelperTimer = new System.Timers.Timer(10000);
                WSHelperTimer.Elapsed += CheckConnection;
@@ -50,7 +50,7 @@ namespace Vanilla.Helpers
         {
             MainConfig.Load();
             WSBase.Pop();
-            MelonCoroutines.Start(CustomTags.TagListNetworkManager());
+           //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
@@ -58,14 +58,17 @@ namespace Vanilla.Helpers
         {
             if (Time.realtimeSinceStartup >= nextPop)
             {
-                nextPop = Time.realtimeSinceStartup + 20f;
-                LogHandler.Dev("MainHelper", "Saving Config");
-                MainConfig.Save();
+                nextPop = Time.realtimeSinceStartup + 30f;
                 LogHandler.Dev("MainHelper", "Poping WS Bubble");
                 new Thread(() => { WSBase.Pop(); }).Start()  ;
                 LogHandler.Dev("MainHelper", "Poping Avatar Log");
                 new Thread(() => { PopAvatarLog(); }).Start();
-                if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
+                if (!RuntimeConfig.isBot)
+                {
+                    LogHandler.Dev("MainHelper", "Saving Config");
+                    MainConfig.Save();
+                    if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
+                }
                 // WSBase.sendmessage("Test", "1", false);
             }
 
@@ -200,32 +203,32 @@ namespace Vanilla.Helpers
     }
     internal struct AvatarLog
     {
-        public string AvatarName;
-        public string Author;
-        public string Authorid;
-        public string Avatarid;
-        public string Description;
-        public string Asseturl;
-        public string Image;
-        public string Platform;
-        public string Status;
-        public string code;
+        internal string AvatarName;
+        internal string Author;
+        internal string Authorid;
+        internal string Avatarid;
+        internal string Description;
+        internal string Asseturl;
+        internal string Image;
+        internal string Platform;
+        internal string Status;
+        internal string code;
 
     }
 
     internal class AvatarSender
     {
-        public string AvatarName { get; set; }
-        public string Author { get; set; }
-        public string Authorid { get; set; }
-        public string Avatarid { get; set; }
-        public string Description { get; set; }
-        public string Asseturl { get; set; }
-        public string Image { get; set; }
-        public string Platform { get; set; }
-        public string Status { get; set; }
-        public string code { get; set; }
-        public string UserKey { get; set; }
-        public string HWID { get; set; }
+        internal string AvatarName { get; set; }
+        internal string Author { get; set; }
+        internal string Authorid { get; set; }
+        internal string Avatarid { get; set; }
+        internal string Description { get; set; }
+        internal string Asseturl { get; set; }
+        internal string Image { get; set; }
+        internal string Platform { get; set; }
+        internal string Status { get; set; }
+        internal string code { get; set; }
+        internal string UserKey { get; set; }
+        internal string HWID { get; set; }
     }
 }

@@ -27,9 +27,10 @@ namespace Vanilla.Wrappers
 
         internal static void HideSelf(bool state)
         {
+            AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(!state);
             GetAvatarPreviewBase().SetActive(!state);
             VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCAvatarManager_0.gameObject.SetActive(!state);
-            AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(!state);
+           
         }
 
 

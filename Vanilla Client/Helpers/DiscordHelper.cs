@@ -39,20 +39,20 @@ internal class DiscordRPC
     internal struct JoinRequest
     {
 #pragma warning disable CS0649 
-        public string userId;
+        internal string userId;
 #pragma warning restore CS0649
 #pragma warning disable CS0649
-        public string username;
+        internal string username;
 #pragma warning restore CS0649 
 #pragma warning disable CS0649
-        public string discriminator;
+        internal string discriminator;
 #pragma warning restore CS0649 
 #pragma warning disable CS0649
-        public string avatar;
+        internal string avatar;
 #pragma warning restore CS0649 
     }
 
-    public enum Reply
+    internal enum Reply
     {
         No,
         Yes,

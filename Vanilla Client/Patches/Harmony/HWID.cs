@@ -50,26 +50,12 @@ namespace Vanilla.Patches.Harmony
                         return b.ToString("x2");
                     }).Aggregate((string x, string y) => x + y);
 
-               Log($"Spoofer", $" Success Patched HWID {newHWID}", ConsoleColor.Green);
+               Log($"Spoofer", $"Success Patched HWID {newHWID}", ConsoleColor.Green);
             }
             __result = newHWID;
             return false;
         }
 
-
-
-
-
-
-
-        public static string newHWID = "";
-
-
-
-
-
-
-
-      
+        internal static string newHWID = "";
     }
 }

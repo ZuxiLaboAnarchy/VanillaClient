@@ -7,12 +7,12 @@ namespace Vanilla.Modules
 {
     internal class AmongUsManager
     {
-        public static bool Check()
+        internal static bool Check()
         {
             string WORLDID = "";
             return RoomManager.Method_Public_Static_String_0().Contains(WORLDID);
         }
-        public static void AmongUsMod(string udonevent)
+        internal static void AmongUsMod(string udonevent)
         {
             bool CheckWorldID = Check();
             if (CheckWorldID)
@@ -27,7 +27,7 @@ namespace Vanilla.Modules
                 }
             }
         }
-        public static void AmongUsGive(string ObjectName)
+        internal static void AmongUsGive(string ObjectName)
         {
             bool CheckWorldID = Check();
             if (CheckWorldID)

@@ -56,17 +56,17 @@
 
         }
 
-        public static string largeImage = "https://files.hvls.cloud/Cypher/JeFibEWO39.jpg";
+        internal static string largeImage = "https://files.hvls.cloud/Cypher/JeFibEWO39.jpg";
 
-        public static string largeImageText = "By Cypher";
+        internal static string largeImageText = "By Cypher";
 
-        public static string smallimage = "";
+        internal static string smallimage = "";
 
-        public static string smallImageText = "";
+        internal static string smallImageText = "";
 
-        public static string details = $"Not A Modifyed Client";
+        internal static string details = $"Not A Modifyed Client";
 
-        public static string state = "hvl.gg/discord";
+        internal static string state = "hvl.gg/discord";
     }
 }
 

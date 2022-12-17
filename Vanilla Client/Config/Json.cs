@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vanilla.Config
+﻿namespace Vanilla.Config
 {
     internal class jsonmanager
     {
-        public class worldhistory
+        internal class worldhistory
         {
-            public string worldname { get; set; }
+            internal string worldname { get; set; }
 
-            public string worldid { get; set; }
+            internal string worldid { get; set; }
         }
     }
 }

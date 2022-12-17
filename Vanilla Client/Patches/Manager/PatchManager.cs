@@ -10,14 +10,15 @@ namespace Vanilla.Patches
     internal class PatchManager
     {
         protected virtual string patchName => "Undefined Patch";
-        public static int PatchedMethods = 0;
+        internal static int PatchedMethods = 0;
         internal static List<VanillaPatches> Patches = new();
         internal static void Patch()
         {
+            //BotPatches
             Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
             Patches.Add(new PhotonPatch());
-           /// Patches.Add(new CurserPatch());
+            /// Patches.Add(new CurserPatch());
             Patches.Add(new PlayerEvents());
             Patches.Add(new PlayerPatch());
             // Patches.Add(new Scanner());
@@ -26,9 +27,9 @@ namespace Vanilla.Patches
             Dev("PatchManager", "Initilized");
         }
 
-        public static void Stop()
+        internal static void Stop()
         {
-            UnpatchAllMethods();
+             UnpatchAllMethods();
 
             Dev("PatchManager", $"Unpatched {PatchManager.PatchedMethods} Methods");
             Patches.Clear();

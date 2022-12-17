@@ -3,26 +3,26 @@
 
     internal class ServerResponce
     {
-        public string Username { get; set; }
-        public string IsStaff { get; set; }
-        public string AquiredVIA { get; set; }
-        public string UUID { get; set; }
-        public bool AllowMal { get; set; }
-        public string ServerUpdates { get; set; }
-        public string message { get; set; }
+        internal string Username { get; set; }
+        internal string IsStaff { get; set; }
+        internal string AquiredVIA { get; set; }
+        internal string UUID { get; set; }
+        internal bool AllowMal { get; set; }
+        internal string ServerUpdates { get; set; }
+        internal string message { get; set; }
     }
 
     internal class AvatarLog
     {
-        public string AvatarName { get; set; }
-        public string Author { get; set; }
-        public string Authorid { get; set; }
-        public string Avatarid { get; set; }
-        public string Description { get; set; }
-        public string Asseturl { get; set; }
-        public string Image { get; set; }
-        public string Platform { get; set; }
-        public string Status { get; set; }
-        public string code { get; set; }
+        internal string AvatarName { get; set; }
+        internal string Author { get; set; }
+        internal string Authorid { get; set; }
+        internal string Avatarid { get; set; }
+        internal string Description { get; set; }
+        internal string Asseturl { get; set; }
+        internal string Image { get; set; }
+        internal string Platform { get; set; }
+        internal string Status { get; set; }
+        internal string code { get; set; }
     }
 }

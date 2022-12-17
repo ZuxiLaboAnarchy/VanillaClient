@@ -14,7 +14,7 @@ namespace Vanilla.Modules
 {
     internal class CustomTags
     {
-        public static IEnumerator TagListNetworkManager()
+        internal static IEnumerator TagListNetworkManager()
         {
             String[] Match = { "|" };
             String[] newline = { "\n" };
@@ -97,20 +97,20 @@ namespace Vanilla.Modules
         }
     }
 }
-public static class UserProtections
+internal static class UserProtections
 {
-    public static string EncodeBase64(this string value)
+    internal static string EncodeBase64(this string value)
     {
         var valueBytes = Encoding.UTF8.GetBytes(value);
         return Convert.ToBase64String(valueBytes);
     }
 
-    public static string DecodeBase64(this string value)
+    internal static string DecodeBase64(this string value)
     {
         var valueBytes = Convert.FromBase64String(value);
         return Encoding.UTF8.GetString(valueBytes);
     }
-    public static string SHA256(string value)
+    internal static string SHA256(string value)
     {
         HashAlgorithm hashAlgorithm = new SHA256Managed();
         StringBuilder stringBuilder = new StringBuilder();

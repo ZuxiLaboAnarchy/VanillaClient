@@ -50,13 +50,21 @@ namespace Vanilla.QM
             var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord", delegate
             { Process.Start("https://hvl.gg/discord/"); }, "Join The Discord");
 
-            var GoToRoom = new QMSingleButton(tabMenu, 1, 3, "Go to Room", delegate
+            var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
             {
                 string roomid = null;
                 Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () => {
                     Networking.GoToRoom(roomid);
                 });
             }, "Go To Room");
+
+            var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
+            {
+                string roomid = null;
+                Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () => {
+                    Networking.GoToRoom(roomid);
+                });
+            }, "Change Avatar By ID");
 
             Settings.SettingsMenu(tabMenu);
            ExploitMenu.InitMenu(tabMenu);

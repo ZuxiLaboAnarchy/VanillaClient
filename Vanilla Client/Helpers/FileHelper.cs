@@ -6,7 +6,7 @@ namespace Vanilla.Utils
 {
     internal class FileHelper
     {
-        public static string GetMainFolder()
+        internal static string GetMainFolder()
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -22,7 +22,7 @@ namespace Vanilla.Utils
             return AppFolder;
         }
 
-        public static string GetCheatFolder()
+        internal static string GetCheatFolder()
         {
 
             if (!Directory.Exists(GetMainFolder() + $"\\Cheats\\{GetGameName()}"))
@@ -35,10 +35,10 @@ namespace Vanilla.Utils
 
 
 
-        public static string GetGameName()
+        internal static string GetGameName()
         { return MelonLoader.InternalUtils.UnityInformationHandler.GameName; }
 
-        public static string GetDependencyFolder()
+        internal static string GetDependencyFolder()
         {
             if (!Directory.Exists(GetMainFolder() + "\\Common\\Dependencies"))
             {
@@ -48,7 +48,7 @@ namespace Vanilla.Utils
             return GetMainFolder() + "\\Common\\Dependencies";
         }
 
-        public static void Setup()
+        internal static void Setup()
         {
             if (!File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
             { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\WSManager.dll", Properties.Resources.WSManager); }
@@ -68,7 +68,7 @@ namespace Vanilla.Utils
 
         }
 
-        public static void CheckDirs()
+        internal static void CheckDirs()
         {
             if (!File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
             { Process.GetCurrentProcess().Kill(); }

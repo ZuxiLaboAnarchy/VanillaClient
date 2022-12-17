@@ -5,7 +5,7 @@ using VRC.UI.Elements;
 
 namespace Vanilla.Buttons.QM
 {
-    public class QMMenuBase
+    internal class QMMenuBase
     {
         protected string btnQMLoc;
         protected GameObject MenuObject;
@@ -13,15 +13,15 @@ namespace Vanilla.Buttons.QM
         protected UIPage MenuPage;
         protected string MenuName;
 
-        public string GetMenuName() => MenuName;
+        internal string GetMenuName() => MenuName;
 
-        public UIPage GetMenuPage() => MenuPage;
+        internal UIPage GetMenuPage() => MenuPage;
 
-        public GameObject GetMenuObject() => MenuObject;
+        internal GameObject GetMenuObject() => MenuObject;
 
-        public void SetMenuTitle(string newTitle) => MenuObject.GetComponentInChildren<TextMeshProUGUI>(true).text = newTitle;
+        internal void SetMenuTitle(string newTitle) => MenuObject.GetComponentInChildren<TextMeshProUGUI>(true).text = newTitle;
 
-        public void ClearChildren()
+        internal void ClearChildren()
         {
             for (int i = 0; i < MenuObject.transform.childCount; i++)
             {

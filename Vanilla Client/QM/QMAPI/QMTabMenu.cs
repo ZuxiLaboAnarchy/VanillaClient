@@ -13,14 +13,14 @@ using VRC.UI.Elements.Tooltips;
 
 namespace Vanilla.Buttons.QM
 {
-    public class QMTabMenu : QMMenuBase
+    internal class QMTabMenu : QMMenuBase
     {
         protected GameObject MainButton;
         protected GameObject BadgeObject;
         protected TextMeshProUGUI BadgeText;
         protected MenuTab MenuTabComp;
 
-        public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
+        internal QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
         {
             Initialize(ToolTipText, MenuTitle, ButtonImage);
         }
@@ -72,7 +72,7 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public void SetImage(Sprite newImg)
+        internal void SetImage(Sprite newImg)
         {
             MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
             MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
@@ -80,22 +80,22 @@ namespace Vanilla.Buttons.QM
             MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
         }
 
-        public void SetToolTip(string newText)
+        internal void SetToolTip(string newText)
         {
             MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
-        public void SetIndex(int newPosition)
+        internal void SetIndex(int newPosition)
         {
             MainButton.transform.SetSiblingIndex(newPosition);
         }
 
-        public void SetActive(bool newState)
+        internal void SetActive(bool newState)
         {
             MainButton.SetActive(newState);
         }
 
-        public void SetBadge(bool showing = true, string text = "")
+        internal void SetBadge(bool showing = true, string text = "")
         {
             if (BadgeObject == null || BadgeText == null)
                 return;
@@ -104,6 +104,6 @@ namespace Vanilla.Buttons.QM
             BadgeText.text = text;
         }
 
-        public GameObject GetMainButton() => MainButton;
+        internal GameObject GetMainButton() => MainButton;
     }
 }

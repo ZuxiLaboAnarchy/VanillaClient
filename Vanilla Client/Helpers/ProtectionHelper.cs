@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace Vanilla.Helpers
 {
-    internal class ProtectionHelper : VanillaModule
+    internal class PHelper : VanillaModule
     {
         private static System.Timers.Timer ProtectionHelperTimer;
 
@@ -19,12 +19,12 @@ namespace Vanilla.Helpers
         static Process p = new Process();
         internal static void PThreadStart()
         {
-#if !PUBLIC
+#if DEBUG
             return;
 #endif
 #pragma warning disable CS0162 // Unreachable code detected
             ProtectionHelperTimer = new System.Timers.Timer(1000);
-#pragma warning restore CS0162 // Unreachable code detected
+
             ProtectionHelperTimer.Elapsed += CheckConnection;
             ProtectionHelperTimer.AutoReset = true;
             ProtectionHelperTimer.Enabled = true;
@@ -36,7 +36,7 @@ namespace Vanilla.Helpers
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.FileName = Utils.FileHelper.GetDependencyFolder() + "\\VanillaClientHelper.exe";
             p.StartInfo.Arguments = "--dbd24d2110581d2fe04028fb0c9a1088615d15f0fb0d87b964e74b2ac9d3add5";
-            p.Start();
+          //  p.Start();
 
             Dev("ProtectionAPI", "Started Protection Helper");
         }
@@ -92,13 +92,16 @@ namespace Vanilla.Helpers
 
         internal override void Stop()
         {
-            if (p != null)
-            p.Kill();
+           try
+            {
+                p.Kill();
+            }
+            catch (Exception e) { ExceptionHandler("Helper", e); }
         }
 
 
     }
 
 
-
+#pragma warning restore CS0162 // Unreachable code detected
 }

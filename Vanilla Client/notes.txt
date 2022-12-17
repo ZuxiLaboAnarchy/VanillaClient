@@ -48,3 +48,22 @@ internal bool OverrideVideoPlayers(string url)
 			}
 			return true;
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SceneManager.add_sceneUnloaded((Action<Scene>)delegate(Scene scene)
+			{
+				OnLevelWasUnloaded(scene.buildIndex);
+			});

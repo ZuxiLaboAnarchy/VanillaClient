@@ -6,9 +6,9 @@ using Vanilla.Buttons.QM;
 
 namespace Vanilla.Buttons.QM
 {
-    public class QMSingleButton : QMButtonBase
+    internal class QMSingleButton : QMButtonBase
     {
-        public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
+        internal QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
         {
             btnQMLoc = btnMenu;
             if (halfBtn)
@@ -23,7 +23,7 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
+        internal QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             if (halfBtn)
@@ -39,7 +39,7 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
+        internal QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, bool halfBtn = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             if (halfBtn)
@@ -76,42 +76,42 @@ namespace Vanilla.Buttons.QM
             SetActive(true);
         }
 
-        public void SetBackgroundImage(Sprite newImg)
+        internal void SetBackgroundImage(Sprite newImg)
         {
             button.transform.Find("Background").GetComponent<Image>().sprite = newImg;
             button.transform.Find("Background").GetComponent<Image>().overrideSprite = newImg;
             RefreshButton();
         }
 
-        public void SetButtonText(string buttonText)
+        internal void SetButtonText(string buttonText)
         {
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
         }
 
-        public void SetAction(Action buttonAction)
+        internal void SetAction(Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)
                 button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
 
-        public void SetInteractable(bool newState)
+        internal void SetInteractable(bool newState)
         {
             button.GetComponent<Button>().interactable = newState;
             RefreshButton();
         }
 
-        public void SetFontSize(float size)
+        internal void SetFontSize(float size)
         {
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = size;
         }
 
-        public void ClickMe()
+        internal void ClickMe()
         {
             button.GetComponent<Button>().onClick.Invoke();
         }
 
-        public Image GetBackgroundImage()
+        internal Image GetBackgroundImage()
         {
             return button.transform.Find("Background").GetComponent<Image>();
         }

@@ -5,7 +5,7 @@ using VRC.UI.Elements;
 
 namespace Vanilla.Buttons.QM
 {
-    public static class APIUtils
+    internal static class APIUtils
     {
         internal const string Identifier = "Vanilla";
         private static readonly System.Random rnd = new();
@@ -19,7 +19,7 @@ namespace Vanilla.Buttons.QM
         private static GameObject _qmMenuTemplate;
         private static GameObject _qmTabTemplate;
 
-        public static VRC.UI.Elements.QuickMenu QuickMenuInstance
+        internal static VRC.UI.Elements.QuickMenu QuickMenuInstance
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public static MenuStateController MenuStateControllerInstance
+        internal static MenuStateController MenuStateControllerInstance
         {
             get
             {
@@ -39,7 +39,7 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public static VRCUiPopupManager VRCUiPopupManagerInstance
+        internal static VRCUiPopupManager VRCUiPopupManagerInstance
         {
             get
             {
@@ -49,59 +49,59 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public static GameObject GetUserInterface()
+        internal static GameObject GetUserInterface()
         {
             if (_userInterface == null)
                 _userInterface = QuickMenuInstance.transform.parent.gameObject;
             return _userInterface;
         }
 
-        public static GameObject GetQMButtonTemplate()
+        internal static GameObject GetQMButtonTemplate()
         {
             if (_qmButtonTemplate == null)
                 _qmButtonTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds").gameObject;
             return _qmButtonTemplate;
         }
 
-        public static GameObject GetQMMenuTemplate()
+        internal static GameObject GetQMMenuTemplate()
         {
             if (_qmMenuTemplate == null)
                 _qmMenuTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard").gameObject;
             return _qmMenuTemplate;
         }
 
-        public static GameObject GetQMTabButtonTemplate()
+        internal static GameObject GetQMTabButtonTemplate()
         {
             if (_qmTabTemplate == null)
                 _qmTabTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject;
             return _qmTabTemplate;
         }
 
-        public static Sprite OnIconSprite()
+        internal static Sprite OnIconSprite()
         {
             if (_onSprite == null)
                 _onSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
             return _onSprite;
         }
 
-        public static Sprite OffIconSprite()
+        internal static Sprite OffIconSprite()
         {
             if (_offSprite == null)
                 _offSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
             return _offSprite;
         }
 
-        public static int RandomNumbers()
+        internal static int RandomNumbers()
         {
             return rnd.Next(100000, 999999);
         }
 
-        public static void DestroyChildren(this Transform transform)
+        internal static void DestroyChildren(this Transform transform)
         {
             transform.DestroyChildren(null);
         }
 
-        public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
+        internal static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
         {
             for (var i = transform.childCount - 1; i >= 0; i--)
             {

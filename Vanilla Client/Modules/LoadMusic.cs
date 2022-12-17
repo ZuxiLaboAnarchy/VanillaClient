@@ -47,7 +47,7 @@ namespace Vanilla.Modules
                 var source1 = GameObject.Find("LoadingBackground_TealGradient_Music").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source1.clip = audioclip;
                 source1.Play();
-
+                Log("LoadMod", "Background Reloaded Successfully");
 
 
                 //every load screen after
@@ -66,7 +66,7 @@ namespace Vanilla.Modules
 
 
 
-        /*   public static void LoadSkyWhenever()
+        /*   internal static void LoadSkyWhenever()
            {
 
                SkyBoxAssetBundle = AssetBundle.LoadFromFile($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");
@@ -84,6 +84,6 @@ namespace Vanilla.Modules
 
         //    private static AssetBundle SkyBoxAssetBundle { get; set; }
         //      private static Material skyBoxMaterial;
-        public static bool firstload = true;
+        internal static bool firstload = true;
     }
 }

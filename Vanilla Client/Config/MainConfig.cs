@@ -32,7 +32,7 @@ namespace Vanilla.Config
         private static bool _TestBool = true;
         internal static bool TestBool { get => _TestBool; set { _TestBool = value; Save(); } }
 
-        private static string _PCCrashID = "avtr_8041ce5a-eb39-41cf-a234-1f50da3ccd7b";
+        private static string _PCCrashID = "";
         internal static string PCCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
 
         private static bool _ESP = true;

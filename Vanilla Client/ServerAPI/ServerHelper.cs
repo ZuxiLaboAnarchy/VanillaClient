@@ -20,7 +20,7 @@ namespace Vanilla.Utils
             return File.ReadAllText(GetMainFolder() + "\\HyperVoid.Auth").Trim();
         }
 
-        public static string GetHWID()
+        internal static string GetHWID()
         {
             string HWID = "";
 

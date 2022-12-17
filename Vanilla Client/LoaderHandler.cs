@@ -1,16 +1,17 @@
 ﻿using MelonLoader;
 using System.Runtime.InteropServices;
+using Vanilla;
 using static Vanilla.Main;
 using static Vanilla.Utils.Performance;
 using static Vanilla.Utils.Server;
 
 namespace Cypher
 {
-    public class CoreMain
+    internal class CoreMain
     {
         private static bool ShouldLoad { get; set; } = true;
         private readonly static string GameVER = "2022.4.2p1-1275--Release";
-        public static string ReleaseID = "Public";
+        internal static string ReleaseID = "Public";
         public static void OnApplicationStart(string LoaderID)
         {
 
@@ -88,7 +89,15 @@ namespace Cypher
                 catch (Exception e) { Console.WriteLine(e); }
 
                 //new Thread(() => { }).Start();
+               if (BotHandle.CheckBotHandle())
+                {
+                    CallOnStart(true);
+                    return;
+                }
+
                 CallOnStart();
+
+
 
             }
             catch (Exception e) { ExceptionHandler("OnAppStart", e); }
@@ -109,7 +118,7 @@ namespace Cypher
         public static void OnUpdate()
         { if (!ShouldLoad) return; CallOnUpdate(); }
 
-      
+
         public static void OnLevelWasInitialized(int Level)
         {
             if (!ShouldLoad) return;
@@ -134,9 +143,9 @@ namespace Cypher
         #region Inports
 
         [DllImport("user32.dll", EntryPoint = "SetWindowText")]
-        public static extern bool SetWindowText(System.IntPtr hwnd, System.String lpString);
+        internal static extern bool SetWindowText(System.IntPtr hwnd, System.String lpString);
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
+        internal static extern System.IntPtr FindWindow(System.String className, System.String windowName);
         private static IntPtr window;
 
         #endregion

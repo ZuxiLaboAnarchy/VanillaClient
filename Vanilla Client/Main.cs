@@ -4,19 +4,34 @@ using Vanilla.Patches;
 using System.Runtime.CompilerServices;
 using static Vanilla.Utils.Performance;
 using UnityEngine;
+using Vanilla.ServerAPI;
 
 namespace Vanilla
 {
     internal class Main
     {
         [CompilerGenerated]
-        internal protected static void CallOnStart()
+        internal protected static void CallOnStart(bool isBot = false)
         {
+
             FileHelper.Setup();
 
-            PatchManager.Patch();
+            if (!isBot)
+            {
+               
 
-            ModuleManager.InitModules();
+                PatchManager.Patch();
+                ModuleManager.InitModules();
+            }
+            else
+            {
+                BotHandle.InitBotHandle();
+            }
+
+
+          
+
+       
 
             AssetLoader.LoadAssetBundle();
 
@@ -51,9 +66,9 @@ namespace Vanilla
         {
             PatchManager.Stop();
             ModuleManager.Stop();
-
+            WSBase.Pop();
             LogHandler.Pop();
-
+            Console.ReadLine();
 
         }
 

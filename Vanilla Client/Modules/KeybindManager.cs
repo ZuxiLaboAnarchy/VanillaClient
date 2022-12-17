@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using Vanilla.Config;
 using Vanilla.Wrappers;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Modules
 {
@@ -15,55 +12,59 @@ namespace Vanilla.Modules
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
-               // Buttons.Loader.LoadButtons();
+                // Buttons.Loader.LoadButtons();
 
                 // UniversalUI.SetUIActive("VanillaClient", IsGUIActive());
             }
 
 
-            if (UnityEngine.Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 LogHandler.RePop();
                 MainConfig.Load();
             }
 
+            if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F) || (Input.GetKey(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl))))
+            {
+                FlyManager.ToggleFly();
+            }
 
-            
 
-            if (UnityEngine.Input.GetKeyDown(KeyCode.RightControl))
+
+            if (Input.GetKeyDown(KeyCode.RightControl))
             {
                 GeneralUtils.CloseGame();
             }
 
-            if (UnityEngine.Input.GetKeyDown(KeyCode.RightAlt))
+            if (Input.GetKeyDown(KeyCode.RightAlt))
             {
                 GeneralUtils.Restart();
             }
 
-            if ((UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.E) || (UnityEngine.Input.GetKey(KeyCode.E) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl))))
+            if ((Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.E) || (UnityEngine.Input.GetKey(KeyCode.E) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl))))
             {
                 CameraModule.ChangeCameraState();
             }
-            else if ((UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P)) || (UnityEngine.Input.GetKey(KeyCode.P) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl)))
+            else if ((Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P)) || (UnityEngine.Input.GetKey(KeyCode.P) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl)))
             {
                 CameraModule.UseFreezeCamera();
             }
-            float axis = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            float axis = Input.GetAxis("Mouse ScrollWheel");
             if (axis != 0f)
             {
                 CameraModule.ApplyThirdpersonSmoothZoom(axis > 0f);
             }
-            if (UnityEngine.Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
-                if (UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetMouseButtonDown(1))
+                if (Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetMouseButtonDown(1))
                 {
                     Ray ray = new Ray(GeneralWrappers.GetPlayerCamera().transform.position, GeneralWrappers.GetPlayerCamera().transform.forward);
                     if (Physics.Raycast(ray, out var hitInfo))
                     {
-                     //   PlayerWrapper.GetLocalPlayerInformation().vrcPlayer.transform.position = hitInfo.point;
+                        //   PlayerWrapper.GetLocalPlayerInformation().vrcPlayer.transform.position = hitInfo.point;
                     }
                 }
-                if (UnityEngine.Input.GetMouseButtonDown(2))
+                if (Input.GetMouseButtonDown(2))
                 {
                     CameraModule.ApplyCameraSmoothZoom(incremental: false, 60f);
                 }
@@ -72,15 +73,15 @@ namespace Vanilla.Modules
                     CameraModule.ApplyCameraSmoothZoom(incremental: true, axis * 30f);
                 }
             }
-            else if (UnityEngine.Input.GetKeyDown(KeyCode.LeftAlt))
+            else if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
                 CameraModule.ChangeCameraActualZoomState(zoom: true);
             }
-            else if (UnityEngine.Input.GetKeyUp(KeyCode.LeftAlt))
+            else if (Input.GetKeyUp(KeyCode.LeftAlt))
             {
                 CameraModule.ChangeCameraActualZoomState(zoom: false);
             }
         }
     }
 }
-    
+

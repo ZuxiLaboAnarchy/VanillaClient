@@ -11,12 +11,12 @@ namespace Vanilla.Utils
 {
     internal class ImageUtils
     {
-       public static byte[] _PageIcon { get; set; }
+       internal static byte[] _PageIcon { get; set; }
 
 
 
 
-        public static byte[] tabImage;
+        internal static byte[] tabImage;
 
 
 
@@ -56,7 +56,7 @@ namespace Vanilla.Utils
 
     
 
-        public static IEnumerator loadspriterest(Image Instance, string url)
+        internal static IEnumerator loadspriterest(Image Instance, string url)
         {
 
             var www = UnityWebRequestTexture.GetTexture(url);
@@ -78,7 +78,7 @@ namespace Vanilla.Utils
 
             if (sprite2 != null) Instance.sprite = sprite2;
         }
-        public static Sprite InitIcon(string URL)
+        internal static Sprite InitIcon(string URL)
         {
             using (WebClient wc = new WebClient())
                 tabImage = wc.DownloadData(URL);

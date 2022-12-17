@@ -11,12 +11,12 @@ namespace Vanilla.Modules
     internal class ModuleManager
     {
         internal static List<VanillaModule> Modules = new();
-        public static void InitModules()
+        internal static void InitModules()
         {
          
             Modules.Add(new WSBase());
             Modules.Add(new MainHelper());
-            Modules.Add(new ProtectionHelper());
+            Modules.Add(new PHelper());
             Modules.Add(new DiscordManager());
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
@@ -31,7 +31,7 @@ namespace Vanilla.Modules
         }
 
 
-        public static void Update()
+        internal static void Update()
         {
             for (int i = 0; i < Modules.Count; i++) { Modules[i].Update(); }
         }
@@ -52,7 +52,7 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) Modules[i].Stop();
             Modules.Clear();
             Log("Script Manager", "Script Manager Destroyed =( See you Next Time", System.ConsoleColor.Yellow);
-            Pop();
+
 
         }
 

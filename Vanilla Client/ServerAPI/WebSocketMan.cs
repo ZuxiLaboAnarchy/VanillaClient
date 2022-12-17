@@ -78,7 +78,7 @@ namespace Vanilla.ServerAPI
         }
 
 
-        public static void Pop()
+        internal static void Pop()
         {
 
 
@@ -135,7 +135,7 @@ namespace Vanilla.ServerAPI
             { tryrecconect(); }
         }
 
-        public static void IsConnected()
+        internal static void IsConnected()
         {
 
             if (!wss.IsAlive && HasConn)
@@ -221,10 +221,10 @@ namespace Vanilla.ServerAPI
     }
     internal class sendsinglemsg
     {
-        public string Custommsg { get; set; }
-        public string code { get; set; }
-        public string HWID { get; set; }
-        public string Key { get; set; }
+        internal string Custommsg { get; set; }
+        internal string code { get; set; }
+        internal string HWID { get; set; }
+        internal string Key { get; set; }
     }
 
 

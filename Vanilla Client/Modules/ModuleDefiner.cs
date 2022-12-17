@@ -1,6 +1,6 @@
 ﻿namespace Vanilla.Modules
 {
-    public abstract class VanillaModule
+    internal abstract class VanillaModule
     {
 
         internal virtual void UI() { }

@@ -7,7 +7,7 @@ using Vanilla.Buttons.QM;
 
 namespace Vanilla.Buttons.QM
 {
-    public class QMToggleButton : QMButtonBase
+    internal class QMToggleButton : QMButtonBase
     {
         protected TextMeshProUGUI btnTextComp;
         protected Button btnComp;
@@ -16,19 +16,19 @@ namespace Vanilla.Buttons.QM
         protected Action OnAction;
         protected Action OffAction;
 
-        public QMToggleButton(QMNestedButton location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
+        internal QMToggleButton(QMNestedButton location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
         {
             btnQMLoc = location.GetMenuName();
             Initialize(btnXPos, btnYPos, btnText, onAction, offAction, btnToolTip, defaultState);
         }
 
-        public QMToggleButton(QMTabMenu location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
+        internal QMToggleButton(QMTabMenu location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
         {
             btnQMLoc = location.GetMenuName();
             Initialize(btnXPos, btnYPos, btnText, onAction, offAction, btnToolTip, defaultState);
         }
 
-        public QMToggleButton(string location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
+        internal QMToggleButton(string location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
         {
             btnQMLoc = location;
             Initialize(btnXPos, btnYPos, btnText, onAction, offAction, btnToolTip, defaultState);
@@ -77,18 +77,18 @@ namespace Vanilla.Buttons.QM
             }
         }
 
-        public void SetButtonText(string buttonText)
+        internal void SetButtonText(string buttonText)
         {
             button.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
         }
 
-        public void SetButtonActions(Action onAction, Action offAction)
+        internal void SetButtonActions(Action onAction, Action offAction)
         {
             OnAction = onAction;
             OffAction = offAction;
         }
 
-        public void SetToggleState(bool newState, bool shouldInvoke = false)
+        internal void SetToggleState(bool newState, bool shouldInvoke = false)
         {
             try
             {
@@ -108,12 +108,12 @@ namespace Vanilla.Buttons.QM
             catch { }
         }
 
-        public void ClickMe()
+        internal void ClickMe()
         {
             HandleClick();
         }
 
-        public bool GetCurrentState()
+        internal bool GetCurrentState()
         {
             return currentState;
         }

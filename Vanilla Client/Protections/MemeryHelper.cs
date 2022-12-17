@@ -9,11 +9,11 @@ namespace Vanilla.Protections
     {
         // s/o guidedhacking.com
 
-        public const int MAX_PATH = 260;
+        internal const int MAX_PATH = 260;
         private const int INVALID_HANDLE_VALUE = -1;
 
         [Flags]
-        public enum ProcessAccessFlags : uint
+        internal enum ProcessAccessFlags : uint
         {
             All = 0x001F0FFF,
             Terminate = 0x00000001,
@@ -43,25 +43,25 @@ namespace Vanilla.Protections
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
+        internal static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct PROCESSENTRY32
+        internal struct PROCESSENTRY32
         {
-            public uint dwSize;
-            public uint cntUsage;
-            public uint th32ProcessID;
-            public IntPtr th32DefaultHeapID;
-            public uint th32ModuleID;
-            public uint cntThreads;
-            public uint th32ParentProcessID;
-            public int pcPriClassBase;
-            public uint dwFlags;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)] public string szExeFile;
+            internal uint dwSize;
+            internal uint cntUsage;
+            internal uint th32ProcessID;
+            internal IntPtr th32DefaultHeapID;
+            internal uint th32ModuleID;
+            internal uint cntThreads;
+            internal uint th32ParentProcessID;
+            internal int pcPriClassBase;
+            internal uint dwFlags;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)] internal string szExeFile;
         };
 
         [StructLayout(LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Ansi)]
-        public struct MODULEENTRY32
+        internal struct MODULEENTRY32
         {
             internal uint dwSize;
             internal uint th32ModuleID;
@@ -80,15 +80,15 @@ namespace Vanilla.Protections
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool ReadProcessMemory(
+        internal static extern bool ReadProcessMemory(
         IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesRead);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool WriteProcessMemory(
+        internal static extern bool WriteProcessMemory(
         IntPtr hProcess, IntPtr lpBaseAddress, [MarshalAs(UnmanagedType.AsAny)] object lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesWritten);
 
         [DllImport("kernel32.dll")]
-        public static extern bool VirtualProtect(IntPtr lpAddress, int dwSize, uint flNewProtect, out uint lpflOldProtect);
+        internal static extern bool VirtualProtect(IntPtr lpAddress, int dwSize, uint flNewProtect, out uint lpflOldProtect);
 
         [DllImport("kernel32.dll")]
         private static extern bool Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
@@ -106,7 +106,7 @@ namespace Vanilla.Protections
         private static extern bool CloseHandle(IntPtr hHandle);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr GetModuleHandle(string moduleName);
+        internal static extern IntPtr GetModuleHandle(string moduleName);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr CreateToolhelp32Snapshot(SnapshotFlags dwFlags, int th32ProcessID);
@@ -120,7 +120,7 @@ namespace Vanilla.Protections
            IntPtr lpParameter, uint dwCreationFlags, out IntPtr lpThreadId);
 
         [Flags]
-        public enum AllocationType
+        internal enum AllocationType
         {
             Commit = 0x1000,
             Reserve = 0x2000,
@@ -134,7 +134,7 @@ namespace Vanilla.Protections
         }
 
         [Flags]
-        public enum MemoryProtection
+        internal enum MemoryProtection
         {
             Execute = 0x10,
             ExecuteRead = 0x20,
@@ -153,7 +153,7 @@ namespace Vanilla.Protections
         private static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress,
                             uint dwSize, AllocationType flAllocationType, MemoryProtection flProtect);
 
-        public static IntPtr GetModuleBaseAddress(Process proc, string modName)
+        internal static IntPtr GetModuleBaseAddress(Process proc, string modName)
         {
             IntPtr addr = IntPtr.Zero;
 
@@ -168,7 +168,7 @@ namespace Vanilla.Protections
             return addr;
         }
 
-        public static IntPtr GetModuleBaseAddress(int procId, string modName)
+        internal static IntPtr GetModuleBaseAddress(int procId, string modName)
         {
             IntPtr modBaseAddr = IntPtr.Zero;
 
@@ -196,7 +196,7 @@ namespace Vanilla.Protections
             return modBaseAddr;
         }
 
-        public static int GetProcId(string procname)
+        internal static int GetProcId(string procname)
         {
             int procid = 0;
 
@@ -224,7 +224,7 @@ namespace Vanilla.Protections
             return procid;
         }
 
-        public static IntPtr FindDMAAddy(IntPtr hProc, IntPtr ptr, int[] offsets)
+        internal static IntPtr FindDMAAddy(IntPtr hProc, IntPtr ptr, int[] offsets)
         {
             var buffer = new byte[IntPtr.Size];
 
@@ -237,7 +237,7 @@ namespace Vanilla.Protections
             return ptr;
         }
 
-        public static bool InjectDLL(string dllpath, string procname)
+        internal static bool InjectDLL(string dllpath, string procname)
         {
             Process[] procs = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(procname));
 

@@ -2,7 +2,7 @@
 using System.Reflection;
 namespace Vanilla.Patches
 {
-    public abstract class VanillaPatches
+    internal abstract class VanillaPatches
     {
         private Type patchType = null;
 
@@ -10,7 +10,7 @@ namespace Vanilla.Patches
 
         internal virtual void Patch() { }
 
-        public virtual void Unpatch() { }
+        internal virtual void Unpatch() { }
 
         internal string GetPatchName()
         {

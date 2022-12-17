@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace Vanilla.Protections
 {
 
-    public static class ProcessExtensions
+    internal static class ProcessExtensions
     {
         private static string FindIndexedProcessName(int pid)
         {
@@ -32,7 +32,7 @@ namespace Vanilla.Protections
             return Process.GetProcessById((int)parentId.NextValue());
         }
 
-        public static Process Parent(this Process process)
+        internal static Process Parent(this Process process)
         {
             return FindPidFromIndexedProcessName(FindIndexedProcessName(process.Id));
         }
@@ -51,7 +51,7 @@ namespace Vanilla.Protections
         static extern int NtQueryInformationProcess(IntPtr processHandle, int processInformationClass, IntPtr processInformation, uint processInformationLength, IntPtr returnLength);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
+        internal static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -62,7 +62,7 @@ namespace Vanilla.Protections
         [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern int memcmp(byte[] b1, byte[] b2, long count);
         [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        public static extern int MessageBox(IntPtr h, string m, string c, int type);
+        internal static extern int MessageBox(IntPtr h, string m, string c, int type);
 
         static bool ByteArrayCompare(byte[] b1, byte[] b2)
         {
@@ -72,7 +72,7 @@ namespace Vanilla.Protections
         }
 
         [Flags]
-        public enum ProcessAccessFlags : uint
+        internal enum ProcessAccessFlags : uint
         {
             All = 0x001F0FFF,
             Terminate = 0x00000001,
@@ -89,7 +89,7 @@ namespace Vanilla.Protections
             Synchronize = 0x00100000
         }
 
-        public enum ProcessInfo : uint
+        internal enum ProcessInfo : uint
         {
             ProcessBasicInformation = 0x00,
             ProcessDebugPort = 0x07,
@@ -109,7 +109,7 @@ namespace Vanilla.Protections
         private static string[] VmProcess = { "VBoxService", "VBoxTray" };
         private static string[] VmDriver = { "VBoxGuest.sys", "VBoxMouse.sys", "VBoxSF.sys", "VBoxWddm.sys" };
 
-        public static bool Run()
+        internal static bool Run()
         {
             /* if (AntiSandboxie())
              {
@@ -141,7 +141,7 @@ namespace Vanilla.Protections
         }
 
 
-        public static void CheckAnti()
+        internal static void CheckAnti()
         {
             if (AntiSandboxie())
             {
@@ -166,7 +166,7 @@ namespace Vanilla.Protections
         }
 
 
-        public static void AntiDump()
+        internal static void AntiDump()
         {
             IntPtr myMod = GetModuleHandle(null);
             Memory.VirtualProtect(myMod, 0x1000, 0x40, out _);
@@ -279,7 +279,7 @@ namespace Vanilla.Protections
                 return false;
         }
 
-        public static IntPtr OpenProcess(ProcessAccessFlags flags1, Process proc, ProcessAccessFlags flags)
+        internal static IntPtr OpenProcess(ProcessAccessFlags flags1, Process proc, ProcessAccessFlags flags)
         {
             return OpenProcess(flags, false, proc.Id);
         }

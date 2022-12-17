@@ -8,11 +8,11 @@ namespace Vanilla.Modules
 {
     internal class MurderManager
     {
-        public static bool murdergoldweapon = false;
-        public static bool murdergodmod = false;
-        public static bool everyonegoldgun = false;
-        public static bool amongusgodmod = false;
-        public static bool continuesfire = false;
-        public static bool everyonecontinuesfire = false;
+        internal static bool murdergoldweapon = false;
+        internal static bool murdergodmod = false;
+        internal static bool everyonegoldgun = false;
+        internal static bool amongusgodmod = false;
+        internal static bool continuesfire = false;
+        internal static bool everyonecontinuesfire = false;
     }
 }

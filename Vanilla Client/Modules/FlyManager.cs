@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Vanilla.Config;
-using VRC.SDKBase;
-using static Vanilla.Main;
 
 namespace Vanilla.Modules
 {
     internal class FlyManager : VanillaModule
     {
+        internal static void ToggleFly()
+        {
+            if (!RuntimeConfig.ShouldFly)
+            {
+                Log("Fly", "Fly Enabled");
+                RuntimeConfig.ShouldFly = true;
+                VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = false;
+            }
+            else
+            {
+                Log("Fly", "Fly Disabled");
+                RuntimeConfig.ShouldFly = false;
+                VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = true;
+            }
 
+
+        }
         private Transform camera() => GameObject.Find("Camera (eye)").transform;
         internal override void Update()
         {

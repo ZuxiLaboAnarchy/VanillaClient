@@ -11,13 +11,12 @@ namespace Vanilla.Utils
         internal static string GetGameName()
         { return MelonLoader.InternalUtils.UnityInformationHandler.GameName; }
 
-
+        internal static string GetCommandLine() {  return Environment.CommandLine.ToLower();  }
 
         internal static void CloseGame() { Process.GetCurrentProcess().Kill(); }
 
         internal static void Restart()
         {
-
             string arguments = "";
             foreach (string stringi in Environment.GetCommandLineArgs())
             {
@@ -28,12 +27,9 @@ namespace Vanilla.Utils
             WorldBoss.StartInfo.Arguments = arguments;
             WorldBoss.Start();
             Process.GetCurrentProcess().Kill();
-
-
-        
         }
 
-        public static void Delay(int time, Action action)
+        internal static void Delay(int time, Action action)
             => MelonCoroutines.Start(WaitForDelayFinish(time, action));
 
         private static IEnumerator WaitForDelayFinish(int time, Action action)

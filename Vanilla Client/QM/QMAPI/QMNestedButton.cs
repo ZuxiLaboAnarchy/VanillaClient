@@ -10,19 +10,19 @@ using static VRC.UI.Elements.UIPage;
 
 namespace Vanilla.Buttons.QM
 {
-    public class QMNestedButton : QMMenuBase
+    internal class QMNestedButton : QMMenuBase
     {
         protected bool IsMenuRoot;
         protected GameObject BackButton;
         protected QMSingleButton MainButton;
 
-        public QMNestedButton(QMTabMenu location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
+        internal QMNestedButton(QMTabMenu location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
             btnQMLoc = location.GetMenuName();
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
         }
 
-        public QMNestedButton(QMNestedButton location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
+        internal QMNestedButton(QMNestedButton location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
             btnQMLoc = location.GetMenuName();
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
@@ -78,19 +78,19 @@ namespace Vanilla.Buttons.QM
             MenuObject.transform.Find("ScrollRect").GetComponent<ScrollRect>().enabled = false;
         }
 
-        public void OpenMe()
+        internal void OpenMe()
         {
             MenuObject.SetActive(true);
             APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, TransitionType.Left);
         }
 
-        public void CloseMe()
+        internal void CloseMe()
         {
             MenuPage.Method_Public_Virtual_New_Void_0();
         }
 
-        public QMSingleButton GetMainButton() => MainButton;
+        internal QMSingleButton GetMainButton() => MainButton;
 
-        public GameObject GetBackButton() => BackButton;
+        internal GameObject GetBackButton() => BackButton;
     }
 }
