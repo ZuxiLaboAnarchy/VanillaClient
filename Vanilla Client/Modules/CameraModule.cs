@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using MelonLoader;
+using System.Collections;
 using System.Collections.Generic;
-using MelonLoader;
-
 using UnityEngine;
 using Vanilla.Wrappers;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Modules
 {
+   
     internal class CameraModule : VanillaModule
     {
+        protected override string ModuleName => "CameraModule";
         private static bool camerasInitialized = false;
 
         private static bool worldFullyLoaded = false;
@@ -38,7 +38,10 @@ namespace Vanilla.Modules
 
         private readonly int CULLING_LAYER_PLAYERLOCAL = 1024;
 
- 
+        internal override void AppFocus(bool state)
+        {
+            ChangeCameraActualZoomState(zoom: false);
+        }
 
         internal override void WaitForPlayer()
         {
@@ -101,7 +104,7 @@ namespace Vanilla.Modules
                 cameraBack.nearClipPlane = (flag ? 0.001f : 0.05f);
                 cameraFreeze.nearClipPlane = (flag ? 0.001f : 0.05f);
             }
-           
+
             if (true)
             {
                 if (cameraSetup == 0)
@@ -124,7 +127,7 @@ namespace Vanilla.Modules
             {
                 worldFullyLoaded = false;
                 MelonCoroutines.Start(DoWorldFullyLoadedCountdown());
-               // ChangeCameraClipping(Configuration.GetGeneralConfig().MinimumCameraClippingDistance);
+                // ChangeCameraClipping(Configuration.GetGeneralConfig().MinimumCameraClippingDistance);
             }
         }
 
@@ -205,7 +208,7 @@ namespace Vanilla.Modules
                 cameraFront.enabled = false;
                 GeneralWrappers.GetPlayerCamera().enabled = false;
             }
-         //   GeneralUtils.SetNameplateWallhack(Configuration.GetGeneralConfig().NameplateWallhack && cameraSetup == 0);
+            //   GeneralUtils.SetNameplateWallhack(Configuration.GetGeneralConfig().NameplateWallhack && cameraSetup == 0);
         }
 
         internal static void ApplyCameraSmoothZoom(bool incremental, float zoom)
@@ -247,7 +250,7 @@ namespace Vanilla.Modules
             if (cameraSetup == 0)
             {
                 altZoom = zoom;
-              //  GeneralWrappers.GetReticle().SetActive(!zoom);
+                //  GeneralWrappers.GetReticle().SetActive(!zoom);
             }
         }
 

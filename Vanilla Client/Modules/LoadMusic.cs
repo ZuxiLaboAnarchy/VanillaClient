@@ -7,6 +7,7 @@ namespace Vanilla.Modules
 {
     internal class LoadMusic : VanillaModule
     {
+        protected override string ModuleName => "LoadMusic";
         internal override void Start()
         {
             // Dev("LoadMusic", "Loading Music");

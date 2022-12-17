@@ -10,6 +10,8 @@ namespace Vanilla.Modules
 {
     internal class JoinLoggerModule : VanillaModule
     {
+        protected override string ModuleName => "JoinLogger";
+
         internal override void PlayerJoin(Player __0)
         {
             if (!MainConfig.JoinLogger)

@@ -5,6 +5,13 @@ namespace Vanilla.Modules
 {
     internal class FlyManager : VanillaModule
     {
+        protected override string ModuleName => "FlyManager";
+
+        internal override void WorldUnload(int level)
+        {
+            RuntimeConfig.ShouldFly = false;
+        }
+
         internal static void ToggleFly()
         {
             if (!RuntimeConfig.ShouldFly)

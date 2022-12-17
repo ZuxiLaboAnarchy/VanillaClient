@@ -1,10 +1,9 @@
 ﻿
+using System.Runtime.CompilerServices;
 using Vanilla.Modules;
 using Vanilla.Patches;
-using System.Runtime.CompilerServices;
-using static Vanilla.Utils.Performance;
-using UnityEngine;
 using Vanilla.ServerAPI;
+using static Vanilla.Utils.Performance;
 
 namespace Vanilla
 {
@@ -18,26 +17,17 @@ namespace Vanilla
 
             if (!isBot)
             {
-               
+
 
                 PatchManager.Patch();
                 ModuleManager.InitModules();
+                AssetLoader.LoadAssetBundle();
             }
             else
             {
                 BotHandle.InitBotHandle();
             }
 
-
-          
-
-       
-
-            AssetLoader.LoadAssetBundle();
-
-
-            
-            try { for (int i = 0; i < PatchManager.Patches.Count; i++) PatchManager.Patches[i].Patch(); } catch (Exception e) { ExceptionHandler("Patches", e); }
 
             Log("Patch Manager", $"Patched {PatchManager.PatchedMethods} Methods", ConsoleColor.Green);
 
@@ -48,36 +38,28 @@ namespace Vanilla
             Log("Performance", $"Client Init Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
 
         }
-     
-        internal protected static void CallOnGUI()
-        {
-            ModuleManager.OnGUI();
-        }
 
-        internal protected static void CallOnUpdate()
-        {
-            ModuleManager.Update();
-        }
-        internal protected static void CallOnLateStart()
-        {
-            ModuleManager.LateStart();
-        }
-        internal protected static void CallOnGameQuit()
-        {
-            PatchManager.Stop();
-            ModuleManager.Stop();
-            WSBase.Pop();
-            LogHandler.Pop();
-            Console.ReadLine();
+        internal protected static void CallOnGUI() => ModuleManager.OnGUI();
+       
 
-        }
+       
 
-        internal protected static void CallOnLevelInit(int level)
-        {
-            ModuleManager.LevelInit(level);
-
-
-        }
-
+    internal protected static void CallOnGameQuit()
+    {
+        PatchManager.Stop();
+        ModuleManager.Stop();
+        WSBase.Pop();
+        LogHandler.Pop();
     }
+    internal protected static void CallOnUpdate() => ModuleManager.Update();
+    internal protected static void CallOnLateStart() => ModuleManager.LateStart();
+
+    internal protected static void CallOnLevelInit(int level) => ModuleManager.LevelInit(level);
+
+    internal protected static void CallOnLevelUnload(int level) => ModuleManager.LevelUnload(level);
+
+
+
+
+}
 }

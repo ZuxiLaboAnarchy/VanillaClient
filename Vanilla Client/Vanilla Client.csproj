@@ -175,11 +175,13 @@
     <Compile Include="Modules\CameraModule.cs" />
     <Compile Include="GenFeatures\FriendLogger.cs" />
     <Compile Include="Modules\ESPModule.cs" />
+    <Compile Include="VanillaGameObject\VanillaObject.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
     <Compile Include="Modules\NamePlates.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="VanillaGameObject\MonoBehavior.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\ExploitMenu.cs" />
     <Compile Include="QM\Menu\Settings.cs" />
@@ -273,8 +275,8 @@
     <Compile Include="Modules\DiscordModule.cs" />
     <Compile Include="Modules\KeybindManager.cs" />
     <Compile Include="Modules\LoadMusic.cs" />
-    <Compile Include="Modules\ModuleDefiner.cs" />
-    <Compile Include="Modules\ModuleManager.cs" />
+    <Compile Include="Modules\Manager\ModuleDefiner.cs" />
+    <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Patches\Harmony\Ani.cs" />
     <Compile Include="Patches\Harmony\Curser.cs" />
     <Compile Include="Patches\Harmony\FullScan.cs" />

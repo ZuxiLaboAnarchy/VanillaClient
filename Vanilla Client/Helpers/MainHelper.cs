@@ -13,6 +13,7 @@ namespace Vanilla.Helpers
 {
     internal class MainHelper : VanillaModule
     {
+        protected override string ModuleName => "MainHelper";
         internal static int SentAvatarCount = 0;
         private float nextPop = 0f;
         static List<string> AvatarList = new List<string>();

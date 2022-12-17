@@ -9,7 +9,7 @@ namespace Vanilla.ServerAPI
 {
     internal class WSBase : VanillaModule
     {
-
+        protected override string ModuleName => "WSBase";
         internal override void Start()
         {
             Runsocket();

@@ -15,6 +15,7 @@ namespace Vanilla.QM
 {
     internal class ButtonLoader : VanillaModule
     {
+        protected override string ModuleName => "QM Loader";
         internal override void Start()
         {
             MelonCoroutines.Start(WaitForQMLoad());

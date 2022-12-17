@@ -1,9 +1,8 @@
-﻿using Vanilla.Patches.Harmony;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
-using VRC.Steam;
+using Vanilla.Patches.Harmony;
 
 namespace Vanilla.Patches
 {
@@ -18,18 +17,22 @@ namespace Vanilla.Patches
             Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
             Patches.Add(new PhotonPatch());
-            /// Patches.Add(new CurserPatch());
+
             Patches.Add(new PlayerEvents());
             Patches.Add(new PlayerPatch());
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());
+#if DEBUG
+            // Patches.Add(new CurserPatch());
+#endif
+            for (int i = 0; i < PatchManager.Patches.Count; i++) { try { PatchManager.Patches[i].Patch(); } catch (Exception e) { ExceptionHandler("Patches", e, Patches[i].GetPatchName()); } }
 
             Dev("PatchManager", "Initilized");
         }
 
         internal static void Stop()
         {
-             UnpatchAllMethods();
+            UnpatchAllMethods();
 
             Dev("PatchManager", $"Unpatched {PatchManager.PatchedMethods} Methods");
             Patches.Clear();

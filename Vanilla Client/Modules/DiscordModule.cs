@@ -3,6 +3,7 @@
 
     internal class DiscordManager : VanillaModule
     {
+        protected override string ModuleName => "Discord Manager";
         internal static DiscordRPC.RichPresence presence;
         internal static DiscordRPC.EventHandlers eventHandlers;
 
@@ -64,7 +65,7 @@
 
         internal static string smallImageText = "";
 
-        internal static string details = $"Not A Modifyed Client";
+        internal static string details = $"Not A Modified Client";
 
         internal static string state = "hvl.gg/discord";
     }

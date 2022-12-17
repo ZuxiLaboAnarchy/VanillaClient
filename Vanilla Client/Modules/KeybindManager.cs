@@ -6,30 +6,24 @@ namespace Vanilla.Modules
 {
     internal class KeybindManager : VanillaModule
     {
+        protected override string ModuleName => "KeyBindManager";
 
         internal override void Update()
         {
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
-                // Buttons.Loader.LoadButtons();
-
-                // UniversalUI.SetUIActive("VanillaClient", IsGUIActive());
+                ModuleManager.DebugKey();
             }
 
+            
 
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                LogHandler.RePop();
-                MainConfig.Load();
-            }
+
 
             if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F) || (Input.GetKey(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl))))
             {
                 FlyManager.ToggleFly();
             }
-
-
 
             if (Input.GetKeyDown(KeyCode.RightControl))
             {

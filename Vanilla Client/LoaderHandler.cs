@@ -135,8 +135,12 @@ namespace Cypher
             Pop();
         }
 
+        public static void OnSceneWasUnloaded(int level)
+        {
+            if (!ShouldLoad) return;
+            CallOnLevelUnload(level);
+        }
 
-      
 
         #endregion
 

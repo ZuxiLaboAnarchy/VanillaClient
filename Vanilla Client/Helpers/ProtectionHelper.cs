@@ -9,6 +9,7 @@ namespace Vanilla.Helpers
 {
     internal class PHelper : VanillaModule
     {
+        protected override string ModuleName => "PHelper";
         private static System.Timers.Timer ProtectionHelperTimer;
 
         internal override void Start()
