@@ -156,6 +156,8 @@
     <Compile Include="GenFeatures\FriendLogger.cs" />
     <Compile Include="Helpers\ESPModule.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
+    <Compile Include="Modules\Manager\ModuleDefiner.cs" />
+    <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Modules\NamePlates.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="GenFeatures\MurderManager.cs" />
