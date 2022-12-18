@@ -147,6 +147,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
     <Compile Include="Config\RuntimeConfig.cs" />
+    <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="GenFeatures\AmongUsManager.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
+    <Compile Include="QM\Menu\Siton.cs" />
     <Compile Include="QM\Menu\ExploitMenu.cs" />
     <Compile Include="QM\Menu\Settings.cs" />
     <Compile Include="QM\QMAPI\QMButtonBase.cs" />
