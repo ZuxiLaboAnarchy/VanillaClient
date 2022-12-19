@@ -60,4 +60,3 @@ namespace Vanilla.Wrappers
         }
         private static GameObject avatarPreviewBase;
     }
-}
