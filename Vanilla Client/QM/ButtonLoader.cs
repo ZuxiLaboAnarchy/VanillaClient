@@ -1,7 +1,9 @@
 ﻿using MelonLoader;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Net;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Vanilla.Buttons.QM;
@@ -25,7 +27,6 @@ namespace Vanilla.QM
             while (GameObject.Find($"Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
             LoadButtons();
         }
-
         internal static void LoadButtons()
         {
 
@@ -43,13 +44,21 @@ namespace Vanilla.QM
                     Networking.GoToRoom(roomid);
                 });
             }, "Go To Room");
+            static void ChangeAvatar(string AvatarID)
+            {
+                PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
+                component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
+                {
 
+                    id = AvatarID
+                };
+                component.ChangeToSelectedAvatar();
+            }
             var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
             {
-                string roomid = null;
-                Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () => {
-                    Networking.GoToRoom(roomid);
-                });
+                aviid = VRC.Player.prop_Player_0.prop_ApiAvatar_0.id;
+                System.Windows.Forms.Clipboard.SetText(aviid);
+                ChangeAvatar(aviid.Trim());
             }, "Change Avatar By ID");
 
             Settings.SettingsMenu(tabMenu);
