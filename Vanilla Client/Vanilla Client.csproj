@@ -154,7 +154,7 @@
     <Compile Include="Helpers\HideSelf.cs" />
     <Compile Include="Modules\CameraModule.cs" />
     <Compile Include="GenFeatures\FriendLogger.cs" />
-    <Compile Include="Helpers\ESPModule.cs" />
+    <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
     <Compile Include="Modules\Manager\ModuleDefiner.cs" />
     <Compile Include="Modules\Manager\ModuleManager.cs" />
@@ -256,8 +256,6 @@
     <Compile Include="Modules\DiscordModule.cs" />
     <Compile Include="Modules\KeybindManager.cs" />
     <Compile Include="Modules\LoadMusic.cs" />
-    <Compile Include="Modules\ModuleDefiner.cs" />
-    <Compile Include="Modules\ModuleManager.cs" />
     <Compile Include="Patches\Harmony\Ani.cs" />
     <Compile Include="Patches\Harmony\Curser.cs" />
     <Compile Include="Patches\Harmony\FullScan.cs" />
@@ -291,6 +289,8 @@
     <Compile Include="Utils\PlayerUtils.cs" />
     <Compile Include="Utils\SUtils.cs" />
     <Compile Include="Utils\UnmanagedUtils.cs" />
+    <Compile Include="VanillaGameObject\MonoBehavior.cs" />
+    <Compile Include="VanillaGameObject\VanillaObject.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
     <Compile Include="Xrefs\Input.cs" />
