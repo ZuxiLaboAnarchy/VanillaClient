@@ -54,8 +54,6 @@ namespace Vanilla.Utils
             return texture;
         }
 
-    
-
         internal static IEnumerator loadspriterest(Image Instance, string url)
         {
 
@@ -78,6 +76,7 @@ namespace Vanilla.Utils
 
             if (sprite2 != null) Instance.sprite = sprite2;
         }
+
         internal static Sprite InitIcon(string URL)
         {
             using (WebClient wc = new WebClient())

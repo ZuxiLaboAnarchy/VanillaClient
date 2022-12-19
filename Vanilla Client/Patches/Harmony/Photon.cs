@@ -30,7 +30,6 @@ namespace Vanilla.Patches.Harmony
 
                 PatchMethod(typeof(LoadBalancingClient).GetMethod("OnEvent"), GetLocalPatch("OnEvent"), null);
              
-               
 
                 //PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
 

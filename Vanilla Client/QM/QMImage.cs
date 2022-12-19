@@ -1,14 +1,9 @@
 ﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using UnityEngine;
 using Vanilla.Config;
-using System.Collections;
 
 namespace Vanilla.QM
 {
@@ -19,7 +14,7 @@ namespace Vanilla.QM
         {
             var backroundimage = GameObject.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<UnityEngine.UI.Image>();
             Component.Destroy(backroundimage.gameObject.GetComponent<VRC.UI.Core.Styles.StyleElement>());
-           // MelonCoroutines.Start(            image.loadspriterest(backroundimage, URI.assets + "Mask.png"));
+           // MelonCoroutines.Start(image.loadspriterest(backroundimage, URI.assets + "Mask.png"));
             backroundimage.sprite = ImageUtils.CreateSpriteFromTexture(AssetLoader.LoadTexture("VanillaClientLogo"));
             var backroundtwo = GameObject.Instantiate(backroundimage, backroundimage.transform);
             backroundtwo.name = "QMBackground";
@@ -27,18 +22,12 @@ namespace Vanilla.QM
             backroundtwo.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             backroundimage.gameObject.AddComponent<Mask>();
 
-
-
-
-
-
-           var Qm = GameObject.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01/QMBackground").gameObject.GetComponent<UnityEngine.UI.Image>();
+            var Qm = GameObject.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01/QMBackground").gameObject.GetComponent<UnityEngine.UI.Image>();
 
             Qm.sprite = ImageUtils.CreateSpriteFromTexture(AssetLoader.LoadTexture("VanillaClientLogo"));
 
             MelonCoroutines.Start(QMMusic());
         }
-
 
         internal static IEnumerator QMMusic()
         {

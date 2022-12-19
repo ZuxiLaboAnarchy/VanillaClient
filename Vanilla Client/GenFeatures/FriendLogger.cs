@@ -19,6 +19,15 @@ namespace Vanilla.Modules
 
         internal static void AutoLogFriendsToFile()
         {
+
+            if (APIUser.CurrentUser == null)
+            {
+                return;
+
+            }
+
+
+
             if (!File.Exists(FileHelper.GetCheatFolder() +  "\\FriendList.CE"))
             {
                 File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE");
@@ -27,7 +36,7 @@ namespace Vanilla.Modules
             }
            
             foreach (string text in APIUser.CurrentUser.friendIDs)
-            {
+            { 
                 if (!File.ReadLines(FileHelper.GetCheatFolder() + "\\FriendList.CE").Contains(text))
                 {
                     File.AppendAllText(FileHelper.GetCheatFolder() + "\\FriendList.CE", text + "\n");

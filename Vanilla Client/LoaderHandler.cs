@@ -119,7 +119,7 @@ namespace Cypher
         { if (!ShouldLoad) return; CallOnUpdate(); }
 
 
-        public static void OnLevelWasInitialized(int Level)
+        public static void OnLevelWasInitialized(int Level, string levelname = null)
         {
             if (!ShouldLoad) return;
 
@@ -135,7 +135,7 @@ namespace Cypher
             Pop();
         }
 
-        public static void OnSceneWasUnloaded(int level)
+        public static void OnSceneWasUnloaded(int level, string levelname = null)
         {
             if (!ShouldLoad) return;
             CallOnLevelUnload(level);
