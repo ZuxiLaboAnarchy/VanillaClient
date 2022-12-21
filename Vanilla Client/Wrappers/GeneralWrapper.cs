@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using VRC.Core;
+using VRC;
 using VRC.UserCamera;
 
 namespace Vanilla.Wrappers
 {
-    internal class GeneralWrappers
+    internal static class GeneralWrappers
     {
+        public static Player LocalPlayer() => Player.prop_Player_0;
+        private static Player[] GetAllPlayer() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+        internal static bool IsFriend(this VRC.Player player) => APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);
         private static Camera uiCamera;
         private static Camera photoCamera;
         private static GameObject reticleObj;

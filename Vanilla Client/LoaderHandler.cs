@@ -68,11 +68,11 @@ namespace Cypher
                 catch (Exception e) { Console.WriteLine(e); }
 
                 //new Thread(() => { }).Start();
-               if (BotHandle.CheckBotHandle())
-                {
-                    CallOnStart(true);
-                    return;
-                }
+              // if (BotHandle.CheckBotHandle())
+                //{
+               //     CallOnStart(true);
+                 //   return;
+                //}
 
                 CallOnStart();
 

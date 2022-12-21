@@ -14,6 +14,7 @@ using Vanilla.Modules;
 using Vanilla.QM.Menu;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
+using VRC.UI;
 
 namespace Vanilla.QM
 {
@@ -54,7 +55,7 @@ namespace Vanilla.QM
                 PlayerWrapper.ChangePlayerAvatar(NewAvi);
 
             }, "Change Avatar By ID");
-
+            */
             Settings.SettingsMenu(tabMenu);
             ExploitMenu.InitMenu(tabMenu);
 

@@ -21,10 +21,10 @@ namespace Vanilla
                 ModuleManager.InitModules();
                 AssetLoader.LoadAssetBundle();
             }
-            else
-            {
-                BotHandle.InitBotHandle();
-            }
+           // else
+           // {
+           //     BotHandle.InitBotHandle();
+           // }
 
 
             Log("Patch Manager", $"Patched {PatchManager.PatchedMethods} Methods", ConsoleColor.Green);
