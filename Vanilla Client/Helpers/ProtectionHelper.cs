@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using Vanilla.Protections;
 
 namespace Vanilla.Helpers
 {
@@ -14,7 +15,8 @@ namespace Vanilla.Helpers
 
         internal override void Start()
         {
-            new Thread(() => { PThreadStart(); }).Start();
+            // new Thread(() => { PThreadStart(); }).Start();
+           /// CAntiReverse.AntiDump();
         }
 
         static Process p = new Process();

@@ -34,6 +34,26 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
@@ -64,6 +84,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -144,12 +165,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotHandle.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
     <Compile Include="Config\RuntimeConfig.cs" />
     <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="GenFeatures\AmongUsManager.cs" />
+    <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\HideSelf.cs" />
     <Compile Include="Modules\CameraModule.cs" />
@@ -162,6 +185,7 @@
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />
     <Compile Include="QM\Menu\ExploitMenu.cs" />
@@ -324,6 +348,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libs\Tomlyn\license.txt" />
+    <None Include="Resources\GameVersion.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -332,6 +357,6 @@ echo %25date%25&gt; "$(ProjectDir)\Resources\Date.txt"
 echo %25time%25&gt; "$(ProjectDir)\Resources\Time.txt"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVoid Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

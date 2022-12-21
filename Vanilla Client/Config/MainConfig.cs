@@ -99,8 +99,6 @@ namespace Vanilla.Config
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);
             File.WriteAllText(FilePath, doc.ToString());
-
-            Dev("Config", "Saved");
         }
     }
 }

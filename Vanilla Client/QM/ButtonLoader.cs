@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using Il2CppSystem;
+using MelonLoader;
 using Photon.Realtime;
 using System;
 using System.Collections;
@@ -11,6 +12,7 @@ using Vanilla.Config;
 using Vanilla.Exploits;
 using Vanilla.Modules;
 using Vanilla.QM.Menu;
+using Vanilla.Wrappers;
 using VRC.SDKBase;
 
 namespace Vanilla.QM
@@ -44,21 +46,13 @@ namespace Vanilla.QM
                     Networking.GoToRoom(roomid);
                 });
             }, "Go To Room");
-            static void ChangeAvatar(string AvatarID)
-            {
-                PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
-                component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
-                {
-
-                    id = AvatarID
-                };
-                component.ChangeToSelectedAvatar();
-            }
+            
             var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
             {
-                aviid = VRC.Player.prop_Player_0.prop_ApiAvatar_0.id;
-                System.Windows.Forms.Clipboard.SetText(aviid);
-                ChangeAvatar(aviid.Trim());
+                var NewAvi = GeneralUtils.GetClipboard();
+                if (NewAvi.Contains("avtr"))
+                PlayerWrapper.ChangePlayerAvatar(NewAvi);
+
             }, "Change Avatar By ID");
 
             Settings.SettingsMenu(tabMenu);

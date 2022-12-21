@@ -61,7 +61,7 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon 12/12/2022  5:11:31.72
+        ///   Looks up a localized string similar to Tue 12/20/2022 23:11:02.68
         ///.
         /// </summary>
         internal static string BuildTime {
@@ -87,6 +87,15 @@ namespace Vanilla.Properties {
             get {
                 object obj = ResourceManager.GetObject("discord_rpc", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2022.4.2p1-1275--Release.
+        /// </summary>
+        internal static string GameVersion {
+            get {
+                return ResourceManager.GetString("GameVersion", resourceCulture);
             }
         }
         

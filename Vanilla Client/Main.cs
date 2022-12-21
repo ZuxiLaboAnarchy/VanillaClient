@@ -17,8 +17,6 @@ namespace Vanilla
 
             if (!isBot)
             {
-
-
                 PatchManager.Patch();
                 ModuleManager.InitModules();
                 AssetLoader.LoadAssetBundle();

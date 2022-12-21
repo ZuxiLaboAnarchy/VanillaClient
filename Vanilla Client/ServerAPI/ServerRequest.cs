@@ -20,7 +20,7 @@ namespace Vanilla.Utils
                     httpClient.DefaultRequestHeaders.Add("User-Agent", SendServerConfig.UA);
                     httpClient.DefaultRequestHeaders.Add("Client-Version", SendServerConfig.Version);
                     httpClient.DefaultRequestHeaders.Add("Client-Agent", SendServerConfig.CA);
-                    httpClient.Timeout = TimeSpan.FromMinutes(1);
+                    httpClient.Timeout = TimeSpan.FromMinutes(3);
                     if (SendData == null)
                         SendData = new Dictionary<string, string>();
 
@@ -43,8 +43,6 @@ namespace Vanilla.Utils
                         Task<string> StringSetup = responce.Content.ReadAsStringAsync();
                         Dev("ServerAPI", StringSetup.Result);
                         return StringSetup.Result;
-
-
                     }
                     #endregion
                     #region If It Is a Bad request Tell The User with the Server Responce
@@ -61,7 +59,7 @@ namespace Vanilla.Utils
 
                         /// var Responce = Json.Decode<Dictionary<string, string>>(DES.Result);
                         // Responce.TryGetValue("message", out var message);
-
+                        Log("Server API", $"Failed to Send Request to {EndPoint} Server responded with (Error: {DES.Result})", ConsoleColor.Red);
                         var Responce = JsonConvert.DeserializeObject<ServerResponce>(DES.Result);
                         Log("Server API", $"Failed to Send Request to {EndPoint} Server responded with (Error: {Responce.message})", ConsoleColor.Red);
                         responce.Dispose();
@@ -80,7 +78,7 @@ namespace Vanilla.Utils
         }
         protected internal class SendServerConfig
         {
-            protected internal static string APIBaseEndpoint = "https://hvl.gg/api/client/";
+            protected internal static string APIBaseEndpoint = "https://hvl.gg/api/cheats/";
             protected internal readonly static string Version = "V" + "1";
             protected internal readonly static string UA = "Galaxy_Installer" + Version;
             protected internal readonly static string CA = "GalaxyInstallerStandaloneAuth" + Version;

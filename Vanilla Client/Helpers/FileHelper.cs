@@ -11,7 +11,7 @@ namespace Vanilla.Utils
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string AppFolder = Path.Combine(folder, "HyperVoid Labs");
+            string AppFolder = Path.Combine(folder, "HyperVanilla Labs");
 
 
             if (!Directory.Exists(AppFolder))
@@ -55,35 +55,27 @@ namespace Vanilla.Utils
 
             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
             { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\discord-rpc.dll", Properties.Resources.discord_rpc); }
-
-           /* if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\UniverseLib.IL2CPP.dll"))
-            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\UniverseLib.IL2CPP.dll", Properties.Resources.UniverseLib_IL2CPP); }
-
-            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\UniverseLib.IL2CPP.Unhollower.dll"))
-            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\UniverseLib.IL2CPP.Unhollower.dll", Properties.Resources.UniverseLib_IL2CPP_Unhollower); }
-
-            */
-
-
-
+           
+            if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
+            { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE").Close(); }
         }
 
         internal static void CheckDirs()
         {
             if (!File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
-            { Process.GetCurrentProcess().Kill(); }
+            {
+                Log("FileHelper", "Missing Core Files will attempt to add back", ConsoleColor.Yellow);
+                File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\WSManager.dll", Properties.Resources.WSManager);
+            }
 
             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
+            { Log("FileHelper", "Missing Important File DiscordRPC Will be re added on next start....", ConsoleColor.Yellow); }
+
+            if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
+            { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE"); }
+
+            if (!File.Exists(GetDependencyFolder() + "\\VanillaClientHelper.exe"))
             { Process.GetCurrentProcess().Kill(); }
-
-            /*  if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\UniverseLib.IL2CPP.dll"))
-             { Process.GetCurrentProcess().Kill(); }
-
-             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\UniverseLib.IL2CPP.Unhollower.dll"))
-             { Process.GetCurrentProcess().Kill(); }
-
-             if (!File.Exists(GetDependencyFolder() + "\\VanillaClientHelper.exe"))
-              { Process.GetCurrentProcess().Kill(); } */
 
 
 

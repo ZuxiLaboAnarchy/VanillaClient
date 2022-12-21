@@ -1,6 +1,9 @@
 ﻿using MelonLoader;
 using System.Runtime.InteropServices;
 using Vanilla;
+using Vanilla.Config;
+using Vanilla.Helpers;
+using Vanilla.Protections;
 using static Vanilla.Main;
 using static Vanilla.Utils.Performance;
 using static Vanilla.Utils.Server;
@@ -10,24 +13,15 @@ namespace Cypher
     internal class CoreMain
     {
         private static bool ShouldLoad { get; set; } = true;
-        private readonly static string GameVER = "2022.4.2p1-1275--Release";
-        internal static string ReleaseID = "Public";
+
         public static void OnApplicationStart(string LoaderID)
         {
 
             try
             {
-#if DEBUG
-                ReleaseID = "Debug";
-#elif RELEASE
-                ReleaseID = "Release";
-#endif
-
-
-
-
+               
                 CypherEngineLog("Core", "Hello From CypherEngine Attempting to Set Up Vanilla Client", ConsoleColor.Cyan);
-                CypherEngineLog("Core", $"Loading Vanilla Client {ReleaseID}", ConsoleColor.Cyan);
+                CypherEngineLog("Core", $"Loading Vanilla Client {RuntimeConfig.ReleaseID}", ConsoleColor.Cyan);
                 StartProfiling("OnStart");
 
                 try
@@ -38,45 +32,30 @@ namespace Cypher
                 }
                 catch (Exception e) { ExceptionHandler("Erase", e); }
 
-
-
-
-
                 ShouldLoad = Vanilla.Protections.LoaderProtections.CheckLoader(LoaderID);
                 if (!ShouldLoad) return;
 
-                if (MelonLoader.InternalUtils.UnityInformationHandler.GameName != "VRChat")
+                if (GeneralUtils.GetGameName() != "VRChat")
                 { ShouldLoad = false; return; }
 
-               // if (SendPostRequestInternal("login") == null)
-                //{ ShouldLoad = false; return; }
+                ShouldLoad = Compatibility.CheckGameVersion();
+                if (!ShouldLoad) return;
 
-                
-#if DEBUG
-                if (MelonLoader.InternalUtils.UnityInformationHandler.GameVersion != GameVER)
-                {
-                    MelonLogger.Error("Game Has Updated. Update Me you Fucking Whore");
-                    MelonLogger.Error("CURRENT GAMEVERSION");
-                    MelonLogger.Msg(MelonLoader.InternalUtils.UnityInformationHandler.GameVersion);
-                }
-#else
-            if (MelonLoader.InternalUtils.UnityInformationHandler.GameVersion != GameVER)
-            {
-                MelonLogger.Error("Game Has Updated Please Wait For Cypher To Update");
-                MelonLogger.Error("Skipping Load...");
-                ShouldLoad = false;
-                return;
-            }
-#endif
-                
+
+                 if (SendPostRequestInternal("login") == null)
+                 { ShouldLoad = false; return; }
+
+
+
+
                 #region Compile Time & Setups
                 try
                 {
                     window = FindWindow(null, "VRChat");
                     string strCompTime = Vanilla.Properties.Resources.BuildTime.Replace("\n", "").Replace("  ", " ");
 
-                    SetWindowText(window, $"Vanilla Client {ReleaseID} | Build Time: {strCompTime} ");
-                    Console.Title = $"Vanilla Client {ReleaseID} | Build Time: " + strCompTime;
+                    SetWindowText(window, $"Vanilla Client {RuntimeConfig.ReleaseID} | Build Time: {strCompTime} ");
+                    Console.Title = $"Vanilla Client {RuntimeConfig.ReleaseID} | Build Time: " + strCompTime;
                     
                     CypherEngineLog("Core", "Done Setting Up", ConsoleColor.Cyan);
                     Log("Core", "Build Time: " + strCompTime, ConsoleColor.Cyan);

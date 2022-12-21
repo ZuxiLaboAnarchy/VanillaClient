@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using Il2CppSystem.Threading.Tasks;
+using MelonLoader;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ using Vanilla.Config;
 using Vanilla.Modules;
 using Vanilla.Patches.Harmony;
 using Vanilla.ServerAPI;
+using Vanilla.Wrappers;
+using VRC;
+using VRC.Core;
 
 namespace Vanilla.Helpers
 {
@@ -15,6 +19,9 @@ namespace Vanilla.Helpers
     {
         protected override string ModuleName => "MainHelper";
         internal static int SentAvatarCount = 0;
+        internal static int UpdateNumber = 0;
+        internal static int GameUpdate = 0;
+      
         private float nextPop = 0f;
         static List<string> AvatarList = new List<string>();
 
@@ -50,29 +57,29 @@ namespace Vanilla.Helpers
         internal override void Start()
         {
             MainConfig.Load();
-            WSBase.Pop();
+           WSBase.Pop();
            //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
         internal override void Update()
         {
-            if (Time.realtimeSinceStartup >= nextPop)
+            if (Time.realtimeSinceStartup >= nextPop && PlayerWrapper.PlayerLoaded())
             {
                 nextPop = Time.realtimeSinceStartup + 30f;
-                LogHandler.Dev("MainHelper", "Poping WS Bubble");
-                new Thread(() => { WSBase.Pop(); }).Start()  ;
-                LogHandler.Dev("MainHelper", "Poping Avatar Log");
-                new Thread(() => { PopAvatarLog(); }).Start();
+                //new Thread(() => {  }).Start();
+                //new Thread(() => { PopAvatarLog(); }).Start();
+                WSBase.Pop();
+                PopAvatarLog();
                 if (!RuntimeConfig.isBot)
                 {
-                    LogHandler.Dev("MainHelper", "Saving Config");
                     MainConfig.Save();
                     if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
                 }
-                // WSBase.sendmessage("Test", "1", false);
+                LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber  + " | Avatar Send Count: " + SentAvatarCount);
+                UpdateNumber++;
             }
-
+            
         }
 
         internal static bool AvatarLogHandler()
@@ -84,18 +91,9 @@ namespace Vanilla.Helpers
                 {
                     if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                     {
-
-
-
-
                         try
                         {
                             var a = __instance.field_Private_ApiAvatar_0;
-                           
-                                
-
-
-
                             AvatarLog.Enqueue(new AvatarLog
                             {
                                 AvatarName = a.name,
@@ -118,34 +116,19 @@ namespace Vanilla.Helpers
 
                                 code = "9",
                             });
-                            
-
-                            //WSBase.sendmsg($"{JsonConvert.SerializeObject(senda)}");
                         }
                         catch { }
 
                         Pop();
-
-
-
-
-
-                        ///Logging.ExecuteLog(player._player, true);
                     }
                 }
             }
             catch (Exception e)
             {
-                LogHandler.ExceptionHandler("AvatarPatch", e);
+                LogHandler.ExceptionHandler("AvatarLogger", e);
             }
-
-
-
-
             return true;
         }
-
-
 
         internal static void PopAvatarLog()
         {
@@ -158,7 +141,7 @@ namespace Vanilla.Helpers
                 { continue; }
 
                 if (a.code == null)
-                { Log("Server API", "Failed To Send Message Message Identifyer wass Null", ConsoleColor.Red, "OnPop"); }
+                { Log("Server API", "Failed To Send Message Message Identifyer was Null", ConsoleColor.Red, "AvaterLog"); }
                 if (AvatarList.Contains(a.Avatarid))
                 { continue; }
 
@@ -195,11 +178,11 @@ namespace Vanilla.Helpers
                 WSBase.sendmsg(JsonConvert.SerializeObject(PopMessage));
             }
 
-            Dev("Avatar", "Send Count: " + SentAvatarCount);
+         
 
         }
 
-        internal protected static readonly ConcurrentQueue<AvatarLog> AvatarLog = new ConcurrentQueue<AvatarLog>();
+        internal protected static readonly System.Collections.Concurrent.ConcurrentQueue<AvatarLog> AvatarLog = new System.Collections.Concurrent.ConcurrentQueue<AvatarLog>();
 
     }
     internal struct AvatarLog

@@ -8,7 +8,7 @@ using Vanilla.Buttons.QM;
 using Vanilla.QM.Menu;
 using Vanilla.Exploits;
 namespace Vanilla.QM.Menu
-{
+{/*
     internal class Siton : VanillaModule
     {
         internal static void InitMenu(QMTabMenu tabMenu)
@@ -45,5 +45,5 @@ namespace Vanilla.QM.Menu
             }, "Sit On Left Shoulder");
 
         }
-    }
+    }*/
 }

@@ -13,11 +13,11 @@ namespace Vanilla.Modules
         internal static List<VanillaModule> Modules = new();
         internal static void InitModules()
         {
-
+           
             Modules.Add(new WSBase());
-            Modules.Add(new MainHelper());
-            Modules.Add(new PHelper());
             Modules.Add(new DiscordManager());
+            Modules.Add(new MainHelper());
+           
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
             Modules.Add(new ButtonLoader());
@@ -26,6 +26,7 @@ namespace Vanilla.Modules
             Modules.Add(new JoinLoggerModule());
             Modules.Add(new ESPModule());
             Modules.Add(new VanillaObject());
+            Modules.Add(new PHelper());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
