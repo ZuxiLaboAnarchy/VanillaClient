@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using VRC;
 using VRC.Core;
 using VRC.UI;
 
@@ -11,6 +12,7 @@ namespace Vanilla.Wrappers
 {
     internal class PlayerWrapper
     {
+
         internal class Target
         {
             internal static VRC.Player targertuser;
@@ -23,11 +25,10 @@ namespace Vanilla.Wrappers
 
                 var players = PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray().Where(player => player.field_Private_APIUser_0.id == userid).FirstOrDefault();
                 targertuser = players;
-                targetplate = players._vrcplayer.GeneratePlate("<color=red>Selected");
             }
         }
-    }
-    internal static void ChangePlayerAvatar(string avatarId)
+
+        internal static void ChangePlayerAvatar(string avatarId)
         {
             new ApiAvatar() { id = avatarId }.Get(new System.Action<ApiContainer>(x =>
             {
@@ -45,7 +46,7 @@ namespace Vanilla.Wrappers
             AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(!state);
             GetAvatarPreviewBase().SetActive(!state);
             VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCAvatarManager_0.gameObject.SetActive(!state);
-           
+
         }
 
 
@@ -59,4 +60,6 @@ namespace Vanilla.Wrappers
 
         }
         private static GameObject avatarPreviewBase;
+
     }
+}

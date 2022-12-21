@@ -83,6 +83,7 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
@@ -154,6 +155,7 @@
     <Compile Include="Helpers\HideSelf.cs" />
     <Compile Include="Modules\CameraModule.cs" />
     <Compile Include="GenFeatures\FriendLogger.cs" />
+    <Compile Include="Modules\OnplayerMenu.cs" />
     <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
     <Compile Include="Modules\Manager\ModuleDefiner.cs" />
@@ -332,6 +334,6 @@ echo %25date%25&gt; "$(ProjectDir)\Resources\Date.txt"
 echo %25time%25&gt; "$(ProjectDir)\Resources\Time.txt"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVoid Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVoid Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

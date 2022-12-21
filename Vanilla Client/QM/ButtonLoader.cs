@@ -11,7 +11,9 @@ using Vanilla.Config;
 using Vanilla.Exploits;
 using Vanilla.Modules;
 using Vanilla.QM.Menu;
+using VRC.Core;
 using VRC.SDKBase;
+using VRC.UI;
 
 namespace Vanilla.QM
 {
@@ -54,13 +56,14 @@ namespace Vanilla.QM
                 };
                 component.ChangeToSelectedAvatar();
             }
+            /*
             var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
             {
-                aviid = VRC.Player.prop_Player_0.prop_ApiAvatar_0.id;
-                System.Windows.Forms.Clipboard.SetText(aviid);
+                var aviid = VRC.Player.prop_Player_0.prop_ApiAvatar_0.id;
+                System.Windows.Markup.Forms.Clipboard.SetText(aviid);
                 ChangeAvatar(aviid.Trim());
             }, "Change Avatar By ID");
-
+            */
             Settings.SettingsMenu(tabMenu);
             ExploitMenu.InitMenu(tabMenu);
 

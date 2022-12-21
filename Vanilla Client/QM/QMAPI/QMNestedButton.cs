@@ -7,6 +7,7 @@ using Vanilla.Buttons.QM;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 using static VRC.UI.Elements.UIPage;
+using TransitionType = VRC.UI.Elements.UIPage.TransitionType;
 
 namespace Vanilla.Buttons.QM
 {
