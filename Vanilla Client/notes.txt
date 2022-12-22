@@ -59,7 +59,7 @@ internal bool OverrideVideoPlayers(string url)
 
 
 
-
+		xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I
 
 
 
