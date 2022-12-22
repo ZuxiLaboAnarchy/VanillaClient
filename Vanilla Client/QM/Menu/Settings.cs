@@ -10,13 +10,18 @@ using Vanilla.Buttons.QM;
 using Vanilla.Config;
 using Vanilla.Modules;
 using static Vanilla.Main;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Vanilla.QM.Menu
 {
     internal class Settings
     {
+        internal static IntPtr _hwnd = IntPtr.Zero;
+        public static extern IntPtr SetActiveWindow(IntPtr hWnd);
         internal static void SettingsMenu(QMTabMenu tabMenu)
         {
+            
             var settingsmenu = new QMNestedButton(tabMenu, 1, 3, "Vanilla Settings", "Vanilla", "Vanilla Client");
 
             //  var miscsettings = new QMNestedButton(settingsmenu, 3, 3, "Misc Settings", "Miscellaneous Settings", "Galaxy Client");
@@ -78,25 +83,48 @@ namespace Vanilla.QM.Menu
                 GeneralUtils.CloseGame();
             }, "Close Game");
 
-          
+            var Mutedisc = new QMSingleButton(tabMenu, 2, 0, "Mute Discord", delegate
+            {
+                var p = Process.GetProcessesByName("Discord").FirstOrDefault();
+                try
+                {
+                    Thread.Sleep(100);
+                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    Thread.Sleep(100);
+                    imports.keybd_event(0xA2, 0, 0, 0);
+                    imports.keybd_event(0xA0, 0, 0, 0);
+                    imports.keybd_event(0x4D, 0, 0, 0);
+                    imports.keybd_event(0xA2, 0, 0x0002, 0);
+                    imports.keybd_event(0xA0, 0, 0x0002, 0);
+                    imports.keybd_event(0x4D, 0, 0x0002, 0);
+                }
+                catch (Exception ex) { MelonLogger.Msg(ex); }
+                Thread.Sleep(100);
+                imports.SetForegroundWindow(_hwnd);
 
+            }, "Mutes Discord");
 
-            /* How to do the murder 4 hacks Implement soon 
-             
-                GameObject Murder = submenu.Create("Murder 4", Xploitsubmenu);
-                new Submenubutton(Xploitsubmenu.GetMenu(), "Murder 4", Murder, Download_Images._XploitIcon, false, 3, 0);
-                new NToggle("Self Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergoldweapon = true, () => Defiance.Settings.ConfigVars.murdergoldweapon = false, Defiance.Settings.ConfigVars.murdergoldweapon);
-                new NToggle("Everyone Gold Weapon", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonegoldgun = true, () => Defiance.Settings.ConfigVars.everyonegoldgun = false, Defiance.Settings.ConfigVars.everyonegoldgun);
-                new NToggle("God Mode", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.murdergodmod = true, () => Defiance.Settings.ConfigVars.murdergodmod = false, Defiance.Settings.ConfigVars.murdergodmod);
-                new NToggle("Self No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.continuesfire = true, () => Defiance.Settings.ConfigVars.continuesfire = false, Defiance.Settings.ConfigVars.continuesfire);
-                new NToggle("Everyone No ShootC", Murder.GetMenu(), () => Defiance.Settings.ConfigVars.everyonecontinuesfire = true, () => Defiance.Settings.ConfigVars.everyonecontinuesfire = false, Defiance.Settings.ConfigVars.everyonecontinuesfire);
-                new NButton(Murder.GetMenu(), "Start Game", () => Defiance.Exploits.MurderMisc.MurderMod("Btn_Start"));
-                new NButton(Murder.GetMenu(), "Throw Apples", () => Defiance.Exploits.MurderMisc.MurderMod("OnLocalPlayerBlinded"));
-                new NButton(Murder.GetMenu(), "Abort Game", () => Defiance.Exploits.MurderMisc.MurderMod("SyncAbort"));
-                new NButton(Murder.GetMenu(), "Good Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryB"));
-                new NButton(Murder.GetMenu(), "Bad Apples Win", () => Defiance.Exploits.MurderMisc.MurderMod("SyncVictoryM"));
+            var Deafndisc = new QMSingleButton(tabMenu, 2, 1, "Deafen Discord", delegate
+            {
+                var p = Process.GetProcessesByName("Discord").FirstOrDefault();
+                try
+                {
+                    Thread.Sleep(100);
+                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    Thread.Sleep(100);
+                    imports.keybd_event(0xA2, 0, 0, 0);
+                    imports.keybd_event(0xA0, 0, 0, 0);
+                    imports.keybd_event(0x44, 0, 0, 0);
+                    imports.keybd_event(0xA2, 0, 2, 0);
+                    imports.keybd_event(0xA0, 0, 2, 0);
+                    imports.keybd_event(0x44, 0, 2, 0);
+                }
+                catch (Exception ex) { MelonLogger.Msg(ex); }
+                Thread.Sleep(100);
+                imports.SetForegroundWindow(_hwnd);
 
-            */
+            }, "Deafen Discord");
+
 
             /* How to do the Among Us hacks Implement soon 
              

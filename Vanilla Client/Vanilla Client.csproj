@@ -321,6 +321,7 @@
     <Compile Include="GenFeatures\TagManager\TagModel.cs" />
     <Compile Include="GenFeatures\TagManager\TagUtils.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
+    <Compile Include="Utils\imports.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\ImgHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />
@@ -373,6 +374,6 @@ echo %25date%25&gt; "$(ProjectDir)\Resources\Date.txt"
 echo %25time%25&gt; "$(ProjectDir)\Resources\Time.txt"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVoid Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>
