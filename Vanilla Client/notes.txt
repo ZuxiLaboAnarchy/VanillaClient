@@ -52,7 +52,7 @@ internal bool OverrideVideoPlayers(string url)
 
 
 
-
+		((source.Count() <= 0) ? 1 : (source.ElementAt(0).Value.AvatarSortIndex + 1));
 
 
 

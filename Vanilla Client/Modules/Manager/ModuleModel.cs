@@ -9,6 +9,7 @@
         internal virtual void Update() { }
         internal virtual void LateStart() { }
         internal virtual void WaitForPlayer() { }
+        internal virtual void WaitForAPIUser() { }
         internal virtual void OnGUI() { }
         internal virtual void PlayerEvent() { }
         internal virtual void Debug() { }

@@ -55,7 +55,7 @@ namespace Vanilla.QM
                 PlayerWrapper.ChangePlayerAvatar(NewAvi);
 
             }, "Change Avatar By ID");
-            */
+            
             Settings.SettingsMenu(tabMenu);
             ExploitMenu.InitMenu(tabMenu);
 

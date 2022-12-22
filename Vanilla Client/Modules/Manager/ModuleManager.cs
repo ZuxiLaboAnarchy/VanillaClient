@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Vanilla.Helpers;
 using Vanilla.QM;
 using Vanilla.ServerAPI;
+using Vanilla.Wrappers;
 using VRC;
+using VRC.Core;
 
 namespace Vanilla.Modules
 {
@@ -35,6 +37,7 @@ namespace Vanilla.Modules
         protected internal static void LateStart()
         {
             for (int i = 0; i < Modules.Count; i++) Modules[i].LateStart();
+            MelonCoroutines.Start(WaitForAPIUser());
             MelonCoroutines.Start(WaitForPlayer());
         }
 
@@ -83,10 +86,16 @@ namespace Vanilla.Modules
             Modules.Clear();
             Log("Script Manager", "Script Manager Destroyed =( See you Next Time", System.ConsoleColor.Yellow);
         }
+        protected internal static IEnumerator WaitForAPIUser()
+        {
+            while (PlayerWrapper.GetLocalAPIUser() == null) yield return null;
+            Dev("ModuleManager", "User logged in");
+            for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForAPIUser(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+        }
 
         protected internal static IEnumerator WaitForPlayer()
         {
-            while (Player.prop_Player_0 == null) yield return null;
+            while (PlayerWrapper.PlayerObject() == null) yield return null;
             Dev("ModuleManager", "Player Found");
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForPlayer(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }

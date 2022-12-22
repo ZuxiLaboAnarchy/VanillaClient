@@ -6,7 +6,7 @@ using Vanilla.Helpers;
 using Vanilla.Protections;
 using static Vanilla.Main;
 using static Vanilla.Utils.Performance;
-using static Vanilla.Utils.Server;
+using static Vanilla.ServerAPI.Server;
 
 namespace Cypher
 {

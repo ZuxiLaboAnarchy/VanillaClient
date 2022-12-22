@@ -75,7 +75,8 @@
     <Reference Include="MelonLoader">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Photon-DotNet, Version=4.1.6.18, Culture=neutral, processorArchitecture=MSIL">
@@ -166,6 +167,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvatarFavorites\AvatarFavoritesModel.cs" />
+    <Compile Include="AvatarFavorites\FavoriteAvatarHandler.cs" />
     <Compile Include="BotHandle.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
@@ -176,12 +179,20 @@
     <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\HideSelf.cs" />
+    <Compile Include="Libs\Tiny-JSON\DefaultDecoder.cs" />
+    <Compile Include="Libs\Tiny-JSON\DefaultEncoder.cs" />
+    <Compile Include="Libs\Tiny-JSON\Extensions.cs" />
+    <Compile Include="Libs\Tiny-JSON\Json.cs" />
+    <Compile Include="Libs\Tiny-JSON\JsonAttributes.cs" />
+    <Compile Include="Libs\Tiny-JSON\JsonBuilder.cs" />
+    <Compile Include="Libs\Tiny-JSON\JsonMapper.cs" />
+    <Compile Include="Libs\Tiny-JSON\JsonParser.cs" />
     <Compile Include="Modules\CameraModule.cs" />
     <Compile Include="GenFeatures\FriendLogger.cs" />
     <Compile Include="Modules\OnplayerMenu.cs" />
     <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
-    <Compile Include="Modules\Manager\ModuleDefiner.cs" />
+    <Compile Include="Modules\Manager\ModuleModel.cs" />
     <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Modules\NamePlates.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
@@ -305,7 +316,10 @@
     <Compile Include="QM\QMImage.cs" />
     <Compile Include="ServerAPI\ServerHelper.cs" />
     <Compile Include="ServerAPI\ServerRequest.cs" />
+    <Compile Include="ServerAPI\ServerResponceHandler.cs" />
     <Compile Include="ServerAPI\WebSocketMan.cs" />
+    <Compile Include="GenFeatures\TagManager\TagModel.cs" />
+    <Compile Include="GenFeatures\TagManager\TagUtils.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\ImgHandler.cs" />

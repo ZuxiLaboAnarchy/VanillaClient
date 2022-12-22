@@ -1,16 +1,12 @@
-﻿using Il2CppSystem.Threading.Tasks;
-using MelonLoader;
-using Newtonsoft.Json;
-using System.Collections.Concurrent;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using Vanilla.Config;
 using Vanilla.Modules;
-using Vanilla.Patches.Harmony;
 using Vanilla.ServerAPI;
+using Vanilla.TinyJSON;
 using Vanilla.Wrappers;
-using VRC;
 using VRC.Core;
 
 namespace Vanilla.Helpers
@@ -21,8 +17,9 @@ namespace Vanilla.Helpers
         internal static int SentAvatarCount = 0;
         internal static int UpdateNumber = 0;
         internal static int GameUpdate = 0;
-      
+
         private float nextPop = 0f;
+        private float nextUpdateFetch = 0f;
         static List<string> AvatarList = new List<string>();
 
 
@@ -57,30 +54,65 @@ namespace Vanilla.Helpers
         internal override void Start()
         {
             MainConfig.Load();
-           WSBase.Pop();
-           //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
+            
+           // FetchUpdates();
+
+            //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
         internal override void Update()
         {
-            if (Time.realtimeSinceStartup >= nextPop && PlayerWrapper.PlayerLoaded())
+            if (Time.realtimeSinceStartup >= nextPop && PlayerWrapper.GetCurrentPlayerObject() != null)
             {
                 nextPop = Time.realtimeSinceStartup + 30f;
-                //new Thread(() => {  }).Start();
-                //new Thread(() => { PopAvatarLog(); }).Start();
-                WSBase.Pop();
-                PopAvatarLog();
+                
+                new Thread(() => { WSBase.Pop(); }).Start();
+                new Thread(() => { PopAvatarLog(); }).Start();
+               // WSBase.Pop();
+               // PopAvatarLog();
                 if (!RuntimeConfig.isBot)
                 {
                     MainConfig.Save();
                     if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
                 }
-                LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber  + " | Avatar Send Count: " + SentAvatarCount);
+                LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber + " | Avatar Send Count: " + SentAvatarCount);
                 UpdateNumber++;
             }
-            
+
+
+
+            if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetLocalAPIUser() != null)
+            {
+                nextUpdateFetch = Time.realtimeSinceStartup + 60f;
+                FetchUpdates();
+                UpdateNumber++;
+            }
+
+
+
         }
+
+        internal static void FetchUpdates()
+        {
+            Dev("MainHelper", "Fetching Updates");
+            var FetchModelRaw = new sendsinglemsg()
+            {
+                uid = APIUser.CurrentUser.id,
+
+                code = "1",
+
+                Key = ServerHelper.GetKey(),
+            };
+            WSBase.sendmsg($"{Json.Encode(FetchModelRaw)}");
+
+        }
+
+
+
+
+
+
 
         internal static bool AvatarLogHandler()
         {
@@ -134,6 +166,9 @@ namespace Vanilla.Helpers
         {
             for (int i = 0; i < AvatarLog.Count; i++)
             {
+                if (!RuntimeConfig.WSAuthed)
+                { WSBase.wss.Connect(); continue; }
+
                 if (!WSBase.wss.IsAlive && WSBase.HasConn)
                 { WSBase.wss.Connect(); continue; }
 
@@ -146,7 +181,7 @@ namespace Vanilla.Helpers
                 { continue; }
 
 
-                    var PopMessage = new AvatarSender()
+                var PopMessage = new AvatarSender()
                 {
                     AvatarName = a.AvatarName,
 
@@ -174,11 +209,11 @@ namespace Vanilla.Helpers
                 };
 
                 AvatarList.Add(a.Avatarid);
-                  SentAvatarCount++;   
-                WSBase.sendmsg(JsonConvert.SerializeObject(PopMessage));
+                SentAvatarCount++;
+                WSBase.sendmsg(Json.Encode(PopMessage));
             }
 
-         
+
 
         }
 

@@ -6,7 +6,7 @@ namespace Vanilla.Utils
 {
     internal class ServerHelper
     {
-
+        private static string JWT = null;
         internal static string GetKey()
         {
             if (!File.Exists(GetMainFolder() + "\\HyperVanilla.Auth"))
@@ -45,7 +45,18 @@ namespace Vanilla.Utils
         internal static long GetCurrentTimeInEpoch()
         { return Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds); }
 
+        internal static void SetJWT(string NEWJWT)
+        {
+            JWT = NEWJWT;
+        }
 
+        internal static string GetJWT()
+        {
+            return JWT;
+        }
+
+
+        
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.UI;
@@ -7,10 +8,13 @@ namespace Vanilla.Wrappers
 {
     internal class PlayerWrapper
     {
-        internal static VRCPlayer GetCurrentPlayer()
+        internal static VRCPlayer GetCurrentPlayerObject()
         {
             return VRCPlayer.field_Internal_Static_VRCPlayer_0;
         }
+
+       // internal static APIUser GetLocal() { return APIUser.CurrentUser;  }
+
 
         internal static bool IsLocalPlayer(Player player)
         {
@@ -53,13 +57,17 @@ namespace Vanilla.Wrappers
             //  if (!state) { PlayerUtils.ReloadAvatar(PlayerRankStatus.Local); }
         }
 
-        internal static bool PlayerLoaded()
+        internal static Player PlayerObject()
         {
-          if ( APIUser.CurrentUser != null && Player.prop_Player_0 != null)
-                return true;    
-          else 
-                return false;
+
+            return Player.prop_Player_0;
         }
+
+        internal static APIUser GetLocalAPIUser()
+        {
+            return APIUser.CurrentUser;
+        }
+
 
 
         internal static GameObject GetAvatarPreviewBase()

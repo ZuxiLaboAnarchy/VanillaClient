@@ -5,8 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using static Vanilla.Utils.ServerHelper;
+using Vanilla.ServerAPI;
 
-namespace Vanilla.Utils
+namespace Vanilla.ServerAPI
 {
     internal class Server
     {
@@ -42,6 +43,8 @@ namespace Vanilla.Utils
                         httpClient.Dispose();
                         Task<string> StringSetup = responce.Content.ReadAsStringAsync();
                         Dev("ServerAPI", StringSetup.Result);
+                        if (StringSetup.Result.Contains("Token"))
+                        { ServerResponceHandler.HandlePostRequest(StringSetup.Result); }
                         return StringSetup.Result;
                     }
                     #endregion
