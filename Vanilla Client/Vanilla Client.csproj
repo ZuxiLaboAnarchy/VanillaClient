@@ -198,7 +198,7 @@
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
-    <Compile Include="Protections\EraseHeaders.cs" />
+    <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />
     <Compile Include="QM\Menu\ExploitMenu.cs" />
@@ -310,14 +310,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Protections\AntiDebugger.cs" />
-    <Compile Include="Protections\LoaderProtections.cs" />
-    <Compile Include="Protections\MemeryHelper.cs" />
+    <Compile Include="Utils\Protections\AntiDebugger.cs" />
+    <Compile Include="Utils\Protections\LoaderProtections.cs" />
+    <Compile Include="Utils\Protections\MemeryHelper.cs" />
     <Compile Include="QM\QMImage.cs" />
-    <Compile Include="ServerAPI\ServerHelper.cs" />
-    <Compile Include="ServerAPI\ServerRequest.cs" />
-    <Compile Include="ServerAPI\ServerResponceHandler.cs" />
-    <Compile Include="ServerAPI\WebSocketMan.cs" />
+    <Compile Include="APIs\ServerAPI\ServerHelper.cs" />
+    <Compile Include="APIs\ServerAPI\ServerRequest.cs" />
+    <Compile Include="APIs\ServerAPI\ServerResponceHandler.cs" />
+    <Compile Include="APIs\ServerAPI\WebSocketMan.cs" />
     <Compile Include="GenFeatures\TagManager\TagModel.cs" />
     <Compile Include="GenFeatures\TagManager\TagUtils.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
@@ -329,8 +329,8 @@
     <Compile Include="Utils\PlayerUtils.cs" />
     <Compile Include="Utils\SUtils.cs" />
     <Compile Include="Utils\UnmanagedUtils.cs" />
-    <Compile Include="VanillaGameObject\MonoBehavior.cs" />
-    <Compile Include="VanillaGameObject\VanillaObject.cs" />
+    <Compile Include="Modules\VanillaGameObject\MonoBehavior.cs" />
+    <Compile Include="Modules\VanillaGameObject\VanillaObject.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
     <Compile Include="Xrefs\Input.cs" />
