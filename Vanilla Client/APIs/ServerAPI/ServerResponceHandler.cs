@@ -33,6 +33,9 @@ namespace Vanilla.ServerAPI
 
         internal static void HandleWSUpdate(string WSResponce)
         {
+            TagUtils.TagList.Clear();
+
+
             string text = WSResponce.Trim();
             if (string.IsNullOrEmpty(text))
             {

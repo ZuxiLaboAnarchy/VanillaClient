@@ -28,6 +28,8 @@ namespace Vanilla.QM
         internal static IEnumerator WaitForQMLoad()
         {
             while (GameObject.Find($"Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
+
+            
             LoadButtons();
         }
         internal static void LoadButtons()
@@ -59,6 +61,7 @@ namespace Vanilla.QM
             Settings.SettingsMenu(tabMenu);
             ExploitMenu.InitMenu(tabMenu);
 
+                         
             //QMImage.LoadQMImage();
             // ButInfo.Info(tabMenu);
             //Exploitable.ButtonExploits(tabMenu);

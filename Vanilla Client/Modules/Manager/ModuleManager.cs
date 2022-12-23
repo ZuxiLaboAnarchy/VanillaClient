@@ -29,6 +29,7 @@ namespace Vanilla.Modules
             Modules.Add(new ESPModule());
             Modules.Add(new VanillaObject());
             Modules.Add(new PHelper());
+            Modules.Add(new VRCPlus());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);

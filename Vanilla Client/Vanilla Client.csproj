@@ -61,6 +61,10 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="DataModel, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
+    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
     </Reference>
@@ -178,6 +182,7 @@
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
     <Compile Include="GenFeatures\AmongUsManager.cs" />
+    <Compile Include="Modules\VRCPlusRemover.cs" />
     <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\HideSelf.cs" />
