@@ -1,6 +1,6 @@
 ﻿namespace Vanilla.Config
 {
-    internal class jsonmanager
+    internal class JsonConfig
     {
         internal class worldhistory
         {
