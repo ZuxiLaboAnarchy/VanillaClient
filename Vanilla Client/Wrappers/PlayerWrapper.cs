@@ -35,7 +35,7 @@ namespace Vanilla.Wrappers
                 targertuser = players;
             }
         }
-
+         
         internal static void ChangePlayerAvatar(string avatarId)
         {
             new ApiAvatar() { id = avatarId }.Get(new System.Action<ApiContainer>(x =>
