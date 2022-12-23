@@ -68,8 +68,6 @@ namespace Vanilla.Wrappers
             return APIUser.CurrentUser;
         }
 
-
-
         internal static GameObject GetAvatarPreviewBase()
         {
             if (avatarPreviewBase == null)
