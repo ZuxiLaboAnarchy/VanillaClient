@@ -16,7 +16,7 @@ namespace Vanilla.QM.Menu
         internal static void MovementMenu(QMTabMenu tabMenu)
         {
 
-            var movementMenu = new QMNestedButton(tabMenu, 2, 2, "Movement Settings", "Vanilla", "Vanilla Client");
+            var movementMenu = new QMNestedButton(tabMenu, 2, 3, "Movement Settings", "Vanilla", "Vanilla Client");
             var rocketJumpButton = new QMToggleButton(movementMenu, 1, 0, "Rocket Shoes", delegate
             {
                jetPackJump = true;
@@ -26,6 +26,7 @@ namespace Vanilla.QM.Menu
             {
                 jetPackJump = false;
             }, "Jump Fly");
+
 
 
         }
