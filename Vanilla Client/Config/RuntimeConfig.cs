@@ -22,7 +22,7 @@
         private static string SubTime = null;
 
 
-
+        internal static bool nextUpdateCheckComplete = false;
 
 
 

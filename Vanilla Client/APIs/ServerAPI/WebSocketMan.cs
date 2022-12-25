@@ -188,8 +188,9 @@ namespace Vanilla.ServerAPI
 
             if (e.Data.ToString().ToLower().Contains("update packet"))
             {
-                ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
-                LogHandler.Log("ServerAPI", "Fetched Latest Update");
+                new Thread(() => { ServerResponceHandler.HandleWSUpdate(e.Data.ToString()); }).Start();
+               
+               // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
 
             if (e.Data.ToString().ToLower().Contains("invalid token"))
@@ -282,7 +283,7 @@ namespace Vanilla.ServerAPI
             if (message.Contains("Update Packet"))
             {
                 new Thread(() => { ServerResponceHandler.HandleWSUpdate(message);  }).Start(); 
-                LogHandler.Log("ServerAPI", "Fetched Latest Update");
+               // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
 
 

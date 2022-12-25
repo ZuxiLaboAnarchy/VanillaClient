@@ -19,7 +19,6 @@ namespace Vanilla.Modules
             Modules.Add(new WSBase());
             Modules.Add(new DiscordManager());
             Modules.Add(new MainHelper());
-           
             Modules.Add(new LoadMusic());
             Modules.Add(new KeybindManager());
             Modules.Add(new ButtonLoader());
@@ -75,6 +74,14 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].PlayerJoin(__0); }
                 catch (Exception e){ ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
+
+        protected internal static void PlayerLeave(Player __0)
+        {
+            for (int i = 0; i < Modules.Count; i++) try { Modules[i].PlayerLeave(__0); }
+                catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+        }
+
+
         protected internal static void OnApplicationFocus(bool __0)
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].AppFocus(__0); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 

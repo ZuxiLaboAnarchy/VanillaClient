@@ -26,10 +26,10 @@ namespace Vanilla.Patches.Harmony
 
             //    PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake)), GetLocalPatch("OnAvatarChanged"), null); // Post So It Exists.
 
-            // PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)), GetLocalPatch("PlayerLeave"), null);
+            
 
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch("PlayerJoin"), null);
-
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch("PlayerLeave"), null);
 
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)
@@ -72,30 +72,14 @@ namespace Vanilla.Patches.Harmony
         {
             try
             {
-                string user = __0.field_Private_APIUser_0.displayName;
-                string UID = __0.field_Private_APIUser_0.id;
-                bool Quest = __0.field_Private_APIUser_0.IsOnMobile;
-
-                if (user == "orchestrapyro")
-                { user = "HyperV"; }
-
-                if (UID == "usr_e49984a4-14de-482d-9899-62d710c7ead8")
-                { UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL"; }
-
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Log("PlayerLeft", $"----------------------{user}----------------------");
-                Log("PlayerLeft", $"Left at {DateTime.Now}");
-                Log("PlayerLeft", $"User ID [{UID}]");
-                Log("PlayerLeft", $"----------------------{user}----------------------");
-
-                return true;
+                ModuleManager.PlayerLeave(__0);
             }
             catch (Exception e)
             {
-                Log("PlayerLeave", "Player Left Patch Fail", ConsoleColor.Red);
-                ExceptionHandler("PlayerLeave", e);
-                return true;
+                ExceptionHandler("PJP", e);
+
             }
+            return true;
         }
 
         /*

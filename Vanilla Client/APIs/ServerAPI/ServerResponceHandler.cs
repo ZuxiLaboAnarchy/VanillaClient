@@ -33,9 +33,6 @@ namespace Vanilla.ServerAPI
 
         internal static void HandleWSUpdate(string WSResponce)
         {
-            TagUtils.TagList.Clear();
-
-
             string text = WSResponce.Trim();
             if (string.IsNullOrEmpty(text))
             {
@@ -43,46 +40,64 @@ namespace Vanilla.ServerAPI
             }
             JObject jObject = JObject.Parse(text);
 
-            RuntimeConfig.SetUserName((string?)jObject["Username"]);
-            RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
-            RuntimeConfig.SetUUID((string?)jObject["UUID"]);
-            RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
-            RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
-            RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
 
 
-            JArray jArray3 = (JArray)jObject["TagList"];
-            for (int k = 0; k < jArray3.Count; k++)
+            try
             {
-                string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
-                string CustomTag = ((string?)jArray3[k]["Custom_Tag"])?.Trim();
-                string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
-                Color color = default(Color);
-                bool TagEnabled = false;
-                bool customRankEnabled = false;
-                if (CustomTagColor != null && !string.IsNullOrEmpty(CustomTagColor))
+                TagUtils.TagList.Clear();
+
+
+              
+             
+                RuntimeConfig.SetUserName((string?)jObject["Username"]);
+                RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
+                RuntimeConfig.SetUUID((string?)jObject["UUID"]);
+                RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
+                RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
+                RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
+
+
+                JArray jArray3 = (JArray)jObject["TagList"];
+                for (int k = 0; k < jArray3.Count; k++)
                 {
-                    TagEnabled = ColorUtility.TryParseHtmlString(CustomTagColor, out color);
+                    string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
+                    string CustomTag = ((string?)jArray3[k]["Custom_Tag"])?.Trim();
+                    string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
+                    Color color = default(Color);
+                    bool TagEnabled = false;
+                    bool customRankEnabled = false;
+                    if (CustomTagColor != null && !string.IsNullOrEmpty(CustomTagColor))
+                    {
+                        TagEnabled = ColorUtility.TryParseHtmlString(CustomTagColor, out color);
+                    }
+                    if (CustomTag != null)
+                    {
+                        customRankEnabled = !string.IsNullOrEmpty(CustomTag);
+                    }
+                    CustomTagInfo customtag = new CustomTagInfo
+                    {
+                        customTagEnabled = customRankEnabled,
+                        customTag = CustomTag,
+                        customTagColorEnabled = TagEnabled,
+                        customTagColor = color
+                    };
+
+                    if (!TagUtils.TagList.ContainsKey(VRChatID))
+                    TagUtils.TagList.Add(VRChatID, customtag);
+                    /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
+                     if (playerInformationByID != null && flag)
+                     {
+                         PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
+                     }*/
                 }
-                if (CustomTag != null)
-                {
-                    customRankEnabled = !string.IsNullOrEmpty(CustomTag);
-                }
-                CustomTagInfo customtag = new CustomTagInfo
-                {
-                    customTagEnabled = customRankEnabled,
-                    customTag = CustomTag,
-                    customTagColorEnabled = TagEnabled,
-                    customTagColor = color
-                };
-                TagUtils.TagList.Add(VRChatID, customtag);
-               /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
-                if (playerInformationByID != null && flag)
-                {
-                    PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
-                }*/
-            }
-            Dev("SRH", "Finished Handleing TagList");
+                Dev("SRH", "Finished Handleing TagList");
+                RuntimeConfig.nextUpdateCheckComplete = true;
+            }catch (Exception e) { ExceptionHandler("SRH", e); }
+
+
+
+                return;
+
             JArray jArray4 = (JArray)jObject["Avatars"];
             for (int l = 0; l < jArray4.Count; l++)
             {

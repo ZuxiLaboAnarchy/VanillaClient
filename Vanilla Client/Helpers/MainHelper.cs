@@ -82,8 +82,9 @@ namespace Vanilla.Helpers
 
 
 
-            if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetLocalAPIUser() != null)
+            if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null && RuntimeConfig.nextUpdateCheckComplete)
             {
+                RuntimeConfig.nextUpdateCheckComplete = false;
                 nextUpdateFetch = Time.realtimeSinceStartup + 60f;
                 FetchUpdates();
                 UpdateNumber++;
