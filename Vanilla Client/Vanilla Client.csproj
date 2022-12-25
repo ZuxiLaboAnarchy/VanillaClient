@@ -206,6 +206,7 @@
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="QM\Menu\MovementMenu.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />
@@ -382,6 +383,6 @@ echo %25date%25&gt; "$(ProjectDir)\Resources\Date.txt"
 echo %25time%25&gt; "$(ProjectDir)\Resources\Time.txt"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVoid Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

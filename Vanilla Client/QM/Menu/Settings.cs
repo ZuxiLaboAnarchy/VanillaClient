@@ -126,6 +126,67 @@ namespace Vanilla.QM.Menu
             }, "Deafen Discord");
 
 
+            
+            var Media = new QMNestedButton(tabMenu, 4, 4, "Media Control", "Vanilla", "Vanilla client");
+
+            var MediaControl = new QMSingleButton(Media, 1, 0, "Previous Track (Spotify)", delegate
+            {
+                var p = Process.GetProcessesByName("Spotify").FirstOrDefault();
+
+                try
+                {
+                    Thread.Sleep(100);
+                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    Thread.Sleep(100);
+                    imports.keybd_event(0x11, 0, 0, 0);
+                    imports.keybd_event(0x25, 0, 0, 0);
+                    imports.keybd_event(0x11, 0, 2, 0);
+                    imports.keybd_event(0x25, 0, 2, 0);
+                }
+                catch { }
+                Thread.Sleep(100);
+                imports.SetForegroundWindow(_hwnd);
+            }, "Pervious Track");
+
+            var playpause = new QMSingleButton(Media, 2, 0, "Play pause (Spotify)", delegate
+            {
+                var p = Process.GetProcessesByName("Spotify").FirstOrDefault();
+
+                try
+                {
+                    Thread.Sleep(100);
+
+                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    Thread.Sleep(100);
+
+                    imports.keybd_event(0x20, 0, 0, 0);
+                    imports.keybd_event(0x20, 0, 2, 0);
+                }
+                catch { }
+
+                Thread.Sleep(100);
+                imports.SetForegroundWindow(_hwnd);
+            }, "Play pause Track");
+
+            var nexttrack = new QMSingleButton(Media, 3, 0, "Next Trak (Spotify)", delegate
+            {
+                var p = Process.GetProcessesByName("Spotify").FirstOrDefault();
+                try
+                {
+                    Thread.Sleep(100);
+                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    Thread.Sleep(100);
+                    imports.keybd_event(0x11, 0, 0, 0);
+                    imports.keybd_event(0x27, 0, 0, 0);
+                    imports.keybd_event(0x11, 0, 2, 0);
+                    imports.keybd_event(0x27, 0, 2, 0);
+                }
+                catch { }
+                Thread.Sleep(100);
+                imports.SetForegroundWindow(_hwnd);
+            }, "Play Next Track");
+
+
             /* How to do the Among Us hacks Implement soon 
              
                 GameObject Among = submenu.Create("AmongUs", Xploitsubmenu);
