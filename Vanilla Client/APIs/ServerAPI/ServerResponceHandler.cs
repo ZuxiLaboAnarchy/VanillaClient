@@ -90,7 +90,7 @@ namespace Vanilla.ServerAPI
                          PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
                      }*/
                 }
-                Dev("SRH", "Finished Handleing TagList");
+                Dev("SRH", "Finished Handleing TagList ") ;
                 RuntimeConfig.nextUpdateCheckComplete = true;
             }catch (Exception e) { ExceptionHandler("SRH", e); }
 
