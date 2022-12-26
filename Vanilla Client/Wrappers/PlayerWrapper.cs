@@ -8,13 +8,35 @@ namespace Vanilla.Wrappers
 {
     internal class PlayerWrapper
     {
+        internal static VRCPlayer GetLocalPlayer()
+        {
+            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        }
+
+        internal static Player LocalPlayer()
+        {
+            return Player.prop_Player_0;
+        }
+        internal static Quaternion GetPlayerRotation()
+        {
+            return GetLocalPlayer().transform.rotation;
+        }
+
+        internal static Vector3 GetPlayerPosition()
+        {
+            return GetLocalPlayer().transform.position;
+        }
         internal static VRCPlayer GetCurrentPlayerObject()
         {
             return VRCPlayer.field_Internal_Static_VRCPlayer_0;
         }
 
-       // internal static APIUser GetLocal() { return APIUser.CurrentUser;  }
-
+        // internal static APIUser GetLocal() { return APIUser.CurrentUser;  }
+        public static void SendToLocation(Vector3 pos, Quaternion rot)
+        {
+            GetLocalPlayer().transform.position = pos;
+            GetLocalPlayer().transform.rotation = rot;
+        }
 
         internal static bool IsLocalPlayer(Player player)
         {

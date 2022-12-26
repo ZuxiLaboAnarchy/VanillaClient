@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Net;
 using Vanilla.Modules;
 using Vanilla.Tomlyn;
 using Vanilla.Tomlyn.Model;
@@ -40,7 +41,6 @@ namespace Vanilla.Config
 
         private static bool _JoinLogger = true;
         internal static bool JoinLogger { get => _JoinLogger; set { _JoinLogger = value; Save(); } }
-
         internal static void Load()
         {
             if (!File.Exists(FilePath))
@@ -100,6 +100,7 @@ namespace Vanilla.Config
             doc.Tables.Add(tbl);
             File.WriteAllText(FilePath, doc.ToString());
         }
+
     }
 }
 

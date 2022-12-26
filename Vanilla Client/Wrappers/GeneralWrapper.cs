@@ -7,11 +7,17 @@ using UnityEngine;
 using VRC.Core;
 using VRC;
 using VRC.UserCamera;
+using VRC.SDKBase;
+using System.Windows.Forms;
+using MelonLoader;
 
 namespace Vanilla.Wrappers
 {
     internal static class GeneralWrappers
     {
+        private static VRC_EventHandler.VrcEvent _vrcEvent;
+
+        private static VRC_Trigger _vrc_Trigger;
         public static Player LocalPlayer() => Player.prop_Player_0;
         private static Player[] GetAllPlayer() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         internal static bool IsFriend(this VRC.Player player) => APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);
@@ -47,6 +53,28 @@ namespace Vanilla.Wrappers
                 reticleObj = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud/ReticleParent");
             }
             return reticleObj;
+        }
+        public static void CopyInstanceToClipboard()
+        {
+            ApiWorldInstance field_Internal_Static_ApiWorldInstance_ = RoomManager.field_Internal_Static_ApiWorldInstance_0;
+            Clipboard.SetText(field_Internal_Static_ApiWorldInstance_.id);
+            MelonLogger.Msg("Copied \"" + field_Internal_Static_ApiWorldInstance_.id + "\".");
+        }
+        public static void GoToRoom(string id)
+        {
+            Networking.GoToRoom(id);
+        }
+        public static void JoinInstanceFromClipboard()
+        {
+            string text = Clipboard.GetText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MelonLogger.Error("Clipboard oof");
+            }
+            else
+            {
+                GoToRoom(text);
+            }
         }
     }
 }

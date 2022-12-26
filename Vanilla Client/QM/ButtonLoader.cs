@@ -60,8 +60,10 @@ namespace Vanilla.QM
             
             Settings.SettingsMenu(tabMenu);
             ExploitMenu.InitMenu(tabMenu);
+            Safetymenu.safetymenu(tabMenu);
+            movement.MovementMenu(tabMenu);
 
-                         
+
             //QMImage.LoadQMImage();
             // ButInfo.Info(tabMenu);
             //Exploitable.ButtonExploits(tabMenu);

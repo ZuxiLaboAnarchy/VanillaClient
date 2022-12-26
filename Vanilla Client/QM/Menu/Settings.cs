@@ -127,7 +127,7 @@ namespace Vanilla.QM.Menu
 
 
             
-            var Media = new QMNestedButton(tabMenu, 4, 4, "Media Control", "Vanilla", "Vanilla client");
+            var Media = new QMNestedButton(tabMenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
 
             var MediaControl = new QMSingleButton(Media, 1, 0, "Previous Track (Spotify)", delegate
             {
