@@ -78,12 +78,13 @@ namespace Vanilla.QM.Menu
             VRC.Player player = PlayerWrapper.LocalPlayer();
             if (flip)
             {
-                _nexkRange = player.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0;
-                player.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0 = new NeckRange(float.MinValue, float.MaxValue, 0f);
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += new Vector3(0f, 1.5f, 0f);
             }
             else
             {
-                player.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0 = _nexkRange;
+
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(0, 0f, 0f, 0f);
             }
         }
 
