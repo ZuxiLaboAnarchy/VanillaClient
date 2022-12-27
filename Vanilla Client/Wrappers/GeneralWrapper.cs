@@ -76,5 +76,65 @@ namespace Vanilla.Wrappers
                 GoToRoom(text);
             }
         }
+        internal static bool IsClientUser(PlayerInformation player)
+        {
+            if (player.isClientUser)
+            {
+                return true;
+            }
+            if (player.lastNetworkedUpdatePacketNumber <= 1)
+            {
+                return false;
+            }
+            if (player.GetPing() < 10)
+            {
+                MelonLogger.Msg("Detector", player.displayName + " is a client user (2)", System.ConsoleColor.Gray, "IsClientUser", 369);
+                player.isClientUser = true;
+                return true;
+            }
+            if (player.GetFPS() < 1)
+            {
+                MelonLogger.Msg("Detector", player.displayName + " is a client user (3)", System.ConsoleColor.Gray, "IsClientUser", 378);
+                player.isClientUser = true;
+                return true;
+            }
+            if (player.isQuestUser)
+            {
+                if (player.GetFPS() > 120 || !player.isVRUser)
+                {
+                    MelonLogger.Msg("Detector", player.displayName + " is a client user (4)", System.ConsoleColor.Gray, "IsClientUser", 390);
+                    player.isClientUser = true;
+                    return true;
+                }
+            }
+            else if (player.GetFPS() > 144 || player.GetPing() > 3000)
+            {
+                MelonLogger.Msg("Detector", player.displayName + " is a client user (5)", System.ConsoleColor.Gray, "IsClientUser", 402);
+                player.isClientUser = true;
+                return true;
+            }
+            if (player.detectedFirstGround)
+            {
+                if (player.GetVelocity().y == 0f && !player.IsGrounded())
+                {
+                    player.airstuckDetections++;
+                    if (player.airstuckDetections >= 5)
+                    {
+                        MelonLogger.Msg("Detector", player.displayName + " is a client user (6)", System.ConsoleColor.Gray, "IsClientUser", 417);
+                        player.isClientUser = true;
+                        return true;
+                    }
+                }
+                else if (player.airstuckDetections > 0)
+                {
+                    player.airstuckDetections--;
+                }
+            }
+            else if (player.IsGrounded())
+            {
+                player.detectedFirstGround = true;
+            }
+            return false;
+        }
     }
 }

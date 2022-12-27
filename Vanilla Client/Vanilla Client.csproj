@@ -188,6 +188,7 @@
     <Compile Include="Exploits\VideoPlayer.cs" />
     <Compile Include="GenFeatures\AmongUsManager.cs" />
     <Compile Include="Modules\Anticrash.cs" />
+    <Compile Include="Modules\Manager\playerinfo.cs" />
     <Compile Include="Modules\VRCPlusRemover.cs" />
     <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />

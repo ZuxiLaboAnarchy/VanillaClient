@@ -8,6 +8,7 @@ namespace Vanilla.Wrappers
 {
     internal class PlayerWrapper
     {
+        internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
         internal static VRCPlayer GetLocalPlayer()
         {
             return VRCPlayer.field_Internal_Static_VRCPlayer_0;

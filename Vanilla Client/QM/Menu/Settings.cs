@@ -12,6 +12,8 @@ using Vanilla.Modules;
 using static Vanilla.Main;
 using System.Threading;
 using System.Diagnostics;
+using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
+using Vanilla.Wrappers;
 
 namespace Vanilla.QM.Menu
 {
@@ -147,6 +149,28 @@ namespace Vanilla.QM.Menu
                 Thread.Sleep(100);
                 imports.SetForegroundWindow(_hwnd);
             }, "Pervious Track");
+
+
+            var custom = new QMToggleButton(settingsmenu,1,1,"Custom Plate", delegate
+            {
+                foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerWrapper.playerCachingList)
+                {
+                    if (!playerCaching.Value.isLocalPlayer)
+                    {
+                        playerCaching.Value.customNameplateObject.SetActive(value: true);
+                    }
+                }
+            },delegate
+            {
+                foreach (KeyValuePair<string, PlayerInformation> playerCaching2 in PlayerWrapper.playerCachingList)
+                {
+                    if (!playerCaching2.Value.isLocalPlayer)
+                    {
+                        playerCaching2.Value.customNameplateObject.SetActive(value: false);
+                    }
+                }
+            },"Yes Fps and ping and such");
+
 
             var playpause = new QMSingleButton(Media, 2, 0, "Play pause (Spotify)", delegate
             {
