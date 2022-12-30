@@ -82,8 +82,9 @@ namespace Vanilla.ServerAPI
                         customTagColor = color
                     };
 
-                    if (!TagUtils.TagList.ContainsKey(VRChatID))
-                    TagUtils.TagList.Add(VRChatID, customtag);
+                    if (!TagUtils.TagList.ContainsKey(VRChatID) && VRChatID != string.Empty)
+                    { TagUtils.TagList.Add(VRChatID, customtag); }
+                     
                     /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
                      if (playerInformationByID != null && flag)
                      {
