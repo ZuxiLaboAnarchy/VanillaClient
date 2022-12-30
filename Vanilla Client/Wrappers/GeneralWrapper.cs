@@ -10,6 +10,7 @@ using VRC.UserCamera;
 using VRC.SDKBase;
 using System.Windows.Forms;
 using MelonLoader;
+using VRC.UI;
 
 namespace Vanilla.Wrappers
 {
@@ -135,6 +136,49 @@ namespace Vanilla.Wrappers
                 player.detectedFirstGround = true;
             }
             return false;
+        }
+        internal static List<T> FindAllComponentsInGameObject<T>(GameObject gameObject, bool includeInactive = true, bool searchParent = true, bool searchChildren = true) where T : class
+        {
+            List<T> list = new List<T>();
+            if (gameObject == null)
+            {
+                return list;
+            }
+            try
+            {
+                foreach (T component in gameObject.GetComponents<T>())
+                {
+                    list.Add(component);
+                }
+                if (searchParent && gameObject.transform.parent != null)
+                {
+                    foreach (T item in gameObject.GetComponentsInParent<T>(includeInactive))
+                    {
+                        list.Add(item);
+                    }
+                }
+                if (searchChildren && gameObject.transform.childCount > 0)
+                {
+                    foreach (T componentsInChild in gameObject.GetComponentsInChildren<T>(includeInactive))
+                    {
+                        list.Add(componentsInChild);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MelonLogger.Error("Misc", "FindAllComponentsInGameObject", e, "FindAllComponentsInGameObject", 388);
+            }
+            return list;
+        }
+        private static PageUserInfo pageUserInfo;
+        internal static PageUserInfo GetPageUserInfo()
+        {
+            if (pageUserInfo == null)
+            {
+                pageUserInfo = GameObject.Find("MenuContent/Screens/UserInfo").GetComponent<PageUserInfo>(); //adjusted for guid change
+            }
+            return pageUserInfo;
         }
     }
 }

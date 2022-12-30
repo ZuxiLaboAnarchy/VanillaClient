@@ -78,13 +78,12 @@ namespace Vanilla.QM.Menu
             VRC.Player player = PlayerWrapper.LocalPlayer();
             if (flip)
             {
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += new Vector3(0f, 1.5f, 0f);
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(0, 0f, 0f, 0f);
             }
             else
             {
-
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(0, 0f, 0f, 0f);
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += new Vector3(0f, 1.5f, 0f);
             }
         }
 
@@ -94,16 +93,16 @@ namespace Vanilla.QM.Menu
         {
             if (spinGod)
             {
+                PlayerWrapper.SendToLocation(_revertVector, _revertRotation);
+            }
+            else
+            {
                 _revertRotation = PlayerWrapper.GetPlayerRotation();
                 _revertVector = PlayerWrapper.GetPlayerPosition();
                 Transform transform = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform;
                 transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
                 Transform transform2 = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform;
                 transform.position = transform2.position + new Vector3(0f, 2f, 0f);
-            }
-            else
-            {
-                PlayerWrapper.SendToLocation(_revertVector, _revertRotation);
             }
         }
 

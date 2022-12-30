@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -48,7 +49,6 @@ namespace Vanilla.Wrappers
         {
             internal static VRC.Player targertuser;
             private static GameObject targetplate;
-
             internal static void Targetuser(string userid)
             {
                 if (targetplate != null)
@@ -58,7 +58,7 @@ namespace Vanilla.Wrappers
                 targertuser = players;
             }
         }
-         
+
         internal static void ChangePlayerAvatar(string avatarId)
         {
             new ApiAvatar() { id = avatarId }.Get(new System.Action<ApiContainer>(x =>
@@ -70,6 +70,18 @@ namespace Vanilla.Wrappers
             {
                 Log("Player", $"Failed to switch to avatar: {avatarId} ({x.Error})");
             }), null, false);
+        }
+
+        internal static PlayerInformation GetPlayerInformationByInstagatorID(int index)
+        {
+            foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerWrapper.playerCachingList)
+            {
+                if (playerCaching.Value.networkBehaviour.prop_Int32_0 == index)
+                {
+                    return playerCaching.Value;
+                }
+            }
+            return null;
         }
 
         internal static void HideSelf(bool state)
@@ -102,5 +114,38 @@ namespace Vanilla.Wrappers
         }
         private static GameObject avatarPreviewBase;
 
+        internal static VRCPlayer GetCurrentPlayer()
+        {
+            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        }
+
+        internal static PlayerInformation GetPlayerInformationByName(string displayName)
+        {
+            if (displayName == APIUser.CurrentUser.displayName)
+            {
+                return GetLocalPlayerInformation();
+            }
+            if (playerCachingList.ContainsKey(displayName))
+            {
+                return playerCachingList[displayName];
+            }
+            return null;
+        }
+
+
+        internal static PlayerInformation localPlayerInfo = null;
+        internal static PlayerInformation GetLocalPlayerInformation()
+        {
+            if (localPlayerInfo == null)
+            {
+                if (APIUser.CurrentUser != null && playerCachingList.ContainsKey(APIUser.CurrentUser.displayName))
+                {
+                    localPlayerInfo = playerCachingList[APIUser.CurrentUser.displayName];
+                    return playerCachingList[APIUser.CurrentUser.displayName];
+                }
+                return null;
+            }
+            return localPlayerInfo;
+        }
     }
 }
