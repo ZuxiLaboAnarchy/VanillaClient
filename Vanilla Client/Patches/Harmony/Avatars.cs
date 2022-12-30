@@ -2,13 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Vanilla.Patches.Harmony
 {
+
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
     internal class Avatars : VanillaPatches
     {
+
         protected override string patchName => "AvaterPatch";
         internal override void Patch()
         {

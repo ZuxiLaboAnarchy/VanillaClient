@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ using UnityEngine;
 
 namespace Vanilla.Patches.Harmony
 {
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
     internal class HWIDPatch : VanillaPatches
     {
 
@@ -19,11 +24,11 @@ namespace Vanilla.Patches.Harmony
             try
             {
                 InitializeLocalPatchHandler(typeof(HWIDPatch));
-                PatchMethod(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), GetLocalPatch("FakeHWID"), null);
+                PatchMethod(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), GetLocalPatch(nameof(FakeHWID)), null);
                
 
 
-
+                 
             }
             catch (Exception e)
             {

@@ -1,8 +1,13 @@
 ﻿using MelonLoader;
 using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Vanilla.Utils
 {
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
     internal class LogHandler
     {
 #if DEBUG

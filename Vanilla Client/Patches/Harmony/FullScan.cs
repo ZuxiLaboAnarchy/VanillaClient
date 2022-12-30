@@ -1,5 +1,11 @@
-﻿namespace Vanilla.Patches.Harmony;
+﻿using System.Reflection;
+using VRC;
 
+namespace Vanilla.Patches.Harmony;
+[Obfuscation(Feature = "-flow")]
+[Obfuscation(Feature = "-strenc")]
+[Obfuscation(Feature = "-virtualization")]
+[Obfuscation(Feature = "-rename")]
 internal class Scanner : VanillaPatches
 {
 #if DEBUG1

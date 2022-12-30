@@ -14,6 +14,10 @@ using static MelonLoader.MelonLogger;
 
 namespace Vanilla.Patches.Harmony
 {
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
     internal class PlayerEvents : VanillaPatches
     {
         protected override string patchName => "PlayerEventPatch";
@@ -28,8 +32,8 @@ namespace Vanilla.Patches.Harmony
 
             
 
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch("PlayerJoin"), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch("PlayerLeave"), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(nameof(PlayerJoin)), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch(nameof(PlayerLeave)), null);
 
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)

@@ -7,13 +7,18 @@ using Vanilla.Protections;
 using static Vanilla.Main;
 using static Vanilla.Utils.Performance;
 using static Vanilla.ServerAPI.Server;
+using System.Reflection;
+using VRC;
 
 namespace Cypher
 {
-    internal class CoreMain
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
+    public class CoreMain
     {
-        private static bool ShouldLoad { get; set; } = true;
-
+        private static bool ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad { get; set; } = true;
         public static void OnApplicationStart(string LoaderID)
         {
 
@@ -28,22 +33,22 @@ namespace Cypher
                 {
                     //CypherEngine.Protections.CAntiReverse.AntiDump();
                     // ShouldLoad = CypherEngine.Protections.CAntiReverse.Run();
-                    if (!ShouldLoad) return;
+                    if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
                 }
                 catch (Exception e) { ExceptionHandler("Erase", e); }
 
-                ShouldLoad = Vanilla.Protections.LoaderProtections.CheckLoader(LoaderID);
-                if (!ShouldLoad) return;
+                ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = Vanilla.Protections.LoaderProtections.CheckLoader(LoaderID);
+                if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
 
                 if (GeneralUtils.GetGameName() != "VRChat")
-                { ShouldLoad = false; return; }
+                { ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = false; return; }
 
-                ShouldLoad = Compatibility.CheckGameVersion();
-                if (!ShouldLoad) return;
+                ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = Compatibility.CheckGameVersion();
+                if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
 
 
                  if (SendPostRequestInternal("login") == null)
-                 { ShouldLoad = false; return; }
+                 { ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = false; return; }
 
 
 
@@ -89,25 +94,25 @@ namespace Cypher
         #region Forward Declarations
 
         public static void OnApplicationLateStart()
-        { if (!ShouldLoad) return; CallOnLateStart(); }
+        { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnLateStart(); }
 
         public static void OnGUI()
-        { if (!ShouldLoad) return; CallOnGUI(); }
+        { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnGUI(); }
 
         public static void OnUpdate()
-        { if (!ShouldLoad) return; CallOnUpdate(); }
+        { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnUpdate(); }
 
 
         public static void OnLevelWasInitialized(int Level, string levelname = null)
         {
-            if (!ShouldLoad) return;
+            if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
 
             CallOnLevelInit(Level);
         }
 
         public static void OnApplicationQuit()
         {
-            if (!ShouldLoad) return;
+            if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
             CallOnGameQuit();
             Log("Core", "Goodbye", ConsoleColor.Yellow);
             CypherEngineLog("Core", "Goodbye", ConsoleColor.Yellow);
@@ -116,7 +121,7 @@ namespace Cypher
 
         public static void OnSceneWasUnloaded(int level, string levelname = null)
         {
-            if (!ShouldLoad) return;
+            if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
             CallOnLevelUnload(level);
         }
 
