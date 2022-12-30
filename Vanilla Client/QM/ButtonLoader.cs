@@ -62,6 +62,8 @@ namespace Vanilla.QM
             ExploitMenu.InitMenu(tabMenu);
             Safetymenu.safetymenu(tabMenu);
             movement.MovementMenu(tabMenu);
+            Micfuckery.MicFuckery(tabMenu);
+            new playermenu();
 
 
             //QMImage.LoadQMImage();

@@ -24,7 +24,7 @@ namespace Vanilla.QM.Menu
                 TeleportToSpace(3f);
             }, "Ports You to space then reloads crashing user atttached");
 
-            var Anticrash = new QMNestedButton(Safemenu, 2,0,"AntiCrash", "Vanilla" , "Vanilla Client");
+            var Anticrash = new QMNestedButton(Safemenu, 2, 0, "AntiCrash", "Vanilla", "Vanilla Client");
 
             var Particles = new QMToggleButton(Anticrash, 1, 0, "Particles Anti", delegate
             {
@@ -73,12 +73,18 @@ namespace Vanilla.QM.Menu
             {
                 verticiesp = false;
             }, "Vertecies anti");
-        }
+
+            var antiErrape = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate
+            {
+                Antirape = true;
+            }, delegate
+            {
+                Antirape = false;
+            }, "Anti Event 1 Bad Data");
 
 
 
-
-
+        } 
 
 
 
@@ -116,7 +122,6 @@ namespace Vanilla.QM.Menu
         internal static bool linerenderp = true;
         internal static bool lightsp = true;
 
-
-
+        public static bool Antirape { get; private set; }
     }
 }

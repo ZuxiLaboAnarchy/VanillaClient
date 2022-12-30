@@ -186,7 +186,6 @@
     <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
-    <Compile Include="GenFeatures\AmongUsManager.cs" />
     <Compile Include="Modules\Anticrash.cs" />
     <Compile Include="Modules\Manager\playerinfo.cs" />
     <Compile Include="Modules\VRCPlusRemover.cs" />
@@ -210,10 +209,13 @@
     <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Modules\NamePlates.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
-    <Compile Include="GenFeatures\MurderManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="QM\Menu\Micfuckery.cs" />
     <Compile Include="QM\Menu\Safetymenu.cs" />
     <Compile Include="QM\Menu\MovementMenu.cs" />
+    <Compile Include="QM\QMAPI\MenuPanelButton.cs" />
+    <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
+    <Compile Include="Utils\AudioHandler.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />
@@ -348,6 +350,7 @@
     <Compile Include="Utils\UnmanagedUtils.cs" />
     <Compile Include="Modules\VanillaGameObject\MonoBehavior.cs" />
     <Compile Include="Modules\VanillaGameObject\VanillaObject.cs" />
+    <Compile Include="Wrappers\ProtectionHandler.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
     <Compile Include="Xrefs\Input.cs" />
