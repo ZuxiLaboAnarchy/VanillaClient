@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MelonLoader;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VRC;
@@ -7,7 +9,7 @@ using VRC.UI;
 
 namespace Vanilla.Wrappers
 {
-    internal class PlayerWrapper
+    internal static class PlayerWrapper
     {
         internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
         internal static VRCPlayer GetLocalPlayer()
@@ -83,7 +85,10 @@ namespace Vanilla.Wrappers
             }
             return null;
         }
-
+        internal static void Start(this IEnumerator instance)
+        {
+            MelonCoroutines.Start(instance);
+        }
         internal static void HideSelf(bool state)
         {
             AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(!state);

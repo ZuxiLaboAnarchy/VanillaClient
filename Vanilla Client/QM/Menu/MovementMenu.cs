@@ -82,7 +82,6 @@ namespace Vanilla.QM.Menu
             }
             else
             {
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += new Vector3(0f, 1.5f, 0f);
             }
         }

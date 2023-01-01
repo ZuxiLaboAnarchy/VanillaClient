@@ -17,11 +17,12 @@ namespace Vanilla.QM.Menu
     {
         internal static void safetymenu(QMTabMenu tabMenu)
         {
+
             var Safemenu = new QMNestedButton(tabMenu, 3, 3, "Safety Settings", "Vanilla", "Vanilla Client");
 
             var Getoffhead = new QMSingleButton(Safemenu, 1, 0, "Anti Attach", delegate
             {
-                TeleportToSpace(3f);
+                TeleportToSpace(3f).Start();
             }, "Ports You to space then reloads crashing user atttached");
 
             var Anticrash = new QMNestedButton(Safemenu, 2, 0, "AntiCrash", "Vanilla", "Vanilla Client");

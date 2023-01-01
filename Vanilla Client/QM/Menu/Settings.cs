@@ -150,7 +150,7 @@ namespace Vanilla.QM.Menu
                 imports.SetForegroundWindow(_hwnd);
             }, "Pervious Track");
 
-
+            /*
             var custom = new QMToggleButton(settingsmenu,1,1,"Custom Plate", delegate
             {
                 foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerWrapper.playerCachingList)
@@ -170,7 +170,7 @@ namespace Vanilla.QM.Menu
                     }
                 }
             },"Yes Fps and ping and such");
-
+            */
 
             var playpause = new QMSingleButton(Media, 2, 0, "Play pause (Spotify)", delegate
             {
