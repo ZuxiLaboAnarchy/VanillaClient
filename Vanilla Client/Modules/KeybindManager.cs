@@ -2,6 +2,7 @@
 using Vanilla.Config;
 using Vanilla.Wrappers;
 
+
 namespace Vanilla.Modules
 {
     internal class KeybindManager : VanillaModule
@@ -13,7 +14,10 @@ namespace Vanilla.Modules
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
+
+               // LogHandler.LogToHud("Test");
                 ModuleManager.DebugKey();
+
             }
 
             

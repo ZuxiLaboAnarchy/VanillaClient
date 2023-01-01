@@ -14,8 +14,12 @@ using VRC.SDKBase.Validation.Performance;
 
 namespace Vanilla.ServerAPI
 {
+    
     internal class ServerResponceHandler
     {
+        internal static bool WSDone = true;
+        private static float nextUpdateFetch;
+
         internal static void HandlePostRequest(string PostRequestData)
         {
             Dev("ServerAPI", "Handleing \n " + PostRequestData);
@@ -33,109 +37,121 @@ namespace Vanilla.ServerAPI
 
         internal static void HandleWSUpdate(string WSResponce)
         {
-            string text = WSResponce.Trim();
-            if (string.IsNullOrEmpty(text))
+
+            if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null && RuntimeConfig.nextUpdateCheckComplete)
             {
-                return;
-            }
-            JObject jObject = JObject.Parse(text);
+
+                nextUpdateFetch = Time.realtimeSinceStartup + 12f;
 
 
 
-            try
-            {
-                TagUtils.TagList.Clear();
-
-
-              
-             
-                RuntimeConfig.SetUserName((string?)jObject["Username"]);
-                RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
-                RuntimeConfig.SetUUID((string?)jObject["UUID"]);
-                RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
-                RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
-                RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
-
-
-                JArray jArray3 = (JArray)jObject["TagList"];
-                for (int k = 0; k < jArray3.Count; k++)
+                string text = WSResponce.Trim();
+                if (string.IsNullOrEmpty(text) && !WSDone)
                 {
-                    string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
-                    string CustomTag = ((string?)jArray3[k]["Custom_Tag"])?.Trim();
-                    string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
-                    Color color = default(Color);
-                    bool TagEnabled = false;
-                    bool customRankEnabled = false;
-                    if (CustomTagColor != null && !string.IsNullOrEmpty(CustomTagColor))
+                    return;
+                }
+                JObject jObject = JObject.Parse(text);
+                WSDone = false;
+
+
+                try
+                {
+                    TagUtils.TagList.Clear();
+
+
+
+
+                    RuntimeConfig.SetUserName((string?)jObject["Username"]);
+                    RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
+                    RuntimeConfig.SetUUID((string?)jObject["UUID"]);
+                    RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
+                    RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
+                    RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
+
+
+                    JArray jArray3 = (JArray)jObject["TagList"];
+                    for (int k = 0; k < jArray3.Count; k++)
                     {
-                        TagEnabled = ColorUtility.TryParseHtmlString(CustomTagColor, out color);
+                        string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
+                        string CustomTag = ((string?)jArray3[k]["Custom_Tag"])?.Trim();
+                        string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
+                        Color color = default(Color);
+                        bool TagEnabled = false;
+                        bool customRankEnabled = false;
+                        if (CustomTagColor != null && !string.IsNullOrEmpty(CustomTagColor))
+                        {
+                            TagEnabled = ColorUtility.TryParseHtmlString(CustomTagColor, out color);
+                        }
+                        if (CustomTag != null)
+                        {
+                            customRankEnabled = !string.IsNullOrEmpty(CustomTag);
+                        }
+                        CustomTagInfo customtag = new CustomTagInfo
+                        {
+                            customTagEnabled = customRankEnabled,
+                            customTag = CustomTag,
+                            customTagColorEnabled = TagEnabled,
+                            customTagColor = color
+                        };
+
+                        if (!TagUtils.TagList.ContainsKey(VRChatID) && VRChatID != string.Empty)
+                        { TagUtils.TagList.Add(VRChatID, customtag); }
+
+                        /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
+                         if (playerInformationByID != null && flag)
+                         {
+                             PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
+                         }*/
                     }
-                    if (CustomTag != null)
+
+                    Dev("SRH", "Finished Handleing TagList ");
+                    WSDone = true;
+                    RuntimeConfig.nextUpdateCheckComplete = true;
+
+                }
+                catch (Exception e) { ExceptionHandler("SRH", e); }
+
+
+
+                return;
+
+                JArray jArray4 = (JArray)jObject["Avatars"];
+                for (int l = 0; l < jArray4.Count; l++)
+                {
+                    FavoriteAvatar favoriteAvatar = new FavoriteAvatar
                     {
-                        customRankEnabled = !string.IsNullOrEmpty(CustomTag);
-                    }
-                    CustomTagInfo customtag = new CustomTagInfo
-                    {
-                        customTagEnabled = customRankEnabled,
-                        customTag = CustomTag,
-                        customTagColorEnabled = TagEnabled,
-                        customTagColor = color
+                        AvatarName = (string?)jArray4[l]["avatar_name"],
+                        AvatarID = (string?)jArray4[l]["avatar_id"],
+                        AvatarAssetUrl = (string?)jArray4[l]["avatar_asset_url"],
+                        AvatarImageUrl = (string?)jArray4[l]["avatar_thumbnail"],
+                        AvatarReleaseStatus = "public",
+                        AvatarAuthorID = (string?)jArray4[l]["avatar_author_id"],
+                        AvatarAuthorName = (string?)jArray4[l]["avatar_author_name"],
                     };
-
-                    if (!TagUtils.TagList.ContainsKey(VRChatID) && VRChatID != string.Empty)
-                    { TagUtils.TagList.Add(VRChatID, customtag); }
-                     
-                    /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
-                     if (playerInformationByID != null && flag)
-                     {
-                         PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
-                     }*/
-                }
-                Dev("SRH", "Finished Handleing TagList ") ;
-                RuntimeConfig.nextUpdateCheckComplete = true;
-            }catch (Exception e) { ExceptionHandler("SRH", e); }
-
-
-
-                return;
-
-            JArray jArray4 = (JArray)jObject["Avatars"];
-            for (int l = 0; l < jArray4.Count; l++)
-            {
-                FavoriteAvatar favoriteAvatar = new FavoriteAvatar
-                {
-                    AvatarName = (string?)jArray4[l]["avatar_name"],
-                    AvatarID = (string?)jArray4[l]["avatar_id"],
-                    AvatarAssetUrl = (string?)jArray4[l]["avatar_asset_url"],
-                    AvatarImageUrl = (string?)jArray4[l]["avatar_thumbnail"],
-                    AvatarReleaseStatus = "public",
-                    AvatarAuthorID = (string?)jArray4[l]["avatar_author_id"],
-                    AvatarAuthorName = (string?)jArray4[l]["avatar_author_name"],
-                };
-                if (favoriteAvatar.AvatarVersionSystem == 2)
-                {
-                    if (!FavoriteAvatarHandler.VanillaAvatarsFav.ContainsKey(favoriteAvatar.AvatarID))
+                    if (favoriteAvatar.AvatarVersionSystem == 2)
                     {
-                        FavoriteAvatarHandler.VanillaAvatarsFav.Add(favoriteAvatar.AvatarID, favoriteAvatar);
+                        if (!FavoriteAvatarHandler.VanillaAvatarsFav.ContainsKey(favoriteAvatar.AvatarID))
+                        {
+                            FavoriteAvatarHandler.VanillaAvatarsFav.Add(favoriteAvatar.AvatarID, favoriteAvatar);
+                        }
+                        else
+                        {
+                            FavoriteAvatarHandler.VanillaAvatarsFav[favoriteAvatar.AvatarID] = favoriteAvatar;
+                        }
+                        continue;
                     }
-                    else
+                    if (FavoriteAvatarHandler.VanillaAvatarsFav.ContainsKey(favoriteAvatar.AvatarID))
                     {
-                        FavoriteAvatarHandler.VanillaAvatarsFav[favoriteAvatar.AvatarID] = favoriteAvatar;
+                        FavoriteAvatarHandler.VanillaAvatarsFav.Remove(favoriteAvatar.AvatarID);
                     }
-                    continue;
+                    //  DeleteAvatarFromDatabase(favoriteAvatar);
+                    FavoriteAvatarHandler.AddAvatarByID(favoriteAvatar.AvatarID, null, null);
                 }
-                if (FavoriteAvatarHandler.VanillaAvatarsFav.ContainsKey(favoriteAvatar.AvatarID))
+                if (FavoriteAvatarHandler.VanillaAvatarsFav.Count > 0)
                 {
-                    FavoriteAvatarHandler.VanillaAvatarsFav.Remove(favoriteAvatar.AvatarID);
+                    // FavoriteAvatarHandler.RefreshList(string.Empty);
                 }
-              //  DeleteAvatarFromDatabase(favoriteAvatar);
-                FavoriteAvatarHandler.AddAvatarByID(favoriteAvatar.AvatarID, null, null);
-            }
-            if (FavoriteAvatarHandler.VanillaAvatarsFav.Count > 0)
-            {
-               // FavoriteAvatarHandler.RefreshList(string.Empty);
-            }
-            Dev("SRH", "Finished Handleing Avatar Favs");
+                Dev("SRH", "Finished Handleing Avatar Favs");
 
 
 
@@ -144,8 +160,8 @@ namespace Vanilla.ServerAPI
 
 
 
-            Dev("ServerAPI", "Done Handleing WS Responce");
-
+                Dev("ServerAPI", "Done Handleing WS Responce");
+            }
         }
 
 

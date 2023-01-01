@@ -11,6 +11,7 @@ using VRC.SDKBase;
 using System.Windows.Forms;
 using MelonLoader;
 using VRC.UI;
+using UnityEngine.UI;
 
 namespace Vanilla.Wrappers
 {
@@ -25,6 +26,19 @@ namespace Vanilla.Wrappers
         private static Camera uiCamera;
         private static Camera photoCamera;
         private static GameObject reticleObj;
+
+       
+        
+
+
+
+        internal static VRCUiManager GetVRCUiManager()
+        {
+            return VRCUiManager.prop_VRCUiManager_0;
+        }
+
+
+
         internal static Camera GetPlayerCamera()
         {
             return VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0;
@@ -179,6 +193,27 @@ namespace Vanilla.Wrappers
                 pageUserInfo = GameObject.Find("MenuContent/Screens/UserInfo").GetComponent<PageUserInfo>(); //adjusted for guid change
             }
             return pageUserInfo;
+        }
+
+        internal static void ShowInputPopup(string title, string initialText, InputField.InputType inputType, bool isNumeric, string confirmButtonText, System.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> onComplete, System.Action onCancel = null, string placeholderText = "Enter text...", bool closeAfterInput = true, System.Action<VRCUiPopup> onPopupShown = null, bool unknownBool = false, int characterLimit = 0)
+        {
+            DelegateWrappers.ShowUiInputPopup(title, initialText, inputType, isNumeric, confirmButtonText, onComplete, onCancel, placeholderText, closeAfterInput, onPopupShown, unknownBool, characterLimit);
+        }
+
+        internal static ShowUiInputPopupAction ShowUiInputPopup
+        {
+            get
+            {
+                if (ourShowUiInputPopupAction != null)
+                {
+                    return ourShowUiInputPopupAction;
+                }
+                MethodInfo method = (from mb in typeof(VRCUiPopupManager).GetMethods()
+                                     where mb.Name.StartsWith("Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_") && PatchManager.CheckMethod(mb, "UserInterface/MenuContent/Popups/InputPopup")
+                                     select mb).First();
+                ourShowUiInputPopupAction = (ShowUiInputPopupAction)System.Delegate.CreateDelegate(typeof(ShowUiInputPopupAction), VRCUiPopupManager.prop_VRCUiPopupManager_0, method);
+                return ourShowUiInputPopupAction;
+            }
         }
     }
 }

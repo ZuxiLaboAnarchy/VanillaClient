@@ -30,7 +30,17 @@ namespace Vanilla.Modules
             if (UID == "usr_e49984a4-14de-482d-9899-62d710c7ead8")
             { UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL"; }
 
-            { Log("Player Join", $"{user}"); }
+            {
+
+                string text = "<color=green>Player Join: <color=purple>" + user;
+             //   InformHudText("PlayerJoin", text);
+               // ConsoleUtils.Info(LanguageManager.GetUsedLanguage().ProtectionsMenuName, text, ConsoleColor.Red, "OnPlayerJoinPatch", 235);
+
+
+              //  UserInterface.AddNotificationToHud($"{user} Joined");
+                
+                
+                Log("Player Join", $"{user}"); }
         }
 
         internal override void PlayerLeave(Player __0)

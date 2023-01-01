@@ -22,7 +22,15 @@ namespace Vanilla.Utils
 
 
 
-
+        internal static Sprite CreateSprite(Texture2D texture)
+		{
+			Rect rect = new Rect(0f, 0f, texture.width, texture.height);
+			Vector2 pivot = new Vector2(0.5f, 0.5f);
+			Vector4 border = Vector4.zero;
+			Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100f, 0u, SpriteMeshType.Tight, ref border, generateFallbackPhysicsShape: false);
+			sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+			return sprite;
+		}
 
         internal static Sprite CreateSpriteFromTexture(Texture2D texture)
         {

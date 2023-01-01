@@ -74,6 +74,8 @@ namespace Vanilla.Buttons.QM
 
         internal void SetImage(Sprite newImg)
         {
+            MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
             MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
             MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
             MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;

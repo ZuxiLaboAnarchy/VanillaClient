@@ -53,8 +53,9 @@ namespace Vanilla.Patches
             {
                 ExceptionHandler("Steam Spoofer", e2);
             }
-           
+
             // Dev("Steam Spoofer", "Patching Steam Succeeded", ConsoleColor.Gray);
+            Dev("Hooks", "Hooked Steam API Succesfully");
             PatchManager.PatchedMethods++;
             steamPatched = true;
         }

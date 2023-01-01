@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,13 @@ namespace Vanilla.Modules
             //Add Components
             VanillaGObject.AddComponent<VanillaBehavior>();
             VanillaGObject.AddComponent<MonoBehaviour>();
+            
             //  VanillaGObject.name = "";
             VanillaGObject.SetActive(true);
+
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\GameObject.txt", VanillaGObject.ToString());
+
+           
 
             // DontDestroyOnLoad(this.gameObject);
         }

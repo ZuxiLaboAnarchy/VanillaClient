@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -54,11 +54,48 @@ namespace Vanilla.Helpers
         internal override void Start()
         {
             MainConfig.Load();
-            
-           // FetchUpdates();
+
+            MelonLoader.MelonCoroutines.Start(WaitForUI());
+
+            // FetchUpdates();
 
             //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
+
+
+
+
+        protected internal static IEnumerator WaitForUI()
+        {
+
+            // while (GeneralWrappers.GetVRCUiManager() == null)
+
+            while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
+            {
+                yield return null;
+            }
+            Dev("HudManager", "HUD Loaded Injecting Alert Panel");
+
+            LogHandler.SetupHud();
+        }
+
+
+
+        internal override void Debug()
+        {
+            string text = "<color=green>DEBUG <color=purple>" + "Debug Key Pressed ";
+
+           // LogToHud(text);
+
+            HudLog("Debug", text);
+
+            // InformHudText("PlayerJoin", text);
+            Log("DebugKey", text);
+
+        }
+
+
+       
 
 
         internal override void Update()
@@ -66,11 +103,11 @@ namespace Vanilla.Helpers
             if (Time.realtimeSinceStartup >= nextPop && PlayerWrapper.GetCurrentPlayerObject() != null)
             {
                 nextPop = Time.realtimeSinceStartup + 30f;
-                
+
                 new Thread(() => { WSBase.Pop(); }).Start();
                 new Thread(() => { PopAvatarLog(); }).Start();
-               // WSBase.Pop();
-               // PopAvatarLog();
+                // WSBase.Pop();
+                // PopAvatarLog();
                 if (!RuntimeConfig.isBot)
                 {
                     MainConfig.Save();

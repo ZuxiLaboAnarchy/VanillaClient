@@ -188,7 +188,10 @@ namespace Vanilla.ServerAPI
 
             if (e.Data.ToString().ToLower().Contains("update packet"))
             {
-                new Thread(() => { ServerResponceHandler.HandleWSUpdate(e.Data.ToString()); }).Start();
+                
+                ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
+               // new Thread(() => {  }).Start();
+               
                
                // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }

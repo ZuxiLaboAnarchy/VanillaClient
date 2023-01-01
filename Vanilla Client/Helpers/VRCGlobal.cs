@@ -3,3 +3,4 @@
 //global using VRC_Player = MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique;
 //global using VRCUiManager = MonoBehaviourPublicObBoStTrStSiTr_qStSiUnique;
 //global using MenuTab = MonoBehaviourPublicStInBoGaObObObUnique;
+global using HUDNotifyGlobal = MonoBehaviourPublicObusQu1VaObQu12StUnique;

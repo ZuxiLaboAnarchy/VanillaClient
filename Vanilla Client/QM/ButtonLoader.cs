@@ -35,7 +35,7 @@ namespace Vanilla.QM
         internal static void LoadButtons()
         {
 
-            var tabMenu = new QMTabMenu("Vanilla", "Vanilla Client", ImageUtils.CreateSpriteFromTexture(AssetLoader.LoadTexture("VanillaClientLogo")));
+            var tabMenu = new QMTabMenu("Vanilla", "Vanilla Client", ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
  
             GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/").gameObject.SetActive(false);
 

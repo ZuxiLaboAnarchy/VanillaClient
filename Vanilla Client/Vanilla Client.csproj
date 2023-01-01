@@ -90,6 +90,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -183,6 +184,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Config\Json.cs" />
     <Compile Include="Config\RuntimeConfig.cs" />
+    <Compile Include="Misc\UserInterface.cs" />
     <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
@@ -216,6 +218,8 @@
     <Compile Include="QM\QMAPI\MenuPanelButton.cs" />
     <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
     <Compile Include="Utils\AudioHandler.cs" />
+    <Compile Include="Utils\GameObjectUtils.cs" />
+    <Compile Include="Utils\Proformance.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />
@@ -347,13 +351,17 @@
     <Compile Include="Utils\PhotonUtils.cs" />
     <Compile Include="Utils\PlayerUtils.cs" />
     <Compile Include="Utils\SUtils.cs" />
+    <Compile Include="Utils\ULogHander.cs" />
     <Compile Include="Utils\UnmanagedUtils.cs" />
     <Compile Include="Modules\VanillaGameObject\MonoBehavior.cs" />
     <Compile Include="Modules\VanillaGameObject\VanillaObject.cs" />
+    <Compile Include="Utils\UserInterface.cs" />
     <Compile Include="Wrappers\ProtectionHandler.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
+    <Compile Include="Wrappers\UserInterface.cs" />
     <Compile Include="Xrefs\Input.cs" />
+    <Compile Include="Xrefs\NotiXref.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
@@ -388,10 +396,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-
+    <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y  
 echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
-
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

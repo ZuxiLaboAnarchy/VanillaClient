@@ -1,4 +1,5 @@
 ﻿
+using MelonLoader;
 using System.Runtime.CompilerServices;
 using Vanilla.Modules;
 using Vanilla.Patches;
@@ -15,6 +16,7 @@ namespace Vanilla
 
             FileHelper.Setup();
 
+          // MelonCoroutines.Start(UserInterface.WaitForUI());
             if (!isBot)
             {
                 PatchManager.Patch();
