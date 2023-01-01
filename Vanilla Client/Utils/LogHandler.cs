@@ -73,7 +73,7 @@ namespace Vanilla.Utils
             {
                 identifier = Identify,
                 text = message,
-                textColor = color,
+                textColor = ConsoleColor,
                 callerName = caller,
                 LogToHud = true,
 

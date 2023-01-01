@@ -11,7 +11,7 @@ namespace Vanilla.Modules
 
         internal override void Update()
         {
-
+#if DEBUG
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
 
@@ -19,8 +19,8 @@ namespace Vanilla.Modules
                 ModuleManager.DebugKey();
 
             }
+#endif
 
-            
 
 
 
