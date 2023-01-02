@@ -178,13 +178,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AvatarFavorites\AvatarFavoritesModel.cs" />
-    <Compile Include="AvatarFavorites\FavoriteAvatarHandler.cs" />
-    <Compile Include="BotHandle.cs" />
-    <Compile Include="Button.cs" />
+    <Compile Include="Misc\AvatarFavorites\AvatarFavoritesModel.cs" />
+    <Compile Include="Misc\AvatarFavorites\FavoriteAvatarHandler.cs" />
+    <Compile Include="Misc\BotHandle.cs" />
     <Compile Include="Config\Json.cs" />
     <Compile Include="Config\RuntimeConfig.cs" />
-    <Compile Include="Misc\UserInterface.cs" />
     <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
@@ -203,7 +201,7 @@
     <Compile Include="Libs\Tiny-JSON\JsonMapper.cs" />
     <Compile Include="Libs\Tiny-JSON\JsonParser.cs" />
     <Compile Include="Modules\CameraModule.cs" />
-    <Compile Include="GenFeatures\FriendLogger.cs" />
+    <Compile Include="Misc\FriendLogger.cs" />
     <Compile Include="Modules\OnplayerMenu.cs" />
     <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
@@ -340,8 +338,8 @@
     <Compile Include="APIs\ServerAPI\ServerRequest.cs" />
     <Compile Include="APIs\ServerAPI\ServerResponceHandler.cs" />
     <Compile Include="APIs\ServerAPI\WebSocketMan.cs" />
-    <Compile Include="GenFeatures\TagManager\TagModel.cs" />
-    <Compile Include="GenFeatures\TagManager\TagUtils.cs" />
+    <Compile Include="Misc\TagManager\TagModel.cs" />
+    <Compile Include="Misc\TagManager\TagUtils.cs" />
     <Compile Include="Utils\AssetUtils.cs" />
     <Compile Include="Utils\imports.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
@@ -355,7 +353,6 @@
     <Compile Include="Utils\UnmanagedUtils.cs" />
     <Compile Include="Modules\VanillaGameObject\MonoBehavior.cs" />
     <Compile Include="Modules\VanillaGameObject\VanillaObject.cs" />
-    <Compile Include="Utils\UserInterface.cs" />
     <Compile Include="Wrappers\ProtectionHandler.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />

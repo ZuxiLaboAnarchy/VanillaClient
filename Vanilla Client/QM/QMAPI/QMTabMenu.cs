@@ -74,6 +74,8 @@ namespace Vanilla.Buttons.QM
 
         internal void SetImage(Sprite newImg)
         {
+            UnityEngine.Object.Destroy(MainButton.transform.Find("Icon").GetComponent<StyleElement>());
+            
             MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
             MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
             MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
