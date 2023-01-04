@@ -35,17 +35,17 @@ namespace Vanilla.Modules
 
                 if (_MeshRenderes.Length > maxmeshes)
                 {
-                    MelonLogger.Msg($"User {vrcplayer._player.field_Private_APIUser_0.displayName} hiddien by anticrash (Meshes) Meshrenders:[{_MeshRenderes.Length}] ");
+                    Log("AntiCrash", $"User {vrcplayer._player.field_Private_APIUser_0.displayName} Hidden by anticrash (Meshes) Meshrenders:[{_MeshRenderes.Length}] ");
                     return;
                 }
                 if (maxmaterials > 800)
                 {
-                    MelonLogger.Msg($"User {vrcplayer._player.field_Private_APIUser_0.displayName} hiddien by anticrash (Meshes) Giagantic number of materials:[{maxmaterials}] ");
+                    Log("AntiCrash", $"User {vrcplayer._player.field_Private_APIUser_0.displayName} Hidden by anticrash (Meshes) Large number of materials:[{maxmaterials}] ");
                     return;
                 }
                 if (_SkinnedMeshRenderers.Length > maxmeshes / 1.5f)
                 {
-                    MelonLogger.Msg($"User {vrcplayer._player.field_Private_APIUser_0.displayName} hiddien by anticrash (Meshes) SkindeMeshRenders:[{_SkinnedMeshRenderers.Length}] ");
+                    Log("AntiCrash", $"User {vrcplayer._player.field_Private_APIUser_0.displayName} Hidden by anticrash (Meshes) SkinMeshRenders:[{_SkinnedMeshRenderers.Length}] ");
                     return;
                 }
                 for (int i3 = 0; i3 < _MeshRenderes.Length; i3++)

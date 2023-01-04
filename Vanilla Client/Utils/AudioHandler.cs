@@ -33,7 +33,7 @@ namespace Vanilla.Utils
             
             if (voiceData.Length <= 8)
             {
-                MelonLogger.Msg(player + "sent Bad Uspeak Data");
+                Log("Protections", player + "sent Bad Uspeak Data");
                 LogToHud(player + "sent Bad Uspeak Data");
                 return true;
                 

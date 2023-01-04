@@ -222,7 +222,6 @@
     <Compile Include="Utils\LoadEmbeded.cs" />
     <Compile Include="Utils\Math.cs" />
     <Compile Include="Utils\MiscUtils.cs" />
-    <Compile Include="Utils\Proformance.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />

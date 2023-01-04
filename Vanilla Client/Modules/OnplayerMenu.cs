@@ -28,7 +28,7 @@ namespace Vanilla.Modules
                 }
                 else
                 {
-                    MelonLogger.Msg("Error", "User is not in instance");
+                    Log("PLayer", "User is not in instance", ConsoleColor.Red);
                 }
             }, interactable: true, "Buttons/RightSideButtons/RightUpperButtonColumn/PlaylistsButton", "Buttons/RightSideButtons/RightUpperButtonColumn");
         }

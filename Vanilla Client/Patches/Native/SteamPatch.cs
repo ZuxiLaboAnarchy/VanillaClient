@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Reflection;
 using MelonLoader;
+using VRC;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Patches
 {
+    [Obfuscation(Feature = "-virtualization")]
     internal class SteamworksPatch : VanillaPatches
 
     {

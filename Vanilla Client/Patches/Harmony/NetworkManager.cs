@@ -10,7 +10,7 @@ using Vanilla.Modules;
 using Vanilla.ServerAPI;
 using VRC;
 using static BestHTTP.JSON.Json;
-using static MelonLoader.MelonLogger;
+
 
 namespace Vanilla.Patches.Harmony
 {

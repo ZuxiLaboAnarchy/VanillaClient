@@ -71,9 +71,9 @@ namespace Vanilla.Wrappers
         }
         public static void CopyInstanceToClipboard()
         {
-            ApiWorldInstance field_Internal_Static_ApiWorldInstance_ = RoomManager.field_Internal_Static_ApiWorldInstance_0;
-            Clipboard.SetText(field_Internal_Static_ApiWorldInstance_.id);
-            MelonLogger.Msg("Copied \"" + field_Internal_Static_ApiWorldInstance_.id + "\".");
+           
+            GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
+            Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
         }
         public static void GoToRoom(string id)
         {
@@ -84,7 +84,7 @@ namespace Vanilla.Wrappers
             string text = Clipboard.GetText();
             if (string.IsNullOrEmpty(text))
             {
-                MelonLogger.Error("Clipboard oof");
+                Log("JoinWorld", "World ID Was empty", ConsoleColor.Red);
             }
             else
             {

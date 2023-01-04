@@ -25,7 +25,7 @@ namespace Vanilla.Modules
                 string PUID = NameplateContainer.field_Public_VRCPlayer_0._player.field_Private_APIUser_0.id;
                 if (PUID == PlayerData.prop_APIUser_0.id) { return NameplateContainer.gameObject.transform; }
             }
-            MelonLogger.Msg("Nameplate search returned null");
+            Dev("NamePlates", "Nameplate search returned null");
             return null;
         }
 

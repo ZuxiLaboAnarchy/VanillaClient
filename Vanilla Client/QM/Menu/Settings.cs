@@ -109,7 +109,7 @@ namespace Vanilla.QM.Menu
                     imports.keybd_event(0xA0, 0, 0x0002, 0);
                     imports.keybd_event(0x4D, 0, 0x0002, 0);
                 }
-                catch (Exception ex) { MelonLogger.Msg(ex); }
+                catch (Exception ex) { ExceptionHandler("Settings" ,ex, "Mute"); }
                 Thread.Sleep(100);
                 imports.SetForegroundWindow(_hwnd);
 
@@ -130,7 +130,7 @@ namespace Vanilla.QM.Menu
                     imports.keybd_event(0xA0, 0, 2, 0);
                     imports.keybd_event(0x44, 0, 2, 0);
                 }
-                catch (Exception ex) { MelonLogger.Msg(ex); }
+                catch (Exception ex) { ExceptionHandler("Buttons", ex, "Defen"); }
                 Thread.Sleep(100);
                 imports.SetForegroundWindow(_hwnd);
 
@@ -146,6 +146,8 @@ namespace Vanilla.QM.Menu
 
                 try
                 {
+
+                    
                     Thread.Sleep(100);
                     imports.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);

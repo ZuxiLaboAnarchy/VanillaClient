@@ -12,13 +12,19 @@ using VRC;
 
 namespace Cypher
 {
-    [Obfuscation(Feature = "-flow")]
-    [Obfuscation(Feature = "-strenc")]
+  
+  //  [Obfuscation(Exclude = true)]
     [Obfuscation(Feature = "-virtualization")]
     [Obfuscation(Feature = "-rename")]
+     [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+
+
+    // [Obfuscation(Feature = "-symbol renaming")]
     public class CoreMain
     {
         private static bool ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad { get; set; } = true;
+       
         public static void OnApplicationStart(string LoaderID)
         {
 
@@ -89,15 +95,21 @@ namespace Cypher
 
         #region Forward Declarations
 
+       
+
         public static void OnApplicationLateStart()
         { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnLateStart(); }
 
         public static void OnGUI()
         { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnGUI(); }
 
+       
+
         public static void OnUpdate()
         { if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return; CallOnUpdate(); }
 
+
+       
 
         public static void OnLevelWasInitialized(int Level, string levelname = null)
         {
@@ -105,6 +117,7 @@ namespace Cypher
 
             CallOnLevelInit(Level);
         }
+
 
         public static void OnApplicationQuit()
         {
@@ -115,11 +128,14 @@ namespace Cypher
             Pop();
         }
 
+    
         public static void OnSceneWasUnloaded(int level, string levelname = null)
         {
             if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
             CallOnLevelUnload(level);
         }
+
+       
 
         public static void OnLateUpdate()
         {
