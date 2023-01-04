@@ -67,3 +67,21 @@ SceneManager.add_sceneUnloaded((Action<Scene>)delegate(Scene scene)
 			{
 				OnLevelWasUnloaded(scene.buildIndex);
 			});
+
+
+
+			if (Math.Abs((DateTime.Now - new DateTime(2022, 12, 20)).Days) >= 14)
+
+
+
+
+
+
+
+
+
+
+
+			Avatar prefab button Location
+
+			"Canvas_MainMenu(Clone)/Container/MMParent/Menu_Avatars/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation/Viewport/VerticalLayoutGroup/VerticalLayoutGroup User/Cell_MM_SidebarListItem prefab"

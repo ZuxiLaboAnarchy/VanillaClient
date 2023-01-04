@@ -14,9 +14,11 @@ using VRC.SDKBase.Validation.Performance;
 
 namespace Vanilla.ServerAPI
 {
+ 
     
     internal class ServerResponceHandler
     {
+        static string lastupdate = null;
         internal static bool WSDone = true;
         private static float nextUpdateFetch;
 
@@ -37,11 +39,21 @@ namespace Vanilla.ServerAPI
 
         internal static void HandleWSUpdate(string WSResponce)
         {
+            //    if (string.IsNullOrEmpty(WSResponce)) { RuntimeConfig.nextUpdateCheckComplete = true; WSDone = true; return;  }
 
+            //   Dev("Comp", WSResponce == lastupdate);
+            RuntimeConfig.nextUpdateCheckComplete = true; WSDone = true;
+         //   if (WSResponce == lastupdate) {  return; }
+           //     lastupdate = WSResponce;
+
+
+            Dev("WSSRH", "Handle WS Update");
+            //  Dev("WSSRH", WSResponce);
+            RuntimeConfig.nextUpdateCheckComplete = true; WSDone = true;
             if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null && RuntimeConfig.nextUpdateCheckComplete)
             {
 
-                nextUpdateFetch = Time.realtimeSinceStartup + 12f;
+               // nextUpdateFetch = Time.realtimeSinceStartup + 12f;
 
 
 
@@ -51,17 +63,18 @@ namespace Vanilla.ServerAPI
                     return;
                 }
                 JObject jObject = JObject.Parse(text);
-                WSDone = false;
-
+                //   WSDone = false;
+               
 
                 try
                 {
-                    TagUtils.TagList.Clear();
+                    PlayerUtils.playerCustomTags.Clear();
 
 
 
 
                     RuntimeConfig.SetUserName((string?)jObject["Username"]);
+                    Dev("WSSRH", RuntimeConfig.GetUserName());
                     RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
                     RuntimeConfig.SetUUID((string?)jObject["UUID"]);
                     RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
@@ -73,7 +86,7 @@ namespace Vanilla.ServerAPI
                     for (int k = 0; k < jArray3.Count; k++)
                     {
                         string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
-                        string CustomTag = ((string?)jArray3[k]["Custom_Tag"])?.Trim();
+                        string CustomTag = ((string?)jArray3[k]["custom_Tag"])?.Trim();
                         string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
                         Color color = default(Color);
                         bool TagEnabled = false;
@@ -85,6 +98,7 @@ namespace Vanilla.ServerAPI
                         if (CustomTag != null)
                         {
                             customRankEnabled = !string.IsNullOrEmpty(CustomTag);
+                            
                         }
                         CustomTagInfo customtag = new CustomTagInfo
                         {
@@ -94,19 +108,23 @@ namespace Vanilla.ServerAPI
                             customTagColor = color
                         };
 
-                        if (!TagUtils.TagList.ContainsKey(VRChatID) && VRChatID != string.Empty)
-                        { TagUtils.TagList.Add(VRChatID, customtag); }
 
-                        /* PlayerInformation playerInformationByID = PlayerWrappers.GetPlayerInformationByID(text2);
-                         if (playerInformationByID != null && flag)
+                        Dev("SRH", "Adding: " + VRChatID + " To Tag List");
+
+
+                      //  if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
+                         PlayerUtils.playerCustomTags.Add(VRChatID, customtag);
+
+                         PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
+                         if (playerInformationByID != null && TagEnabled)
                          {
                              PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
-                         }*/
+                         }
                     }
 
                     Dev("SRH", "Finished Handleing TagList ");
-                    WSDone = true;
-                    RuntimeConfig.nextUpdateCheckComplete = true;
+                    
+                  
 
                 }
                 catch (Exception e) { ExceptionHandler("SRH", e); }

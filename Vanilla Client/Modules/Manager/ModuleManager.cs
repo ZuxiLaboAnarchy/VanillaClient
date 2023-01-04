@@ -24,11 +24,13 @@ namespace Vanilla.Modules
             Modules.Add(new ButtonLoader());
             Modules.Add(new FlyManager());
             Modules.Add(new CameraModule());
-            Modules.Add(new JoinLoggerModule());
+            Modules.Add(new PlayerController());
             Modules.Add(new ESPModule());
             Modules.Add(new VanillaObject());
             Modules.Add(new PHelper());
             Modules.Add(new VRCPlus());
+            Modules.Add(new JoinLoggerModule());
+            Modules.Add(new PlayerHandler());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
@@ -64,6 +66,10 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WorldLoad(level); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 
+        protected internal static void LateUpdates()
+        {
+            for (int i = 0; i < Modules.Count; i++) try { Modules[i].LateUpdate(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+        }
 
 
         protected internal static void LevelUnload(int level)

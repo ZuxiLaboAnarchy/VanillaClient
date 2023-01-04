@@ -7,14 +7,22 @@ using TMPro;
 using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.UI;
+using Vanilla.TagManager;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
 
-namespace Vanilla.Utils
+namespace Vanilla.Utils 
 {
     internal class PlayerUtils
-    {
+    { 
+        internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
+
+        internal static readonly System.Collections.Generic.Dictionary<string, CustomTagInfo> playerCustomTags = new System.Collections.Generic.Dictionary<string, CustomTagInfo>();
+
+        internal static readonly System.Collections.Generic.Dictionary<string, Color> playerColorCache = new System.Collections.Generic.Dictionary<string, Color>();
+
+        internal static readonly System.Collections.Generic.Dictionary<string, GameObject> playerCloneList = new System.Collections.Generic.Dictionary<string, GameObject>();
     }
 
     internal class PlayerInformation
@@ -43,7 +51,7 @@ namespace Vanilla.Utils
 
         internal bool blockedLocalPlayer;
 
-    
+        internal PlayerRankStatus rankStatus;
 
         internal Player player;
 
@@ -90,7 +98,7 @@ namespace Vanilla.Utils
 
         internal short GetPing()
         {
-            return vrcPlayer.prop_PlayerNet_0.prop_Int16_1;
+            return vrcPlayer.prop_PlayerNet_0.field_Private_Int16_0;
         }
 
         internal int GetFPS()
@@ -139,5 +147,17 @@ namespace Vanilla.Utils
         {
             return vrcPlayer.field_Internal_GameObject_0;
         }
+    }
+
+    public enum PlayerRankStatus : short
+    {
+        Unknown = 0,
+        Local = 1,
+        Visitor = 2,
+        NewUser = 3,
+        User = 4,
+        Known = 5,
+        Trusted = 6,
+        Friend = 9
     }
 }

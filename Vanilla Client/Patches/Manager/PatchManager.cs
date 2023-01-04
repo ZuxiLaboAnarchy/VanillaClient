@@ -17,8 +17,8 @@ namespace Vanilla.Patches
             Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
             Patches.Add(new PhotonPatch());
-
-            Patches.Add(new PlayerEvents());
+            Patches.Add(new VRCPlayerPatch());
+            Patches.Add(new NetworkManagerPatch());
             Patches.Add(new PlayerPatch());
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());

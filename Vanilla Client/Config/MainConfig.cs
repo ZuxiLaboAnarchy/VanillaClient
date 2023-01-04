@@ -41,6 +41,24 @@ namespace Vanilla.Config
 
         private static bool _JoinLogger = true;
         internal static bool JoinLogger { get => _JoinLogger; set { _JoinLogger = value; Save(); } }
+
+        private static bool _LogModerations = true;
+        internal static bool LogModerations { get => _LogModerations; set { _LogModerations = value; Save(); } }
+
+        private static bool _NameplateWallhack = true;
+        internal static bool NameplateWallhack { get => _NameplateWallhack; set { _NameplateWallhack = value; Save(); } }
+
+        private static bool _NameplateMoreInfo = true;
+        internal static bool NameplateMoreInfo { get => _NameplateMoreInfo; set { _NameplateMoreInfo = value; Save(); } }
+
+        private static bool _ShowActorID = true;
+        internal static bool ShowActorID { get => _ShowActorID; set { _ShowActorID = value; Save(); } }
+
+        private static bool _DetectLagOrCrash = true;
+        internal static bool DetectLagOrCrash { get => _DetectLagOrCrash; set { _DetectLagOrCrash = value; Save(); } }
+
+
+       
         internal static void Load()
         {
             if (!File.Exists(FilePath))
@@ -77,8 +95,24 @@ namespace Vanilla.Config
                 Boolean.TryParse(installertbl["ESP"].ToString(), out _ESP);
             
             if (installertbl.ContainsKey("JoinEvents"))
-                Boolean.TryParse(installertbl["JoinEvents"].ToString(), out _ESP);
+                Boolean.TryParse(installertbl["JoinEvents"].ToString(), out _JoinLogger);
 
+            if (installertbl.ContainsKey("LogModerations"))
+                Boolean.TryParse(installertbl["LogModerations"].ToString(), out _LogModerations);
+            
+            if (installertbl.ContainsKey("NameplateWallhack"))
+                Boolean.TryParse(installertbl["NameplateWallhack"].ToString(), out _NameplateWallhack);
+            
+            if (installertbl.ContainsKey("NameplateMoreInfo"))
+                Boolean.TryParse(installertbl["NameplateMoreInfo"].ToString(), out _NameplateMoreInfo);
+          
+            if (installertbl.ContainsKey("ShowActorID"))
+                Boolean.TryParse(installertbl["ShowActorID"].ToString(), out _ShowActorID);
+           
+            if (installertbl.ContainsKey("DetectLagOrCrash"))
+                Boolean.TryParse(installertbl["DetectLagOrCrash"].ToString(), out _DetectLagOrCrash);
+
+            
             Dev("Config", "Loaded...");
 
         }
@@ -95,6 +129,12 @@ namespace Vanilla.Config
             tbl.Items.Add(new KeyValueSyntax("PCCrashID", new StringValueSyntax(_PCCrashID)));
             tbl.Items.Add(new KeyValueSyntax("ESP", new BooleanValueSyntax(_ESP)));
             tbl.Items.Add(new KeyValueSyntax("JoinLogger", new BooleanValueSyntax(_JoinLogger)));
+            tbl.Items.Add(new KeyValueSyntax("LogModerations", new BooleanValueSyntax(_LogModerations)));
+            tbl.Items.Add(new KeyValueSyntax("NameplateWallhack", new BooleanValueSyntax(_NameplateWallhack)));
+            tbl.Items.Add(new KeyValueSyntax("NameplateMoreInfo", new BooleanValueSyntax(_NameplateMoreInfo)));
+            tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ShowActorID)));
+            tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_DetectLagOrCrash)));
+            
 
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);

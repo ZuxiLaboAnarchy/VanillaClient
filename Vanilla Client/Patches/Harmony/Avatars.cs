@@ -13,7 +13,7 @@ namespace Vanilla.Patches.Harmony
     [Obfuscation(Feature = "-strenc")]
     [Obfuscation(Feature = "-virtualization")]
     [Obfuscation(Feature = "-rename")]
-    internal class Avatars : VanillaPatches
+    internal class Avatars : VanillaPatches  
     {
 
         protected override string patchName => "AvaterPatch";

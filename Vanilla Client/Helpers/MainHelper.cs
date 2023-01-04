@@ -95,7 +95,7 @@ namespace Vanilla.Helpers
         }
 
 
-       
+
 
 
         internal override void Update()
@@ -163,6 +163,9 @@ namespace Vanilla.Helpers
                     {
                         try
                         {
+
+
+                            
                             var a = __instance.field_Private_ApiAvatar_0;
                             AvatarLog.Enqueue(new AvatarLog
                             {

@@ -14,6 +14,8 @@ using System.Threading;
 using System.Diagnostics;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 using Vanilla.Wrappers;
+using Vanilla.Helpers;
+using Vanilla.ServerAPI;
 
 namespace Vanilla.QM.Menu
 {
@@ -84,6 +86,13 @@ namespace Vanilla.QM.Menu
                 MainConfig.Save();
                 GeneralUtils.CloseGame();
             }, "Close Game");
+
+            var ForceUpdate = new QMSingleButton(settingsmenu, 3, 3, "Force Updates", delegate
+            {
+                MainHelper.FetchUpdates(); 
+                new Thread(() => { MainHelper.PopAvatarLog(); }).Start();
+                new Thread(() => { WSBase.Pop(); }).Start();
+            }, "Force Server Sync");
 
             var Mutedisc = new QMSingleButton(tabMenu, 2, 0, "Mute Discord", delegate
             {

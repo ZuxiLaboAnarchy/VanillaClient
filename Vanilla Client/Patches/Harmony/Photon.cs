@@ -32,7 +32,7 @@ namespace Vanilla.Patches.Harmony
             {
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
 
-                PatchMethod(typeof(LoadBalancingClient).GetMethod("OnEvent"), GetLocalPatch(nameof(OnEvent)), null);
+                PatchMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(nameof(OnEvent)), null);
              
 
                 //PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);

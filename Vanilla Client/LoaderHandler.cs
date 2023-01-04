@@ -25,7 +25,7 @@ namespace Cypher
             try
             {
                
-                CypherEngineLog("Core", "Hello From CypherEngine Attempting to Set Up Vanilla Client", ConsoleColor.Cyan);
+                CypherEngineLog("Core", "Hello From Vanilla Engine Attempting to Set Up Vanilla Client", ConsoleColor.Cyan);
                 CypherEngineLog("Core", $"Loading Vanilla Client {RuntimeConfig.ReleaseID}", ConsoleColor.Cyan);
                 StartProfiling("OnStart");
 
@@ -37,7 +37,7 @@ namespace Cypher
                 }
                 catch (Exception e) { ExceptionHandler("Erase", e); }
 
-                ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = Vanilla.Protections.LoaderProtections.CheckLoader(LoaderID);
+                ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad = LoaderProtections.CheckLoader(LoaderID);
                 if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
 
                 if (GeneralUtils.GetGameName() != "VRChat")
@@ -120,6 +120,13 @@ namespace Cypher
             if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
             CallOnLevelUnload(level);
         }
+
+        public static void OnLateUpdate()
+        {
+            if (!ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad) return;
+            CallOnLateUpdate();
+        }
+        
 
 
         #endregion

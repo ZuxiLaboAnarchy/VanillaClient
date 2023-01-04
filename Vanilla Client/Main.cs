@@ -59,7 +59,8 @@ namespace Vanilla
     internal protected static void CallOnLevelUnload(int level) => ModuleManager.LevelUnload(level);
 
 
+        internal protected static void CallOnLateUpdate() => ModuleManager.LateUpdates();
 
 
-}
+    }
 }

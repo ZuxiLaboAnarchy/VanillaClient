@@ -2,6 +2,7 @@
 {
     internal class RuntimeConfig
     {
+        
         internal readonly static string GameVER = "2022.4.2p1-1275--Release";
         internal static bool isBot = false;
         internal static bool ShouldFly = false;
@@ -13,8 +14,8 @@
         private static string PCCrashID = null;
         private static string QuestCrashID = null;
 
-
-
+        internal static bool isQuickMenuOpen = false;
+        internal static bool RanksCustomRanks = true;
         /*User Vars*/
         private static string Username = null;
         private static bool IsStaff = false;
@@ -24,6 +25,7 @@
 
         internal static bool nextUpdateCheckComplete = false;
 
+        internal static bool isConnectedToInstance = false;
 
 
 #if DEBUG

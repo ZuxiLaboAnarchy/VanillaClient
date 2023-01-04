@@ -18,13 +18,13 @@ namespace Vanilla.Patches.Harmony
     [Obfuscation(Feature = "-strenc")]
     [Obfuscation(Feature = "-virtualization")]
     [Obfuscation(Feature = "-rename")]
-    internal class PlayerEvents : VanillaPatches
+    internal class NetworkManagerPatch : VanillaPatches
     {
         protected override string patchName => "PlayerEventPatch";
         internal override void Patch()
         {
             //   var instance = new HarmonyLib.Harmony("StartDONTGETRIDOFTag");
-            InitializeLocalPatchHandler(typeof(PlayerEvents));
+            InitializeLocalPatchHandler(typeof(NetworkManagerPatch));
 
 
 
@@ -34,7 +34,8 @@ namespace Vanilla.Patches.Harmony
 
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(nameof(PlayerJoin)), null);
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch(nameof(PlayerLeave)), null);
-
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_PDM_0)), null, GetLocalPatch(nameof(OnJoinedRoomPatch))); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null, GetLocalPatch(nameof(OnLeftRoomPatch))); //works
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)
             //  PatchMethod(PlayerEvents._OnPlayerJoinedMethod, null, GetLocalPatch("PlayerJoin"));
@@ -55,6 +56,17 @@ namespace Vanilla.Patches.Harmony
 
             //Nebula.Patch(AccessTools.Method(typeof(NetworkManager), nameof(NetworkManager.Method_Public_Void_Player_0)), GetPatch(nameof(playevleave)));
         }
+
+          private static void OnJoinedRoomPatch()
+       {
+            RuntimeConfig.isConnectedToInstance = true;
+          
+       }
+
+       private static void OnLeftRoomPatch()
+       {
+           RuntimeConfig.isConnectedToInstance = false;
+       }
 
 
         private static bool PlayerJoin(Player __0)

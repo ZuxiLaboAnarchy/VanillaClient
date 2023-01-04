@@ -152,5 +152,55 @@ namespace Vanilla.Wrappers
             }
             return localPlayerInfo;
         }
+
+        internal static PlayerInformation GetPlayerInformation(Player player)
+        {
+            string text = string.Empty;
+            if (player != null)
+            {
+                if (player.prop_APIUser_0 != null)
+                {
+                    text = player.prop_APIUser_0.displayName;
+                }
+                else if (player.prop_VRCPlayerApi_0 != null)
+                {
+                    text = player.prop_VRCPlayerApi_0.displayName;
+                }
+            }
+            if (text == string.Empty)
+            {
+                return null;
+            }
+            if (APIUser.CurrentUser != null && APIUser.CurrentUser.displayName == text)
+            {
+                return GetLocalPlayerInformation();
+            }
+            if (PlayerUtils.playerCachingList.ContainsKey(text))
+            {
+                return PlayerUtils.playerCachingList[text];
+            }
+            return null;
+        }
+
+        internal static PlayerInformation GetPlayerInformationByID(string id)
+        {
+            if (id == APIUser.CurrentUser?.id)
+            {
+                return GetLocalPlayerInformation();
+            }
+            if (PlayerUtils.playerCachingList.Count == 0)
+            {
+                return null;
+            }
+            foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerUtils.playerCachingList)
+            {
+                if (playerCaching.Value.id == id)
+                {
+                    return playerCaching.Value;
+                }
+            }
+            return null;
+        }
+
     }
 }
