@@ -218,7 +218,6 @@
     <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
     <Compile Include="Utils\AudioHandler.cs" />
     <Compile Include="Utils\GameObjectUtils.cs" />
-    <Compile Include="Utils\Proformance.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
     <Compile Include="QM\ButtonLoader.cs" />
     <Compile Include="QM\Menu\Siton.cs" />

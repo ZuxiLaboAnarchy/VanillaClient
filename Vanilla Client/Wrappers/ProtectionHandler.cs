@@ -12,15 +12,12 @@ namespace Vanilla.Wrappers
 {
     internal class ProtectionHandler
     {
-        internal static bool IsEvent1Bad(ref EventData eventData)
+        internal static bool IsEvent1Bad(EventData eventData)
         {
             if (Safetymenu.Antirape)
             {
                 byte[] voiceData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
-                if (AudioHandler.IsVoiceDataBad(eventData.Sender, voiceData))
-                {
-                    PlayerInformation playerInformationByInstagatorID = PlayerWrapper.GetPlayerInformationByInstagatorID(eventData.Sender);
-                }
+                return (AudioHandler.IsVoiceDataBad(eventData.Sender, voiceData));
             }
             return false;
         }

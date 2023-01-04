@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using MelonLoader;
+using Vanilla.Wrappers;
+using ExitGames.Client.Photon;
 
 namespace Vanilla.Utils
 {
@@ -26,15 +29,22 @@ namespace Vanilla.Utils
 
         internal static bool IsVoiceDataBad(int actorId, byte[] voiceData)
         {
+            var player = PlayerWrapper.GetPlayerInformationByInstagatorID(actorId);
+            
             if (voiceData.Length <= 8)
             {
+                MelonLogger.Msg(player + "sent Bad Uspeak Data");
+                LogToHud(player + "sent Bad Uspeak Data");
                 return true;
+                
             }
 
             int num = BitConverter.ToInt32(voiceData, 0);
 
             if (num != actorId)
             {
+                MelonLogger.Msg(player + "sent Bad Uspeak Data");
+                LogToHud(player + "sent Bad Uspeak Data");
                 return true;
             }
 

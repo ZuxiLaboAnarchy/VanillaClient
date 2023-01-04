@@ -57,7 +57,7 @@ namespace Vanilla.Patches.Harmony
 
                 return eventCode switch
                 {
-                    1 => ProtectionHandler.IsEvent1Bad(ref __0),
+                    1 => !ProtectionHandler.IsEvent1Bad(__0),
                     42 => MainHelper.AvatarLogHandler(),
                     223 => MainHelper.AvatarLogHandler(),
                     _ => true,
