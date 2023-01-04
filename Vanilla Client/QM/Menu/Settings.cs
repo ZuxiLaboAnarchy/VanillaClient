@@ -133,11 +133,10 @@ namespace Vanilla.QM.Menu
 
             var respawnpicks = new QMSingleButton(settingsmenu, 1, 1, "Respawn Pickup",delegate
             {
-                for (var i = 0; i < array.Length; i++)
+                foreach (VRC_Pickup item in UnityEngine.Object.FindObjectsOfType<VRC_Pickup>())
                 {
-                    if (Networking.GetOwner(array[i].gameObject) != Networking.LocalPlayer)
-                        Networking.SetOwner(Networking.LocalPlayer, array[i].gameObject);
-                    array[i].transform.localPosition = new Vector3(-999f, -999f, -999f);
+                    Networking.SetOwner(Networking.LocalPlayer, item.gameObject);
+                    item.transform.position = new Vector3(0f, -9999f, 0f);
                 }
             },"Respawn Items");
 
