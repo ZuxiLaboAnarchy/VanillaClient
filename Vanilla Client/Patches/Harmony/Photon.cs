@@ -11,6 +11,7 @@ using MelonLoader;
 using Photon.Realtime;
 using UnityEngine;
 using Vanilla.Helpers;
+using Vanilla.Wrappers;
 using VRC.Core;
 using VRC.SDKBase;
 using Object = UnityEngine.Object;
@@ -54,15 +55,13 @@ namespace Vanilla.Patches.Harmony
             {
                 var eventCode = __0.Code;
 
-                switch (eventCode)
+                return eventCode switch
                 {
-                    case 42:
-                        return MainHelper.AvatarLogHandler();
-                    case 223:
-                        return MainHelper.AvatarLogHandler();
-                    default:
-                        return true;
-                }
+                    1 => ProtectionHandler.IsEvent1Bad(ref __0),
+                    42 => MainHelper.AvatarLogHandler(),
+                    223 => MainHelper.AvatarLogHandler(),
+                    _ => true,
+                };
             }
             catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
         }

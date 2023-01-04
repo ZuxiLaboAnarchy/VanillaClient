@@ -12,7 +12,7 @@ namespace Vanilla.Wrappers
 {
     internal class ProtectionHandler
     {
-        internal bool IsEvent1Bad(ref EventData eventData)
+        internal static bool IsEvent1Bad(ref EventData eventData)
         {
             if (Safetymenu.Antirape)
             {

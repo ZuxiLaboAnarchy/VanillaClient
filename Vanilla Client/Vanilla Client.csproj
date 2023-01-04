@@ -187,6 +187,7 @@
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
     <Compile Include="Modules\Anticrash.cs" />
+    <Compile Include="Modules\Manager\LovenseHanlder.cs" />
     <Compile Include="Modules\Manager\playerinfo.cs" />
     <Compile Include="Modules\VRCPlusRemover.cs" />
     <Compile Include="Helpers\Compatibility.cs" />
