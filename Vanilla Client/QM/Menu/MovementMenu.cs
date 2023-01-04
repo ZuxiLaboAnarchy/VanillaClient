@@ -65,8 +65,10 @@ namespace Vanilla.QM.Menu
             VRCPlayerApi localPlayer = Networking.LocalPlayer;
             if (Math.Abs(VRCInputManager.Method_Public_Static_VRCInput_String_0("Jump").prop_Single_0 - 1f) < 1f)
             {
+                //curent V
                 Vector3 velocity = localPlayer.GetVelocity();
-                velocity.y = localPlayer.GetJumpImpulse();
+                float sex = velocity.y;
+                velocity.y = sex + 5;
                 localPlayer.SetVelocity(velocity);
             }
         }
