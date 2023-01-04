@@ -356,6 +356,7 @@
     <Compile Include="Wrappers\ProtectionHandler.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
+    <Compile Include="Wrappers\ratelimiter.cs" />
     <Compile Include="Wrappers\UserInterface.cs" />
     <Compile Include="Xrefs\Input.cs" />
     <Compile Include="Xrefs\NotiXref.cs" />
