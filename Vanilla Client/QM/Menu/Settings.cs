@@ -14,13 +14,17 @@ using System.Threading;
 using System.Diagnostics;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 using Vanilla.Wrappers;
+using Il2CppSystem;
+using VRC.SDKBase;
+using VRC;
 
 namespace Vanilla.QM.Menu
 {
     internal class Settings
     {
-        internal static IntPtr _hwnd = IntPtr.Zero;
-        public static extern IntPtr SetActiveWindow(IntPtr hWnd);
+        internal static System.IntPtr _hwnd = System.IntPtr.Zero;
+        internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
+        internal static VRC.SDKBase.VRC_Pickup[] array;
         internal static void SettingsMenu(QMTabMenu tabMenu)
         {
             
@@ -100,7 +104,7 @@ namespace Vanilla.QM.Menu
                     imports.keybd_event(0xA0, 0, 0x0002, 0);
                     imports.keybd_event(0x4D, 0, 0x0002, 0);
                 }
-                catch (Exception ex) { MelonLogger.Msg(ex); }
+                catch (System.Exception ex) { MelonLogger.Msg(ex); }
                 Thread.Sleep(100);
                 imports.SetForegroundWindow(_hwnd);
 
@@ -121,14 +125,38 @@ namespace Vanilla.QM.Menu
                     imports.keybd_event(0xA0, 0, 2, 0);
                     imports.keybd_event(0x44, 0, 2, 0);
                 }
-                catch (Exception ex) { MelonLogger.Msg(ex); }
+                catch (System.Exception ex) { MelonLogger.Msg(ex); }
                 Thread.Sleep(100);
                 imports.SetForegroundWindow(_hwnd);
 
             }, "Deafen Discord");
 
+            var respawnpicks = new QMSingleButton(settingsmenu, 1, 1, "Respawn Pickup",delegate
+            {
+                for (var i = 0; i < array.Length; i++)
+                {
+                    if (Networking.GetOwner(array[i].gameObject) != Networking.LocalPlayer)
+                        Networking.SetOwner(Networking.LocalPlayer, array[i].gameObject);
+                    array[i].transform.localPosition = new Vector3(-999f, -999f, -999f);
+                }
+            },"Respawn Items");
 
-            
+
+            var Tpobj = new QMSingleButton(settingsmenu, 2, 1, "TP Pickup", delegate
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+
+                    if (array[i].gameObject)
+                    {
+                        VRC.Player player = PlayerWrapper.LocalPlayer();
+                        Networking.SetOwner(PlayerWrapper.LoclPayer.field_Private_VRCPlayerApi_0, array[i].gameObject);
+                        Transform transform = array[i].transform;
+                        transform.transform.position = player.transform.position + new Vector3(0f, 0.1f, 0f);
+                    }
+                }
+            }, "Tp Items");
+
             var Media = new QMNestedButton(tabMenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
 
             var MediaControl = new QMSingleButton(Media, 1, 0, "Previous Track (Spotify)", delegate
@@ -233,7 +261,6 @@ namespace Vanilla.QM.Menu
              */
 
 
-
             if (MainConfig.LoadMusic == true)
             { LoadMusicToggle.ClickMe(); }
             if (MainConfig.ESP == true)
@@ -241,8 +268,5 @@ namespace Vanilla.QM.Menu
             if (MainConfig.JoinLogger == true)
             { JoinLogger.ClickMe(); }
         }
-
-     
-
     }
 }

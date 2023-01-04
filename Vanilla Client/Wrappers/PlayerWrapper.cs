@@ -136,7 +136,13 @@ namespace Vanilla.Wrappers
             }
             return null;
         }
-
+        internal static Player LoclPayer
+        {
+            get
+            {
+                return Player.prop_Player_0;
+            }
+        }
 
         internal static PlayerInformation localPlayerInfo = null;
         internal static PlayerInformation GetLocalPlayerInformation()
