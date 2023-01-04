@@ -212,7 +212,6 @@
     <Compile Include="Modules\FlyManager.cs" />
     <Compile Include="Patches\Harmony\QuickMenuPatch.cs" />
     <Compile Include="Patches\Harmony\VRCPlayer.cs" />
-    <Compile Include="Patches\Harmony\UdonPatch.cs" />
     <Compile Include="QM\Menu\Micfuckery.cs" />
     <Compile Include="QM\Menu\Safetymenu.cs" />
     <Compile Include="QM\Menu\MovementMenu.cs" />
@@ -407,6 +406,6 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

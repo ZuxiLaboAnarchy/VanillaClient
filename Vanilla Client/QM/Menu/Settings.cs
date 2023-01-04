@@ -19,6 +19,7 @@ using Vanilla.ServerAPI;
 using Il2CppSystem;
 using VRC.SDKBase;
 using VRC;
+using Exception = System.Exception;
 
 namespace Vanilla.QM.Menu
 {
