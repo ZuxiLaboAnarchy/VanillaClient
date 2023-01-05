@@ -141,7 +141,7 @@ namespace Vanilla.QM.Menu
 
             }, "Deafen Discord");
 
-            var Pickups = new QMNestedButton(settingsmenu, 1, 0, "PickUps", "Vanilla", "Vanilla Client");
+            var Pickups = new QMNestedButton(settingsmenu, 1, 1, "PickUps", "Vanilla", "Vanilla Client");
 
             var respawnpicks = new QMSingleButton(Pickups, 1, 0, "Respawn Pickup",delegate
             {
