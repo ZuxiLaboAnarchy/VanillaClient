@@ -133,6 +133,8 @@ namespace Vanilla.Helpers
 
         internal static void FetchUpdates()
         {
+            ServerResponceHandler.HandleWSUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, 0).ToString()); 
+                return;
             Dev("MainHelper", "Fetching Updates");
             var FetchModelRaw = new sendsinglemsg()
             {
