@@ -21,13 +21,6 @@ namespace Vanilla.AvatarFavorites
 
         }
 
-
-
-
-
-
-
-
         private static void AvatarNotFoundHandlerSilent(ApiContainer apiContainer)
         {
             Log("AvatarAPI", "Avatar not Found", ConsoleColor.Red);
@@ -77,20 +70,20 @@ namespace Vanilla.AvatarFavorites
                 // ServerAPICore.GetInstance().UploadAvatarToDatabase(favoriteAvatar);
                 if (notifyUser)
                 {
-                  //  GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().SuccessText, LanguageManager.GetUsedLanguage().AvatarFavorited.Replace("{name}", avi.name));
+                    //  GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().SuccessText, LanguageManager.GetUsedLanguage().AvatarFavorited.Replace("{name}", avi.name));
                 }
             }
             else
             {
                 /*TODO Add Ability to delete Avatars*/
-               // ServerAPICore.GetInstance().DeleteAvatarFromDatabase(VanillaAvatarsFav[avi.id]);
+                // ServerAPICore.GetInstance().DeleteAvatarFromDatabase(VanillaAvatarsFav[avi.id]);
                 VanillaAvatarsFav.Remove(avi.id);
                 if (notifyUser)
                 {
-                   // GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().SuccessText, LanguageManager.GetUsedLanguage().AvatarUnfavorited.Replace("{name}", avi.name));
+                    // GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().SuccessText, LanguageManager.GetUsedLanguage().AvatarUnfavorited.Replace("{name}", avi.name));
                 }
             }
-                // RefreshList(string.Empty);
+            // RefreshList(string.Empty);
             return true;
         }
 

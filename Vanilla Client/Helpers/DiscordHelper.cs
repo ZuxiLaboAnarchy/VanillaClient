@@ -60,7 +60,6 @@ internal class DiscordRPC
     }
 
 
-
     [DllImport("UserLibs/discord-rpc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Discord_Initialize")]
     internal protected static extern void Initialize(string applicationId, ref DiscordRPC.EventHandlers handlers, bool autoRegister, string optionalSteamId);
 

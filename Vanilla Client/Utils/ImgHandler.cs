@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
+﻿using UnityEngine;
 //using Galaxy.API;
-using System.Net;
-using MelonLoader;
 
 namespace Vanilla.Utils
 {
     internal class ImageUtils
     {
-       internal static byte[] _PageIcon { get; set; }
+        internal static byte[] _PageIcon { get; set; }
 
 
 
@@ -23,14 +17,14 @@ namespace Vanilla.Utils
 
 
         internal static Sprite CreateSprite(Texture2D texture)
-		{
-			Rect rect = new Rect(0f, 0f, texture.width, texture.height);
-			Vector2 pivot = new Vector2(0.5f, 0.5f);
-			Vector4 border = Vector4.zero;
-			Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100f, 0u, SpriteMeshType.Tight, ref border, generateFallbackPhysicsShape: false);
-			sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-			return sprite;
-		}
+        {
+            Rect rect = new Rect(0f, 0f, texture.width, texture.height);
+            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Vector4 border = Vector4.zero;
+            Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100f, 0u, SpriteMeshType.Tight, ref border, generateFallbackPhysicsShape: false);
+            sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            return sprite;
+        }
 
         internal static Sprite CreateSpriteFromTexture(Texture2D texture)
         {

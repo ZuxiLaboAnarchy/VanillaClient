@@ -1,11 +1,10 @@
-﻿using Vanilla.Config;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Vanilla.Config;
 using static Vanilla.Utils.ServerHelper;
-using Vanilla.ServerAPI;
 
 namespace Vanilla.ServerAPI
 {
@@ -42,7 +41,7 @@ namespace Vanilla.ServerAPI
 
                         httpClient.Dispose();
                         Task<string> StringSetup = responce.Content.ReadAsStringAsync();
-                        Dev("ServerAPI", StringSetup.Result);
+                        // Dev("ServerAPI", StringSetup.Result);
                         if (StringSetup.Result.Contains("Token"))
                         { ServerResponceHandler.HandlePostRequest(StringSetup.Result); }
                         return StringSetup.Result;
@@ -51,7 +50,7 @@ namespace Vanilla.ServerAPI
                     #region If It Is a Bad request Tell The User with the Server Responce
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        //Console.ForegroundColor = ConsoleColor.Red;
                         Task<string> DES = responce.Content.ReadAsStringAsync();
 
                         if (DES.Result.Contains("<"))

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using VRC;
 
 namespace Vanilla.Patches.Harmony;
 [Obfuscation(Feature = "-flow")]

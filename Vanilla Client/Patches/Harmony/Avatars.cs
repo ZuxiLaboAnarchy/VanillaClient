@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -13,7 +7,7 @@ namespace Vanilla.Patches.Harmony
     [Obfuscation(Feature = "-strenc")]
     [Obfuscation(Feature = "-virtualization")]
     [Obfuscation(Feature = "-rename")]
-    internal class Avatars : VanillaPatches  
+    internal class Avatars : VanillaPatches
     {
 
         protected override string patchName => "AvaterPatch";
@@ -26,7 +20,7 @@ namespace Vanilla.Patches.Harmony
 
 
 
-              //  PatchMethod(typeof(VRC_Player).GetMethod(nameof(VRC_Player.Awake)), null, GetLocalPatch("OnAvatarChanged")); // Post So It Exists.
+                //  PatchMethod(typeof(VRC_Player).GetMethod(nameof(VRC_Player.Awake)), null, GetLocalPatch("OnAvatarChanged")); // Post So It Exists.
 
 
 
@@ -35,7 +29,7 @@ namespace Vanilla.Patches.Harmony
             {
                 Utils.LogHandler.ExceptionHandler(patchName, e);
             }
-          
+
         }
 
         /*

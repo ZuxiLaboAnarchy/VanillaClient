@@ -1,11 +1,14 @@
 ﻿using MelonLoader;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace Vanilla.Utils
 {
     internal class FileHelper
     {
+
+        static bool _isCleanup = false;
         internal static string GetMainFolder()
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -50,23 +53,34 @@ namespace Vanilla.Utils
 
         internal static void Setup()
         {
-            if (!File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
-            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\WSManager.dll", Properties.Resources.WSManager); }
+            if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
+            { _isCleanup = true; }
 
             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
             { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\discord-rpc.dll", Properties.Resources.discord_rpc); }
-           
+
             if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
             { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE").Close(); }
+
+
+
+            if (_isCleanup)
+            {
+                Log("Cleaner", "Cleaning up around this will only take a Minute");
+
+                if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
+                {
+                    File.Delete(MelonUtils.BaseDirectory + "\\WSManager.dll");
+                }
+
+
+                Log("Cleaner", "Done...");
+            }
         }
 
         internal static void CheckDirs()
         {
-            if (!File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
-            {
-                Log("FileHelper", "Missing Core Files will attempt to add back", ConsoleColor.Yellow);
-                File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\WSManager.dll", Properties.Resources.WSManager);
-            }
+
 
             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
             { Log("FileHelper", "Missing Important File DiscordRPC Will be re added on next start....", ConsoleColor.Yellow); }
@@ -81,6 +95,24 @@ namespace Vanilla.Utils
 
         }
 
+        internal static string[] EmbededLibraryPaths = new string[1] { "Vanilla.Resources.WSManager.dll" };
+        internal static void LoadResources()
+        {
+            for (int i = 0; i < EmbededLibraryPaths.Length; i++)
+            {
+                string EmbededName = EmbededLibraryPaths[i];
+                try
+                {
+                    byte[] rawAssembly = ResourceUtils.ExtractResource(EmbededName);
+                    Assembly assembly = Assembly.Load(rawAssembly);
+                    Dev("RLoader", "Injected Embedded Library: " + EmbededName);
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler("RLoader", ex);
+                }
+            }
+        }
 
 
     }

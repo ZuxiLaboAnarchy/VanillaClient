@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using UnityEngine;
-using VRC.UI.Elements.Tooltips;
 
 namespace Vanilla.Buttons.QM
 {

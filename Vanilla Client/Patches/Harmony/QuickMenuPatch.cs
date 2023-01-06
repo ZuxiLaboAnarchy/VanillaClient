@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Vanilla.Config;
 using Vanilla.Modules;
-using VRC.UI.Elements;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -41,7 +39,7 @@ namespace Vanilla.Patches.Harmony
                     playerCaching.Value.customNameplateTransform.localPosition = MiscUtils.GetNameplateOffset(open: false);
                 }
             }
-          //  lastOpenedMenu = QuickMenuUtils.GetQuickMenu().prop_MenuStateController_0.field_Private_UIPage_0.field_Public_String_0;
+            //  lastOpenedMenu = QuickMenuUtils.GetQuickMenu().prop_MenuStateController_0.field_Private_UIPage_0.field_Public_String_0;
             //CameraFeaturesHandler.ChangeCameraClipping(Configuration.GetGeneralConfig().MinimumCameraClippingDistance);
             RuntimeConfig.isQuickMenuOpen = false;
         }

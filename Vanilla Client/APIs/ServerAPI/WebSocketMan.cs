@@ -1,15 +1,11 @@
-﻿using Vanilla.Modules;
-using Newtonsoft.Json;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using WebSocketSharp;
-using VRC.Core;
-using Vanilla.Config;
-using Il2CppSystem.Net;
-using Vanilla.Wrappers;
-using Vanilla.TinyJSON;
 using System.Threading;
+using System.Threading.Tasks;
+using Vanilla.Config;
+using Vanilla.Modules;
+using Vanilla.TinyJSON;
+using WebSocketSharp;
 
 namespace Vanilla.ServerAPI
 {
@@ -19,7 +15,7 @@ namespace Vanilla.ServerAPI
         internal override void WaitForAPIUser()
         {
             new Thread(() => { SetupSocket(); }).Start();
-          
+
         }
 
         internal override void Stop()
@@ -29,11 +25,11 @@ namespace Vanilla.ServerAPI
             ShutDown = true;
             wss.Close();
 
-            
+
             Dev("WSAPI", "Popped WS Bubble & Disconnected");
         }
 
-       
+
 
 
         internal static void SetupSocket()
@@ -56,8 +52,8 @@ namespace Vanilla.ServerAPI
 
                     if (HasConn && HasConn)
                     {
-                     //   Log("ServerAPI", $"Disconnected", ConsoleColor.Red);
-                       // Log("ServerAPI", $"Attempting Reconnect in 3 Seconds", ConsoleColor.Yellow);
+                        //   Log("ServerAPI", $"Disconnected", ConsoleColor.Red);
+                        // Log("ServerAPI", $"Attempting Reconnect in 3 Seconds", ConsoleColor.Yellow);
                     }
                     Task.Delay(3000);
                     tryrecconect();
@@ -65,22 +61,22 @@ namespace Vanilla.ServerAPI
                 wss.OnOpen += (sender, e) =>
                 {
                     if (!HasConn)
-                    Log("ServerAPI", $"Connected", ConsoleColor.Green);
+                        Log("ServerAPI", $"Connected", ConsoleColor.Green);
                     HasConn = true;
 
                     var sendidtosv = new sendsinglemsg()
                     {
                         uid = null,//APIUser.CurrentUser.id,
 
-                        code = "1",
+                        code = "3",
 
                         Key = ServerHelper.GetKey(),
 
-                       
+
                     };
                     sendmsg(Json.Encode(sendidtosv));
                     Pop();
-                    
+
                 };
                 wss.OnMessage += Ws_OnMessage;
                 wss.Log.Output = (_, __) => { };
@@ -91,7 +87,7 @@ namespace Vanilla.ServerAPI
         internal static void ConnectNewJWT()
         {
             if (!wss.IsAlive)
-            wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+                wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
         }
 
 
@@ -101,7 +97,7 @@ namespace Vanilla.ServerAPI
         internal static void Pop()
         {
             if (!RuntimeConfig.WSAuthed)
-            { return;  }
+            { return; }
 
             for (int i = 0; i < toSend.Count; i++)
             {
@@ -149,7 +145,7 @@ namespace Vanilla.ServerAPI
         internal protected static void sendmsg(string text)
         {
 
-           
+
             if (wss.IsAlive)
             { wss.Send(text); }
             else
@@ -173,27 +169,27 @@ namespace Vanilla.ServerAPI
             }
             catch (Exception error)
             {
-                Console.WriteLine("Server Down Possibly", "Server");
-                Console.WriteLine($"Cloud not connect : {error}", "Server");
+                Log("Server", "Server Down Possibly", ConsoleColor.Red);
+                ExceptionHandler("WSMAN", error);
                 wss.Connect();
             }
         }
 
         internal protected static void Ws_OnMessage(object sender, MessageEventArgs e)
         {
-          //  Dev("ServerAPI", "Raw Data: " + e.Data.ToString());
-            
+            //  Dev("ServerAPI", "Raw Data: " + e.Data.ToString());
+
             if (e.Data.ToString().ToLower().Contains("authed"))
             { RuntimeConfig.WSAuthed = true; LogHandler.Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green); }
 
             if (e.Data.ToString().ToLower().Contains("update packet"))
             {
-                
+
                 ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
-               // new Thread(() => {  }).Start();
-               
-               
-               // LogHandler.Log("ServerAPI", "Fetched Latest Update");
+                // new Thread(() => {  }).Start();
+
+
+                // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
 
             if (e.Data.ToString().ToLower().Contains("invalid token"))
@@ -225,9 +221,9 @@ namespace Vanilla.ServerAPI
 
 
             var message = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(e.Data));
-            
+
             if (message.ToString() == "authed")
-            { RuntimeConfig.WSAuthed = true; LogHandler.Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green);  }
+            { RuntimeConfig.WSAuthed = true; LogHandler.Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green); }
 
             if (message.Contains("AvatarName") && message.Contains("Authorid") && message.Contains("Asseturl"))
             { }
@@ -263,7 +259,7 @@ namespace Vanilla.ServerAPI
                 // System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
             if (message.ToLower().Contains("tokenexpirederror") || e.Data.ToString().ToLower().Contains("tokenexpirederror"))
-                {
+            {
                 RuntimeConfig.WSAuthed = false;
                 LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
                 if (Server.SendPostRequestInternal("login") != null)
@@ -285,8 +281,8 @@ namespace Vanilla.ServerAPI
 
             if (message.Contains("Update Packet"))
             {
-                new Thread(() => { ServerResponceHandler.HandleWSUpdate(message);  }).Start(); 
-               // LogHandler.Log("ServerAPI", "Fetched Latest Update");
+                new Thread(() => { ServerResponceHandler.HandleWSUpdate(message); }).Start();
+                // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
 
 

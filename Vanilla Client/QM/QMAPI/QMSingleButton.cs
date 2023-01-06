@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Vanilla.Buttons.QM;
 
 namespace Vanilla.Buttons.QM
 {

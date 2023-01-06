@@ -1,11 +1,7 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Vanilla.Patches.Harmony
@@ -25,10 +21,10 @@ namespace Vanilla.Patches.Harmony
             {
                 InitializeLocalPatchHandler(typeof(HWIDPatch));
                 PatchMethod(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), GetLocalPatch(nameof(FakeHWID)), null);
-               
 
 
-                 
+
+
             }
             catch (Exception e)
             {
@@ -55,7 +51,7 @@ namespace Vanilla.Patches.Harmony
                         return b.ToString("x2");
                     }).Aggregate((string x, string y) => x + y);
 
-               Log($"Spoofer", $"Success Patched HWID {newHWID}", ConsoleColor.Green);
+                Log($"Spoofer", $"Success Patched HWID {newHWID}", ConsoleColor.Green);
             }
             __result = newHWID;
             return false;

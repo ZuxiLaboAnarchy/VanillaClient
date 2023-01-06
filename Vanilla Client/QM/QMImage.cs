@@ -14,7 +14,7 @@ namespace Vanilla.QM
         {
             var backroundimage = GameObject.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<UnityEngine.UI.Image>();
             Component.Destroy(backroundimage.gameObject.GetComponent<VRC.UI.Core.Styles.StyleElement>());
-           // MelonCoroutines.Start(image.loadspriterest(backroundimage, URI.assets + "Mask.png"));
+            // MelonCoroutines.Start(image.loadspriterest(backroundimage, URI.assets + "Mask.png"));
             backroundimage.sprite = ImageUtils.CreateSpriteFromTexture(AssetLoader.LoadTexture("VanillaClientLogo"));
             var backroundtwo = GameObject.Instantiate(backroundimage, backroundimage.transform);
             backroundtwo.name = "QMBackground";

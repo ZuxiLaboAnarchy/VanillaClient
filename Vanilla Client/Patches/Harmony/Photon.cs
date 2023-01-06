@@ -1,21 +1,8 @@
-﻿
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using ExitGames.Client.Photon;
-using HarmonyLib;
-using Il2CppSystem.Net;
-using MelonLoader;
+﻿using ExitGames.Client.Photon;
 using Photon.Realtime;
-using UnityEngine;
+using System.Reflection;
 using Vanilla.Helpers;
 using Vanilla.Wrappers;
-using VRC.Core;
-using VRC.SDKBase;
-using Object = UnityEngine.Object;
-using Random = System.Random;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -34,7 +21,7 @@ namespace Vanilla.Patches.Harmony
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
 
                 PatchMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(nameof(OnEvent)), null);
-             
+
 
                 //PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
 
@@ -66,7 +53,7 @@ namespace Vanilla.Patches.Harmony
             catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
         }
 
-      
+
 
     }
 }

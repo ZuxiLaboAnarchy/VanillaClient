@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib;
-using UnityEngine.UI;
-using UnityEngine;
+﻿using System.Linq;
 using System.Reflection;
+using UnhollowerRuntimeLib;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Vanilla.Xrefs
 {
@@ -17,7 +13,7 @@ namespace Vanilla.Xrefs
         private static MethodInfo _Warning { get; set; }
         private static MethodInfo _InputPopout { get; set; }
 
-      
+
 
 
         internal static void SetMethods()
@@ -60,21 +56,21 @@ namespace Vanilla.Xrefs
 
         internal static void PopOutWarrningMessage(string _message, string description = "", float _Time = 10)
         {
-       
+
             _Warning.Invoke(VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, new object[] { _message, description, _Time });
         }
 
         internal static void PopOutToggle(string _title, string _desciption, Action _ok = null, Action _cancel = null)
         {
- 
-           _Toggle.Invoke(VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, new object[] {_title, _desciption, "Cancel"
+
+            _Toggle.Invoke(VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, new object[] {_title, _desciption, "Cancel"
                   ,(Il2CppSystem.Action)new Action(()=> {_cancel.Invoke();
                   VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Private_Void_0();
                   }), "Accept",(Il2CppSystem.Action)new Action(()=> {_ok.Invoke(); VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Private_Void_0(); }),null});
         }
         internal static void PopOutNumbersKeyboard(string _title, Action<int> _intOut, Action _action)
         {
-    
+
             _NumbKeyboard.Invoke(VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, new object[] {_title, "", InputField.InputType.Standard, true, "Enter", DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>
                               (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>
                               (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
@@ -86,7 +82,7 @@ namespace Vanilla.Xrefs
 
         internal static void PopOutInput(string _title, Action<string> _stringOut, Action _action)
         {
-            
+
             _InputPopout.Invoke(VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, new object[] {_title, "", InputField.InputType.Standard, false, "Enter",
                             DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>
                                 (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>

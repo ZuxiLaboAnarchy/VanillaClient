@@ -1,66 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib;
+﻿using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Vanilla.QM.QMAPI
 {
-        internal class MenuPanelButton
+    internal class MenuPanelButton
+    {
+        private GameObject button;
+
+        private Text buttonText;
+
+        private Button buttonHandler;
+
+        private Action onButtonClick;
+
+        internal MenuPanelButton(string text, Action onClick, bool interactable, string buttonTemplate, string parentColumn)
         {
-            private GameObject button;
+            InitButton(text, onClick, interactable, buttonTemplate, parentColumn);
+        }
 
-            private Text buttonText;
+        private void InitButton(string text, Action onClick, bool interactable, string buttonTemplate, string parentColumn)
+        {
+            button = UnityEngine.Object.Instantiate(MenuPanelAPI.GetMenuButtonTemplate(buttonTemplate), MenuPanelAPI.GetTabParent(parentColumn).transform);
+            UnityEngine.Object.Destroy(button.GetComponent<VRCUiButton>());
+            buttonText = button.GetComponentInChildren<Text>();
+            buttonHandler = button.GetComponent<Button>();
+            SetText(text);
+            SetAction(onClick);
+            SetInteractable(interactable);
+            SetActive(isActive: true);
+        }
 
-            private Button buttonHandler;
+        internal void SetText(string text)
+        {
+            button.name = text;
+            buttonText.text = text;
+        }
 
-            private Action onButtonClick;
-
-            internal MenuPanelButton(string text, Action onClick, bool interactable, string buttonTemplate, string parentColumn)
+        internal void SetAction(Action buttonAction)
+        {
+            onButtonClick = buttonAction;
+            buttonHandler.onClick = new Button.ButtonClickedEvent();
+            buttonHandler.onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)delegate
             {
-                InitButton(text, onClick, interactable, buttonTemplate, parentColumn);
-            }
+                onButtonClick();
+            }));
+        }
 
-            private void InitButton(string text, Action onClick, bool interactable, string buttonTemplate, string parentColumn)
-            {
-                button = UnityEngine.Object.Instantiate(MenuPanelAPI.GetMenuButtonTemplate(buttonTemplate), MenuPanelAPI.GetTabParent(parentColumn).transform);
-                UnityEngine.Object.Destroy(button.GetComponent<VRCUiButton>());
-                buttonText = button.GetComponentInChildren<Text>();
-                buttonHandler = button.GetComponent<Button>();
-                SetText(text);
-                SetAction(onClick);
-                SetInteractable(interactable);
-                SetActive(isActive: true);
-            }
+        internal void SetActive(bool isActive)
+        {
+            button.gameObject.SetActive(isActive);
+        }
 
-            internal void SetText(string text)
-            {
-                button.name = text;
-                buttonText.text = text;
-            }
-
-            internal void SetAction(Action buttonAction)
-            {
-                onButtonClick = buttonAction;
-                buttonHandler.onClick = new Button.ButtonClickedEvent();
-                buttonHandler.onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)delegate
-                {
-                    onButtonClick();
-                }));
-            }
-
-            internal void SetActive(bool isActive)
-            {
-                button.gameObject.SetActive(isActive);
-            }
-
-            internal void SetInteractable(bool isInteractable)
-            {
-                buttonHandler.interactable = isInteractable;
-            }
+        internal void SetInteractable(bool isInteractable)
+        {
+            buttonHandler.interactable = isInteractable;
         }
     }
+}

@@ -1,17 +1,12 @@
-﻿using System;
+﻿using MelonLoader;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using VRC.Core;
-using VRC;
-using VRC.UserCamera;
-using VRC.SDKBase;
 using System.Windows.Forms;
-using MelonLoader;
+using UnityEngine;
+using VRC;
+using VRC.Core;
+using VRC.SDKBase;
 using VRC.UI;
-using UnityEngine.UI;
+using VRC.UserCamera;
 
 namespace Vanilla.Wrappers
 {
@@ -27,8 +22,8 @@ namespace Vanilla.Wrappers
         private static Camera photoCamera;
         private static GameObject reticleObj;
 
-       
-        
+
+
 
 
 
@@ -71,7 +66,7 @@ namespace Vanilla.Wrappers
         }
         public static void CopyInstanceToClipboard()
         {
-           
+
             GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
             Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
         }
@@ -195,6 +190,6 @@ namespace Vanilla.Wrappers
             return pageUserInfo;
         }
 
-      
+
     }
 }

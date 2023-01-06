@@ -1,9 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using MelonLoader;
-
-using UnhollowerBaseLib;
+﻿using System.Runtime.InteropServices;
 
 namespace Vanilla.Utils
 {
@@ -24,18 +19,18 @@ namespace Vanilla.Utils
             PAGE_WRITECOMBINE = 0x400
         }
 
-       /* internal struct NativeString
-        {
-            internal IntPtr Data;
+        /* internal struct NativeString
+         {
+             internal IntPtr Data;
 
-            internal long Capacity;
+             internal long Capacity;
 
-            internal long Unknown;
+             internal long Unknown;
 
-            internal long Length;
+             internal long Length;
 
-            internal int Unknown2;
-        }*/
+             internal int Unknown2;
+         }*/
 
         [StructLayout(LayoutKind.Explicit, Size = 136)]
         internal struct NodeContainer
@@ -46,6 +41,7 @@ namespace Vanilla.Utils
             [FieldOffset(128)]
             internal long DirectSubCount;
         }
+
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr LoadLibrary(string lpFileName);
@@ -79,6 +75,24 @@ namespace Vanilla.Utils
 
         [DllImport("user32.dll")]
         internal static extern IntPtr GetWindow(IntPtr hWnd, int nCmd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        internal static extern void keybd_event(uint bVk, uint bScan, uint dwFlags, uint dwExtraInfo);
+
+        [DllImport("User32.dll")]
+        internal static extern int SetForegroundWindow(IntPtr point);
+
+        [DllImport("kernel32.dll")]
+        internal static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowText")]
+        public static extern bool SetWindowText(System.IntPtr hwnd, System.String lpString);
+
+        [DllImport("user32.dll", EntryPoint = "FindWindow")]
+        public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
+
+        [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        public static extern int SendMessage(IntPtr hwnd, int message, int wParam, IntPtr lParam);
 
         internal static void VolumeUp()
         {
@@ -130,47 +144,47 @@ namespace Vanilla.Utils
             VirtualProtect(address, (UIntPtr)4uL, lpflOldProtect, out var _);
         }
 
-     /*   internal unsafe static void PatchEngineOffset<T>(int offset, T patchDelegate, out T delegateField) where T : MulticastDelegate
-        {
-            delegateField = null;
-            if (offset == 0)
-            {
-                ConsoleUtils.Info("Patcher", "Offset for " + patchDelegate.Method.Name + " not found - abort patching", ConsoleColor.Gray, "PatchEngineOffset", 138);
-                return;
-            }
-            IntPtr ptr = CompatibilityLayer.GetUnityPlayerBaseAddress() + offset;
-            MainUtils.antiGCList.Add(patchDelegate);
-            MelonUtils.NativeHookAttach((IntPtr)(&ptr), Marshal.GetFunctionPointerForDelegate(patchDelegate));
-            delegateField = Marshal.GetDelegateForFunctionPointer<T>(ptr);
-        }*/
+        /*   internal unsafe static void PatchEngineOffset<T>(int offset, T patchDelegate, out T delegateField) where T : MulticastDelegate
+           {
+               delegateField = null;
+               if (offset == 0)
+               {
+                   ConsoleUtils.Info("Patcher", "Offset for " + patchDelegate.Method.Name + " not found - abort patching", ConsoleColor.Gray, "PatchEngineOffset", 138);
+                   return;
+               }
+               IntPtr ptr = CompatibilityLayer.GetUnityPlayerBaseAddress() + offset;
+               MainUtils.antiGCList.Add(patchDelegate);
+               MelonUtils.NativeHookAttach((IntPtr)(&ptr), Marshal.GetFunctionPointerForDelegate(patchDelegate));
+               delegateField = Marshal.GetDelegateForFunctionPointer<T>(ptr);
+           }*/
 
-       /* internal unsafe static void PatchICall<T>(string name, out T original, MethodInfo target) where T : MulticastDelegate
-        {
-            IntPtr intPtr = IL2CPP.il2cpp_resolve_icall(name);
-            if (intPtr == IntPtr.Zero)
-            {
-                ConsoleUtils.Info("ICallPatcher", "ICall " + name + " not found - abort patching", ConsoleColor.Gray, "PatchICall", 156);
-                original = null;
-                return;
-            }
-            IntPtr functionPointer = target.MethodHandle.GetFunctionPointer();
-            MelonUtils.NativeHookAttach((IntPtr)(&intPtr), functionPointer);
-            MainUtils.antiGCList.Add(intPtr);
-            MainUtils.antiGCList.Add(functionPointer);
-            MainUtils.antiGCList.Add(target);
-            original = Marshal.GetDelegateForFunctionPointer<T>(intPtr);
-            MainUtils.antiGCList.Add(original);
-            ConsoleUtils.Info("ICallPatcher", "ICall " + name + " patched", ConsoleColor.Gray, "PatchICall", 172);
-        }*/
+        /* internal unsafe static void PatchICall<T>(string name, out T original, MethodInfo target) where T : MulticastDelegate
+         {
+             IntPtr intPtr = IL2CPP.il2cpp_resolve_icall(name);
+             if (intPtr == IntPtr.Zero)
+             {
+                 ConsoleUtils.Info("ICallPatcher", "ICall " + name + " not found - abort patching", ConsoleColor.Gray, "PatchICall", 156);
+                 original = null;
+                 return;
+             }
+             IntPtr functionPointer = target.MethodHandle.GetFunctionPointer();
+             MelonUtils.NativeHookAttach((IntPtr)(&intPtr), functionPointer);
+             MainUtils.antiGCList.Add(intPtr);
+             MainUtils.antiGCList.Add(functionPointer);
+             MainUtils.antiGCList.Add(target);
+             original = Marshal.GetDelegateForFunctionPointer<T>(intPtr);
+             MainUtils.antiGCList.Add(original);
+             ConsoleUtils.Info("ICallPatcher", "ICall " + name + " patched", ConsoleColor.Gray, "PatchICall", 172);
+         }*/
 
-     /*   internal static void UseFunctionInEngine<T>(int offset, out T delegateField) where T : MulticastDelegate
-        {
-            delegateField = null;
-            if (offset != 0)
-            {
-                IntPtr ptr = CompatibilityLayer.GetUnityPlayerBaseAddress() + offset;
-                delegateField = Marshal.GetDelegateForFunctionPointer<T>(ptr);
-            }
-        }*/
+        /*   internal static void UseFunctionInEngine<T>(int offset, out T delegateField) where T : MulticastDelegate
+           {
+               delegateField = null;
+               if (offset != 0)
+               {
+                   IntPtr ptr = CompatibilityLayer.GetUnityPlayerBaseAddress() + offset;
+                   delegateField = Marshal.GetDelegateForFunctionPointer<T>(ptr);
+               }
+           }*/
     }
 }

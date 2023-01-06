@@ -1,11 +1,6 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vanilla.Utils
 {
@@ -13,7 +8,7 @@ namespace Vanilla.Utils
     {
         internal static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
-           Il2CppSystem.Object customObject2 = SerializationUtils.FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
+            Il2CppSystem.Object customObject2 = SerializationUtils.FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
             OpRaiseEvent(code, customObject2, RaiseEventOptions, sendOptions);
         }
 

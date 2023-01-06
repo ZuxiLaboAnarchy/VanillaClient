@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
+﻿using TMPro;
 using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +7,10 @@ using VRC;
 using VRC.Core;
 using VRC.SDKBase;
 
-namespace Vanilla.Utils 
+namespace Vanilla.Utils
 {
     internal class PlayerUtils
-    { 
+    {
         internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
 
         internal static readonly System.Collections.Generic.Dictionary<string, CustomTagInfo> playerCustomTags = new System.Collections.Generic.Dictionary<string, CustomTagInfo>();

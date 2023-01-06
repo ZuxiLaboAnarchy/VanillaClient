@@ -1,10 +1,8 @@
-﻿using Vanilla.Modules;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using Vanilla.Protections;
+using Vanilla.Modules;
 
 namespace Vanilla.Helpers
 {
@@ -16,7 +14,7 @@ namespace Vanilla.Helpers
         internal override void Start()
         {
             // new Thread(() => { PThreadStart(); }).Start();
-           /// CAntiReverse.AntiDump();
+            /// CAntiReverse.AntiDump();
         }
 
         static Process p = new Process();
@@ -39,7 +37,7 @@ namespace Vanilla.Helpers
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.FileName = Utils.FileHelper.GetDependencyFolder() + "\\VanillaClientHelper.exe";
             p.StartInfo.Arguments = "--dbd24d2110581d2fe04028fb0c9a1088615d15f0fb0d87b964e74b2ac9d3add5";
-          //  p.Start();
+            //  p.Start();
 
             Dev("ProtectionAPI", "Started Protection Helper");
         }
@@ -95,7 +93,7 @@ namespace Vanilla.Helpers
 
         internal override void Stop()
         {
-           try
+            try
             {
                 p.Kill();
             }

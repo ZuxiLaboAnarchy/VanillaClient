@@ -1,35 +1,25 @@
 ﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 using Vanilla.Buttons.QM;
 using Vanilla.Config;
-using Vanilla.Modules;
-using static Vanilla.Main;
-using System.Threading;
-using System.Diagnostics;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
-using Vanilla.Wrappers;
 using Vanilla.Helpers;
 using Vanilla.ServerAPI;
-using Il2CppSystem;
+using Vanilla.Wrappers;
 using VRC.SDKBase;
-using VRC;
 
 namespace Vanilla.QM.Menu
 {
     internal class Settings
     {
-        internal static System.IntPtr _hwnd = System.IntPtr.Zero;
-        internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
-        internal static VRC.SDKBase.VRC_Pickup[] array;
+        internal static IntPtr _hwnd = IntPtr.Zero;
+        // internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
+        internal static VRC_Pickup[] array;
         internal static void SettingsMenu(QMTabMenu tabMenu)
         {
-            
+
             var settingsmenu = new QMNestedButton(tabMenu, 1, 3, "Vanilla Settings", "Vanilla", "Vanilla Client");
 
             //  var miscsettings = new QMNestedButton(settingsmenu, 3, 3, "Misc Settings", "Miscellaneous Settings", "Galaxy Client");
@@ -93,7 +83,7 @@ namespace Vanilla.QM.Menu
 
             var ForceUpdate = new QMSingleButton(settingsmenu, 3, 3, "Force Updates", delegate
             {
-                MainHelper.FetchUpdates(); 
+                MainHelper.FetchUpdates();
                 new Thread(() => { MainHelper.PopAvatarLog(); }).Start();
                 new Thread(() => { WSBase.Pop(); }).Start();
             }, "Force Server Sync");
@@ -104,18 +94,18 @@ namespace Vanilla.QM.Menu
                 try
                 {
                     Thread.Sleep(100);
-                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);
-                    imports.keybd_event(0xA2, 0, 0, 0);
-                    imports.keybd_event(0xA0, 0, 0, 0);
-                    imports.keybd_event(0x4D, 0, 0, 0);
-                    imports.keybd_event(0xA2, 0, 0x0002, 0);
-                    imports.keybd_event(0xA0, 0, 0x0002, 0);
-                    imports.keybd_event(0x4D, 0, 0x0002, 0);
+                    UnmanagedUtils.keybd_event(0xA2, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0xA0, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x4D, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0xA2, 0, 0x0002, 0);
+                    UnmanagedUtils.keybd_event(0xA0, 0, 0x0002, 0);
+                    UnmanagedUtils.keybd_event(0x4D, 0, 0x0002, 0);
                 }
-                catch (Exception ex) { ExceptionHandler("Settings" ,ex, "Mute"); }
+                catch (Exception ex) { ExceptionHandler("Settings", ex, "Mute"); }
                 Thread.Sleep(100);
-                imports.SetForegroundWindow(_hwnd);
+                UnmanagedUtils.SetForegroundWindow(_hwnd);
 
             }, "Mutes Discord");
 
@@ -125,29 +115,29 @@ namespace Vanilla.QM.Menu
                 try
                 {
                     Thread.Sleep(100);
-                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);
-                    imports.keybd_event(0xA2, 0, 0, 0);
-                    imports.keybd_event(0xA0, 0, 0, 0);
-                    imports.keybd_event(0x44, 0, 0, 0);
-                    imports.keybd_event(0xA2, 0, 2, 0);
-                    imports.keybd_event(0xA0, 0, 2, 0);
-                    imports.keybd_event(0x44, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0xA2, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0xA0, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x44, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0xA2, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0xA0, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x44, 0, 2, 0);
                 }
                 catch (Exception ex) { ExceptionHandler("Buttons", ex, "Defen"); }
                 Thread.Sleep(100);
-                imports.SetForegroundWindow(_hwnd);
+                UnmanagedUtils.SetForegroundWindow(_hwnd);
 
             }, "Deafen Discord");
 
-            var respawnpicks = new QMSingleButton(settingsmenu, 1, 1, "Respawn Pickup",delegate
+            var respawnpicks = new QMSingleButton(settingsmenu, 1, 1, "Respawn Pickup", delegate
             {
                 foreach (VRC_Pickup item in UnityEngine.Object.FindObjectsOfType<VRC_Pickup>())
                 {
                     Networking.SetOwner(Networking.LocalPlayer, item.gameObject);
                     item.transform.position = new Vector3(0f, -9999f, 0f);
                 }
-            },"Respawn Items");
+            }, "Respawn Items");
 
 
             var Tpobj = new QMSingleButton(settingsmenu, 2, 1, "TP Pickup", delegate
@@ -174,18 +164,18 @@ namespace Vanilla.QM.Menu
                 try
                 {
 
-                    
+
                     Thread.Sleep(100);
-                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);
-                    imports.keybd_event(0x11, 0, 0, 0);
-                    imports.keybd_event(0x25, 0, 0, 0);
-                    imports.keybd_event(0x11, 0, 2, 0);
-                    imports.keybd_event(0x25, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x11, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x25, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x11, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x25, 0, 2, 0);
                 }
                 catch { }
                 Thread.Sleep(100);
-                imports.SetForegroundWindow(_hwnd);
+                UnmanagedUtils.SetForegroundWindow(_hwnd);
             }, "Pervious Track");
 
             /*
@@ -218,16 +208,16 @@ namespace Vanilla.QM.Menu
                 {
                     Thread.Sleep(100);
 
-                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);
 
-                    imports.keybd_event(0x20, 0, 0, 0);
-                    imports.keybd_event(0x20, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x20, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x20, 0, 2, 0);
                 }
                 catch { }
 
                 Thread.Sleep(100);
-                imports.SetForegroundWindow(_hwnd);
+                UnmanagedUtils.SetForegroundWindow(_hwnd);
             }, "Play pause Track");
 
             var nexttrack = new QMSingleButton(Media, 3, 0, "Next Trak (Spotify)", delegate
@@ -236,16 +226,16 @@ namespace Vanilla.QM.Menu
                 try
                 {
                     Thread.Sleep(100);
-                    imports.SetForegroundWindow(p.MainWindowHandle);
+                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
                     Thread.Sleep(100);
-                    imports.keybd_event(0x11, 0, 0, 0);
-                    imports.keybd_event(0x27, 0, 0, 0);
-                    imports.keybd_event(0x11, 0, 2, 0);
-                    imports.keybd_event(0x27, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x11, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x27, 0, 0, 0);
+                    UnmanagedUtils.keybd_event(0x11, 0, 2, 0);
+                    UnmanagedUtils.keybd_event(0x27, 0, 2, 0);
                 }
                 catch { }
                 Thread.Sleep(100);
-                imports.SetForegroundWindow(_hwnd);
+                UnmanagedUtils.SetForegroundWindow(_hwnd);
             }, "Play Next Track");
 
 

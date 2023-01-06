@@ -23,7 +23,7 @@
         private static string SubTime = null;
 
 
-        internal static bool nextUpdateCheckComplete = false;
+        internal static bool nextUpdateCheckComplete = true;
 
         internal static bool isConnectedToInstance = false;
 

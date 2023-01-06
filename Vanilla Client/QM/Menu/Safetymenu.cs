@@ -1,15 +1,7 @@
-﻿using MelonLoader;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 using Vanilla.Buttons.QM;
-using Vanilla.Exploits;
 using Vanilla.Wrappers;
-using VRC.SDKBase;
 
 namespace Vanilla.QM.Menu
 {
@@ -85,7 +77,7 @@ namespace Vanilla.QM.Menu
 
 
 
-        } 
+        }
 
 
 

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Vanilla.Buttons.QM;
-using Vanilla.Config;
 using Vanilla.Wrappers;
 using VRC.DataModel;
 using VRC.SDKBase;
@@ -19,11 +13,11 @@ namespace Vanilla.QM.Menu
         {
 
             var movementMenu = new QMNestedButton(tabMenu, 4, 0, "Movement Settings", "Vanilla", "Vanilla Client");
-            
+
             var rocketJumpButton = new QMToggleButton(movementMenu, 1, 0, "Rocket Shoes", delegate
             {
-               jetPackJump = true;
-               Packhandler();
+                jetPackJump = true;
+                Packhandler();
 
             }, delegate
             {
@@ -72,8 +66,8 @@ namespace Vanilla.QM.Menu
                 localPlayer.SetVelocity(velocity);
             }
         }
-        
-        
+
+
         private static NeckRange _nexkRange;
         internal static void HeedflipHHandler(bool flip)
         {

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using VRC;
 using VRC.Core;
 
 namespace Vanilla.Patches.Harmony

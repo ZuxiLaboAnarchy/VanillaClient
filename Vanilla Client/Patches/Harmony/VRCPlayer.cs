@@ -2,7 +2,6 @@
 using UnityEngine;
 using Vanilla.Config;
 using VRC.Core;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -18,7 +17,7 @@ namespace Vanilla.Patches.Harmony
                 PatchMethod(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Static_String_APIUser_0)), GetLocalPatch(nameof(GetFriendlyDetailedNameForSocialRankPatch)), null);
                 //PatchMethod(typeof(VRCPlayer).GetMethod("Method_Public_Static_String_APIUser_1"), GetLocalPatch("GetFriendlyDetailedNameForSocialRankPatch"), null);
                 PatchMethod(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Static_Color_APIUser_0)), GetLocalPatch(nameof(GetColorForSocialRankPatch)), null);
-              
+
             }
             else
             {
@@ -39,7 +38,7 @@ namespace Vanilla.Patches.Harmony
             }
             if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) && PlayerUtils.playerCustomTags[__0.id].customTagEnabled)
             {
-           
+
                 __result = PlayerUtils.playerCustomTags[__0.id].customTag;
                 return false;
             }

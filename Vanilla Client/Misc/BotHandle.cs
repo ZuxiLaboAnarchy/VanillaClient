@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Config;
+﻿using Vanilla.Config;
 using Vanilla.Helpers;
 using Vanilla.Modules;
 using Vanilla.Patches;
@@ -30,7 +25,8 @@ namespace Vanilla
             return false;
         }
 
-        internal static void InitBotHandle() {
+        internal static void InitBotHandle()
+        {
             PatchManager.Patches.Add(new SteamworksPatch());
             PatchManager.Patches.Add(new HWIDPatch());
             PatchManager.Patches.Add(new PhotonPatch());

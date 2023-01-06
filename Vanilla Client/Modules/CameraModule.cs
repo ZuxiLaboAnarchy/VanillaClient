@@ -6,7 +6,7 @@ using Vanilla.Wrappers;
 
 namespace Vanilla.Modules
 {
-   
+
     internal class CameraModule : VanillaModule
     {
         protected override string ModuleName => "CameraModule";

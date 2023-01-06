@@ -1,18 +1,14 @@
 ﻿using System.IO;
-using System.Linq;
-using System.Net;
-using Vanilla.Modules;
 using Vanilla.Tomlyn;
 using Vanilla.Tomlyn.Model;
 using Vanilla.Tomlyn.Syntax;
-using Vanilla.Utils;
 
 namespace Vanilla.Config
 {
 
     internal static class MainConfig
     {
-       
+
 
         private static string FilePath = Path.Combine(FileHelper.GetCheatFolder(), "Vanilla.cfg");
 
@@ -37,7 +33,7 @@ namespace Vanilla.Config
         internal static string PCCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
 
         private static bool _ESP = true;
-        internal static bool ESP { get => _ESP; set { _ESP  = value; Save(); } }
+        internal static bool ESP { get => _ESP; set { _ESP = value; Save(); } }
 
         private static bool _JoinLogger = true;
         internal static bool JoinLogger { get => _JoinLogger; set { _JoinLogger = value; Save(); } }
@@ -58,7 +54,7 @@ namespace Vanilla.Config
         internal static bool DetectLagOrCrash { get => _DetectLagOrCrash; set { _DetectLagOrCrash = value; Save(); } }
 
 
-       
+
         internal static void Load()
         {
             if (!File.Exists(FilePath))
@@ -75,7 +71,7 @@ namespace Vanilla.Config
             TomlTable installertbl = (TomlTable)tbl["Main"];
             if ((installertbl == null) || (installertbl.Count <= 0))
                 return;
-           
+
             if (installertbl.ContainsKey("TestBool"))
                 Boolean.TryParse(installertbl["TestBool"].ToString(), out _TestBool);
 
@@ -93,26 +89,26 @@ namespace Vanilla.Config
 
             if (installertbl.ContainsKey("ESP"))
                 Boolean.TryParse(installertbl["ESP"].ToString(), out _ESP);
-            
+
             if (installertbl.ContainsKey("JoinEvents"))
                 Boolean.TryParse(installertbl["JoinEvents"].ToString(), out _JoinLogger);
 
             if (installertbl.ContainsKey("LogModerations"))
                 Boolean.TryParse(installertbl["LogModerations"].ToString(), out _LogModerations);
-            
+
             if (installertbl.ContainsKey("NameplateWallhack"))
                 Boolean.TryParse(installertbl["NameplateWallhack"].ToString(), out _NameplateWallhack);
-            
+
             if (installertbl.ContainsKey("NameplateMoreInfo"))
                 Boolean.TryParse(installertbl["NameplateMoreInfo"].ToString(), out _NameplateMoreInfo);
-          
+
             if (installertbl.ContainsKey("ShowActorID"))
                 Boolean.TryParse(installertbl["ShowActorID"].ToString(), out _ShowActorID);
-           
+
             if (installertbl.ContainsKey("DetectLagOrCrash"))
                 Boolean.TryParse(installertbl["DetectLagOrCrash"].ToString(), out _DetectLagOrCrash);
 
-            
+
             Dev("Config", "Loaded...");
 
         }
@@ -134,7 +130,7 @@ namespace Vanilla.Config
             tbl.Items.Add(new KeyValueSyntax("NameplateMoreInfo", new BooleanValueSyntax(_NameplateMoreInfo)));
             tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ShowActorID)));
             tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_DetectLagOrCrash)));
-            
+
 
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);

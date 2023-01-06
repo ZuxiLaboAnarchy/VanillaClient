@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Vanilla.Buttons.QM;
-using VRC.UI.Elements;
+﻿using Vanilla.Buttons.QM;
 
 namespace Vanilla.QM.Menu
 {
@@ -14,16 +7,16 @@ namespace Vanilla.QM.Menu
         internal static void MicFuckery(QMTabMenu tabMenu)
         {
             var Micsettings = new QMNestedButton(tabMenu, 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
-            
-            var Default = new QMSingleButton(Micsettings, 1,0, "Defualt Bitrate", delegate
+
+            var Default = new QMSingleButton(Micsettings, 1, 0, "Defualt Bitrate", delegate
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.field_Private_USpeaker_0.field_Private_BitRate_0 = BitRate.BitRate_24K;
-            },"Defaul Bitrate");
+            }, "Defaul Bitrate");
 
             var twozerokbitrate = new QMSingleButton(Micsettings, 2, 0, "20K Bitrate", delegate
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.field_Private_USpeaker_0.field_Private_BitRate_0 = BitRate.BitRate_20K;
-            },"20K Bitrate on Mic");
+            }, "20K Bitrate on Mic");
 
             var eighteenkbitrate = new QMSingleButton(Micsettings, 3, 0, "18K Bitrate", delegate
             {
@@ -40,7 +33,7 @@ namespace Vanilla.QM.Menu
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.field_Private_USpeaker_0.field_Private_BitRate_0 = BitRate.BitRate_10K;
             }, "10K Bitrate on Mic");
 
-            var eightkbitrate = new QMSingleButton(Micsettings,2, 1, "8K Bitrate", delegate
+            var eightkbitrate = new QMSingleButton(Micsettings, 2, 1, "8K Bitrate", delegate
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.field_Private_USpeaker_0.field_Private_BitRate_0 = BitRate.BitRate_8K;
             }, "8K Bitrate on Mic");
@@ -59,7 +52,7 @@ namespace Vanilla.QM.Menu
             {
                 USpeaker.field_Internal_Static_Single_1 += 1;
             }, "Mic Volume +1");
-            
+
             var Micdown = new QMSingleButton(Micsettings, 2, 2, "Mic Vol Down", delegate
             {
                 USpeaker.field_Internal_Static_Single_1 -= 1;

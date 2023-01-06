@@ -1,8 +1,5 @@
-﻿using System;
+﻿using MelonLoader;
 using System.Reflection;
-using MelonLoader;
-using VRC;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Patches
 {
@@ -17,10 +14,10 @@ namespace Vanilla.Patches
         internal unsafe override void Patch()
         {
             InitializeLocalPatchHandler(typeof(SteamworksPatch));
-          //  if (!Configuration.GetGeneralConfig().SpooferSteamID || steamPatched)
+            //  if (!Configuration.GetGeneralConfig().SpooferSteamID || steamPatched)
             //{
-              //  return;
-           // }
+            //  return;
+            // }
             IntPtr intPtr = IntPtr.Zero;
             try
             {
@@ -32,7 +29,7 @@ namespace Vanilla.Patches
             }
             if (intPtr == IntPtr.Zero)
             {
-               Dev("Steam Spoofer", "SteamAPI library returned no valid address - Steam Spoofer won't work", ConsoleColor.Gray);
+                Dev("Steam Spoofer", "SteamAPI library returned no valid address - Steam Spoofer won't work", ConsoleColor.Gray);
                 return;
             }
             try

@@ -1,5 +1,4 @@
 ﻿using MelonLoader;
-using Newtonsoft.Json;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
@@ -7,9 +6,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Vanilla.Config;
 using Vanilla.Modules;
-using Vanilla.ServerAPI;
 using VRC;
-using static BestHTTP.JSON.Json;
 
 
 namespace Vanilla.Patches.Harmony
@@ -30,7 +27,7 @@ namespace Vanilla.Patches.Harmony
 
             //    PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake)), GetLocalPatch("OnAvatarChanged"), null); // Post So It Exists.
 
-            
+
 
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(nameof(PlayerJoin)), null);
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch(nameof(PlayerLeave)), null);
@@ -57,16 +54,16 @@ namespace Vanilla.Patches.Harmony
             //Nebula.Patch(AccessTools.Method(typeof(NetworkManager), nameof(NetworkManager.Method_Public_Void_Player_0)), GetPatch(nameof(playevleave)));
         }
 
-          private static void OnJoinedRoomPatch()
-       {
+        private static void OnJoinedRoomPatch()
+        {
             RuntimeConfig.isConnectedToInstance = true;
-          
-       }
 
-       private static void OnLeftRoomPatch()
-       {
-           RuntimeConfig.isConnectedToInstance = false;
-       }
+        }
+
+        private static void OnLeftRoomPatch()
+        {
+            RuntimeConfig.isConnectedToInstance = false;
+        }
 
 
         private static bool PlayerJoin(Player __0)

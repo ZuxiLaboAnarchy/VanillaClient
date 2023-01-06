@@ -85,7 +85,7 @@ namespace Vanilla.Helpers
         {
             string text = "<color=green>DEBUG <color=purple>" + "Debug Key Pressed ";
 
-           // LogToHud(text);
+            // LogToHud(text);
 
             HudLog("Debug", text);
 
@@ -133,6 +133,12 @@ namespace Vanilla.Helpers
 
         internal static void FetchUpdates()
         {
+            Dev("Update", "Fetching Updates");
+            ServerResponceHandler.HandleWSUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, 0).ToString());
+            RuntimeConfig.nextUpdateCheckComplete = true;
+
+
+            return;
             Dev("MainHelper", "Fetching Updates");
             var FetchModelRaw = new sendsinglemsg()
             {
@@ -165,7 +171,7 @@ namespace Vanilla.Helpers
                         {
 
 
-                            
+
                             var a = __instance.field_Private_ApiAvatar_0;
                             AvatarLog.Enqueue(new AvatarLog
                             {

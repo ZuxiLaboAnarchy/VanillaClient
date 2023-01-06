@@ -61,7 +61,7 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tue 12/20/2022 23:11:02.68
+        ///   Looks up a localized string similar to Wed 01/04/2023  2:11:04.14
         ///.
         /// </summary>
         internal static string BuildTime {
@@ -96,16 +96,6 @@ namespace Vanilla.Properties {
         internal static string GameVersion {
             get {
                 return ResourceManager.GetString("GameVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] WSManager {
-            get {
-                object obj = ResourceManager.GetObject("WSManager", resourceCulture);
-                return ((byte[])(obj));
             }
         }
     }

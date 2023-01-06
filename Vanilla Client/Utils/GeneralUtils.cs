@@ -12,7 +12,7 @@ namespace Vanilla.Utils
         internal static string GetGameName()
         { return MelonLoader.InternalUtils.UnityInformationHandler.GameName; }
 
-        internal static string GetCommandLine() {  return Environment.CommandLine.ToLower();  }
+        internal static string GetCommandLine() { return Environment.CommandLine.ToLower(); }
 
         internal static void CloseGame() { Process.GetCurrentProcess().Kill(); }
 
@@ -31,9 +31,9 @@ namespace Vanilla.Utils
         }
 
         internal static string GetClipboard()
-        { return Clipboard.GetText();  }
+        { return Clipboard.GetText(); }
         internal static void SetClipboard(string Set) => Clipboard.SetText(Set);
-     
+
         internal static void Delay(int time, Action action) => MelonCoroutines.Start(WaitForDelayFinish(time, action));
 
         private static IEnumerator WaitForDelayFinish(int time, Action action)

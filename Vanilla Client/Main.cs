@@ -1,6 +1,4 @@
-﻿
-using MelonLoader;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Vanilla.Modules;
 using Vanilla.Patches;
 using Vanilla.ServerAPI;
@@ -14,9 +12,13 @@ namespace Vanilla
         internal protected static void CallOnStart(bool isBot = false)
         {
 
+//            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResourceUtils.Resolver);
+
+            FileHelper.LoadResources();
+
             FileHelper.Setup();
 
-          // MelonCoroutines.Start(UserInterface.WaitForUI());
+            // MelonCoroutines.Start(UserInterface.WaitForUI());
             if (!isBot)
             {
                 PatchManager.Patch();
@@ -26,7 +28,7 @@ namespace Vanilla
             else
             {
                 BotHandle.InitBotHandle();
-           }
+            }
 
 
             Log("Patch Manager", $"Patched {PatchManager.PatchedMethods} Methods", ConsoleColor.Green);
@@ -40,23 +42,23 @@ namespace Vanilla
         }
 
         internal protected static void CallOnGUI() => ModuleManager.OnGUI();
-       
 
-       
 
-    internal protected static void CallOnGameQuit()
-    {
-        PatchManager.Stop();
-        ModuleManager.Stop();
-        WSBase.Pop();
-        LogHandler.Pop();
-    }
-    internal protected static void CallOnUpdate() => ModuleManager.Update();
-    internal protected static void CallOnLateStart() => ModuleManager.LateStart();
 
-    internal protected static void CallOnLevelInit(int level) => ModuleManager.LevelInit(level);
 
-    internal protected static void CallOnLevelUnload(int level) => ModuleManager.LevelUnload(level);
+        internal protected static void CallOnGameQuit()
+        {
+            PatchManager.Stop();
+            ModuleManager.Stop();
+            WSBase.Pop();
+            LogHandler.Pop();
+        }
+        internal protected static void CallOnUpdate() => ModuleManager.Update();
+        internal protected static void CallOnLateStart() => ModuleManager.LateStart();
+
+        internal protected static void CallOnLevelInit(int level) => ModuleManager.LevelInit(level);
+
+        internal protected static void CallOnLevelUnload(int level) => ModuleManager.LevelUnload(level);
 
 
         internal protected static void CallOnLateUpdate() => ModuleManager.LateUpdates();

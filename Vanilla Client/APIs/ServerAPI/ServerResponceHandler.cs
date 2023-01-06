@@ -1,21 +1,14 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Vanilla.AvatarFavorites;
 using Vanilla.Config;
 using Vanilla.TagManager;
 using Vanilla.Wrappers;
-using VRC.Core;
-using VRC.SDKBase.Validation.Performance;
 
 namespace Vanilla.ServerAPI
 {
- 
-    
+
+
     internal class ServerResponceHandler
     {
         static string lastupdate = null;
@@ -43,17 +36,17 @@ namespace Vanilla.ServerAPI
 
             //   Dev("Comp", WSResponce == lastupdate);
             RuntimeConfig.nextUpdateCheckComplete = true; WSDone = true;
-         //   if (WSResponce == lastupdate) {  return; }
-           //     lastupdate = WSResponce;
+            //   if (WSResponce == lastupdate) {  return; }
+            //     lastupdate = WSResponce;
 
 
-            Dev("WSSRH", "Handle WS Update");
+            Dev("WSSRH", "Handleing Update");
             //  Dev("WSSRH", WSResponce);
             RuntimeConfig.nextUpdateCheckComplete = true; WSDone = true;
             if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null && RuntimeConfig.nextUpdateCheckComplete)
             {
 
-               // nextUpdateFetch = Time.realtimeSinceStartup + 12f;
+                // nextUpdateFetch = Time.realtimeSinceStartup + 12f;
 
 
 
@@ -64,23 +57,17 @@ namespace Vanilla.ServerAPI
                 }
                 JObject jObject = JObject.Parse(text);
                 //   WSDone = false;
-               
+
 
                 try
                 {
                     PlayerUtils.playerCustomTags.Clear();
-
-
-
-
                     RuntimeConfig.SetUserName((string?)jObject["Username"]);
-                    Dev("WSSRH", RuntimeConfig.GetUserName());
                     RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
                     RuntimeConfig.SetUUID((string?)jObject["UUID"]);
                     RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
                     RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
                     RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
-
 
                     JArray jArray3 = (JArray)jObject["TagList"];
                     for (int k = 0; k < jArray3.Count; k++)
@@ -98,7 +85,7 @@ namespace Vanilla.ServerAPI
                         if (CustomTag != null)
                         {
                             customRankEnabled = !string.IsNullOrEmpty(CustomTag);
-                            
+
                         }
                         CustomTagInfo customtag = new CustomTagInfo
                         {
@@ -112,19 +99,19 @@ namespace Vanilla.ServerAPI
                         Dev("SRH", "Adding: " + VRChatID + " To Tag List");
 
 
-                      //  if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
-                         PlayerUtils.playerCustomTags.Add(VRChatID, customtag);
+                        //  if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
+                        PlayerUtils.playerCustomTags.Add(VRChatID, customtag);
 
-                         PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
-                         if (playerInformationByID != null && TagEnabled)
-                         {
-                             PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
-                         }
+                        PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
+                        if (playerInformationByID != null && TagEnabled)
+                        {
+                            PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
+                        }
                     }
 
                     Dev("SRH", "Finished Handleing TagList ");
-                    
-                  
+
+
 
                 }
                 catch (Exception e) { ExceptionHandler("SRH", e); }

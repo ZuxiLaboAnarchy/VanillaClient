@@ -1,39 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Vanilla.QM.QMAPI
 {
-        internal class MenuPanelAPI
+    internal class MenuPanelAPI
+    {
+        private static GameObject menuPanelUserPanel;
+
+        private static GameObject menuPanelButtonReference;
+
+        internal static GameObject GetMenuUserPanel()
         {
-            private static GameObject menuPanelUserPanel;
-
-            private static GameObject menuPanelButtonReference;
-
-            internal static GameObject GetMenuUserPanel()
+            if (menuPanelUserPanel == null)
             {
-                if (menuPanelUserPanel == null)
-                {
-                    menuPanelUserPanel = GameObject.Find("MenuContent/Screens/UserInfo");  //fixed for Guid change
-                }
-                return menuPanelUserPanel;
+                menuPanelUserPanel = GameObject.Find("MenuContent/Screens/UserInfo");  //fixed for Guid change
             }
+            return menuPanelUserPanel;
+        }
 
-            internal static GameObject GetMenuButtonTemplate(string buttonTemplate)
+        internal static GameObject GetMenuButtonTemplate(string buttonTemplate)
+        {
+            if (menuPanelButtonReference == null)
             {
-                if (menuPanelButtonReference == null)
-                {
-                    menuPanelButtonReference = GetMenuUserPanel().transform.Find(buttonTemplate).gameObject;
-                }
-                return menuPanelButtonReference;
+                menuPanelButtonReference = GetMenuUserPanel().transform.Find(buttonTemplate).gameObject;
             }
+            return menuPanelButtonReference;
+        }
 
-            internal static GameObject GetTabParent(string column)
-            {
-                return GetMenuUserPanel().transform.Find(column).gameObject;
-            }
+        internal static GameObject GetTabParent(string column)
+        {
+            return GetMenuUserPanel().transform.Find(column).gameObject;
         }
     }
+}
