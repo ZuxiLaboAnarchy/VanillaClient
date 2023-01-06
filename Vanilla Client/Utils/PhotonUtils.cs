@@ -3,7 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 namespace Vanilla.Utils
-{
+{ 
     internal class PhotonUtils
     {
         internal static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)

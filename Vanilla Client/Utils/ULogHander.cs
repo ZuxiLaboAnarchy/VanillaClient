@@ -7,7 +7,7 @@ namespace Vanilla.Utils
         internal static void InformHudText(string identifier, string text, bool logToConsole = false)
         {
 
-
+             
 
 
             try

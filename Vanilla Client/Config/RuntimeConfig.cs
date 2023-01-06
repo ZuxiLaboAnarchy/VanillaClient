@@ -2,32 +2,34 @@
 {
     internal class RuntimeConfig
     {
-        
+        /*Read Only Vars*/
         internal readonly static string GameVER = "2022.4.2p1-1275--Release";
+        
+        
+        /*Unsaved Global Vars*/
         internal static bool isBot = false;
         internal static bool ShouldFly = false;
         internal static bool ShouldEarRape = false;
-        internal static string NamePlatesLongString = "usr_94d9bc4e-6e16-438e-aa97-7382cb5187e4|VGhlIFJhaWQ/|IzkxNzRkYg==";
-        internal static string Server_JWT = null;
-
-        internal static bool WSAuthed = false;
-        private static string PCCrashID = null;
-        private static string QuestCrashID = null;
-
+        internal static bool EventLogger1 = false;
         internal static bool isQuickMenuOpen = false;
         internal static bool RanksCustomRanks = true;
+        internal static bool isConnectedToInstance = false;
+
         /*User Vars*/
         private static string Username = null;
         private static bool IsStaff = false;
         private static int UUID = 0;
         private static string SubTime = null;
+        internal static string Server_JWT = null;
 
+        /*Server Set Var*/
+        private static string PCCrashID = null;
+        private static string QuestCrashID = null;
 
+        /*Server Controller Vars*/
         internal static bool nextUpdateCheckComplete = true;
-
-        internal static bool isConnectedToInstance = false;
-
-
+        internal static bool WSAuthed = false;
+        
 #if DEBUG
         internal static string ReleaseID = "Debug";
 #else

@@ -23,8 +23,8 @@ namespace Cypher
         private static bool ShosahkdfhaskfvbhaskscvjkasduldLASAdafabnsjklbfjlasfasoad { get; set; } = true;
 
         public static void OnApplicationStart(string LoaderID)
-        {
-
+        { 
+               
             try
             {
 

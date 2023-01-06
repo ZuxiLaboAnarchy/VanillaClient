@@ -16,7 +16,7 @@
 
             presence.details = "Sweet Like Candy";
             presence.largeImageKey = largeImage;
-            presence.largeImageText = "by Cypher and Masterblastr";
+            presence.largeImageText = "by Vanilla Labs";
             presence.smallImageKey = "<3";
             presence.smallImageText = ".gg/hvl";
             presence.partySize = 0;
@@ -56,10 +56,10 @@
         {
 
         }
+       
+        internal static string largeImage = "https://files.hvls.cloud/Cypher/rIFAHUju33.png";
 
-        internal static string largeImage = "https://files.hvls.cloud/Cypher/JeFibEWO39.jpg";
-
-        internal static string largeImageText = "By Cypher and Masterblastr";
+        internal static string largeImageText = "By Vanilla Labs";
 
         internal static string smallimage = "";
 

@@ -55,6 +55,83 @@
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|AnyCPU'">
+    <OutputPath>bin\Vanilla\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
+    <OutputPath>bin\ARM64\x64 Build Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x64 Build Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Vanilla\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
+echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
+</PreBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x64 Build Debug|ARM64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Vanilla\x64 Debug Build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMonoBehave|AnyCPU'">
+    <OutputPath>bin\TestMonoBehave\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMonoBehave|ARM64'">
+    <OutputPath>bin\ARM64\TestMonoBehave\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Debug|x64'">
+    <OutputPath>bin\Vanilla\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
+echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
+</PreBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
+    <OutputPath>bin\Vanilla\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>10</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
@@ -128,7 +205,7 @@
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -174,7 +251,7 @@
     </Reference>
     <Reference Include="WSManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\WSManager.dll</HintPath>
+      <HintPath>Resources\WSManager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +482,6 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <!--<PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>-->
   </PropertyGroup>
 </Project>

@@ -7,7 +7,6 @@ using Vanilla.Buttons.QM;
 using Vanilla.Config;
 using Vanilla.Helpers;
 using Vanilla.ServerAPI;
-using Vanilla.Wrappers;
 using VRC.SDKBase;
 
 namespace Vanilla.QM.Menu
@@ -17,7 +16,7 @@ namespace Vanilla.QM.Menu
         internal static IntPtr _hwnd = IntPtr.Zero;
         // internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
         internal static VRC_Pickup[] array;
-        internal static System.IntPtr _hwnd = System.IntPtr.Zero;
+       
         internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
         internal static VRC_Pickup[] GetAllPickups { get; set; }
         internal static void SettingsMenu(QMTabMenu tabMenu)
@@ -49,6 +48,10 @@ namespace Vanilla.QM.Menu
                 MainConfig.LoadMusic = false;
                 MainConfig.Save();
             }, "Toggle Load Music");
+
+
+
+
 
             var ESP = new QMToggleButton(settingsmenu, 3, 0, "ESP", delegate
 
@@ -135,7 +138,7 @@ namespace Vanilla.QM.Menu
 
             var Pickups = new QMNestedButton(settingsmenu, 1, 1, "PickUps", "Vanilla", "Vanilla Client");
 
-            var respawnpicks = new QMSingleButton(Pickups, 1, 0, "Respawn Pickup",delegate
+            var respawnpicks = new QMSingleButton(Pickups, 1, 0, "Respawn Pickup", delegate
             {
                 foreach (VRC_Pickup item in UnityEngine.Object.FindObjectsOfType<VRC_Pickup>())
                 {
