@@ -10,6 +10,7 @@ using Vanilla.Buttons.QM;
 using Vanilla.Exploits;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
+using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.QM.Menu
 {

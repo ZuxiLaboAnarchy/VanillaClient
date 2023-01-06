@@ -65,7 +65,6 @@ namespace Vanilla.Patches.Harmony
             }
             catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
         }
-
       
 
     }

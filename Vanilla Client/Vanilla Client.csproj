@@ -357,6 +357,7 @@
     <Compile Include="Utils\UnmanagedUtils.cs" />
     <Compile Include="Modules\VanillaGameObject\MonoBehavior.cs" />
     <Compile Include="Modules\VanillaGameObject\VanillaObject.cs" />
+    <Compile Include="Wrappers\WorldWrapper.cs" />
     <Compile Include="Wrappers\ProtectionHandler.cs" />
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
