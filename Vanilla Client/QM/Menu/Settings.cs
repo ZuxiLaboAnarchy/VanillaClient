@@ -17,6 +17,9 @@ namespace Vanilla.QM.Menu
         internal static IntPtr _hwnd = IntPtr.Zero;
         // internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
         internal static VRC_Pickup[] array;
+        internal static System.IntPtr _hwnd = System.IntPtr.Zero;
+        internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
+        internal static VRC_Pickup[] GetAllPickups { get; set; }
         internal static void SettingsMenu(QMTabMenu tabMenu)
         {
 
@@ -130,7 +133,9 @@ namespace Vanilla.QM.Menu
 
             }, "Deafen Discord");
 
-            var respawnpicks = new QMSingleButton(settingsmenu, 1, 1, "Respawn Pickup", delegate
+            var Pickups = new QMNestedButton(settingsmenu, 1, 1, "PickUps", "Vanilla", "Vanilla Client");
+
+            var respawnpicks = new QMSingleButton(Pickups, 1, 0, "Respawn Pickup",delegate
             {
                 foreach (VRC_Pickup item in UnityEngine.Object.FindObjectsOfType<VRC_Pickup>())
                 {
@@ -140,20 +145,25 @@ namespace Vanilla.QM.Menu
             }, "Respawn Items");
 
 
-            var Tpobj = new QMSingleButton(settingsmenu, 2, 1, "TP Pickup", delegate
+            var OWnerShipItem = new QMSingleButton(Pickups, 2, 0, "Pickup OwnerShip", delegate
             {
-                for (int i = 0; i < array.Length; i++)
+                for (int i = 0; i < GetAllPickups.Length; i++)
                 {
-
-                    if (array[i].gameObject)
-                    {
-                        VRC.Player player = PlayerWrapper.LocalPlayer();
-                        Networking.SetOwner(PlayerWrapper.LoclPayer.field_Private_VRCPlayerApi_0, array[i].gameObject);
-                        Transform transform = array[i].transform;
-                        transform.transform.position = player.transform.position + new Vector3(0f, 0.1f, 0f);
-                    }
+                    VRC_Pickup pickup = GetAllPickups[i];
+                    TakeOwnerShipPickup(pickup);
                 }
-            }, "Tp Items");
+            }, "Pickup OwnerShip");
+
+
+            static void TakeOwnerShipPickup(VRC_Pickup pickup)
+            {
+                if (!(pickup == null))
+                {
+                    Networking.SetOwner(Networking.LocalPlayer, pickup.gameObject);
+                }
+            }
+
+
 
             var Media = new QMNestedButton(tabMenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
 
