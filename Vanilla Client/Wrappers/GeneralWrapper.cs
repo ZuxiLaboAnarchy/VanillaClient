@@ -24,7 +24,29 @@ namespace Vanilla.Wrappers
 
 
 
+        internal static ApiWorld GetWorld()
+        {
+            return RoomManager.field_Internal_Static_ApiWorld_0;
+        }
 
+        internal static ApiWorldInstance GetWorldInstance()
+        {
+            return RoomManager.field_Internal_Static_ApiWorldInstance_0;
+        }
+
+        internal static bool IsInWorld()
+        {
+            if (GetWorld() == null)
+            {
+                return GetWorldInstance() != null;
+            }
+            return true;
+        }
+
+        internal static void GoToRoom(string id)
+        {
+            Networking.GoToRoom(id);
+        }
 
 
         internal static VRCUiManager GetVRCUiManager()
@@ -69,10 +91,6 @@ namespace Vanilla.Wrappers
 
             GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
             Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
-        }
-        public static void GoToRoom(string id)
-        {
-            Networking.GoToRoom(id);
         }
         public static void JoinInstanceFromClipboard()
         {
