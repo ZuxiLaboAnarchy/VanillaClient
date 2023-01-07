@@ -83,10 +83,9 @@ namespace Vanilla.QM.Menu
         }
 
 
+    // Safety Handleing
 
-        // Safety Handleing
-
-        private static Vector3 _currentVector;
+    private static Vector3 _currentVector;
 
         private static Quaternion _currentQuaternion;
 
