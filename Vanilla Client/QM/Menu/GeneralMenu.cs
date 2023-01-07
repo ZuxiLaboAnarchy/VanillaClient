@@ -85,6 +85,8 @@ namespace Vanilla.QM.Menu
 
             }, "Mutes Discord");
 
+            
+
             var Deafndisc = new QMSingleButton(GeneralMenu, 1, 1, "Deafen Discord", delegate
             {
                 var p = Process.GetProcessesByName("Discord").FirstOrDefault();
@@ -106,7 +108,7 @@ namespace Vanilla.QM.Menu
 
             }, "Deafen Discord");
 
-            var ClearVRam = new QMSingleButton(GeneralMenu, 3, 0, "ClearVRAM", delegate
+            var ClearVRam = new QMSingleButton(GeneralMenu, 3, 1, "ClearVRAM", delegate
             {
                 GeneralUtils.ClearVRAM();
             }, "ClearVRAM");

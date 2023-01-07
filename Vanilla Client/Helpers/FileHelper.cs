@@ -16,7 +16,7 @@ namespace Vanilla.Utils
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string AppFolder = Path.Combine(folder, "HyperVanilla Labs");
+            string AppFolder = Path.Combine(folder, "Vanilla");
 
 
             if (!Directory.Exists(AppFolder))

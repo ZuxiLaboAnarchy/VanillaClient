@@ -9,15 +9,18 @@ namespace Vanilla.Utils
         private static string JWT = null;
         internal static string GetKey()
         {
-            if (!File.Exists(GetMainFolder() + "\\HyperVanilla.Auth"))
+            if (!File.Exists(GetMainFolder() + "\\Vanilla.Auth"))
             {
-                throw new Exception("HyperVanilla Auth File Not Found");
+                if (File.Exists(GetMainFolder() + "\\..\\HyperVanilla Labs\\HyperVanilla.Auth"))
+                  File.Copy(GetMainFolder() + "\\..\\HyperVanilla Labs\\HyperVanilla.Auth", GetMainFolder() + "\\Vanilla.Auth");
+                else
+                throw new Exception("Vanilla Auth File Not Found");
             }
-            if (new FileInfo(GetMainFolder() + "\\HyperVanilla.Auth").Length <= 0)
+            if (new FileInfo(GetMainFolder() + "\\Vanilla.Auth").Length <= 0)
             {
                 throw new Exception("No Key Found");
             }
-            return File.ReadAllText(GetMainFolder() + "\\HyperVanilla.Auth").Trim();
+            return File.ReadAllText(GetMainFolder() + "\\Vanilla.Auth").Trim();
         }
 
         internal static string GetHWID()
