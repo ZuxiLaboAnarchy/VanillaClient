@@ -12,9 +12,9 @@ namespace Vanilla.Wrappers
 {
     internal static class GeneralWrappers
     {
-        private static VRC_EventHandler.VrcEvent _vrcEvent;
+     
 
-        private static VRC_Trigger _vrc_Trigger;
+     
         public static Player LocalPlayer() => Player.prop_Player_0;
         private static Player[] GetAllPlayer() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         internal static bool IsFriend(this VRC.Player player) => APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);

@@ -46,15 +46,6 @@ namespace Vanilla.QM.Menu
 
         }
 
-
-
-
-
-
-
-
-
-        bool lagger = true;
         static IEnumerator ItemLaggers()
         {
             while (RuntimeConfig.ItemLagger)

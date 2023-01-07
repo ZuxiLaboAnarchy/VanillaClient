@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Vanilla.Config;
 using Vanilla.Modules;
 using Vanilla.TinyJSON;
+using Vanilla.Wrappers;
 using WebSocketSharp;
 
 namespace Vanilla.ServerAPI
 {
     internal class WSBase : VanillaModule
     {
+        
         protected override string ModuleName => "WSBase";
         internal override void WaitForAPIUser()
         {
@@ -29,7 +31,26 @@ namespace Vanilla.ServerAPI
             Dev("WSAPI", "Popped WS Bubble & Disconnected");
         }
 
+        internal static void KeepAlivePack()
+        {
+            if (wss is null)
+                return;
+          
+            if (!wss.IsAlive && HasConn)
+                return;
 
+
+            var FetchModelRaw = new sendsinglemsg()
+            {
+              //  uid = PlayerWrapper.GetLocalAPIUser().id,
+
+                code = "4",
+
+               // Key = ServerHelper.GetKey(),
+            };
+            WSBase.sendmsg($"{Json.Encode(FetchModelRaw)}");
+             
+        }
 
 
         internal static void SetupSocket()
@@ -185,7 +206,7 @@ namespace Vanilla.ServerAPI
             if (e.Data.ToString().ToLower().Contains("update packet"))
             {
 
-                ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
+              //  ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
                 // new Thread(() => {  }).Start();
 
 
@@ -281,7 +302,7 @@ namespace Vanilla.ServerAPI
 
             if (message.Contains("Update Packet"))
             {
-                new Thread(() => { ServerResponceHandler.HandleWSUpdate(message); }).Start();
+            //    new Thread(() => { ServerResponceHandler.HandleWSUpdate(message); }).Start();
                 // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
 

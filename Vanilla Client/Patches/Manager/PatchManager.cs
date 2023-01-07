@@ -20,6 +20,7 @@ namespace Vanilla.Patches
             Patches.Add(new VRCPlayerPatch());
             Patches.Add(new NetworkManagerPatch());
             Patches.Add(new PlayerPatch());
+            Patches.Add(new ImageDownloaderPatch());
             // Patches.Add(new Scanner());
             // Patches.Add(new UnityExplorerPatch());
 #if DEBUG

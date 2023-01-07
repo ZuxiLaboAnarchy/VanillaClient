@@ -4,13 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Vanilla.Config;
+using Vanilla.Helpers;
 using static Vanilla.Utils.ServerHelper;
 
 namespace Vanilla.ServerAPI
 {
     internal class Server
     {
-        protected internal static object SendPostRequestInternal(string EndPoint, Dictionary<string, string> SendData = null, int ParseOnReceve = 0)
+        protected internal static object SendPostRequestInternal(string EndPoint, Dictionary<string, string> SendData = null, Action<bool, string> onFinished = null)
         {
             try
             {
@@ -44,20 +45,35 @@ namespace Vanilla.ServerAPI
                         // Dev("ServerAPI", StringSetup.Result);
                         if (StringSetup.Result.Contains("Token"))
                         { ServerResponceHandler.HandlePostRequest(StringSetup.Result); }
+                        
+                        if (onFinished != null)
+                            onFinished(arg2: StringSetup.Result, arg1: false);
+
+
                         return StringSetup.Result;
                     }
                     #endregion
                     #region If It Is a Bad request Tell The User with the Server Responce
                     else
                     {
+                       
+
+
                         //Console.ForegroundColor = ConsoleColor.Red;
                         Task<string> DES = responce.Content.ReadAsStringAsync();
+                      
 
                         if (DES.Result.Contains("<"))
                         {
+                            if (onFinished != null)
+                                onFinished(arg2: null, arg1: true);
                             Log("Server API", "Server Down Possibly Report To Cypher", ConsoleColor.Red);
                             return null;
                         }
+                        if (onFinished != null)
+                            onFinished(arg2: DES.Result, arg1: true);
+
+
 
                         /// var Responce = Json.Decode<Dictionary<string, string>>(DES.Result);
                         // Responce.TryGetValue("message", out var message);
@@ -75,6 +91,12 @@ namespace Vanilla.ServerAPI
             catch (Exception e)
             {
                 ExceptionHandler("Server API", e, EndPoint);
+
+
+                if (onFinished != null)
+                    onFinished(arg2: null, arg1: true);
+
+
                 return null;
             }
         }
@@ -82,8 +104,8 @@ namespace Vanilla.ServerAPI
         {
             protected internal static string APIBaseEndpoint = "https://hvl.gg/api/cheats/";
             protected internal readonly static string Version = "V" + "1";
-            protected internal readonly static string UA = "Galaxy_Installer" + Version;
-            protected internal readonly static string CA = "GalaxyInstallerStandaloneAuth" + Version;
+            protected internal readonly static string UA = "VanillaClient" + Version;
+            protected internal readonly static string CA = "VanillaClientServerAPI" + Version;
         }
 
     }

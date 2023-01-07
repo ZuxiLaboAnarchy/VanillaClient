@@ -200,6 +200,10 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
@@ -255,6 +259,10 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\ServerAPI\Upload.cs" />
+    <Compile Include="APIs\ServerAPI\TempContainer.cs" />
+    <Compile Include="Config\UploadQueConfig.cs" />
+    <Compile Include="Helpers\UploadHelper.cs" />
     <Compile Include="Misc\AvatarFavorites\AvatarFavoritesModel.cs" />
     <Compile Include="Misc\AvatarFavorites\FavoriteAvatarHandler.cs" />
     <Compile Include="Misc\BotHandle.cs" />
@@ -265,6 +273,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Exploits\VideoPlayer.cs" />
     <Compile Include="Modules\Anticrash.cs" />
     <Compile Include="Modules\JoinLoggerModule.cs" />
+    <Compile Include="Modules\PerfModule.cs" />
     <Compile Include="Modules\PlayerController.cs" />
     <Compile Include="Modules\PlayerHandler.cs" />
     <Compile Include="Modules\VRCPlusRemover.cs" />
@@ -287,6 +296,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="Patches\Harmony\ImgDownloader.cs" />
     <Compile Include="Patches\Harmony\QuickMenuPatch.cs" />
     <Compile Include="Patches\Harmony\VRCPlayer.cs" />
     <Compile Include="QM\Menu\AmongUsHacks.cs" />
@@ -300,6 +310,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="QM\QMAPI\MenuPanelButton.cs" />
     <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
     <Compile Include="Utils\AvatarFavorite.cs" />
+    <Compile Include="Utils\CacheUtils.cs" />
+    <Compile Include="Utils\CRC32.cs" />
+    <Compile Include="Utils\ImgDownloaderStruct.cs" />
     <Compile Include="Utils\ResourceUtils.cs" />
     <Compile Include="Utils\AudioHandler.cs" />
     <Compile Include="Utils\GameObjectUtils.cs" />
@@ -480,8 +493,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
+echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt" 
+</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
   </PropertyGroup>
@@ -491,6 +505,5 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <!--<PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>-->
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\djms0\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

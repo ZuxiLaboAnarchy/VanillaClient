@@ -10,17 +10,17 @@ namespace Vanilla.Wrappers
     internal class WorldWrapper
     {
 
-        private static Vector3 _currentVector;
+       
 
-        private static Quaternion _currentQuaternion;
+     
 
         private static int _countedPickups;
 
         private static int _countedPens;
 
-        private static int _countedVideoPlayers;
+       
 
-        private static int _countedMirrors;
+        
         private static VRC_Pickup[] GetAllPickups { get; set; }
 
         private static VRC_MirrorReflection[] _mirrorReflectionArray;
@@ -35,8 +35,7 @@ namespace Vanilla.Wrappers
         {
             _countedPickups = 0;
             _countedPens = 0;
-            _countedVideoPlayers = 0;
-            _countedMirrors = 0;
+           
             _penComponentList = new List<VRC_Pickup>();
             //_videoPlayerArray = Resources.FindObjectsOfTypeAll<VideoPlayer>().ToArray();
             _mirrorReflectionArray = Resources.FindObjectsOfTypeAll<VRC_MirrorReflection>().ToArray();
@@ -79,7 +78,7 @@ namespace Vanilla.Wrappers
                         vRC_Pickup.gameObject.SetActive(value: false);
                     }
                 }
-                bool flag = true;
+                
             }
             else
             {
@@ -113,8 +112,7 @@ namespace Vanilla.Wrappers
                         penComponent.gameObject.SetActive(value: false);
                     }
                 }
-                bool flag = true;
-                return;
+                
             }
             foreach (VRC_Pickup penComponent2 in _penComponentList)
             {
@@ -123,7 +121,7 @@ namespace Vanilla.Wrappers
                     penComponent2.gameObject.SetActive(value: true);
                 }
             }
-            bool flag2 = true;
+            
         }
     }
 }

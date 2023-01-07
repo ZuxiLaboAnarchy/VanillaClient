@@ -14,7 +14,7 @@
         internal static bool isQuickMenuOpen = false;
         internal static bool RanksCustomRanks = true;
         internal static bool isConnectedToInstance = false;
-
+        internal static bool isForced = false;
         /*User Vars*/
         private static string Username = null;
         private static bool IsStaff = false;
