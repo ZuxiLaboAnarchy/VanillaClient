@@ -7,6 +7,7 @@ using Vanilla.Modules;
 using Vanilla.QM.Menu;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
+using VRC.UI.Core.Styles;
 
 namespace Vanilla.QM
 {
@@ -51,11 +52,52 @@ namespace Vanilla.QM
 
             }, "Change Avatar By ID");
 
-            Settings.SettingsMenu(tabMenu);
-            ExploitMenu.InitMenu(tabMenu);
-            Safetymenu.safetymenu(tabMenu);
-            movement.MovementMenu(tabMenu);
-            Micfuckery.MicFuckery(tabMenu);
+            var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "AvatarID", delegate
+            {
+                var World = GeneralUtils.GetClipboard();
+                if (World.Contains(":"))
+                    // PlayerWrapper.ChangePlayerAvatar(NewAvi);
+                    Networking.GoToRoom(World);
+            }, "Change Avatar By ID");
+
+
+           // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
+            var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Remote", 1, 3, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
+          //  Selected = new QMNestedButton("Menu_SelectedUser_Remote", "", 0, 0, "Target functions for Blaze's Client", "Blaze's Client");
+
+            var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 1, "General\nMenu", "Vanilla", "Vanilla client");
+            GeneralMenu.InitMenu(GeneralMenuButton);
+         
+            var MovementMenu = new QMNestedButton(GeneralMenuButton, 4, 0, "Movement Settings", "Vanilla", "Vanilla Client");
+            Movement.InitMenu(MovementMenu);
+
+            var ExploitMenuButton = new QMNestedButton(tabMenu, 2, 3, "Exploits", "Vanilla", "Vanilla Client");
+            ExploitMenu.InitMenu(ExploitMenuButton);
+
+            var MicMenu = new QMNestedButton(ExploitMenuButton, 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
+            Micfuckery.InitMenu(MicMenu);
+
+            var AmonUsMenu = new QMNestedButton(ExploitMenuButton, 4, 1, "Among Us", "Vanilla", "Vanilla client");
+            AmongUsHacks.InitMenu(AmonUsMenu);
+
+            var Muder4 = new QMNestedButton(ExploitMenuButton, 4, 2, "Murder 4", "Vanilla", "Vanilla client");
+            MurderHacks.InitMenu(Muder4);
+
+            var settingsmenu = new QMNestedButton(tabMenu, 1, 3, "Vanilla Settings", "Vanilla", "Vanilla Client");
+            Settings.InitMenu(settingsmenu);
+
+            var SafeMenu = new QMNestedButton(tabMenu, 3, 3, "Safety Settings", "Vanilla", "Vanilla Client");
+            SafetyMenu.InitMenu(SafeMenu);
+#if DEBUG
+            var DevMenuButton = new QMNestedButton(tabMenu, 4, 3, "DevMenu", "Vanilla", "Vanilla Client");
+            DevMenu.InitMenu(DevMenuButton);
+#endif
+
+
+
+
+
+
             new playermenu();
 
 

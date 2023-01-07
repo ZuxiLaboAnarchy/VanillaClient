@@ -6,13 +6,13 @@ using VRC.SDKBase;
 
 namespace Vanilla.QM.Menu
 {
-    internal class movement
+    internal class Movement
     {
         internal static bool jetPackJump;
-        internal static void MovementMenu(QMTabMenu tabMenu)
+        internal static void InitMenu(QMNestedButton movementMenu)
         {
 
-            var movementMenu = new QMNestedButton(tabMenu, 4, 0, "Movement Settings", "Vanilla", "Vanilla Client");
+         
 
             var rocketJumpButton = new QMToggleButton(movementMenu, 1, 0, "Rocket Shoes", delegate
             {

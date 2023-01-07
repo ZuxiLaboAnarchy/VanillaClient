@@ -21,6 +21,13 @@ namespace Vanilla.Buttons.QM
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
         }
 
+        public QMNestedButton(string location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
+        {
+            btnQMLoc = location;
+            Initialize(location.StartsWith("Menu_"), btnText, posX, posY, toolTipText, menuTitle, halfButton);
+        }
+
+
         internal QMNestedButton(QMNestedButton location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
             btnQMLoc = location.GetMenuName();

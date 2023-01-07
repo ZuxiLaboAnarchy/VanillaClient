@@ -35,7 +35,7 @@
 #else
         internal static string ReleaseID = "Release";
 #endif
-
+        internal static bool ItemLagger = false;
 
         internal static void SetStaff(string id)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static Vanilla.QM.Menu.Safetymenu;
+using static Vanilla.QM.Menu.SafetyMenu;
 
 namespace Vanilla.Modules
 {

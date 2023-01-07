@@ -53,6 +53,10 @@ namespace Vanilla.Config
         private static bool _DetectLagOrCrash = true;
         internal static bool DetectLagOrCrash { get => _DetectLagOrCrash; set { _DetectLagOrCrash = value; Save(); } }
 
+        private static bool _AntiE1 = true;
+        internal static bool AntiE1 { get => _AntiE1; set { _AntiE1 = value; Save(); } }
+
+
 
 
         internal static void Load()

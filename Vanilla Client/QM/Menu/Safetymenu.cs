@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Vanilla.Buttons.QM;
+using Vanilla.Config;
 using Vanilla.Wrappers;
 
 namespace Vanilla.QM.Menu
 {
-    internal class Safetymenu
+    internal class SafetyMenu
     {
-        internal static void safetymenu(QMTabMenu tabMenu)
+        internal static void InitMenu(QMNestedButton Safemenu)
         {
 
-            var Safemenu = new QMNestedButton(tabMenu, 3, 3, "Safety Settings", "Vanilla", "Vanilla Client");
+          
 
             var Getoffhead = new QMSingleButton(Safemenu, 1, 0, "Anti Attach", delegate
             {
@@ -67,16 +68,18 @@ namespace Vanilla.QM.Menu
                 verticiesp = false;
             }, "Vertecies anti");
 
-            var antiErrape = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate
+            var AntiE1 = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate
             {
-                Antirape = true;
+                MainConfig.AntiE1 = true;
             }, delegate
             {
-                Antirape = false;
+                MainConfig.AntiE1 = false;
             }, "Anti Event 1 Bad Data");
 
 
-
+            if (MainConfig.AntiE1 == true)
+            { AntiE1.ClickMe(); }
+           
         }
 
 
@@ -115,6 +118,6 @@ namespace Vanilla.QM.Menu
         internal static bool linerenderp = true;
         internal static bool lightsp = true;
 
-        public static bool Antirape { get; private set; }
+      //  public static bool Antirape { get; private set; }
     }
 }

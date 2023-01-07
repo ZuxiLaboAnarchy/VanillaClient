@@ -19,10 +19,10 @@ namespace Vanilla.QM.Menu
        
         internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
         internal static VRC_Pickup[] GetAllPickups { get; set; }
-        internal static void SettingsMenu(QMTabMenu tabMenu)
+        internal static void InitMenu(QMNestedButton settingsmenu)
         {
 
-            var settingsmenu = new QMNestedButton(tabMenu, 1, 3, "Vanilla Settings", "Vanilla", "Vanilla Client");
+            
 
             //  var miscsettings = new QMNestedButton(settingsmenu, 3, 3, "Misc Settings", "Miscellaneous Settings", "Galaxy Client");
 
@@ -94,47 +94,7 @@ namespace Vanilla.QM.Menu
                 new Thread(() => { WSBase.Pop(); }).Start();
             }, "Force Server Sync");
 
-            var Mutedisc = new QMSingleButton(tabMenu, 2, 0, "Mute Discord", delegate
-            {
-                var p = Process.GetProcessesByName("Discord").FirstOrDefault();
-                try
-                {
-                    Thread.Sleep(100);
-                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
-                    Thread.Sleep(100);
-                    UnmanagedUtils.keybd_event(0xA2, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0xA0, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0x4D, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0xA2, 0, 0x0002, 0);
-                    UnmanagedUtils.keybd_event(0xA0, 0, 0x0002, 0);
-                    UnmanagedUtils.keybd_event(0x4D, 0, 0x0002, 0);
-                }
-                catch (Exception ex) { ExceptionHandler("Settings", ex, "Mute"); }
-                Thread.Sleep(100);
-                UnmanagedUtils.SetForegroundWindow(_hwnd);
-
-            }, "Mutes Discord");
-
-            var Deafndisc = new QMSingleButton(tabMenu, 2, 1, "Deafen Discord", delegate
-            {
-                var p = Process.GetProcessesByName("Discord").FirstOrDefault();
-                try
-                {
-                    Thread.Sleep(100);
-                    UnmanagedUtils.SetForegroundWindow(p.MainWindowHandle);
-                    Thread.Sleep(100);
-                    UnmanagedUtils.keybd_event(0xA2, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0xA0, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0x44, 0, 0, 0);
-                    UnmanagedUtils.keybd_event(0xA2, 0, 2, 0);
-                    UnmanagedUtils.keybd_event(0xA0, 0, 2, 0);
-                    UnmanagedUtils.keybd_event(0x44, 0, 2, 0);
-                }
-                catch (Exception ex) { ExceptionHandler("Buttons", ex, "Defen"); }
-                Thread.Sleep(100);
-                UnmanagedUtils.SetForegroundWindow(_hwnd);
-
-            }, "Deafen Discord");
+           
 
             var Pickups = new QMNestedButton(settingsmenu, 1, 1, "PickUps", "Vanilla", "Vanilla Client");
 
@@ -168,7 +128,7 @@ namespace Vanilla.QM.Menu
 
 
 
-            var Media = new QMNestedButton(tabMenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
+            var Media = new QMNestedButton(settingsmenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
 
             var MediaControl = new QMSingleButton(Media, 1, 0, "Previous Track (Spotify)", delegate
             {

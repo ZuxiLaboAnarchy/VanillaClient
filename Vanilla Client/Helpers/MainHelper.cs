@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MunchenClient.ModuleSystem.Modules;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -160,7 +161,7 @@ namespace Vanilla.Helpers
 
         internal static bool AvatarLogHandler()
         {
-
+            
             try
             {
                 foreach (VRCPlayer __instance in UnityEngine.Object.FindObjectsOfType<VRCPlayer>())
@@ -170,7 +171,7 @@ namespace Vanilla.Helpers
                         try
                         {
 
-
+                            new FavoriteAvatar(__instance.field_Private_ApiAvatar_0);
 
                             var a = __instance.field_Private_ApiAvatar_0;
                             AvatarLog.Enqueue(new AvatarLog
@@ -208,6 +209,22 @@ namespace Vanilla.Helpers
             }
             return true;
         }
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
 
         internal static void PopAvatarLog()
         {

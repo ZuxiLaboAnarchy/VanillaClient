@@ -4,9 +4,8 @@ namespace Vanilla.QM.Menu
 {
     internal class Micfuckery
     {
-        internal static void MicFuckery(QMTabMenu tabMenu)
+        internal static void InitMenu(QMNestedButton Micsettings)
         {
-            var Micsettings = new QMNestedButton(tabMenu, 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
 
             var Default = new QMSingleButton(Micsettings, 1, 0, "Defualt Bitrate", delegate
             {
