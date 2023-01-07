@@ -20,7 +20,7 @@ namespace Vanilla.QM.Menu
         internal static void InitMenu(QMNestedButton GeneralMenu)
         {
 
-            var FlyToggle = new QMToggleButton(GeneralMenu, 2, 0, "Fly", delegate
+            var FlyToggle = new QMToggleButton(GeneralMenu, 1, 0, "Fly", delegate
             {
 
                 FlyManager.ToggleFly();
@@ -33,7 +33,7 @@ namespace Vanilla.QM.Menu
             }, "I believe i can Fly");
 
 
-            var Hidequest = new QMToggleButton(GeneralMenu, 3, 3, "Hidequest", delegate
+            var Hidequest = new QMToggleButton(GeneralMenu, 2, 0, "Hidequest", delegate
             {
                 var playes = GetAllPlayers();
                 for (int i = 0; i < playes._size; i++)
@@ -53,7 +53,7 @@ namespace Vanilla.QM.Menu
                 LogToHud("Quest are Shown");
             }, "Hide Quest (Does not block but local hide them)");
 
-            var forceJump = new QMToggleButton(GeneralMenu, 3, 2, "ForceJump", delegate
+            var forceJump = new QMToggleButton(GeneralMenu, 3, 0, "ForceJump", delegate
             {
                 EnableDisableJumping(state: true);
                 LogToHud("Force Jump Enabled");
@@ -64,7 +64,7 @@ namespace Vanilla.QM.Menu
             }, "Force Jump for those annoying worlds");
 
 
-            var Mutedisc = new QMSingleButton(GeneralMenu, 2, 0, "Mute Discord", delegate
+            var Mutedisc = new QMSingleButton(GeneralMenu, 2, 1, "Mute Discord", delegate
             {
                 var p = Process.GetProcessesByName("Discord").FirstOrDefault();
                 try
@@ -85,7 +85,7 @@ namespace Vanilla.QM.Menu
 
             }, "Mutes Discord");
 
-            var Deafndisc = new QMSingleButton(GeneralMenu, 2, 1, "Deafen Discord", delegate
+            var Deafndisc = new QMSingleButton(GeneralMenu, 1, 1, "Deafen Discord", delegate
             {
                 var p = Process.GetProcessesByName("Discord").FirstOrDefault();
                 try

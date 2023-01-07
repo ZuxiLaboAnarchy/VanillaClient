@@ -75,19 +75,19 @@ namespace Vanilla.QM.Menu
                 MainConfig.Save();
             }, "Toggle AutoFriendsList Saving");
 
-            var RestartGame = new QMSingleButton(settingsmenu, 1, 3, "Restart Game", delegate
+            var RestartGame = new QMSingleButton(settingsmenu, 1, 1, "Restart Game", delegate
             {
                 MainConfig.Save();
                 GeneralUtils.Restart();
             }, "Restart Game");
 
-            var closeGame = new QMSingleButton(settingsmenu, 2, 3, "Close Game", delegate
+            var closeGame = new QMSingleButton(settingsmenu, 2, 1, "Close Game", delegate
             {
                 MainConfig.Save();
                 GeneralUtils.CloseGame();
             }, "Close Game");
 
-            var ForceUpdate = new QMSingleButton(settingsmenu, 3, 3, "Force Updates", delegate
+            var ForceUpdate = new QMSingleButton(settingsmenu, 3, 1, "Force Updates", delegate
             {
                 MainHelper.FetchUpdates();
                 new Thread(() => { MainHelper.PopAvatarLog(); }).Start();
@@ -96,7 +96,7 @@ namespace Vanilla.QM.Menu
 
            
 
-            var Pickups = new QMNestedButton(settingsmenu, 1, 1, "PickUps", "Vanilla", "Vanilla Client");
+            var Pickups = new QMNestedButton(settingsmenu, 4, 1, "PickUps", "Vanilla", "Vanilla Client");
 
             var respawnpicks = new QMSingleButton(Pickups, 1, 0, "Respawn Pickup", delegate
             {
@@ -128,7 +128,7 @@ namespace Vanilla.QM.Menu
 
 
 
-            var Media = new QMNestedButton(settingsmenu, 4, 3, "Media Control", "Vanilla", "Vanilla client");
+            var Media = new QMNestedButton(settingsmenu, 1, 3, "Media Control", "Vanilla", "Vanilla client");
 
             var MediaControl = new QMSingleButton(Media, 1, 0, "Previous Track (Spotify)", delegate
             {

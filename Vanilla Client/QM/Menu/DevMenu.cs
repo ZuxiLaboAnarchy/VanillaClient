@@ -13,7 +13,7 @@ namespace Vanilla.QM.Menu
     {
         internal static void InitMenu(QMNestedButton Menu) {
 
-            var EventLoggerButton = new QMToggleButton(Menu, 2, 2, "LogEvent1", delegate
+            var EventLoggerButton = new QMToggleButton(Menu, 1, 0, "LogEvent1", delegate
             {
                 RuntimeConfig.EventLogger1 = true;
             }, delegate
