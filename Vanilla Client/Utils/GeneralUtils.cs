@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using UnityEngine;
+using VRC;
+
 
 namespace Vanilla.Utils
 {
@@ -59,7 +61,51 @@ namespace Vanilla.Utils
             }
             return string.Empty;
         }
+        internal static void ClearVRAM()
+        {
+            AssetBundleDownloadManager assetBundleDownloadManager = AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0;
+            System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
+            PlayerManager playerManager = PlayerManager.prop_PlayerManager_0;
+            Player[] P = playerManager.field_Private_List_1_Player_0.ToArray();
+            for (int i = 0; i < P.Length; i++)
+            {
+                if (P[i] != null && P[i].prop_ApiAvatar_0 != null)
+                {
+                    list.Add(P[i].prop_ApiAvatar_0.assetUrl);
+                }
+            }
+            System.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique> dictionary = new System.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique>();
+            Il2CppSystem.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique>.KeyCollection.Enumerator enumerator = assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0.Keys.GetEnumerator();      //field_Private_Dictionary_2_String_AssetBundleDownload_0.Keys.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                string current = enumerator.Current;
+                dictionary.Add(current, assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0[current]);
+            }
+            foreach (string key in dictionary.Keys)
+            {
+                ObjectPublicInStInCoBoUnInStObBoUnique assetBundleDownload = assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0[key];
+                if (!assetBundleDownload.field_Private_String_0.Contains("wrld_") && !list.Contains(key))
+                {
+                    if (assetBundleDownload.prop_GameObject_0 != null)
+                    {
+                        UnityEngine.Object.DestroyImmediate(assetBundleDownload.prop_GameObject_0, allowDestroyingAssets: true);
+                    }
+                    assetBundleDownload.field_Private_AssetBundle_0?.Unload(unloadAllLoadedObjects: true);
+                    assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0.Remove(key);
+                }
+            }
+            dictionary.Clear();
+            list.Clear();
+            Resources.UnloadUnusedAssets();
+            Il2CppSystem.GC.Collect(0, Il2CppSystem.GCCollectionMode.Forced, blocking: true, compacting: true);
+            Il2CppSystem.GC.Collect(1, Il2CppSystem.GCCollectionMode.Forced, blocking: true, compacting: true);
+            System.GC.Collect(0, System.GCCollectionMode.Forced, blocking: true, compacting: true);
+            System.GC.Collect(1, System.GCCollectionMode.Forced, blocking: true, compacting: true);
+            System.GC.WaitForPendingFinalizers();
+        }
     }
+
+   
 
 
 }

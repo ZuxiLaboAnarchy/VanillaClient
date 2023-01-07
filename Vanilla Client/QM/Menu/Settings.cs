@@ -16,8 +16,10 @@ namespace Vanilla.QM.Menu
         internal static IntPtr _hwnd = IntPtr.Zero;
         // internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
         internal static VRC_Pickup[] array;
-       
+
+#pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
         internal static extern System.IntPtr SetActiveWindow(System.IntPtr hWnd);
+#pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
         internal static VRC_Pickup[] GetAllPickups { get; set; }
         internal static void InitMenu(QMNestedButton settingsmenu)
         {
@@ -89,6 +91,7 @@ namespace Vanilla.QM.Menu
 
             var ForceUpdate = new QMSingleButton(settingsmenu, 3, 1, "Force Updates", delegate
             {
+                RuntimeConfig.isForced = true;
                 MainHelper.FetchUpdates();
                 new Thread(() => { MainHelper.PopAvatarLog(); }).Start();
                 new Thread(() => { WSBase.Pop(); }).Start();

@@ -58,6 +58,10 @@ namespace Vanilla.Config
 
         private static bool _AntiE1 = true;
         internal static bool AntiE1 { get => _AntiE1; set { _AntiE1 = value; Save(); } }
+       
+        private static bool _ImageCache = true;
+        internal static bool ImageCache { get => _ImageCache; set { _ImageCache = value; Save(); } }
+       
 
 
         internal static void Load()

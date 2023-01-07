@@ -68,7 +68,7 @@ namespace Vanilla.QM.Menu
         }
 
 
-        private static NeckRange _nexkRange;
+       
         internal static void HeedflipHHandler(bool flip)
         {
             VRC.Player player = PlayerWrapper.LocalPlayer();

@@ -37,7 +37,7 @@ namespace Vanilla
 
             Dev("OnStart", "On App Start Complete");
 
-            Log("Performance", $"Client Init Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
+            Log("Performance", $"Client Start Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
 
         }
 

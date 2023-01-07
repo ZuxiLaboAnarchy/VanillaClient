@@ -31,6 +31,7 @@ namespace Vanilla.Modules
             Modules.Add(new VRCPlus());
             Modules.Add(new JoinLoggerModule());
             Modules.Add(new PlayerHandler());
+            Modules.Add(new PerfModule());
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);

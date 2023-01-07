@@ -106,6 +106,10 @@ namespace Vanilla.QM.Menu
 
             }, "Deafen Discord");
 
+            var ClearVRam = new QMSingleButton(GeneralMenu, 3, 0, "ClearVRAM", delegate
+            {
+                GeneralUtils.ClearVRAM();
+            }, "ClearVRAM");
         }
 
         static void EnableDisableJumping(bool state)

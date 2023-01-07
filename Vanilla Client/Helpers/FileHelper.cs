@@ -1,7 +1,9 @@
 ﻿using MelonLoader;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using UnityEngine;
 
 namespace Vanilla.Utils
 {
@@ -32,7 +34,7 @@ namespace Vanilla.Utils
             {
                 Directory.CreateDirectory(GetMainFolder() + $"\\Cheats\\{GetGameName()}");
             }
-            return GetMainFolder() + $"\\Cheats\\{GetGameName()}";
+            return GetMainFolder() + $"\\Cheats\\{GetGameName()}\\";
         }
 
 
@@ -113,6 +115,43 @@ namespace Vanilla.Utils
                 }
             }
         }
+
+        internal static bool SaveTextureToDisk(Texture texture, string fileDirectory, string fileName, bool includeCRC32InFileName = false)
+        {
+            try
+            {
+                Texture2D texture2D = new Texture2D(texture.width, texture.height, TextureFormat.RGBA32, mipChain: false);
+                RenderTexture active = RenderTexture.active;
+                RenderTexture temporary = RenderTexture.GetTemporary(texture.width, texture.height, 32);
+                Graphics.Blit(texture, temporary);
+                RenderTexture.active = temporary;
+                texture2D.ReadPixels(new Rect(0f, 0f, temporary.width, temporary.height), 0, 0);
+                texture2D.Apply();
+                RenderTexture.active = active;
+                RenderTexture.ReleaseTemporary(temporary);
+                byte[] bytes = ImageConversion.EncodeToPNG(texture2D);
+                if (!Directory.Exists(fileDirectory))
+                {
+                    Directory.CreateDirectory(fileDirectory);
+                }
+                if (!includeCRC32InFileName)
+                {
+                    File.WriteAllBytes(fileDirectory + "/" + fileName + ".png", bytes);
+                }
+                else
+                {
+                    File.WriteAllBytes(fileDirectory + "/" + fileName + " - " + Crc32.CalculateCRC(bytes) + ".png", bytes);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
 
 
     }
