@@ -1,5 +1,6 @@
 ﻿using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
+using Vanilla.Config;
 using Vanilla.QM.Menu;
 
 namespace Vanilla.Wrappers
@@ -8,7 +9,7 @@ namespace Vanilla.Wrappers
     {
         internal static bool IsEvent1Bad(EventData eventData)
         {
-            if (Safetymenu.Antirape)
+            if (MainConfig.Antirape)
             {
                 byte[] voiceData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
                 return (AudioHandler.IsVoiceDataBad(eventData.Sender, voiceData));

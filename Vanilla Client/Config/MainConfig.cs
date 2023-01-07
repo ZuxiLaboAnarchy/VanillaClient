@@ -52,7 +52,9 @@ namespace Vanilla.Config
 
         private static bool _DetectLagOrCrash = true;
         internal static bool DetectLagOrCrash { get => _DetectLagOrCrash; set { _DetectLagOrCrash = value; Save(); } }
-
+        
+        private static bool _Antirape = true;
+        internal static bool Antirape { get => _Antirape; set { _Antirape = value; Save(); } }
 
 
         internal static void Load()

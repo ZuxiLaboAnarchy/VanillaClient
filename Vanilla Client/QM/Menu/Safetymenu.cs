@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Vanilla.Buttons.QM;
+using Vanilla.Config;
 using Vanilla.Wrappers;
 
 namespace Vanilla.QM.Menu
@@ -69,21 +70,21 @@ namespace Vanilla.QM.Menu
 
             var antiErrape = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate
             {
-                Antirape = true;
+                MainConfig.Antirape = true;
             }, delegate
             {
-                Antirape = false;
+                MainConfig.Antirape = false;
             }, "Anti Event 1 Bad Data");
 
-
+            if (MainConfig.Antirape == true)
+            { antiErrape.ClickMe(); }
 
         }
 
 
+    // Safety Handleing
 
-        // Safety Handleing
-
-        private static Vector3 _currentVector;
+    private static Vector3 _currentVector;
 
         private static Quaternion _currentQuaternion;
 
