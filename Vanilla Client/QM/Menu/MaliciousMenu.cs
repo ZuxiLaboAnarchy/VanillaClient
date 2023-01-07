@@ -17,7 +17,7 @@ namespace Vanilla.QM.Menu
     {
         internal static void InitMenu(QMNestedButton Menu)
         {
-            var Itemlagg = new QMToggleButton(Menu, 4, 3, "Itemlag", delegate
+            var Itemlagg = new QMToggleButton(Menu, 1, 0, "Itemlag", delegate
             {
 #pragma warning disable CS0219 // Variable is assigned but its value is never used
                 bool lagger = true;
@@ -35,7 +35,7 @@ namespace Vanilla.QM.Menu
 
             }, "Item Lag");
 
-            var HideSelfButton = new QMToggleButton(Menu, 1, 1, "Hide Self", delegate
+            var HideSelfButton = new QMToggleButton(Menu, 2,0, "Hide Self", delegate
             {
                 PlayerWrapper.HideSelf(true);
             }, delegate

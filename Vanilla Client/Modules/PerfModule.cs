@@ -16,6 +16,7 @@ namespace Vanilla.Modules
             
             if (!state)
             {
+                GeneralUtils.ClearVRAM();
                 Application.targetFrameRate = 15;
                 GeneralUtils.ClearVRAM();
                 Dev("PerfModule", "Set Framerate to 15 Successfully");

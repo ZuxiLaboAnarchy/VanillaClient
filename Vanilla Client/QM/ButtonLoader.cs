@@ -52,7 +52,7 @@ namespace Vanilla.QM
 
             }, "Change Avatar By ID");
 
-            var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "AvatarID", delegate
+            var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "JoinWorld", delegate
             {
                 var World = GeneralUtils.GetClipboard();
                 if (World.Contains(":"))
@@ -65,7 +65,7 @@ namespace Vanilla.QM
             var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Remote", 1, 3, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
           //  Selected = new QMNestedButton("Menu_SelectedUser_Remote", "", 0, 0, "Target functions for Blaze's Client", "Blaze's Client");
 
-            var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 1, "General\nMenu", "Vanilla", "Vanilla client");
+            var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 0, "General\nMenu", "Vanilla", "Vanilla client");
             GeneralMenu.InitMenu(GeneralMenuButton);
          
             var MovementMenu = new QMNestedButton(GeneralMenuButton, 4, 0, "Movement Settings", "Vanilla", "Vanilla Client");
@@ -74,7 +74,7 @@ namespace Vanilla.QM
             var ExploitMenuButton = new QMNestedButton(tabMenu, 2, 3, "Exploits", "Vanilla", "Vanilla Client");
             ExploitMenu.InitMenu(ExploitMenuButton);
 
-            var MicMenu = new QMNestedButton(ExploitMenuButton, 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
+            var MicMenu = new QMNestedButton(ExploitMenuButton, 4, 3, "Mic Settings", "Vanilla", "Vanilla Client");
             Micfuckery.InitMenu(MicMenu);
 
             var AmonUsMenu = new QMNestedButton(ExploitMenuButton, 4, 1, "Among Us", "Vanilla", "Vanilla client");

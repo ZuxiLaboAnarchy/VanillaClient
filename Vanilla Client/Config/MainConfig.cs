@@ -31,6 +31,9 @@ namespace Vanilla.Config
 
         private static string _PCCrashID = "";
         internal static string PCCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
+        
+        private static string _QuestCrashID = "avtr_4a82f447-9465-4a02-a070-0059c0d576af";
+        internal static string QuestCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
 
         private static bool _ESP = true;
         internal static bool ESP { get => _ESP; set { _ESP = value; Save(); } }
