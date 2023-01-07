@@ -64,7 +64,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat\Core_vrchat.dll" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
     <OutputPath>bin\ARM64\x64 Build Release\</OutputPath>
