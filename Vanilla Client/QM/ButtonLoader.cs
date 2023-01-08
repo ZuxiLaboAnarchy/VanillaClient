@@ -125,10 +125,6 @@ namespace Vanilla.QM
 
 
 
-            new playermenu();
-
-
-
 
 
             //QMImage.LoadQMImage();

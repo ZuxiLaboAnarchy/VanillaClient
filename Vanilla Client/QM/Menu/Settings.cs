@@ -214,19 +214,18 @@ namespace Vanilla.QM.Menu
                 UnmanagedUtils.SetForegroundWindow(_hwnd);
             }, "Play Next Track");
 
+            var Chachedimg = new QMToggleButton(settingsmenu, 4, 3, "Cached Img", delegate
 
-            /* How to do the Among Us hacks Implement soon 
-             
-                GameObject Among = submenu.Create("AmongUs", Xploitsubmenu);
-                new Submenubutton(Xploitsubmenu.GetMenu(), "AmongUs", Among, Download_Images._XploitIcon, false, 4, 0);
-                new NButton(Among.GetMenu(), "Complete Task", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("OnLocalPlayerCompletedTask"));
-                new NButton(Among.GetMenu(), "Crew Win", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("Btn_Start"));
-                new NButton(Among.GetMenu(), "Sussy Wub", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("SyncVictoryM"));
-                new NButton(Among.GetMenu(), "Kill All", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("KillLocalPlayer"));
-                new NButton(Among.GetMenu(), "Start Game", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("SyncVictoryB"));
-                new NButton(Among.GetMenu(), "Force Meeting", () => Defiance.Exploits.AmongUsMisc.AmongUsMod("StartMeeting"));
-            
-             */
+            {
+                MainConfig.ImageCache = true;
+                MainConfig.Save();
+            }, delegate
+            {
+                MainConfig.ImageCache = false;
+                MainConfig.Save();
+            }, "Toggle Cached img Saving");
+
+
 
 
             /* World History button Somthing like this 
@@ -243,6 +242,8 @@ namespace Vanilla.QM.Menu
             { ESP.ClickMe(); }
             if (MainConfig.JoinLogger == true)
             { JoinLogger.ClickMe(); }
+            if (MainConfig.ImageCache == true)
+            { Chachedimg.ClickMe(); }
         }
     }
 }
