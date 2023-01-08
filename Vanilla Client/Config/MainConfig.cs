@@ -144,8 +144,8 @@ namespace Vanilla.Config
             tbl.Items.Add(new KeyValueSyntax("NameplateWallhack", new BooleanValueSyntax(_NameplateWallhack)));
             tbl.Items.Add(new KeyValueSyntax("NameplateMoreInfo", new BooleanValueSyntax(_NameplateMoreInfo)));
             tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ShowActorID)));
-            tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_DetectLagOrCrash)));
-            tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ImageCache)));
+            tbl.Items.Add(new KeyValueSyntax("DetectLagOrCrash", new BooleanValueSyntax(_DetectLagOrCrash)));
+            tbl.Items.Add(new KeyValueSyntax("ImageCache", new BooleanValueSyntax(_ImageCache)));
             
 
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
