@@ -74,6 +74,8 @@ namespace Vanilla.Helpers
 
             // while (GeneralWrappers.GetVRCUiManager() == null)
 
+            Xrefs.Input.SetMethods()
+
             while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
             {
                 yield return null;
@@ -81,6 +83,8 @@ namespace Vanilla.Helpers
             Dev("HudManager", "HUD Loaded Injecting Alert Panel");
 
             LogHandler.SetupHud();
+
+            
         }
 
 

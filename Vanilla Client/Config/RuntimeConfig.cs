@@ -29,7 +29,7 @@
         /*Server Controller Vars*/
         internal static bool nextUpdateCheckComplete = true;
         internal static bool WSAuthed = false;
-        
+        internal static VRCPlayer SelectedPlayer = null;
 #if DEBUG
         internal static string ReleaseID = "Debug";
 #else

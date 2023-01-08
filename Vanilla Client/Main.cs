@@ -38,7 +38,7 @@ namespace Vanilla
             Dev("OnStart", "On App Start Complete");
 
             Log("Performance", $"Client Start Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
-
+           
         }
 
         internal protected static void CallOnGUI() => ModuleManager.OnGUI();

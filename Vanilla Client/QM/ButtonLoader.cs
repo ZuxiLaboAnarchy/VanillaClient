@@ -3,11 +3,13 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using Vanilla.Buttons.QM;
+using Vanilla.Config;
 using Vanilla.Modules;
 using Vanilla.QM.Menu;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
 using VRC.UI.Core.Styles;
+using VRC.UI.Elements.Menus;
 
 namespace Vanilla.QM
 {
@@ -61,8 +63,25 @@ namespace Vanilla.QM
             }, "Change Avatar By ID");
 
 
-           // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
-            var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Remote", 1, 3, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
+            // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
+            var selectedmenu = GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
+            Log("1", "1");
+            //selectedmenu.FindObject
+
+
+           //  var selectedGroup = UnityEngine.Object.Instantiate(selectedmenu.gameObject,selectedmenu.gameObject.transform.parent);
+           var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for Vanilla Client", "Vanilla");
+            Selected.GetMainButton().SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
+            Selected.GetMainButton().GetGameObject().transform.SetParent(selectedmenu.transform);
+            Log("1", "1");
+            Selected.GetMainButton().SetAction(delegate
+            {
+                
+              
+                RuntimeConfig.SelectedPlayer = PlayerWrapper.GetSelectedUser();
+                Selected.OpenMe();
+            });
+            var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Local", 20, 4, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
           //  Selected = new QMNestedButton("Menu_SelectedUser_Remote", "", 0, 0, "Target functions for Blaze's Client", "Blaze's Client");
 
             var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 0, "General\nMenu", "Vanilla", "Vanilla client");

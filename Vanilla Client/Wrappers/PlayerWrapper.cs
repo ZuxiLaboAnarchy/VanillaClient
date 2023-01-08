@@ -6,6 +6,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.UI;
+using VRC.UI.Elements.Menus;
 
 namespace Vanilla.Wrappers
 {
@@ -16,6 +17,16 @@ namespace Vanilla.Wrappers
         {
             return VRCPlayer.field_Internal_Static_VRCPlayer_0;
         }
+
+        public static VRCPlayer GetSelectedUser()
+        {
+         //   var a = UnityEngine.Object.FindObjectOfType<SelectedUserMenuQM>().;
+
+            var SelectedGameObject = GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local").transform.GetComponent<SelectedUserMenuQM>().field_Private_IUser_0;
+
+            return PlayerWrapper.GetPlayerInformationByID(SelectedGameObject.prop_String_0).vrcPlayer;
+        }
+
 
         internal static Player LocalPlayer()
         {

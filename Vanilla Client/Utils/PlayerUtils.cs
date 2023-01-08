@@ -142,6 +142,7 @@ namespace Vanilla.Utils
         {
             return vrcPlayer.field_Internal_GameObject_0;
         }
+
     }
 
     public enum PlayerRankStatus : short

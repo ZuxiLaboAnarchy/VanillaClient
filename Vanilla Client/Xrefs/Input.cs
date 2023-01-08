@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Il2CppSystem.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -29,17 +30,31 @@ namespace Vanilla.Xrefs
                         if (xrefedmethods[i2].Type != UnhollowerRuntimeLib.XrefScans.XrefType.Global) continue;
                         switch (true)
                         {
+
+                            case true when xrefedmethods[i2].ReadAsObject().ToString() == "Container/MMParent/Modal_MM_Keyboard":
+                                _Warning = methods[i];
+                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
+
+                                break;
+
+
+
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/AlertPopup":
                                 _Warning = methods[i];
+                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
+
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/InputKeypadPopup":
                                 _NumbKeyboard = methods[i];
+                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _NumbKeyboard.Name);
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/StandardPopupV2":
                                 _Toggle = methods[i];
+                                Console.WriteLine("XrefScanner", "Found Mehod for _Toggle" + _Toggle.Name);
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/InputPopup":
                                 _InputPopout = methods[i];
+                                Console.WriteLine("XrefScanner", "Found Mehod for _InputPopout" + _InputPopout.Name);
                                 break;
                         }
                     }
@@ -91,6 +106,16 @@ namespace Vanilla.Xrefs
                                     _stringOut(s);
                                     _action.Invoke();
                                })),null,"Enter text....",true,null,false,0 });
+        }
+
+        public static void CloseKeyboard() => VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_Boolean_1(true, false);
+        
+        public static Il2CppSystem.Action CloseKeyboardAction => DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(new Action(() => { CloseKeyboard(); }));
+      
+        public static void OpenKeyboard(string title, string text, Action<string, List<KeyCode>, Text> action)
+        {
+            Il2CppSystem.Action<string, List<KeyCode>, Text> newAction = DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, List<KeyCode>, Text>>(action);
+            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(title, null, TMPro.TMP_InputField.InputType.Standard, false, "Okay", newAction, CloseKeyboardAction, text);
         }
     }
 }
