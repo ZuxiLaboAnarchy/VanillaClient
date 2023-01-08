@@ -65,7 +65,6 @@ namespace Vanilla.QM
 
             // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
             var selectedmenu = GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
-            Log("1", "1");
             //selectedmenu.FindObject
 
 
@@ -73,7 +72,12 @@ namespace Vanilla.QM
            var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for Vanilla Client", "Vanilla");
             Selected.GetMainButton().SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
             Selected.GetMainButton().GetGameObject().transform.SetParent(selectedmenu.transform);
-            Log("1", "1");
+
+
+
+
+            UnityEngine.Object.Destroy(Selected.GetMainButton().GetGameObject().GetComponent<StyleElement>());
+
             Selected.GetMainButton().SetAction(delegate
             {
                 
@@ -81,7 +85,11 @@ namespace Vanilla.QM
                 RuntimeConfig.SelectedPlayer = PlayerWrapper.GetSelectedUser();
                 Selected.OpenMe();
             });
-            var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Local", 20, 4, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
+
+            SelectedPlayer.InitMenu(Selected); 
+
+
+         //   var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Local", 20, 4, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
           //  Selected = new QMNestedButton("Menu_SelectedUser_Remote", "", 0, 0, "Target functions for Blaze's Client", "Blaze's Client");
 
             var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 0, "General\nMenu", "Vanilla", "Vanilla client");

@@ -116,6 +116,12 @@ namespace Vanilla.Config
 
             if (installertbl.ContainsKey("DetectLagOrCrash"))
                 Boolean.TryParse(installertbl["DetectLagOrCrash"].ToString(), out _DetectLagOrCrash);
+          
+            if (installertbl.ContainsKey("CacheImages"))
+                    Boolean.TryParse(installertbl["CacheImages"].ToString(), out _ImageCache);
+
+
+            
 
 
             Dev("Config", "Loaded...");
@@ -139,7 +145,8 @@ namespace Vanilla.Config
             tbl.Items.Add(new KeyValueSyntax("NameplateMoreInfo", new BooleanValueSyntax(_NameplateMoreInfo)));
             tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ShowActorID)));
             tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_DetectLagOrCrash)));
-
+            tbl.Items.Add(new KeyValueSyntax("ShowActorID", new BooleanValueSyntax(_ImageCache)));
+            
 
             //tbl.Items.Add(new KeyValueSyntax("LastSelectedGamePath", new StringValueSyntax(string.IsNullOrEmpty(_lastselectedgamepath) ? "" : _lastselectedgamepath)));
             doc.Tables.Add(tbl);

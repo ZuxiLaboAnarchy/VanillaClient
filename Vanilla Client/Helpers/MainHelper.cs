@@ -74,7 +74,7 @@ namespace Vanilla.Helpers
 
             // while (GeneralWrappers.GetVRCUiManager() == null)
 
-            Xrefs.Input.SetMethods()
+            Xrefs.Input.SetMethods();
 
             while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
             {
