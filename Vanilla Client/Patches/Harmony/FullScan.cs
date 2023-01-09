@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
 
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
 namespace Vanilla.Patches.Harmony;
 [Obfuscation(Feature = "-flow")]
 [Obfuscation(Feature = "-strenc")]
@@ -7,7 +11,24 @@ namespace Vanilla.Patches.Harmony;
 [Obfuscation(Feature = "-rename")]
 internal class Scanner : VanillaPatches
 {
+    static void FindOBBB()
+    {
+      //   Test =;   //       onClick.FindMethod_Impl.Name.ToString();
+
+        
+        //     InitializeLocalPatchHandler(typeof(ImageDownloaderPatch));
+
+        
+
+
+       /// PatchMethod(typeof().GetMethod("DownloadImageInternal"), GetLocalPatch("OnImageDownloadPatch"), null);
+
+        //Test.
+        }
 #if DEBUG1
+
+                GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
+
     protected override string patchName => "Scanner";
 
     internal override void Patch()

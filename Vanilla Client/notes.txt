@@ -85,3 +85,17 @@ SceneManager.add_sceneUnloaded((Action<Scene>)delegate(Scene scene)
 			Avatar prefab button Location
 
 			"Canvas_MainMenu(Clone)/Container/MMParent/Menu_Avatars/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation/Viewport/VerticalLayoutGroup/VerticalLayoutGroup User/Cell_MM_SidebarListItem prefab"
+
+
+
+
+			TrackingVolume/VRLoadingOverlay/FlatLoadingOverlay(Clone)/
+
+
+			TrackingVolume/VRLoadingOverlay/FlatLoadingOverlay(Clone)/Container/Canvas/Background
+
+			/LoadingBackground_TealGradient_Music/
+
+
+
+

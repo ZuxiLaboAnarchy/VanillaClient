@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
 using Vanilla.Config;
 using Vanilla.Wrappers;
 
@@ -15,11 +17,11 @@ namespace Vanilla.Modules
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
 
-               // LogHandler.LogToHud("Test");
+               
+                // LogHandler.LogToHud("Test");
                 ModuleManager.DebugKey();
 
-
-
+//  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
 
             }
 #endif

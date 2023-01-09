@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Vanilla.Modules;
 using Vanilla.Patches;
+using Vanilla.Patches.Harmony;
 using Vanilla.ServerAPI;
 using static Vanilla.Utils.Performance;
 
@@ -11,8 +12,9 @@ namespace Vanilla
         [CompilerGenerated]
         internal protected static void CallOnStart(bool isBot = false)
         {
-
-//            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResourceUtils.Resolver);
+            Xrefs.Input.SetMethods();
+            Console.WriteLine("OK");
+            //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResourceUtils.Resolver);
 
             FileHelper.LoadResources();
 

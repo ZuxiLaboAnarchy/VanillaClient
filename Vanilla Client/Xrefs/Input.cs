@@ -19,7 +19,48 @@ namespace Vanilla.Xrefs
 
         internal static void SetMethods()
         {
-            MethodInfo[] methods = typeof(VRCUiPopupManager).GetMethods();
+            return;
+          
+          
+
+
+            MethodInfo[] methods = typeof(VRCPlayer).GetMethods();
+            try
+            {
+                for (int i = 0; i < methods.Length; i++)
+            {
+
+                    
+                    var xrefedmethods = UnhollowerRuntimeLib.XrefScans.XrefScanner.XrefScan(methods[i]).ToArray();
+                for (int i2 = 0; i2 < xrefedmethods.Length; i2++)
+                {
+                    
+                        if (xrefedmethods[i2].Type != UnhollowerRuntimeLib.XrefScans.XrefType.Global) continue;
+                    switch (true)
+                    {
+                           
+                        case true when xrefedmethods[i2].ReadAsObject().ToString() == "Container/MMParent/Modal_MM_Keyboard":
+                            _Warning = methods[i];
+                            Log("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
+                                Console.ReadLine();
+                                break;
+
+                        case true when xrefedmethods[i2].ReadAsObject().ToString().Contains("Modal_MM_Keyboard"):
+                            _InputPopout = methods[i];
+                            Log("XrefScanner", "Found Methhod for _Modal_MM_Keyboard => " + _InputPopout.Name, ConsoleColor.Yellow);
+                                Console.ReadLine();
+                                break;
+                               
+                    }
+                       
+                }
+                    Log("XrefScanner", "Not Found", ConsoleColor.Red);
+
+                }
+        }
+            catch { }
+            return;
+          //  MethodInfo[] methods = typeof(VRCUiPopupManager).GetMethods();
             try
             {
                 for (int i = 0; i < methods.Length; i++)
@@ -33,7 +74,7 @@ namespace Vanilla.Xrefs
 
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "Container/MMParent/Modal_MM_Keyboard":
                                 _Warning = methods[i];
-                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
+                                Log("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
 
                                 break;
 
@@ -41,21 +82,26 @@ namespace Vanilla.Xrefs
 
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/AlertPopup":
                                 _Warning = methods[i];
-                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
+                               Log("XrefScanner", "Found Mehod for _Warning" + _Warning.Name);
 
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/InputKeypadPopup":
                                 _NumbKeyboard = methods[i];
-                                Console.WriteLine("XrefScanner", "Found Mehod for _Warning" + _NumbKeyboard.Name);
+                                Log("XrefScanner", "Found Mehod for _Warning" + _NumbKeyboard.Name);
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/StandardPopupV2":
                                 _Toggle = methods[i];
-                                Console.WriteLine("XrefScanner", "Found Mehod for _Toggle" + _Toggle.Name);
+                                Log("XrefScanner", "Found Mehod for _Toggle" + _Toggle.Name);
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString() == "MenuContent/Popups/InputPopup":
                                 _InputPopout = methods[i];
-                                Console.WriteLine("XrefScanner", "Found Mehod for _InputPopout" + _InputPopout.Name);
+                               Log("XrefScanner", "Found Mehod for _InputPopout" + _InputPopout.Name);
                                 break;
+                            case true when xrefedmethods[i2].ReadAsObject().ToString().Contains("Modal_MM_Keyboard"):
+                                _InputPopout = methods[i];
+                                Log("XrefScanner", "Found Mehod for _Modal_MM_Keyboard => " + _InputPopout.Name, ConsoleColor.Yellow);
+                                break;
+
                         }
                     }
 

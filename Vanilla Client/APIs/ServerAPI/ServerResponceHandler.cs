@@ -36,7 +36,7 @@ namespace Vanilla.ServerAPI
         {
             Dev("RH", "Handleing Update");
             //  Dev("WSSRH", WSResponce);
-            Console.WriteLine(WSResponce);
+            
 
             if (WSResponce.IsNullOrEmpty())
             {

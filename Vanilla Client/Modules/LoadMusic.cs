@@ -23,11 +23,8 @@ namespace Vanilla.Modules
             {
                 AudioClip audioclip = null;
 
-
-
-
                 if (MusicPath == string.Empty)
-                { Dev("Audio Handler", "Loading Local Audio");  audioclip = AssetLoader.LoadAudio("LoadMusic"); }
+                { Dev("Audio Handler", "Loading Local Audio"); audioclip = AssetLoader.LoadAudio("LoadMusic"); }
 
                 else
                 {
@@ -64,27 +61,5 @@ namespace Vanilla.Modules
 
             }
         }
-
-
-
-        /*   internal static void LoadSkyWhenever()
-           {
-
-               SkyBoxAssetBundle = AssetBundle.LoadFromFile($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");
-               skyBoxMaterial = SkyBoxAssetBundle.LoadAsset_Internal("Load.mat", Il2CppType.Of<Material>()).Cast<Material>();
-               UnityEngine.Object.Instantiate<Material>(skyBoxMaterial);
-               bool flag = skyBoxMaterial == null;
-               if (flag)
-               {
-                   API.LogHandler.Error("SkyBox Mat was null ping Hyper", "Skyboxes");
-               }
-               RenderSettings.skybox = skyBoxMaterial;
-               SkyBoxAssetBundle.Unload(false);
-               firstload = false;
-           }*/
-
-        //    private static AssetBundle SkyBoxAssetBundle { get; set; }
-        //      private static Material skyBoxMaterial;
-        internal static bool firstload = true;
     }
 }
