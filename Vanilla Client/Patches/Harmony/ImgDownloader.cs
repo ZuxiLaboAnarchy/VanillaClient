@@ -16,7 +16,7 @@ namespace Vanilla.Patches.Harmony
         internal override void Patch()
         {
             InitializeLocalPatchHandler(typeof(ImageDownloaderPatch));
-            PatchMethod(typeof(ImageDownloader).GetMethod("DownloadImageInternal"), GetLocalPatch("OnImageDownloadPatch"), null);
+            PatchMethod(typeof(ImageDownloader).GetMethod(Strings.DownloadImageInternal), GetLocalPatch(Strings.OnImageDownloadPatch), null);
         }
 
         private static bool OnImageDownloadPatch(string __0, int __1, Il2CppSystem.Action<Texture2D> __2, Il2CppSystem.Action __3, string __4, bool __5)

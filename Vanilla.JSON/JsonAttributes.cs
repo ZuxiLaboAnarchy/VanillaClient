@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON {
 
 	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
 	public class JsonPropertyAttribute : Attribute {

@@ -3,7 +3,8 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON
+{
 
 	public static class StringExtensions {
 		public static string SnakeCaseToCamelCase(this string snakeCaseName) {

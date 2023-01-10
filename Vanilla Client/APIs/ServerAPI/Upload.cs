@@ -2,7 +2,7 @@
 using Vanilla.Helpers;
 using Vanilla.ServerAPI;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
-using Vanilla.TinyJSON;
+using Vanilla.JSON;
 using System.Threading;
 
 namespace Vanilla.API.ServerAPI

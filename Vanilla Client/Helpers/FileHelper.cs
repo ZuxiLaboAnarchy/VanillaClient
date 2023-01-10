@@ -97,7 +97,10 @@ namespace Vanilla.Utils
 
         }
 
-        internal static string[] EmbededLibraryPaths = new string[1] { "Vanilla.Resources.WSManager.dll" };
+        
+        [Obfuscation(Feature = "-strenc")]
+
+        internal static string[] EmbededLibraryPaths = new string[4] { "Vanilla.Resources.WSManager.dll", "Vanilla.Resources.Vanilla.Tomlyn.dll", "Vanilla.Resources.Vanilla.JSON.dll", "Vanilla.Resources.Vanilla.Refs.dll" };
         internal static void LoadResources()
         {
             for (int i = 0; i < EmbededLibraryPaths.Length; i++)

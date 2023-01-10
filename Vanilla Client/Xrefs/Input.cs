@@ -16,7 +16,7 @@ namespace Vanilla.Xrefs
 
 
 
-
+#pragma warning disable CS0162 // Unreachable code detected
         internal static void SetMethods()
         {
             return;
@@ -98,7 +98,9 @@ namespace Vanilla.Xrefs
                                Log("XrefScanner", "Found Mehod for _InputPopout" + _InputPopout.Name);
                                 break;
                             case true when xrefedmethods[i2].ReadAsObject().ToString().Contains("Modal_MM_Keyboard"):
+
                                 _InputPopout = methods[i];
+
                                 Log("XrefScanner", "Found Mehod for _Modal_MM_Keyboard => " + _InputPopout.Name, ConsoleColor.Yellow);
                                 break;
 
@@ -111,7 +113,7 @@ namespace Vanilla.Xrefs
             catch { }
         }
 
-
+#pragma warning restore CS0162 // Unreachable code detected
 
 
 

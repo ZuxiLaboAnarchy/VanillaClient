@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Collections;
 
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON {
 	public class JsonBuilder {
 		StringBuilder builder = new StringBuilder();
 		bool pretty = false;

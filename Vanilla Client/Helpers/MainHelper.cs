@@ -8,7 +8,7 @@ using Vanilla.AvatarFavorites;
 using Vanilla.Config;
 using Vanilla.Modules;
 using Vanilla.ServerAPI;
-using Vanilla.TinyJSON;
+using Vanilla.JSON;
 using Vanilla.Wrappers;
 using VRC.Core;
 using static MelonLoader.MelonLogger;
@@ -24,7 +24,7 @@ namespace Vanilla.Helpers
 
         private float nextPop = 0f;
         private float nextUpdateFetch = 0f;
-        public static List<string> AvatarList = new List<string>();
+      //  public static List<string> AvatarList = new List<string>();
 
 
 
@@ -161,12 +161,12 @@ namespace Vanilla.Helpers
                     if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                     {
                         var a = __instance.field_Private_ApiAvatar_0;
-                        if (AvatarList.Contains(a.id))
-                        { continue; }
+                      //  if (AvatarList.Contains(a.id))
+                        //{ continue; }
                         SentAvatarCount++;
                         UploadHelper.UploadAvatarToGlobalDatabase(new FavoriteAvatar(__instance.field_Private_ApiAvatar_0));
 
-                        AvatarList.Add(a.id);
+                       // AvatarList.Add(a.id);
                     }
                 }
             }
@@ -185,8 +185,7 @@ namespace Vanilla.Helpers
                 if (!AvatarLog.TryDequeue(out var a))
                 { continue; }
 
-                if (AvatarList.Contains(a.avatar_id))
-                { continue; }
+              
 
 
                 Dictionary<string, string> AvatarsUploadPram = new Dictionary<string, string>

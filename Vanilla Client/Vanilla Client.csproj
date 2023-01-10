@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vanilla</RootNamespace>
     <AssemblyName>core</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -64,7 +64,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat\Core_vrchat.dll" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat\Core_vrchat.dll" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
     <OutputPath>bin\ARM64\x64 Build Release\</OutputPath>
@@ -88,7 +88,7 @@
     <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
 echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
 </PreBuildEvent>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x64 Build Debug|ARM64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,7 +99,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PlatformTarget>ARM64</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMonoBehave|AnyCPU'">
     <OutputPath>bin\TestMonoBehave\</OutputPath>
@@ -119,7 +119,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
 echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
 </PreBuildEvent>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
     <OutputPath>bin\Vanilla\Release\</OutputPath>
@@ -130,7 +130,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PlatformTarget>ARM64</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -227,6 +227,15 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
+    <Reference Include="Vanilla.JSON">
+      <HintPath>Resources\Vanilla.JSON.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanilla.Refs">
+      <HintPath>Resources\Vanilla.Refs.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanilla.Tomlyn">
+      <HintPath>Resources\Vanilla.Tomlyn.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.Udon, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.dll</HintPath>
@@ -280,17 +289,8 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\HideSelf.cs" />
-    <Compile Include="Libs\Tiny-JSON\DefaultDecoder.cs" />
-    <Compile Include="Libs\Tiny-JSON\DefaultEncoder.cs" />
-    <Compile Include="Libs\Tiny-JSON\Extensions.cs" />
-    <Compile Include="Libs\Tiny-JSON\Json.cs" />
-    <Compile Include="Libs\Tiny-JSON\JsonAttributes.cs" />
-    <Compile Include="Libs\Tiny-JSON\JsonBuilder.cs" />
-    <Compile Include="Libs\Tiny-JSON\JsonMapper.cs" />
-    <Compile Include="Libs\Tiny-JSON\JsonParser.cs" />
     <Compile Include="Modules\CameraModule.cs" />
     <Compile Include="Misc\FriendLogger.cs" />
-    <Compile Include="Modules\OnplayerMenu.cs" />
     <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\Manager\ModuleModel.cs" />
     <Compile Include="Modules\Manager\ModuleManager.cs" />
@@ -310,6 +310,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="QM\Menu\SelectedPlayer.cs" />
     <Compile Include="QM\QMAPI\MenuPanelButton.cs" />
     <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
+    <Compile Include="Tests.cs.cs" />
     <Compile Include="Utils\AvatarFavorite.cs" />
     <Compile Include="Utils\CacheUtils.cs" />
     <Compile Include="Utils\CRC32.cs" />
@@ -340,75 +341,6 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Helpers\ProtectionHelper.cs" />
     <Compile Include="Helpers\VanillaGlobals.cs" />
     <Compile Include="Helpers\MainHelper.cs" />
-    <Compile Include="Libs\Tomlyn\Collections\Iterator.cs" />
-    <Compile Include="Libs\Tomlyn\Helpers\DateTimeRFC3339.cs" />
-    <Compile Include="Libs\Tomlyn\Helpers\ThrowHelper.cs" />
-    <Compile Include="Libs\Tomlyn\Model\ObjectKind.cs" />
-    <Compile Include="Libs\Tomlyn\Model\SyntaxTransform.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlArray.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlBoolean.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlDateTime.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlFloat.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlInteger.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlObject.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlString.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlTable.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlTableArray.cs" />
-    <Compile Include="Libs\Tomlyn\Model\TomlValue.cs" />
-    <Compile Include="Libs\Tomlyn\Parsing\ITokenProvider.cs" />
-    <Compile Include="Libs\Tomlyn\Parsing\Lexer.cs" />
-    <Compile Include="Libs\Tomlyn\Parsing\LexerState.cs" />
-    <Compile Include="Libs\Tomlyn\Parsing\Parser.cs" />
-    <Compile Include="Libs\Tomlyn\Parsing\SyntaxTokenValue.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\ArrayItemSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\ArraySyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\BareKeyOrStringValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\BareKeySyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\BooleanValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DateTimeValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DiagnosticMessage.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DiagnosticMessageKind.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DiagnosticsBag.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DocumentSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\DottedKeyItemSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\FloatValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\InlineTableItemSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\InlineTableSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\IntegerValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\InvalidSyntaxToken.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\KeySyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\KeyValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SourceSpan.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\StringValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxFactory.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxKind.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxList.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxNode.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxNodeBase.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxNodeExtensions.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxToken.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxTrivia.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxValidator.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\SyntaxVisitor.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TableArraySyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TableSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TableSyntaxBase.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TextPosition.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TokenKind.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\TokenKindExtensions.cs" />
-    <Compile Include="Libs\Tomlyn\Syntax\ValueSyntax.cs" />
-    <Compile Include="Libs\Tomlyn\Text\char32.cs" />
-    <Compile Include="Libs\Tomlyn\Text\CharacterIterator.cs" />
-    <Compile Include="Libs\Tomlyn\Text\CharHelper.cs" />
-    <Compile Include="Libs\Tomlyn\Text\CharReaderException.cs" />
-    <Compile Include="Libs\Tomlyn\Text\ISourceView.cs" />
-    <Compile Include="Libs\Tomlyn\Text\IStringView.cs" />
-    <Compile Include="Libs\Tomlyn\Text\StringCharacterIterator.cs" />
-    <Compile Include="Libs\Tomlyn\Text\StringCharacterUtf8Iterator.cs" />
-    <Compile Include="Libs\Tomlyn\Text\StringSourceView.cs" />
-    <Compile Include="Libs\Tomlyn\Text\StringUtf8SourceView.cs" />
-    <Compile Include="Libs\Tomlyn\Toml.cs" />
-    <Compile Include="Libs\Tomlyn\TomlParserOptions.cs" />
     <Compile Include="LoaderHandler.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Modules\DiscordModule.cs" />
@@ -465,8 +397,6 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="Libs\Tomlyn\readme.md" />
-    <None Include="Libs\Tomlyn\Syntax\Syntax.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -477,7 +407,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   <ItemGroup>
     <None Include="Resources\BuildTime.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Vanilla.Tomlyn.dll" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ClientBundle" />
   </ItemGroup>
@@ -488,9 +420,17 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <None Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Libs\Tomlyn\license.txt" />
     <EmbeddedResource Include="Resources\WSManager.dll" />
     <None Include="Resources\GameVersion.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Libs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Vanilla.JSON.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Vanilla.Refs.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

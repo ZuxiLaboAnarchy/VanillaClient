@@ -1,4 +1,4 @@
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON {
 	public static class Json {
 		public static T Decode<T>(this string json) {
 			if (string.IsNullOrEmpty(json)) return default(T);

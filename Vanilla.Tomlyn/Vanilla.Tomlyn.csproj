@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB5332E7-999C-4FD3-A1BF-048D00786E7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vanilla.Tomlyn</RootNamespace>
+    <AssemblyName>Vanilla.Tomlyn</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\Iterator.cs" />
+    <Compile Include="Helpers\DateTimeRFC3339.cs" />
+    <Compile Include="Helpers\ThrowHelper.cs" />
+    <Compile Include="Model\ObjectKind.cs" />
+    <Compile Include="Model\SyntaxTransform.cs" />
+    <Compile Include="Model\TomlArray.cs" />
+    <Compile Include="Model\TomlBoolean.cs" />
+    <Compile Include="Model\TomlDateTime.cs" />
+    <Compile Include="Model\TomlFloat.cs" />
+    <Compile Include="Model\TomlInteger.cs" />
+    <Compile Include="Model\TomlObject.cs" />
+    <Compile Include="Model\TomlString.cs" />
+    <Compile Include="Model\TomlTable.cs" />
+    <Compile Include="Model\TomlTableArray.cs" />
+    <Compile Include="Model\TomlValue.cs" />
+    <Compile Include="Parsing\ITokenProvider.cs" />
+    <Compile Include="Parsing\Lexer.cs" />
+    <Compile Include="Parsing\LexerState.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Parsing\SyntaxTokenValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Syntax\ArrayItemSyntax.cs" />
+    <Compile Include="Syntax\ArraySyntax.cs" />
+    <Compile Include="Syntax\BareKeyOrStringValueSyntax.cs" />
+    <Compile Include="Syntax\BareKeySyntax.cs" />
+    <Compile Include="Syntax\BooleanValueSyntax.cs" />
+    <Compile Include="Syntax\DateTimeValueSyntax.cs" />
+    <Compile Include="Syntax\DiagnosticMessage.cs" />
+    <Compile Include="Syntax\DiagnosticMessageKind.cs" />
+    <Compile Include="Syntax\DiagnosticsBag.cs" />
+    <Compile Include="Syntax\DocumentSyntax.cs" />
+    <Compile Include="Syntax\DottedKeyItemSyntax.cs" />
+    <Compile Include="Syntax\FloatValueSyntax.cs" />
+    <Compile Include="Syntax\InlineTableItemSyntax.cs" />
+    <Compile Include="Syntax\InlineTableSyntax.cs" />
+    <Compile Include="Syntax\IntegerValueSyntax.cs" />
+    <Compile Include="Syntax\InvalidSyntaxToken.cs" />
+    <Compile Include="Syntax\KeySyntax.cs" />
+    <Compile Include="Syntax\KeyValueSyntax.cs" />
+    <Compile Include="Syntax\SourceSpan.cs" />
+    <Compile Include="Syntax\StringValueSyntax.cs" />
+    <Compile Include="Syntax\SyntaxFactory.cs" />
+    <Compile Include="Syntax\SyntaxKind.cs" />
+    <Compile Include="Syntax\SyntaxList.cs" />
+    <Compile Include="Syntax\SyntaxNode.cs" />
+    <Compile Include="Syntax\SyntaxNodeBase.cs" />
+    <Compile Include="Syntax\SyntaxNodeExtensions.cs" />
+    <Compile Include="Syntax\SyntaxToken.cs" />
+    <Compile Include="Syntax\SyntaxTrivia.cs" />
+    <Compile Include="Syntax\SyntaxValidator.cs" />
+    <Compile Include="Syntax\SyntaxVisitor.cs" />
+    <Compile Include="Syntax\TableArraySyntax.cs" />
+    <Compile Include="Syntax\TableSyntax.cs" />
+    <Compile Include="Syntax\TableSyntaxBase.cs" />
+    <Compile Include="Syntax\TextPosition.cs" />
+    <Compile Include="Syntax\TokenKind.cs" />
+    <Compile Include="Syntax\TokenKindExtensions.cs" />
+    <Compile Include="Syntax\ValueSyntax.cs" />
+    <Compile Include="Text\char32.cs" />
+    <Compile Include="Text\CharacterIterator.cs" />
+    <Compile Include="Text\CharHelper.cs" />
+    <Compile Include="Text\CharReaderException.cs" />
+    <Compile Include="Text\ISourceView.cs" />
+    <Compile Include="Text\IStringView.cs" />
+    <Compile Include="Text\StringCharacterIterator.cs" />
+    <Compile Include="Text\StringCharacterUtf8Iterator.cs" />
+    <Compile Include="Text\StringSourceView.cs" />
+    <Compile Include="Text\StringUtf8SourceView.cs" />
+    <Compile Include="Toml.cs" />
+    <Compile Include="TomlParserOptions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Syntax\Syntax.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

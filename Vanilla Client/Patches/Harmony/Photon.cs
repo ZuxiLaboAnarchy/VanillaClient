@@ -23,7 +23,7 @@ namespace Vanilla.Patches.Harmony
             {
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
 
-                PatchMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(nameof(OnEvent)), null);
+                PatchMethod(typeof(LoadBalancingClient).GetMethod(Strings.OnEvent), GetLocalPatch(Strings.OnEvent), null);
 
          
                 //PatchMethod(typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("OnEventSent"), null);
@@ -59,13 +59,21 @@ namespace Vanilla.Patches.Harmony
                     }
                 }
 
+                if (eventCode == 6)
+                {
+                    if (RuntimeConfig.EventLogger6)
+                    {
+                        byte[] E6 = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(__0.CustomData.Pointer);
+
+                        Dev("Event 6", Convert.ToBase64String(E6));
+                    }
+                }
 
 
 
 
 
 
-                
 
                 return eventCode switch
                 {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Vanilla.API.ServerAPI;
 using Vanilla.AvatarFavorites;
 using Vanilla.Config;
-using Vanilla.TinyJSON;
+using Vanilla.JSON;
 using VRC.Core;
 using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 

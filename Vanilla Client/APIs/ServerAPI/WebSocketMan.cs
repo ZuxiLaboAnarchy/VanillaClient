@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Vanilla.Config;
 using Vanilla.Modules;
-using Vanilla.TinyJSON;
+using Vanilla.JSON;
 using Vanilla.Wrappers;
 using WebSocketSharp;
 

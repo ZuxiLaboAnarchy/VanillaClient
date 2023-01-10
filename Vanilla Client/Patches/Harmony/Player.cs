@@ -16,7 +16,7 @@ namespace Vanilla.Patches.Harmony
 
             InitializeLocalPatchHandler(typeof(PlayerPatch));
 
-            PatchMethod(typeof(APIUser).GetProperty(nameof(APIUser.allowAvatarCopying)).GetSetMethod(), GetLocalPatch(nameof(ForceClone)), null);
+            PatchMethod(typeof(APIUser).GetProperty(nameof(Strings.allowAvatarCopying)).GetSetMethod(), GetLocalPatch(Strings.ForceClone), null);
 
         }
 

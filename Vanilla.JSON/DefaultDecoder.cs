@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON {
 
 	using Decoder = Func<Type, object, object>;
 

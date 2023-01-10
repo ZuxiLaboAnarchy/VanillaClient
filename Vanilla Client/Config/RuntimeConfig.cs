@@ -11,6 +11,7 @@
         internal static bool ShouldFly = false;
         internal static bool ShouldEarRape = false;
         internal static bool EventLogger1 = false;
+        internal static bool EventLogger6 = false;
         internal static bool isQuickMenuOpen = false;
         internal static bool RanksCustomRanks = true;
         internal static bool isConnectedToInstance = false;

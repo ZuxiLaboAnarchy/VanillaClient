@@ -20,7 +20,7 @@ namespace Vanilla.Patches.Harmony
             try
             {
                 InitializeLocalPatchHandler(typeof(HWIDPatch));
-                PatchMethod(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), GetLocalPatch(nameof(FakeHWID)), null);
+                PatchMethod(typeof(SystemInfo).GetProperty(Strings.deviceUniqueIdentifier).GetGetMethod(), GetLocalPatch(Strings.FakeHWID), null);
 
 
 

@@ -29,10 +29,10 @@ namespace Vanilla.Patches.Harmony
 
 
 
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(nameof(PlayerJoin)), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_2)), GetLocalPatch(nameof(PlayerLeave)), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_PDM_0)), null, GetLocalPatch(nameof(OnJoinedRoomPatch))); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null, GetLocalPatch(nameof(OnLeftRoomPatch))); //works
+            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCPlayerJoin), GetLocalPatch(Strings.PlayerJoin), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCPlayerLeave), GetLocalPatch(Strings.PlayerLeave), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCOnJoinRoom), null, GetLocalPatch(Strings.OnJoinedRoomPatch)); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
+            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCOnLeftRoom), null, GetLocalPatch(Strings.OnLeftRoomPatch)); //works
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)
             //  PatchMethod(PlayerEvents._OnPlayerJoinedMethod, null, GetLocalPatch("PlayerJoin"));

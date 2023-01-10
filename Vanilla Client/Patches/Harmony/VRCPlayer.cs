@@ -1,10 +1,13 @@
 ﻿
+using MelonLoader.TinyJSON;
+using System.Reflection;
 using UnityEngine;
 using Vanilla.Config;
 using VRC.Core;
 
 namespace Vanilla.Patches.Harmony
 {
+    [Obfuscation(Exclude = true)]
     internal class VRCPlayerPatch : VanillaPatches
     {
         protected override string patchName => "VRCPlayerPatch";
@@ -14,9 +17,9 @@ namespace Vanilla.Patches.Harmony
             InitializeLocalPatchHandler(typeof(VRCPlayerPatch));
             if (!BotHandle.CheckBotHandle())
             {
-                PatchMethod(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Static_String_APIUser_0)), GetLocalPatch(nameof(GetFriendlyDetailedNameForSocialRankPatch)), null);
+                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetFriendlyDetailedNameForSocialRank), GetLocalPatch(Strings.GetFriendlyDetailedNameForSocialRankPatch), null);
                 //PatchMethod(typeof(VRCPlayer).GetMethod("Method_Public_Static_String_APIUser_1"), GetLocalPatch("GetFriendlyDetailedNameForSocialRankPatch"), null);
-                PatchMethod(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Static_Color_APIUser_0)), GetLocalPatch(nameof(GetColorForSocialRankPatch)), null);
+                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetColorForSocialRank), GetLocalPatch(Strings.GetColorForSocialRankPatch), null);
 
             }
             else

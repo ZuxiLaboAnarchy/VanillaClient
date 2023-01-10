@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Reflection;
 
-namespace Vanilla.TinyJSON {
+namespace Vanilla.JSON {
 	
 	using Encoder = Action<object, JsonBuilder>;
 

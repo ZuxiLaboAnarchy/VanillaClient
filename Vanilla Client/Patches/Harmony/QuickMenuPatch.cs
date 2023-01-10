@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using MelonLoader.TinyJSON;
+using System.Collections.Generic;
+using System.Reflection;
 using Vanilla.Config;
 using Vanilla.Modules;
 
 namespace Vanilla.Patches.Harmony
 {
+    [Obfuscation(Exclude = true)]
     internal class QuickMenuPatch : VanillaPatches
     {
         private static string lastOpenedMenu = string.Empty;
@@ -13,8 +16,8 @@ namespace Vanilla.Patches.Harmony
         internal override void Patch()
         {
             InitializeLocalPatchHandler(typeof(QuickMenuPatch));
-            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.OnEnable)), null, GetLocalPatch(nameof(OnQuickMenuOpenPatch)));
-            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.OnDisable)), null, GetLocalPatch(nameof(OnQuickMenuClosePatch)));
+            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnEnable), null, GetLocalPatch(Strings.OnQuickMenuOpenPatch));
+            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnDisable), null, GetLocalPatch(Strings.OnQuickMenuClosePatch));
         }
 
         private static void OnQuickMenuOpenPatch()
