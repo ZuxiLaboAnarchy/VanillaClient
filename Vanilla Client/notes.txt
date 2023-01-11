@@ -99,3 +99,19 @@ SceneManager.add_sceneUnloaded((Action<Scene>)delegate(Scene scene)
 
 
 
+			https://hvls.cloud/Cypher/DENaDehA60.png
+
+
+			MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique.Method_Private_Void_PDM_0()
+
+
+
+			VRCUiPopupManager.Method_Public_Void_String_String_Action_1_VRCUiPopup_0(string, string, Action<VRCUiPopup>)\
+
+
+
+			New Alert Action
+			UIManagerPublicBoObBoAc1BoAcGa1MeUnique.Method_Public_Virtual_Final_New_Void_String_String_Boolean_String_Action_String_Action_0(string, string, bool, string, Action, string, Action)
+
+
+			UIManagerPublicBoObBoAc1BoAcGa1MeUnique.Method_Public_Virtual_Final_New_Void_String_String_InputType_Boolean_String_Action_1_String_Action_String_Boolean_Int32_0(string, string, TMP_InputField.InputType, bool, string, Action<string>, Action, string, bool, int)

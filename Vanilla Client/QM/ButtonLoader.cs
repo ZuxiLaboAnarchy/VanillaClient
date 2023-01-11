@@ -48,19 +48,16 @@ namespace Vanilla.QM
 
             var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
             {
-                var NewAvi = GeneralUtils.GetClipboard();
-                if (NewAvi.Contains("avtr"))
-                    PlayerWrapper.ChangePlayerAvatar(NewAvi);
+                InternalUIManager.RunKeyBoardPopup("Enter Avatar ID", "AvatarID", "Change Avatar",null, PlayerWrapper.ChangePlayerAvatar, null);
+               
 
             }, "Change Avatar By ID");
 
             var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "JoinWorld", delegate
             {
-                var World = GeneralUtils.GetClipboard();
-                if (World.Contains(":"))
-                    // PlayerWrapper.ChangePlayerAvatar(NewAvi);
-                    Networking.GoToRoom(World);
-            }, "Change Avatar By ID");
+                InternalUIManager.RunKeyBoardPopup("Enter WorldID", "WorldID", "Go to World", null, WorldWrapper.GoToRoom, null);
+            }, "Change Your Current World");
+
 
 
             // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
@@ -70,6 +67,9 @@ namespace Vanilla.QM
 
            //  var selectedGroup = UnityEngine.Object.Instantiate(selectedmenu.gameObject,selectedmenu.gameObject.transform.parent);
            var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for Vanilla Client", "Vanilla");
+
+
+
             Selected.GetMainButton().SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
             Selected.GetMainButton().GetGameObject().transform.SetParent(selectedmenu.transform);
 
@@ -80,13 +80,18 @@ namespace Vanilla.QM
 
             Selected.GetMainButton().SetAction(delegate
             {
-                
-              
                 RuntimeConfig.SelectedPlayer = PlayerWrapper.GetSelectedUser();
+ 
                 Selected.OpenMe();
             });
 
+
+
+
+
             SelectedPlayer.InitMenu(Selected); 
+
+            
 
 
          //   var SelectedPlayerMenu = new QMNestedButton("Menu_SelectedUser_Local", 20, 4, "Vanilla", "Vanilla Client Selected User Menu", "Vanilla Client");
@@ -118,6 +123,7 @@ namespace Vanilla.QM
 #if DEBUG
             var DevMenuButton = new QMNestedButton(tabMenu, 4, 3, "DevMenu", "Vanilla", "Vanilla Client");
             DevMenu.InitMenu(DevMenuButton);
+
 #endif
 
 

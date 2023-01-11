@@ -10,7 +10,7 @@ namespace Vanilla.Patches.Harmony
     internal class Avatars : VanillaPatches
     {
 
-        protected override string patchName => "AvaterPatch";
+        protected override string patchName => "AvatarPatch";
         internal override void Patch()
         {
 

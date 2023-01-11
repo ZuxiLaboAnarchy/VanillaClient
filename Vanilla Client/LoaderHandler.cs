@@ -27,6 +27,7 @@ namespace Cypher
                
             try
             {
+                Vanilla.Xrefs.Input.GetMethods();
 
                 CypherEngineLog("Core", "Hello From Vanilla Engine Attempting to Set Up Vanilla Client", ConsoleColor.Cyan);
                 CypherEngineLog("Core", $"Loading Vanilla Client {RuntimeConfig.ReleaseID}", ConsoleColor.Cyan);

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vanilla.Buttons.QM;
+using Vanilla.Config;
 using Vanilla.Exploits;
+using Vanilla.ServerAPI;
 using Vanilla.Wrappers;
 
 namespace Vanilla.QM.Menu
@@ -54,7 +56,10 @@ namespace Vanilla.QM.Menu
                 PlayerAttach._Part = 4; MelonLoader.MelonCoroutines.Start(PlayerAttach._Sitonparts());
             }, "Sit On Left Shoulder");
 
-
+#if DEBUG
+            var DevSelectedMenuButton = new QMNestedButton(Menu, 4, 4, "DevMenu", "Vanilla", "Vanilla Client");
+            DevSelectedMenu.InitMenu(DevSelectedMenuButton);
+#endif
 
         }
     }

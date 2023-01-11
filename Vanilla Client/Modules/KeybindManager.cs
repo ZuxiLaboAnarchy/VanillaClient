@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using TMPro;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 using Vanilla.Config;
@@ -11,15 +13,40 @@ namespace Vanilla.Modules
     {
         protected override string ModuleName => "KeyBindManager";
 
+        public static void Test2(string s)
+        {
+            LogHandler.Log("Done", "Sucesss");
+            LogHandler.Log("Output", s);
+        }
+
+        internal static void Test(Action<string> _stringOut, Action _action)
+        {
+
+          //  var UIObject = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
+
+            //UIObject.Method_Public_Virtual_Final_New_Void_String_String_InputType_Boolean_String_Action_1_String_Action_String_Boolean_Int32_0("Title", "Something2", TMP_InputField.InputType.Standard, false, "String3", _stringOut, _action);
+            
+        }
+
+
         internal override void Update()
         {
 #if DEBUG
             if (UnityEngine.Input.GetKeyDown(KeyCode.L))
             {
+               // InputHandler.RunAlertPopup(null, null);
 
-               
                 // LogHandler.LogToHud("Test");
                 ModuleManager.DebugKey();
+
+               
+
+
+
+
+
+
+
 
 //  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
 

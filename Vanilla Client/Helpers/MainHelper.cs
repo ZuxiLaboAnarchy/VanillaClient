@@ -24,7 +24,7 @@ namespace Vanilla.Helpers
 
         private float nextPop = 0f;
         private float nextUpdateFetch = 0f;
-      //  public static List<string> AvatarList = new List<string>();
+        public static List<string> AvatarList = new List<string>();
 
 
 
@@ -76,14 +76,15 @@ namespace Vanilla.Helpers
 
             
 
-            while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
+            while (GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog") == null)
             {
                 yield return null;
             }
             Dev("HudManager", "HUD Loaded Injecting Alert Panel");
 
             LogHandler.SetupHud();
-
+           
+            //GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog/Background_Scrim").SetActive(false);
             
         }
 
@@ -161,12 +162,12 @@ namespace Vanilla.Helpers
                     if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                     {
                         var a = __instance.field_Private_ApiAvatar_0;
-                      //  if (AvatarList.Contains(a.id))
-                        //{ continue; }
+                         if (AvatarList.Contains(a.id))
+                        { continue; }
                         SentAvatarCount++;
                         UploadHelper.UploadAvatarToGlobalDatabase(new FavoriteAvatar(__instance.field_Private_ApiAvatar_0));
 
-                       // AvatarList.Add(a.id);
+                        AvatarList.Add(a.id);
                     }
                 }
             }

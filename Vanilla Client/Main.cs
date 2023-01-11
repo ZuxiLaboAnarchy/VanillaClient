@@ -12,7 +12,7 @@ namespace Vanilla
         [CompilerGenerated]
         internal protected static void CallOnStart(bool isBot = false)
         {
-            Xrefs.Input.SetMethods();
+            Xrefs.Input.GetMethods();//      SetMethods();
             Console.WriteLine("OK");
             //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResourceUtils.Resolver);
 

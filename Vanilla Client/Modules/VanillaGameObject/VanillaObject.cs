@@ -25,7 +25,11 @@ namespace Vanilla.Modules
             //Add Components
             VanillaGObject.AddComponent<VanillaBehavior>();
             VanillaGObject.AddComponent<MonoBehaviour>();
+            VanillaGObject.AddComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>();
             
+          //  VanillaGObject.GetComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>()
+
+
             //  VanillaGObject.name = "";
             VanillaGObject.SetActive(true);
 

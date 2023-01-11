@@ -61,7 +61,7 @@ namespace Vanilla.Wrappers
         internal class Target
         {
             internal static VRC.Player targertuser;
-            private static GameObject targetplate;
+           
             internal static void Targetuser(string userid)
             {
                 var players = GetSelectedUser();
@@ -80,6 +80,7 @@ namespace Vanilla.Wrappers
                 Log("Player", $"Failed to switch to avatar: {avatarId} ({x.Error})");
             }), null, false);
         }
+        
 
         internal static PlayerInformation GetPlayerInformationByInstagatorID(int index)
         {

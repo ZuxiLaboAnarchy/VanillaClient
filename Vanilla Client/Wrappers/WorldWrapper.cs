@@ -31,6 +31,9 @@ namespace Vanilla.Wrappers
 
         private static readonly List<string> PenComponentNameList = new List<string> { "pen", "marker", "grip" };
 
+        internal static void GoToRoom(string ID) => Networking.GoToRoom(ID);
+
+
         private static IEnumerator FindComponentsOnSceneLoad()
         {
             _countedPickups = 0;
