@@ -38,13 +38,14 @@ namespace Vanilla.Modules
 
         private readonly int CULLING_LAYER_PLAYERLOCAL = 1024;
 
-        internal override void AppFocus(bool state)
+        internal override void AppFocus(bool state) 
         {
             ChangeCameraActualZoomState(zoom: false);
         }
 
         internal override void WaitForPlayer()
         {
+            
             camerasInitialized = false;
             GameObject gameObject = new GameObject("Vanilla Back Camera");
             cameraBack = gameObject.AddComponent<Camera>();

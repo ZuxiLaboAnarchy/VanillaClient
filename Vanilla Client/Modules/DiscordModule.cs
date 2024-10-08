@@ -12,13 +12,13 @@
         {
             eventHandlers = default(DiscordRPC.EventHandlers);
             eventHandlers.errorCallback = delegate (int code, string message) { };
-            presence.state = $".gg/hvl";
+            presence.state = $"upset.moe";
 
             presence.details = "Sweet Like Candy";
             presence.largeImageKey = largeImage;
             presence.largeImageText = "by Vanilla Labs";
             presence.smallImageKey = "<3";
-            presence.smallImageText = ".gg/hvl";
+            presence.smallImageText = "";
             presence.partySize = 0;
             presence.partyMax = 0;
             presence.startTimestamp = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
@@ -57,17 +57,17 @@
 
         }
        
-        internal static string largeImage = "https://files.hvls.cloud/Cypher/rIFAHUju33.png";
+        internal static string largeImage = "zuxilogo";
 
-        internal static string largeImageText = "By Vanilla Labs";
+        internal static string largeImageText = "By Zuxi";
 
         internal static string smallimage = "";
 
         internal static string smallImageText = "";
 
-        internal static string details = $"Not A Modified Client";
+        internal static string details = $"Oppsie Woopsie";
 
-        internal static string state = "hvl.gg/discord";
+        internal static string state = "upset.moe";
     }
 }
 

@@ -41,7 +41,7 @@ namespace Vanilla.Patches.Harmony
             }
             if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) && PlayerUtils.playerCustomTags[__0.id].customTagEnabled)
             {
-
+                Log("USER HAS TAG", __0.displayName,ConsoleColor.Green);
                 __result = PlayerUtils.playerCustomTags[__0.id].customTag;
                 return false;
             }
@@ -56,6 +56,7 @@ namespace Vanilla.Patches.Harmony
             }
             if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) && PlayerUtils.playerCustomTags[__0.id].customTagColorEnabled)
             {
+                Log("USER HAS TAG", __0.displayName, ConsoleColor.Green);
                 __result = PlayerUtils.playerCustomTags[__0.id].customTagColor;
                 return false;
             }

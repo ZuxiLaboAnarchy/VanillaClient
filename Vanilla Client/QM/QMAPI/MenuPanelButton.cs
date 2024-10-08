@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+/*
 namespace Vanilla.QM.QMAPI
 {
     internal class MenuPanelButton
@@ -58,4 +58,4 @@ namespace Vanilla.QM.QMAPI
             buttonHandler.interactable = isInteractable;
         }
     }
-}
+}*/

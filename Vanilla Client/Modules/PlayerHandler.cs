@@ -163,7 +163,7 @@ namespace Vanilla.Modules
                 return;
             }
          
-            int field_Private_Int32_ = playerInfo.vrcPlayer.prop_PlayerNet_0.field_Private_Int16_0;
+            int field_Private_Int32_ = playerInfo.vrcPlayer.prop_PlayerNet_0.field_Private_Int32_0;
             float num2 = Time.realtimeSinceStartup - playerInfo.lastNetworkedUpdateTime;
             int ping = playerInfo.GetPing();
             float num3 = 0.5f + 0.011f * (float)PlayerUtils.playerCachingList.Count + Mathf.Min(MathUtils.Clamp(ping, 0, 1000), 500f) / 1000f;
@@ -260,7 +260,7 @@ namespace Vanilla.Modules
             {
                 stringBuilder.Append($"FPS: <color=red>{fPS}<color=white>");
             }
-            else if (fPS < 50)
+            else if (fPS < 50) 
             {
                 stringBuilder.Append($"FPS: <color=yellow>{fPS}<color=white>");
             }

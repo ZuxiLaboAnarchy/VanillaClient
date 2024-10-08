@@ -12,15 +12,15 @@ namespace Vanilla
         [CompilerGenerated]
         internal protected static void CallOnStart(bool isBot = false)
         {
-            Xrefs.Input.GetMethods();//      SetMethods();
+            Xrefs.Input.GetMethods();
             Console.WriteLine("OK");
-            //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResourceUtils.Resolver);
+
 
             FileHelper.LoadResources();
 
             FileHelper.Setup();
 
-            // MelonCoroutines.Start(UserInterface.WaitForUI());
+         
             if (!isBot)
             {
                 PatchManager.Patch();

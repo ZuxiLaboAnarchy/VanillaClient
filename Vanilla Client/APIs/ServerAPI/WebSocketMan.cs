@@ -55,6 +55,8 @@ namespace Vanilla.ServerAPI
 
         internal static void SetupSocket()
         {
+            RuntimeConfig.WSAuthed = true;
+            return;
             using (wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT()))
             {
                 Dev("ServerAPI", "Connecting to: " + wss.Url);
@@ -108,7 +110,8 @@ namespace Vanilla.ServerAPI
         internal static void ConnectNewJWT()
         {
             if (!wss.IsAlive)
-                wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+               // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+            wss = new WebSocket("wss://ws.imzuxi.com/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
         }
 
 

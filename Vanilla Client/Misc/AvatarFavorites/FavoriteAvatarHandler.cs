@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Vanilla.Helpers;
 using Vanilla.Wrappers;
 using VRC.Core;
 
@@ -55,6 +56,9 @@ namespace Vanilla.AvatarFavorites
             }
             if (!VanillaAvatarsFav.ContainsKey(avi.id))
             {
+            
+
+
                 IOrderedEnumerable<System.Collections.Generic.KeyValuePair<string, FavoriteAvatar>> source = VanillaAvatarsFav.ToList().OrderByDescending(delegate (System.Collections.Generic.KeyValuePair<string, FavoriteAvatar> entry)
                 {
                     System.Collections.Generic.KeyValuePair<string, FavoriteAvatar> keyValuePair = entry;

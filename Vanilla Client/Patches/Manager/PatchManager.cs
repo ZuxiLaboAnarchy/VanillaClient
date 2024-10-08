@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
+using Vanilla.Modules;
 using Vanilla.Patches.Harmony;
 
 namespace Vanilla.Patches
@@ -11,9 +13,24 @@ namespace Vanilla.Patches
         protected virtual string patchName => "Undefined Patch";
         internal static int PatchedMethods = 0;
         internal static List<VanillaPatches> Patches = new();
+        internal static string[] Ignore = { };
         internal static void Patch()
         {
-            //BotPatches
+
+            Assembly currentAssembly = Assembly.GetExecutingAssembly();
+
+            IEnumerable<Type> InternalTypes = currentAssembly.GetTypes()
+           .Where(type => type.IsSubclassOf(typeof(VanillaPatches)));
+
+            foreach (Type type in InternalTypes)
+            {
+              //  Console.WriteLine(type.FullName);
+                if (!Ignore.Contains<string>(type.FullName.ToLower())){
+                    Patches.Add((VanillaPatches)Activator.CreateInstance(type));
+                }               
+            }
+
+        /*    //BotPatches
             Patches.Add(new SteamworksPatch());
             Patches.Add(new HWIDPatch());
             Patches.Add(new PhotonPatch());
@@ -22,7 +39,7 @@ namespace Vanilla.Patches
             Patches.Add(new PlayerPatch());
             Patches.Add(new ImageDownloaderPatch());
             // Patches.Add(new Scanner());
-            // Patches.Add(new UnityExplorerPatch());
+            // Patches.Add(new UnityExplorerPatch());*/
 #if DEBUG
             // Patches.Add(new CurserPatch());
 #endif

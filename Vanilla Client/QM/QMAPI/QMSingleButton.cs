@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+/*
 namespace Vanilla.Buttons.QM
 {
     internal class QMSingleButton : QMButtonBase
@@ -54,7 +54,7 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip)
         {
-            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
+            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/" + btnQMLoc).transform, true);
             button.transform.Find("Badge_MMJump").gameObject.SetActive(false);
             button.name = $"{APIUtils.Identifier}-Single-Button-{APIUtils.RandomNumbers()}";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 30;
@@ -120,4 +120,4 @@ namespace Vanilla.Buttons.QM
             button.SetActive(true);
         }
     }
-}
+}*/

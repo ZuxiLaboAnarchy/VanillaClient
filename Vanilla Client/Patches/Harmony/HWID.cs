@@ -23,8 +23,6 @@ namespace Vanilla.Patches.Harmony
                 PatchMethod(typeof(SystemInfo).GetProperty(Strings.deviceUniqueIdentifier).GetGetMethod(), GetLocalPatch(Strings.FakeHWID), null);
 
 
-
-
             }
             catch (Exception e)
             {

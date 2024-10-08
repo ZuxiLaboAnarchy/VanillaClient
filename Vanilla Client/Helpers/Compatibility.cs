@@ -1,4 +1,5 @@
 ﻿using MelonLoader;
+using System.IO;
 using Vanilla.Config;
 
 namespace Vanilla.Helpers
@@ -10,15 +11,17 @@ namespace Vanilla.Helpers
 
         internal static bool CheckGameVersion()
         {
-
+            
 #if DEBUG
 
-            if (MelonLoader.InternalUtils.UnityInformationHandler.GameVersion != RuntimeConfig.GameVER)
+            if (MelonLoader.InternalUtils.UnityInformationHandler.GameVersion != Properties.Resources.GameVersion)
             {
                 Dev("Game Has Updated. Update Me you Fucking Whore", ConsoleColor.Red);
                 Dev("Core", "CURRENT GAMEVERSION");
                 Dev("Core" , MelonLoader.InternalUtils.UnityInformationHandler.GameVersion);
                 ShouldLoad = true;
+
+                File.WriteAllText("G:\\Visual Studio\\VanillaClientAnarchyEdition\\Vanilla Client\\Resources\\GameVersion.txt", MelonLoader.InternalUtils.UnityInformationHandler.GameVersion);
 
             }
 #else

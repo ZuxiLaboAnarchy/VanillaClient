@@ -1,43 +1,41 @@
 ﻿using TMPro;
+using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.DataModel;
 
 namespace Vanilla.Utils
 {
     internal class InternalUIManager
     {
-        static MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique KeyBoardMonoBehav = null;
+       // static MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique KeyBoardMonoBehav = null;
 
         internal static void RunKeyBoardPopup(string Title, string TextBox, string OKButton, Action<string> RealTimeString, Action<string> EndString, Action OnClose, bool multiLine2 = true, int CharLimit = 0)
         {
-            try
-            {
-                KeyboardData KeyBoardData = new KeyboardData();
-
-                KeyBoardMonoBehav = GameObject.Find("VanillaObject").GetComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>();
-
-                KeyboardData KeyBoardData2 = KeyBoardData.Method_Public_KeyboardData_String_String_String_String_String_PDM_0(Title, TextBox, "3", OKButton);
-
-                KeyboardData keyboardData3 = KeyBoardData2.Method_Public_KeyboardData_Action_1_String_Action_1_String_Action_Boolean_PDM_1(RealTimeString, EndString, OnClose, true);
-
-                KeyboardData keyboardData4 = keyboardData3.Method_Public_KeyboardData_EnumPublicSealedvaStNuSe4vUnique_Boolean_PDM_0(EnumPublicSealedvaStNuSe4vUnique.Standard, true);
-
-                KeyboardData keyboardData5 = keyboardData4.Method_Public_KeyboardData_InputType_ContentType_Int32_Boolean_Boolean_InterfacePublicAbstractBoStVoAc1VoAcSt1BoUnique_PDM_0(TMP_InputField.InputType.Standard, TMP_InputField.ContentType.Standard, CharLimit, multiLine2, false, null);
-
-                keyboardData5._isWorldKeyboard = true;
-
-                KeyBoardMonoBehav._keyboardData = keyboardData5;
-
-                KeyBoardMonoBehav.Method_Private_Void_1();
-            }
-            catch (Exception) { }
+            run(Title, EndString, OnClose);
         }
+        // TODO: Get Old Popup 
+        /* internal static void RunAlertPopup(string Header, string Body, string button1, string button2, Il2CppSystem.Action button1Action, Il2CppSystem.Action button2Action)
+         {
+             UIManagerPublicBoObBoAc1BoAcGa1MeUnique UIManager = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
 
-        internal static void RunAlertPopup(string Header, string Body, string button1, string button2, Il2CppSystem.Action button1Action, Il2CppSystem.Action button2Action)
+             UIManager.Method_Public_Virtual_Final_New_Void_String_String_Boolean_String_Action_String_Action_1(Header, Body, true, button1, button1Action, button2, button2Action);
+         }*/
+
+        public static string run(string name, Action<string> setOutput, Action action)
         {
-            UIManagerPublicBoObBoAc1BoAcGa1MeUnique UIManager = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
+            string returned = "";
+            VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_PDM_0(name, "", InputField.InputType.Standard, false, "Enter",
+                    DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>
+                        (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>
+                        (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
+                        {
+                            setOutput(s);
+                            action.Invoke();
+                            ;
 
-            UIManager.Method_Public_Virtual_Final_New_Void_String_String_Boolean_String_Action_String_Action_1(Header, Body, true, button1, button1Action, button2, button2Action);
+                        })), null, "", true, null);
+            return returned;
         }
 
         internal static void KAction1(string a)

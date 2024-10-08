@@ -13,7 +13,7 @@ namespace Vanilla.Modules
 {
     internal class VanillaObject : VanillaModule
     {
-        private GameObject VanillaGObject;
+        internal static GameObject VanillaGObject { get; private set; }
         protected override string ModuleName => "VanillaObject";
 
         internal override void WaitForPlayer()
@@ -25,19 +25,15 @@ namespace Vanilla.Modules
             //Add Components
             VanillaGObject.AddComponent<VanillaBehavior>();
             VanillaGObject.AddComponent<MonoBehaviour>();
-            VanillaGObject.AddComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>();
+         //Old Keyboard Data LOL
+            //   VanillaGObject.AddComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>();
             
           //  VanillaGObject.GetComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>()
 
 
             //  VanillaGObject.name = "";
             VanillaGObject.SetActive(true);
-
-            File.WriteAllText(Directory.GetCurrentDirectory() + "\\GameObject.txt", VanillaGObject.ToString());
-
-           
-
-            // DontDestroyOnLoad(this.gameObject);
+            OnScreenUI.AfterGameObjectInit(VanillaGObject);
         }
 
      

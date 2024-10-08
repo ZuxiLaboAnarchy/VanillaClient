@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
-
+using VRC.UI.Elements.Controls;
+/*
 namespace Vanilla.Buttons.QM
 {
     internal static class APIUtils
@@ -9,6 +10,7 @@ namespace Vanilla.Buttons.QM
         internal const string Identifier = "Vanilla";
         private static readonly System.Random rnd = new();
         private static VRC.UI.Elements.QuickMenu _quickMenu;
+      //  private static MenuController
         private static MenuStateController _menuStateController;
         private static VRCUiPopupManager _vrcUiPopupManager;
         private static Sprite _onSprite;
@@ -58,35 +60,36 @@ namespace Vanilla.Buttons.QM
         internal static GameObject GetQMButtonTemplate()
         {
             if (_qmButtonTemplate == null)
-                _qmButtonTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds").gameObject;
+
+                _qmButtonTemplate = QuickMenuInstance.transform.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds").gameObject;
             return _qmButtonTemplate;
-        }
+        } 
 
         internal static GameObject GetQMMenuTemplate()
         {
             if (_qmMenuTemplate == null)
-                _qmMenuTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard").gameObject;
+                _qmMenuTemplate = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard").gameObject;
             return _qmMenuTemplate;
         }
 
         internal static GameObject GetQMTabButtonTemplate()
         {
             if (_qmTabTemplate == null)
-                _qmTabTemplate = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject;
+                _qmTabTemplate = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject;
             return _qmTabTemplate;
         }
 
         internal static Sprite OnIconSprite()
         {
             if (_onSprite == null)
-                _onSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
+                _onSprite = QuickMenuInstance.transform.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
             return _onSprite;
         }
 
         internal static Sprite OffIconSprite()
         {
             if (_offSprite == null)
-                _offSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
+                _offSprite = QuickMenuInstance.transform.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
             return _offSprite;
         }
 
@@ -111,4 +114,4 @@ namespace Vanilla.Buttons.QM
             }
         }
     }
-}
+}*/

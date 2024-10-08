@@ -7,7 +7,7 @@ using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
-
+/*
 
 namespace Vanilla.Buttons.QM
 {
@@ -83,8 +83,9 @@ namespace Vanilla.Buttons.QM
         }
 
         internal void SetToolTip(string newText)
-        {
-            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
+        {//TODO: Fix ToolTips
+            return; 
+         //   MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
         internal void SetIndex(int newPosition)
@@ -108,4 +109,4 @@ namespace Vanilla.Buttons.QM
 
         internal GameObject GetMainButton() => MainButton;
     }
-}
+}*/

@@ -1,9 +1,12 @@
 ﻿using MelonLoader;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Vanilla.Helpers;
 using Vanilla.QM;
 using Vanilla.ServerAPI;
+using Vanilla.Utils;
 using Vanilla.Wrappers;
 using VRC;
 using VRC.Core;
@@ -15,7 +18,18 @@ namespace Vanilla.Modules
         internal static List<VanillaModule> Modules = new();
         internal static void InitModules()
         {
-           
+            Assembly currentAssembly = Assembly.GetExecutingAssembly();
+
+            IEnumerable<Type> InternalTypes = currentAssembly.GetTypes()
+           .Where(type => type.IsSubclassOf(typeof(VanillaModule)));
+
+            foreach (Type type in InternalTypes)
+            {
+              //  Console.WriteLine(type.FullName);
+                Modules.Add((VanillaModule)Activator.CreateInstance(type));
+            }
+
+            /*
             Modules.Add(new WSBase());
             Modules.Add(new DiscordManager());
             Modules.Add(new MainHelper());
@@ -32,6 +46,8 @@ namespace Vanilla.Modules
             Modules.Add(new JoinLoggerModule());
             Modules.Add(new PlayerHandler());
             Modules.Add(new PerfModule());
+            */
+
 
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
             Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
@@ -80,7 +96,7 @@ namespace Vanilla.Modules
         {
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].PlayerJoin(__0); }
                 catch (Exception e){ ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
-        }
+        } 
 
         protected internal static void PlayerLeave(Player __0)
         {
@@ -92,6 +108,7 @@ namespace Vanilla.Modules
         protected internal static void OnApplicationFocus(bool __0)
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].AppFocus(__0); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
+        // TODO: fix this
         protected internal static void DebugKey()
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].Debug(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
@@ -105,6 +122,11 @@ namespace Vanilla.Modules
         {
             while (PlayerWrapper.GetLocalAPIUser() == null) yield return null;
             Dev("ModuleManager", "User logged in");
+            Testing.Test();
+
+
+
+            
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForAPIUser(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 
@@ -113,6 +135,7 @@ namespace Vanilla.Modules
             while (PlayerWrapper.PlayerObject() == null) yield return null;
             Dev("ModuleManager", "Player Found");
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForPlayer(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+            yield return null;
         }
 
 

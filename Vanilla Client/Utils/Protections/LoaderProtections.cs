@@ -9,8 +9,8 @@
         {
             if (LoaderID != LoaderProtections.LoaderID)
             {
-                Utils.LogHandler.Log("Verifyer", "Core Failed Verifcation", ConsoleColor.Yellow);
-                Utils.LogHandler.Log("Verifyer", "For Your Protection VanillaClient Will not Load", ConsoleColor.Yellow);
+                Utils.LogHandler.Log("Verifier", "Core Failed Verification", ConsoleColor.Yellow);
+                Utils.LogHandler.Log("Verifier", "For Your Protection VanillaClient Will not Load", ConsoleColor.Yellow);
 
                 return false;
             }

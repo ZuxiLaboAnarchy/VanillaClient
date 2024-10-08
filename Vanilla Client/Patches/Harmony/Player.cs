@@ -9,7 +9,7 @@ namespace Vanilla.Patches.Harmony
     [Obfuscation(Feature = "-rename")]
     internal class PlayerPatch : VanillaPatches
     {
-        protected override string patchName => "PlayerEventPatch";
+        protected override string patchName => "PlayerPatch";
         internal override void Patch()
         {
             //   var instance = new HarmonyLib.Harmony("StartDONTGETRIDOFTag");
@@ -25,13 +25,6 @@ namespace Vanilla.Patches.Harmony
         {
             __0 = true;
         }
-
-
-
-
-
-
-
     }
 }
 

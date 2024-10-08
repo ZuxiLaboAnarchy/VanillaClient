@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+/*
 namespace Vanilla.QM.QMAPI
 {
     internal class MenuPanelAPI
@@ -32,3 +32,4 @@ namespace Vanilla.QM.QMAPI
         }
     }
 }
+*/

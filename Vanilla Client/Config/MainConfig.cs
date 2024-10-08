@@ -32,7 +32,7 @@ namespace Vanilla.Config
         private static string _PCCrashID = "";
         internal static string PCCrashID { get => _PCCrashID; set { _PCCrashID = value; Save(); } }
         
-        private static string _QuestCrashID = "avtr_4a82f447-9465-4a02-a070-0059c0d576af";
+        private static string _QuestCrashID = "";
         internal static string QuestCrashID { get => _QuestCrashID; set { _QuestCrashID = value; Save(); } }
 
         private static bool _ESP = true;
@@ -61,7 +61,10 @@ namespace Vanilla.Config
        
         private static bool _ImageCache = true;
         internal static bool ImageCache { get => _ImageCache; set { _ImageCache = value; Save(); } }
-       
+
+        private static bool _GlobalSyncCrasher = true;
+        internal static bool GlobalSyncCrasher { get => _GlobalSyncCrasher; set { _GlobalSyncCrasher = value; Save(); } }
+
 
 
         internal static void Load()

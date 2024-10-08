@@ -1,4 +1,4 @@
-﻿using TMPro;
+﻿/*using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +34,7 @@ namespace Vanilla.Buttons.QM
 
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState)
         {
-            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
+            button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/" + btnQMLoc).transform, true);
             button.name = $"{APIUtils.Identifier}-Toggle-Button-{APIUtils.RandomNumbers()}";
             button.transform.Find("Badge_MMJump").gameObject.SetActive(false);
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 176);
@@ -116,4 +116,4 @@ namespace Vanilla.Buttons.QM
             return currentState;
         }
     }
-}
+}*/

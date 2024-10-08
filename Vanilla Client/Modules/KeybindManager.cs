@@ -39,20 +39,21 @@ namespace Vanilla.Modules
                 // LogHandler.LogToHud("Test");
                 ModuleManager.DebugKey();
 
-               
-
-
-
-
-
-
-
-
-//  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
+                //  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
 
             }
 #endif
+            if (UnityEngine.Input.GetKeyDown(KeyCode.O))
+            {
+                // InputHandler.RunAlertPopup(null, null);
 
+                // LogHandler.LogToHud("Test");
+               // ModuleManager.DebugKey();
+             //   ModuleManager.WaitForPlayer();
+
+                //  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
+
+            }
 
 
 

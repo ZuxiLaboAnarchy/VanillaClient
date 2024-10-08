@@ -25,15 +25,15 @@ namespace Vanilla.Utils
             {
                 arguments += $"{stringi} ";
             }
-            System.Diagnostics.Process WorldBoss = new System.Diagnostics.Process();
-            WorldBoss.StartInfo.FileName = $"{Directory.GetCurrentDirectory()}\\RealVRChat.exe";
-            WorldBoss.StartInfo.Arguments = arguments;
-            WorldBoss.Start();
+            System.Diagnostics.Process vrcProcess = new System.Diagnostics.Process();
+            vrcProcess.StartInfo.FileName = $"{Directory.GetCurrentDirectory()}\\VRChat.exe";
+            vrcProcess.StartInfo.Arguments = arguments;
+            vrcProcess.Start();
             Process.GetCurrentProcess().Kill();
         }
 
-        internal static string GetClipboard()
-        { return Clipboard.GetText(); }
+        internal static string GetClipboard() => Clipboard.GetText();
+
         internal static void SetClipboard(string Set) => Clipboard.SetText(Set);
 
         internal static void Delay(int time, Action action) => MelonCoroutines.Start(WaitForDelayFinish(time, action));

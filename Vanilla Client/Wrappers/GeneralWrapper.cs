@@ -16,7 +16,7 @@ namespace Vanilla.Wrappers
 
      
         public static Player LocalPlayer() => Player.prop_Player_0;
-        private static Player[] GetAllPlayer() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+        private static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         internal static bool IsFriend(this VRC.Player player) => APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);
         private static Camera uiCamera;
         private static Camera photoCamera;
@@ -73,7 +73,7 @@ namespace Vanilla.Wrappers
         {
             if (photoCamera == null)
             {
-                photoCamera = UserCameraController.field_Public_Static_UserCameraController_0.field_Public_GameObject_0.GetComponent<Camera>();
+                photoCamera = FPVCameraController.field_Public_Static_FPVCameraController_0.field_Public_GameObject_0.GetComponent<Camera>();
             }
             return photoCamera;
         }
@@ -116,13 +116,13 @@ namespace Vanilla.Wrappers
             }
             if (player.GetPing() < 10)
             {
-                MelonLogger.Msg("Detector", player.displayName + " is a client user (2)", System.ConsoleColor.Gray, "IsClientUser", 369);
+               Log("Detector", player.displayName + " is a client user (2)", System.ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
             if (player.GetFPS() < 1)
             {
-                MelonLogger.Msg("Detector", player.displayName + " is a client user (3)", System.ConsoleColor.Gray, "IsClientUser", 378);
+                Log("Detector", player.displayName + " is a client user (3)", System.ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
@@ -130,14 +130,14 @@ namespace Vanilla.Wrappers
             {
                 if (player.GetFPS() > 120 || !player.isVRUser)
                 {
-                    MelonLogger.Msg("Detector", player.displayName + " is a client user (4)", System.ConsoleColor.Gray, "IsClientUser", 390);
+                    Log("Detector", player.displayName + " is a client user (4)", System.ConsoleColor.Gray, "IsClientUser");
                     player.isClientUser = true;
                     return true;
                 }
             }
             else if (player.GetFPS() > 144 || player.GetPing() > 3000)
             {
-                MelonLogger.Msg("Detector", player.displayName + " is a client user (5)", System.ConsoleColor.Gray, "IsClientUser", 402);
+                Log("Detector", player.displayName + " is a client user (5)", System.ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
@@ -148,7 +148,7 @@ namespace Vanilla.Wrappers
                     player.airstuckDetections++;
                     if (player.airstuckDetections >= 5)
                     {
-                        MelonLogger.Msg("Detector", player.displayName + " is a client user (6)", System.ConsoleColor.Gray, "IsClientUser", 417);
+                        Log("Detector", player.displayName + " is a client user (6)", System.ConsoleColor.Gray, "IsClientUser");
                         player.isClientUser = true;
                         return true;
                     }

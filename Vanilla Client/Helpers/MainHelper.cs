@@ -8,9 +8,7 @@ using Vanilla.AvatarFavorites;
 using Vanilla.Config;
 using Vanilla.Modules;
 using Vanilla.ServerAPI;
-using Vanilla.JSON;
 using Vanilla.Wrappers;
-using VRC.Core;
 using static MelonLoader.MelonLogger;
 
 namespace Vanilla.Helpers
@@ -74,18 +72,18 @@ namespace Vanilla.Helpers
 
             // while (GeneralWrappers.GetVRCUiManager() == null)
 
-            
 
-            while (GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog") == null)
+
+            while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
             {
                 yield return null;
             }
             Dev("HudManager", "HUD Loaded Injecting Alert Panel");
 
             LogHandler.SetupHud();
-           
+
             //GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog/Background_Scrim").SetActive(false);
-            
+
         }
 
 
@@ -109,11 +107,13 @@ namespace Vanilla.Helpers
 
         internal override void Update()
         {
+            return;
             if (Time.realtimeSinceStartup >= nextPop)
             {
                 nextPop = Time.realtimeSinceStartup + 30f;
-                ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString());
-                new Thread(() => { Upload.SendUpdates(); }).Start();
+                //TODO Update API for Anarchy bc this is based off of old VRC stuff wich is still used lol
+             //   new Thread(() => { ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString()); }).Start();
+             //   new Thread(() => { Upload.SendUpdates(); }).Start();
                 WSBase.KeepAlivePack();
                 LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber + " | Avatar Send Count: " + SentAvatarCount);
                 UpdateNumber++;
@@ -122,7 +122,7 @@ namespace Vanilla.Helpers
 
             if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null)
             {
-                
+
                 nextUpdateFetch = Time.realtimeSinceStartup + 60f;
                 //FetchUpdates();
                 if (!RuntimeConfig.isBot)
@@ -141,11 +141,11 @@ namespace Vanilla.Helpers
         internal static void FetchUpdates()
         {
             Dev("Update", "Fetching Updates");
-            
-           
+
+
         }
 
-    
+
 
 
 
@@ -155,20 +155,22 @@ namespace Vanilla.Helpers
         {
             try
             {
-              
+
                 foreach (VRCPlayer __instance in UnityEngine.Object.FindObjectsOfType<VRCPlayer>())
                 {
-                      
+
                     if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                     {
                         var a = __instance.field_Private_ApiAvatar_0;
-                         if (AvatarList.Contains(a.id))
+                        if (AvatarList.Contains(a.id))
                         { continue; }
+                        AvatarList.Add(a.id);
                         SentAvatarCount++;
                         UploadHelper.UploadAvatarToGlobalDatabase(new FavoriteAvatar(__instance.field_Private_ApiAvatar_0));
 
-                        AvatarList.Add(a.id);
+
                     }
+                    else { Dev("Avatar", "Found Avatar Already"); }
                 }
             }
             catch (Exception e)
@@ -186,7 +188,7 @@ namespace Vanilla.Helpers
                 if (!AvatarLog.TryDequeue(out var a))
                 { continue; }
 
-              
+
 
 
                 Dictionary<string, string> AvatarsUploadPram = new Dictionary<string, string>

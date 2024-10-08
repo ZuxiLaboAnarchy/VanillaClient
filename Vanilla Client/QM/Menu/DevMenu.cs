@@ -33,32 +33,34 @@ namespace Vanilla.QM.Menu
 
             var SetGlobalPCCrasher = new QMSingleButton(Menu, 3, 0, "Set Global PC", delegate
             {
-                Dictionary<string, string> Prams = new Dictionary<string, string>();
 
-                var id = "";
-                InternalUIManager.RunKeyBoardPopup("Set Global PC", "AvatarID", "Upload", null, value => id = value, null);
-                Prams.Add("PCCrash", id);
-
-                Server.SendPostRequestInternal("upload-crasher", Prams);
-                Dev("GlobalUpdates", "SentCrasher: " + id);
-                Prams.Clear();
+                Prams.Clear(); InternalUIManager.RunKeyBoardPopup("Set Global PC", "AvatarID", "Upload", null, SetPC, null);
             }, "Change Crasher for PC");
 
             var SetGlobalQuestCrasher = new QMSingleButton(Menu, 4, 0, "Set Global Quest", delegate
             {
-                Dictionary<string, string> Prams = new Dictionary<string, string>();
-                var id = "";
-                InternalUIManager.RunKeyBoardPopup("Set Global Crasher", "AvatarID", "Upload", null, value => id = value, null);
-                 Prams.Add("QuestCrash", id);
-
-                Server.SendPostRequestInternal("upload-crasher", Prams);
-                Dev("GlobalUpdates", "SentCrasher");
-                Prams.Clear();
+                Prams.Clear(); InternalUIManager.RunKeyBoardPopup("Set Global Crasher", "AvatarID", "Upload", null, SetQuest, null);
+                
             }, "Change Crasher for Quest");
             
            
         }
+        static void SetPC(string id)
+        {
+            Prams.Add("PCCrash", id);
+            Server.SendPostRequestInternal("upload-crasher", Prams);
+            Dev("GlobalUpdates", "SentCrasher");
+            Prams.Clear();
+        }
 
+        static void SetQuest(string id)
+        {
+            Prams.Add("QuestCrash", id);
+            Server.SendPostRequestInternal("upload-crasher", Prams);
+            Dev("GlobalUpdates", "SentCrasher");
+            Prams.Clear();
+        }
 
+        static Dictionary<string, string> Prams = new Dictionary<string, string>();
     }
 }

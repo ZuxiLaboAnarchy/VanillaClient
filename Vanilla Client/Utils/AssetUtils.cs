@@ -19,16 +19,19 @@ namespace Vanilla.Utils
 
         internal static Texture2D LoadTexture(string textureName)
         {
+            LogHandler.Log("Assets", "Requested " + textureName);
             if (cachedAssetBundle == null)
             {
+               LogHandler.Log("Assets", "AssetBundleNull", ConsoleColor.Red);
                 return null;
-            }
+            } 
             string text = "Assets/" + textureName + ".png";
             if (assetCache.ContainsKey(text))
             {
                 return (Texture2D)assetCache[text];
             }
-            Texture2D texture2D = cachedAssetBundle.LoadAsset_Internal(text, Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
+            Texture2D texture2D = null;
+            texture2D = cachedAssetBundle.LoadAsset_Internal(text, Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             texture2D.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             assetCache.Add(text, texture2D);
             return texture2D;
@@ -57,7 +60,7 @@ namespace Vanilla.Utils
             {
                 return null;
             }
-            string text = "Assets/" + audioName + ".mp3";
+            string text = "Assets/" + audioName + ".ogg";
             if (assetCache.ContainsKey(text))
             {
                 return (AudioClip)assetCache[text];

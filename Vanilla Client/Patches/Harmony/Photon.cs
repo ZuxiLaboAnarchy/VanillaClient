@@ -1,9 +1,11 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using UnhollowerBaseLib;
 using Vanilla.Config;
 using Vanilla.Helpers;
+using Vanilla.Misc;
 using Vanilla.Modules;
 using Vanilla.Wrappers;
 
@@ -22,8 +24,8 @@ namespace Vanilla.Patches.Harmony
             try
             {
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
-
-                PatchMethod(typeof(LoadBalancingClient).GetMethod(Strings.OnEvent), GetLocalPatch(Strings.OnEvent), null);
+              
+                PatchMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(Strings.OnEvent), null);
 
          
                 //PatchMethod(typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("OnEventSent"), null);
@@ -43,14 +45,22 @@ namespace Vanilla.Patches.Harmony
 
 
 
-        private static bool OnEvent(EventData __0)
+        private static bool OnEvent(ref EventData __0)
         {
+            return true;
+            int A = 0;
+            Dev("PhotonPatch", A); A++;
+            PhotonEventCodes.EventCodes eventCode = (PhotonEventCodes.EventCodes)__0.Code;
+            Dev("Event", eventCode.ToString());
+            if (__0 == null) return true;
+            Dev("PhotonPatch", A); A++;
             try
             {
-                var eventCode = __0.Code;
-
-                if (eventCode == 1)
+                
+                Dev("PhotonPatch", A); A++;
+                if (eventCode == PhotonEventCodes.EventCodes.VoiceData)
                 {
+                    Dev("PhotonPatch", A); A++;
                     if (RuntimeConfig.EventLogger1)
                     {
                         byte[] voiceData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(__0.CustomData.Pointer);
@@ -59,8 +69,9 @@ namespace Vanilla.Patches.Harmony
                     }
                 }
 
-                if (eventCode == 6)
+                if (eventCode == PhotonEventCodes.EventCodes.VRChatRPC)
                 {
+                    Dev("PhotonPatch", A); A++;
                     if (RuntimeConfig.EventLogger6)
                     {
                         byte[] E6 = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(__0.CustomData.Pointer);
@@ -68,20 +79,13 @@ namespace Vanilla.Patches.Harmony
                         Dev("Event 6", Convert.ToBase64String(E6));
                     }
                 }
-
-
-
-
-
-
-
+                Dev("PhotonPatch", A); A++;
                 return eventCode switch
                 {
-
-
-                    1 => !ProtectionHandler.IsEvent1Bad(__0),
-                    42 => MainHelper.AvatarLogHandler(),
-                    223 => MainHelper.AvatarLogHandler(),
+                    PhotonEventCodes.EventCodes.VoiceData => !ProtectionHandler.IsEvent1Bad(__0),
+                    PhotonEventCodes.EventCodes.Moderations => ModerationManager.OnEvent(__0),
+                    PhotonEventCodes.EventCodes.SetPlayerData => true,//MainHelper.AvatarLogHandler(),
+                    PhotonEventCodes.EventCodes.AuthEvent => true,
                     _ => true,
                 };
             }

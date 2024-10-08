@@ -9,51 +9,60 @@ using VRC.SDKBase.Validation.Performance;
 using VRC;
 using Vanilla.Config;
 using UnityEngine.UI;
+using VRC.SDK.Internal.ModularPieces;
 
 namespace Vanilla.Modules
 {
     internal class PlayerController : VanillaModule
     {
+
+        public static GameObject canvas = null;
         protected override string ModuleName => "PlayerController";
 
 
-        #region Nameplates
-        public static Transform GetBasePlate(VRC.Player PlayerData, NameplateManager[] Nameplates)
+        #region Nameplates 
+        // TODO: Fix Nameplates 
+        /*public static Transform GetBasePlate(VRC.Player PlayerData, MonoBehaviour1PublicSiObSiBoObAcSi1MeSiUnique[] Nameplates)
         {
-            foreach (NameplateManager NameplateContainer in Nameplates)
+            foreach (MonoBehaviour1PublicSiObSiBoObAcSi1MeSiUnique NameplateContainer in Nameplates)
             {
+                if (NameplateContainer.gameObject.name != "PlayerNameplate")
+                    continue;
                 string PUID = NameplateContainer.field_Public_VRCPlayer_0._player.field_Private_APIUser_0.id;
-                if (PUID == PlayerData.prop_APIUser_0.id) { return NameplateContainer.gameObject.transform; }
+                if (PUID == PlayerData.prop_APIUser_0.id) { Dev("IDCheck", "Check Was True :P"); return NameplateContainer.gameObject.transform; }
             }
             Dev("NamePlates", "Nameplate search returned null");
             return null;
-        }
+        } */
 
         internal override void WorldUnload(int level)
         {
             PlayerUtils.playerCachingList.Clear();
         }
 
+        internal override void Debug()
+        {
+          //  canvas.name = "Vanilla Test Object";
+        }
+
         internal override void PlayerJoin(VRC.Player __0)
         {
             if ( __0 == null || PlayerWrapper.GetPlayerInformation(__0) != null) { return; }
             bool flag = __0.prop_APIUser_0.id == APIUser.CurrentUser.id;
-            GameObject canvas = null;
+           // GameObject canvas = null;
             ImageThreeSlice nameplateBackground = null;
             Image nameplateIconBackground = null;
             GameObject CreatedPlate = null;
             RectTransform rectTransform = null;
             TextMeshProUGUI textMeshProUGUI = null;
-            try //total hours wasted debugging this code: 8
-            { //im never touching this code again
-                NameplateManager[] PlateManager = UnityEngine.Object.FindObjectsOfType<NameplateManager>();
-                canvas = GetBasePlate(__0, PlateManager).Find("PlayerNameplate/Canvas").gameObject;
-                //returning the transform and dropping the static variable was the solution
-                nameplateBackground = canvas.transform.Find("NameplateGroup/Nameplate/Contents/Main/Background").GetComponent<ImageThreeSlice>();
-                nameplateIconBackground = canvas.transform.Find("NameplateGroup/Nameplate/Contents/Icon/Background").GetComponent<Image>();
+            try 
+            { 
+                canvas = __0.prop_VRCPlayer_0.transform.Find("Player Nameplate/Canvas").gameObject;
+                nameplateBackground = canvas.transform.Find("Nameplate/Contents/Main/Background").GetComponent<ImageThreeSlice>();
+                nameplateIconBackground = canvas.transform.Find("Nameplate/Contents/Icon/Background").GetComponent<Image>();
                 if (!flag)
                 {
-                    Transform transform = canvas.transform.Find("NameplateGroup/Nameplate/Contents");
+                    Transform transform = canvas.transform.Find("Nameplate/Contents");
                     GameObject gameObject3 = transform.transform.Find("Quick Stats").gameObject;
 
                     CreatedPlate = UnityEngine.Object.Instantiate(gameObject3, transform);
@@ -92,7 +101,7 @@ namespace Vanilla.Modules
             {
                 playerInformation = new PlayerInformation
                 {
-                    actorId = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_1,
+                    actorId = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0,
                     actorIdData = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 * PhotonNetwork.field_Public_Static_Int32_0 + 1,
                     actorIdDataOther = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 * PhotonNetwork.field_Public_Static_Int32_0 + 3,
                     id = __0.prop_APIUser_0.id,

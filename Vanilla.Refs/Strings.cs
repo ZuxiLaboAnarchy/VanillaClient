@@ -17,7 +17,7 @@ namespace Vanilla.Refs
         
        
         public static readonly string VRCPlayerJoin = "Method_Public_Void_Player_0";
-        public static readonly string VRCPlayerLeave = "Method_Public_Void_Player_2";
+        public static readonly string VRCPlayerLeave = "Method_Public_Void_Player_1";
         public static readonly string VRCOnJoinRoom = "Method_Public_Void_PDM_0";
         public static readonly string VRCOnLeftRoom = "OnLeftRoom";
 

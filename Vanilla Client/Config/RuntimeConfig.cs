@@ -3,7 +3,7 @@
     internal class RuntimeConfig
     {
         /*Read Only Vars*/
-        internal readonly static string GameVER = "2022.4.2p1-1275--Release";
+        internal readonly static string GameVER = "2023.1.1p3-1282--Release";
         
         
         /*Unsaved Global Vars*/
@@ -16,6 +16,9 @@
         internal static bool RanksCustomRanks = true;
         internal static bool isConnectedToInstance = false;
         internal static bool isForced = false;
+        internal static string RealPCrashID = MainConfig.GlobalSyncCrasher ? PCCrashID : MainConfig.PCCrashID;
+        internal static string RealQCrashID = MainConfig.GlobalSyncCrasher ? QuestCrashID : MainConfig.QuestCrashID;
+
         /*User Vars*/
         private static string Username = null;
         private static bool IsStaff = false;
@@ -45,15 +48,14 @@
 
         internal static bool GetIsStaff()
         {
-            /*TODO make this retun a bool instead*/
             return IsStaff;
         }
 
 
-        internal static void SetUserName(string id)
-        { if (Username != null) 
+        internal static void SetUserName(string username)
+        { if (Username is not null) 
                 return;
-             Username = id;
+             Username = username;
             Log("Core", "Welcome " + Username);
         }
 
@@ -81,12 +83,6 @@
         {
             return PCCrashID;
         }
-
-
-        
-
-
-
 
         internal static void SetCrashingAvatarQuest(string id)
         {

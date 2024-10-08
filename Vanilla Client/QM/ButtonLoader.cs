@@ -1,7 +1,10 @@
-﻿using MelonLoader;
+﻿using Il2CppSystem.Net;
+using MelonLoader;
 using System.Collections;
 using System.Diagnostics;
+using System.Windows.Forms;
 using UnityEngine;
+using UnityEngine.UI;
 using Vanilla.Buttons.QM;
 using Vanilla.Config;
 using Vanilla.Modules;
@@ -10,9 +13,11 @@ using Vanilla.Wrappers;
 using VRC.SDKBase;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements.Menus;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Vanilla.QM
 {
+    //[Zuxi.SDK.DoNotObfuscate]
     internal class ButtonLoader : VanillaModule
     {
         protected override string ModuleName => "QM Loader";
@@ -22,23 +27,28 @@ namespace Vanilla.QM
 
         internal static IEnumerator WaitForQMLoad()
         {
-            while (GameObject.Find($"Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
+            while (GameObject.Find($"UserInterface/Canvas_QuickMenu(Clone)") == null) yield return null;
 
 
             LoadButtons();
+            // ToDo Move to its own thing
+            if (GeneralUtils.GetClipboard().Contains("wrld_"))
+                Networking.GoToRoom(GeneralUtils.GetClipboard());
         }
+       // [Zuxi.SDK.DoNotObfuscate]
         internal static void LoadButtons()
         {
 
             var tabMenu = new QMTabMenu("Vanilla", "Vanilla Client", ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
 
-            GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/").gameObject.SetActive(false);
+          //  GameObject.Find("Canvas_QuickMenu(Clone)/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/").gameObject.SetActive(false);
 
             var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord", delegate
-            { Process.Start("https://hvl.gg/discord/"); }, "Join The Discord");
+            { Process.Start("https://imzuxi.com/galaxydiscord/"); }, "Join The Discord");
 
             var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
             {
+                
                 string roomid = null;
                 Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () =>
                 {
@@ -52,29 +62,29 @@ namespace Vanilla.QM
                
 
             }, "Change Avatar By ID");
-
+             
             var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "JoinWorld", delegate
             {
                 InternalUIManager.RunKeyBoardPopup("Enter WorldID", "WorldID", "Go to World", null, WorldWrapper.GoToRoom, null);
             }, "Change Your Current World");
 
 
+            var RestartAndRejoin = new QMSingleButton(tabMenu, 1, 1, "Restart And Rejoin", delegate
+            {
+                GeneralWrappers.CopyInstanceToClipboard();
+                GeneralUtils.Restart();
+            }, "Change Your Current World");
 
             // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "Vanilla Client");
-            var selectedmenu = GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
+            var selectedmenu = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
             //selectedmenu.FindObject
 
 
            //  var selectedGroup = UnityEngine.Object.Instantiate(selectedmenu.gameObject,selectedmenu.gameObject.transform.parent);
-           var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for Vanilla Client", "Vanilla");
-
-
+            var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for Vanilla Client", "Vanilla");
 
             Selected.GetMainButton().SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
             Selected.GetMainButton().GetGameObject().transform.SetParent(selectedmenu.transform);
-
-
-
 
             UnityEngine.Object.Destroy(Selected.GetMainButton().GetGameObject().GetComponent<StyleElement>());
 

@@ -52,15 +52,6 @@ namespace Vanilla.Modules
                 return;
 
             string user = __0.field_Private_APIUser_0.displayName;
-            string UID = __0.field_Private_APIUser_0.id;
-            bool Quest = __0.field_Private_APIUser_0.IsOnMobile;
-
-            if (user == "orchestrapyro")
-            { user = "HyperV"; }
-
-            if (UID == "usr_e49984a4-14de-482d-9899-62d710c7ead8")
-            { UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL"; }
-
             { Log("Player Leave", $"{user}"); }
         }
 

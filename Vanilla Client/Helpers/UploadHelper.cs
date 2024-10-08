@@ -11,7 +11,6 @@ using Vanilla.AvatarFavorites;
 using Vanilla.Config;
 using Vanilla.JSON;
 using VRC.Core;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Helpers
 {
@@ -75,7 +74,7 @@ namespace Vanilla.Helpers
             TempUploadContainer tempUploadContainer = default(TempUploadContainer);
             //tempUploadContainer.uploadType = 7;
             tempUploadContainer.saved_avatar = avatar;
-            Dev("Added" , avatar.AvatarID);
+            Dev("AVILOG" , "Added: " + avatar.AvatarID);
             TempUploadContainer item = tempUploadContainer;
             GetUploadQueueConfig().UploadQueue.Enqueue(item);
             SaveUploadQueueConfig();

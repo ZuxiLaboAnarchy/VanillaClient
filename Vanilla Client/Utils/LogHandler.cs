@@ -3,6 +3,8 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using UnityEngine;
+using Vanilla.Modules;
+using static Il2CppSystem.TypeIdentifiers;
 
 namespace Vanilla.Utils
 {
@@ -45,11 +47,13 @@ namespace Vanilla.Utils
         internal static void LogToHud(string message)
         {
             // Sprite sprite= ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo");
-            HUDInstance.Method_Public_Void_String_Sprite_0(message, ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
+         //   HUDInstance.Method_Public_Void_String_Sprite_0(message, ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
 
             // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
 
-
+           
+                OnScreenUI.AddString(
+                    string.Format("<color=#ff0000> {0} </color>", message.ToString()));
 
 
         }
@@ -81,19 +85,18 @@ namespace Vanilla.Utils
 
         }
 
-        internal static void Log(string Identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
+        internal static void Log(string identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
         {
             WrittenToConsole.Enqueue(new ConsoleLog
             {
-                identifier = Identify,
+                identifier = identify,
                 text = message,
                 textColor = color,
                 callerName = caller,
-                LogToHud = false,
+                LogToHud = true,
 
             });
             Pop();
-
         }
         internal static int CurCue;
 
@@ -147,7 +150,8 @@ namespace Vanilla.Utils
 
                 if (result.LogToHud)
                 {
-                    LogToHud("[" + result.identifier + "] " + result.text.ToString());
+                      OnScreenUI.AddString("[" + result.identifier + "] <color=#00aeff>" + result.text + "</color>");
+                   // LogToHud("[" + result.identifier + "] " + result.text.ToString());
                 }
 
             }

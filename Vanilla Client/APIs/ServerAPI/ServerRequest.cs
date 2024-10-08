@@ -91,18 +91,14 @@ namespace Vanilla.ServerAPI
             catch (Exception e)
             {
                 ExceptionHandler("Server API", e, EndPoint);
-
-
                 if (onFinished != null)
                     onFinished(arg2: null, arg1: true);
-
-
                 return null;
             }
         }
         protected internal class SendServerConfig
         {
-            protected internal static string APIBaseEndpoint = "https://hvl.gg/api/cheats/";
+            protected internal static string APIBaseEndpoint = "https://api.zuxi.dev/api/cheats/";
             protected internal readonly static string Version = "V" + "1";
             protected internal readonly static string UA = "VanillaClient" + Version;
             protected internal readonly static string CA = "VanillaClientServerAPI" + Version;

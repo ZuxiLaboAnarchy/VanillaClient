@@ -46,6 +46,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "G:\Visual Studio\VanillaClient\Vanilla Client\Resources" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

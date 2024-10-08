@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
-
+/*
 namespace Vanilla.Buttons.QM
 {
     internal class QMButtonBase
@@ -18,8 +18,8 @@ namespace Vanilla.Buttons.QM
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (232 * (buttonXLoc + initShift[0]));
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (210 * (buttonYLoc + initShift[1]));
         }
-
-        internal void SetToolTip(string buttonToolTip) => button.GetComponents<VRC.UI.Elements.Tooltips.UiTooltip>().ToList().ForEach(x => x.field_Public_String_0 = buttonToolTip);
+        // TODO: Fix ToolTips
+        internal void SetToolTip(string buttonToolTip) { return;  } //=> //button.GetComponents<VRC.UI.Elements.Tooltips.UiTooltip>().ToList().ForEach(x => x.field_Public_String_0 = buttonToolTip);
 
         internal void DestroyMe()
         {
@@ -30,4 +30,4 @@ namespace Vanilla.Buttons.QM
             catch { }
         }
     }
-}
+}*/

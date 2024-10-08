@@ -20,11 +20,11 @@ namespace Vanilla.Wrappers
 
         public static VRCPlayer GetSelectedUser()
         {
-         //   var a = UnityEngine.Object.FindObjectOfType<SelectedUserMenuQM>().;
+            //   var a = UnityEngine.Object.FindObjectOfType<SelectedUserMenuQM>().;
 
-            var SelectedGameObject = GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local").transform.GetComponent<SelectedUserMenuQM>().field_Private_IUser_0;
-
-            return PlayerWrapper.GetPlayerInformationByID(SelectedGameObject.prop_String_0).vrcPlayer;
+            //   var SelectedGameObject = GameObject.Find("Canvas_QuickMenu(Clone)/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").transform.GetComponent<SelectedUserMenuQM>();
+           
+            return PlayerWrapper.GetPlayerInformationByID(QuickMenu.prop_QuickMenu_0.prop_APIUser_0.id).vrcPlayer;
         }
 
 
@@ -72,8 +72,9 @@ namespace Vanilla.Wrappers
         {
             new ApiAvatar() { id = avatarId }.Get(new System.Action<ApiContainer>(x =>
             {
-                GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = x.Model.Cast<ApiAvatar>();
-                GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().ChangeToSelectedAvatar();
+                //TODO: Fix Page Avatar Lol
+                //  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = x.Model.Cast<ApiAvatar>();
+                //  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().ChangeToSelectedAvatar();
             }),
             new System.Action<ApiContainer>(x =>
             {

@@ -32,7 +32,7 @@ namespace Vanilla.Xrefs
 
         internal static void GetMethods()
         {
-
+            /*
             MethodInfo[] methods = typeof(UIManagerPublicBoObBoAc1BoAcGa1MeUnique).GetMethods();
             
             //  MethodInfo[] methods = typeof(VRCUiPopupManager).GetMethods();
@@ -68,6 +68,7 @@ namespace Vanilla.Xrefs
                 }
             }
             catch { }
+            */
         }
 
 
