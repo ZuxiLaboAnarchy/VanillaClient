@@ -2,9 +2,9 @@
 using UnityEngine;
 using Vanilla.AvatarFavorites;
 using Vanilla.Config;
+using Vanilla.Modules;
 using Vanilla.TagManager;
 using Vanilla.Wrappers;
-using WebSocketSharp;
 
 namespace Vanilla.ServerAPI
 {
@@ -38,12 +38,12 @@ namespace Vanilla.ServerAPI
             //  Dev("WSSRH", WSResponce);
             
 
-            if (WSResponce.IsNullOrEmpty())
+          /*  if (WSResponce.IsNullOrEmpty())
             {
-                Dev("PlayerChanges", "Update Was Null Returning");
+                Dev("Dev", "Update Was Null Returning");
                 return;
             }
-
+          */
 
             if (WSResponce == LastUpdate && !RuntimeConfig.isForced)
             {
@@ -65,20 +65,13 @@ namespace Vanilla.ServerAPI
 
             try
             {
-                PlayerUtils.playerCustomTags.Clear();
-                RuntimeConfig.SetUserName((string?)jObject["Username"]);
-                RuntimeConfig.SetStaff((string?)jObject["IsStaff"]);
-                RuntimeConfig.SetUUID((string?)jObject["UUID"]);
-                RuntimeConfig.SetSubTime((string?)jObject["SubTime"]);
-                RuntimeConfig.SetCrashingAvatarPC((string?)jObject["PCCrash"]);
-                RuntimeConfig.SetCrashingAvatarQuest((string?)jObject["QuestCrash"]);
-
+               
                 JArray jArray3 = (JArray)jObject["TagList"];
                 for (int k = 0; k < jArray3.Count; k++)
                 {
-                    string VRChatID = ((string?)jArray3[k]["vrchat_id"])?.Trim();
-                    string CustomTag = ((string?)jArray3[k]["custom_Tag"])?.Trim();
-                    string CustomTagColor = ((string?)jArray3[k]["custom_Tag_color"])?.Trim();
+                    string VRChatID = ((string?)jArray3[k]["anarchy_id"])?.Trim();
+                    string CustomTag = ((string?)jArray3[k]["custom_rank"])?.Trim();
+                    string CustomTagColor = ((string?)jArray3[k]["custom_tag_color"])?.Trim();
                     Color color = default(Color);
                     bool TagEnabled = false;
                     bool customRankEnabled = false;
@@ -103,13 +96,35 @@ namespace Vanilla.ServerAPI
                     Dev("SRH", "Adding: " + VRChatID + " To Tag List");
 
 
-                    //  if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
-                    PlayerUtils.playerCustomTags.Add(VRChatID, customtag);
+                    if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
+                    { PlayerUtils.playerCustomTags.Add(VRChatID, customtag); }
+                    else
+                    { PlayerUtils.playerCustomTags[VRChatID] = customtag; }
 
-                    PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
+                        PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
                     if (playerInformationByID != null && TagEnabled)
                     {
                         PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
+                    }
+                }
+
+                JArray jArray10 = (JArray)jObject["ShaderWhiteList"];
+                for (int k = 0; k < jArray10.Count; k++)
+                {
+                   if(! MainConfig.GetInstance().WhiteListedShaderList.Contains(jArray10[k].ToString()))
+                    {
+                        if (string.IsNullOrEmpty(jArray10[k].ToString())) continue;
+                        MainConfig.GetInstance().WhiteListedShaderList.Add(jArray10[k].ToString());
+                    }
+                }
+
+                JArray jArray11 = (JArray)jObject["AvatarWhiteList"];
+                for (int k = 0; k < jArray11.Count; k++)
+                {
+                    if (!MainConfig.GetInstance().WhiteListedAvatarIDs.Contains(jArray11[k].ToString()))
+                    {
+                        if (string.IsNullOrEmpty(jArray10[k].ToString())) continue;
+                        MainConfig.GetInstance().WhiteListedAvatarIDs.Add(jArray11[k].ToString());
                     }
                 }
 

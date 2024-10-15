@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using Harmony;
+using MelonLoader;
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
@@ -74,16 +75,16 @@ namespace Vanilla.Utils
                     list.Add(P[i].prop_ApiAvatar_0.assetUrl);
                 }
             }
-            System.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique> dictionary = new System.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique>();
-            Il2CppSystem.Collections.Generic.Dictionary<string, ObjectPublicInStInCoBoUnInStObBoUnique>.KeyCollection.Enumerator enumerator = assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0.Keys.GetEnumerator();      //field_Private_Dictionary_2_String_AssetBundleDownload_0.Keys.GetEnumerator();
+            System.Collections.Generic.Dictionary<string, AssetBundleDownload> dictionary = new System.Collections.Generic.Dictionary<string, AssetBundleDownload>();
+            Il2CppSystem.Collections.Generic.Dictionary<string, AssetBundleDownload>.KeyCollection.Enumerator enumerator = assetBundleDownloadManager.field_Private_Dictionary_2_String_AssetBundleDownload_0.Keys.GetEnumerator();      //field_Private_Dictionary_2_String_AssetBundleDownload_0.Keys.GetEnumerator();
             while (enumerator.MoveNext())
             {
                 string current = enumerator.Current;
-                dictionary.Add(current, assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0[current]);
+                dictionary.Add(current, assetBundleDownloadManager.field_Private_Dictionary_2_String_AssetBundleDownload_0[current]);
             }
             foreach (string key in dictionary.Keys)
             {
-                ObjectPublicInStInCoBoUnInStObBoUnique assetBundleDownload = assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0[key];
+                AssetBundleDownload assetBundleDownload = assetBundleDownloadManager.field_Private_Dictionary_2_String_AssetBundleDownload_0[key];
                 if (!assetBundleDownload.field_Private_String_0.Contains("wrld_") && !list.Contains(key))
                 {
                     if (assetBundleDownload.prop_GameObject_0 != null)
@@ -91,7 +92,8 @@ namespace Vanilla.Utils
                         UnityEngine.Object.DestroyImmediate(assetBundleDownload.prop_GameObject_0, allowDestroyingAssets: true);
                     }
                     assetBundleDownload.field_Private_AssetBundle_0?.Unload(unloadAllLoadedObjects: true);
-                    assetBundleDownloadManager.field_Private_Dictionary_2_String_ObjectPublicInStInCoBoUnInStObBoUnique_0.Remove(key);
+                    assetBundleDownloadManager.field_Private_Dictionary_2_String_AssetBundleDownload_0.Remove(key);
+                          assetBundleDownloadManager.field_Private_Dictionary_2_String_AssetBundleDownload_0.Remove(key);
                 }
             }
             dictionary.Clear();

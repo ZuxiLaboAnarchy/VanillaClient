@@ -9,9 +9,10 @@ namespace Vanilla.Modules
 {
     internal class DebugManager : VanillaModule
     {
+        protected override string ModuleName => "Debug Manager";
         internal override void Debug()
         {
             GeneralWrappers.CopyInstanceToClipboard();
-        }
+        } 
     }
 }

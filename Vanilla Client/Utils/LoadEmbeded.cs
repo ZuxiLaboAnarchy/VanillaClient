@@ -7,7 +7,7 @@ namespace Vanilla.Utils
     {
         public static void Test()
         {
-            Console.WriteLine("AuthInfo");
+            //Console.WriteLine("AuthInfo");
             /*
             Console.WriteLine(VRC.Core.ApiCredentials.authToken);
                 

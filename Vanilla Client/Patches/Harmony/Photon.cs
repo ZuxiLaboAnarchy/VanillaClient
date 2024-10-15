@@ -7,7 +7,9 @@ using Vanilla.Config;
 using Vanilla.Helpers;
 using Vanilla.Misc;
 using Vanilla.Modules;
+using Vanilla.Modules.Photon;
 using Vanilla.Wrappers;
+using VRC.Core;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -25,16 +27,13 @@ namespace Vanilla.Patches.Harmony
             {
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
               
-                PatchMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(Strings.OnEvent), null);
+                PatchMethod(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetLocalPatch(nameof(OnEvent)) , null);
 
-         
                 //PatchMethod(typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("OnEventSent"), null);
 
               //  LoadBalancingClient
 
-                //PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
-
-
+              //  PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
 
             }
             catch (Exception e)
@@ -43,24 +42,29 @@ namespace Vanilla.Patches.Harmony
             }
         }
 
+        private static bool OnEventWrapper(ref EventData __0)
+        {
+            bool state = OnEvent(ref __0);
+            if (state)
+            {
 
+                PhotonEventCodes.EventCodes eventCode = (PhotonEventCodes.EventCodes)__0.Code;
+                if (eventCode == PhotonEventCodes.EventCodes.PhotonHeartbeat)
+                    return true;
+                LogHandler.Log("PhotonDebug", eventCode.ToString() + " Returned " + state.ToString() );
+            }
+            return state;
+        }
 
         private static bool OnEvent(ref EventData __0)
         {
-            return true;
-            int A = 0;
-            Dev("PhotonPatch", A); A++;
             PhotonEventCodes.EventCodes eventCode = (PhotonEventCodes.EventCodes)__0.Code;
-            Dev("Event", eventCode.ToString());
+           // Dev("Event", eventCode.ToString());
             if (__0 == null) return true;
-            Dev("PhotonPatch", A); A++;
             try
             {
-                
-                Dev("PhotonPatch", A); A++;
                 if (eventCode == PhotonEventCodes.EventCodes.VoiceData)
                 {
-                    Dev("PhotonPatch", A); A++;
                     if (RuntimeConfig.EventLogger1)
                     {
                         byte[] voiceData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(__0.CustomData.Pointer);
@@ -71,7 +75,6 @@ namespace Vanilla.Patches.Harmony
 
                 if (eventCode == PhotonEventCodes.EventCodes.VRChatRPC)
                 {
-                    Dev("PhotonPatch", A); A++;
                     if (RuntimeConfig.EventLogger6)
                     {
                         byte[] E6 = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(__0.CustomData.Pointer);
@@ -79,15 +82,15 @@ namespace Vanilla.Patches.Harmony
                         Dev("Event 6", Convert.ToBase64String(E6));
                     }
                 }
-                Dev("PhotonPatch", A); A++;
                 return eventCode switch
                 {
                     PhotonEventCodes.EventCodes.VoiceData => !ProtectionHandler.IsEvent1Bad(__0),
-                    PhotonEventCodes.EventCodes.Moderations => ModerationManager.OnEvent(__0),
+                    PhotonEventCodes.EventCodes.Moderations => true,// ModerationManager.OnEvent(__0),
                     PhotonEventCodes.EventCodes.SetPlayerData => true,//MainHelper.AvatarLogHandler(),
                     PhotonEventCodes.EventCodes.AuthEvent => true,
-                    _ => true,
-                };
+                    PhotonEventCodes.EventCodes.VRChatRPC => RPC.IsGoodRPC(__0),
+                    _ => true, 
+                };   
             }
             catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
         }

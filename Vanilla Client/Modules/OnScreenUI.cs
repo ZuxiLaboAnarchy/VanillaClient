@@ -9,7 +9,9 @@ using UnityEngine;
 namespace Vanilla.Modules
 {
     internal class OnScreenUI : VanillaModule
-    { 
+    {
+        protected override string ModuleName => "OnScreenUI";
+
         private static GameObject _uiLayerObject = null;
         private static TextMeshProUGUI _uiLogger = null;
         private static TextMeshProUGUI _uiStatus = null;
@@ -41,14 +43,14 @@ namespace Vanilla.Modules
             _uiLogger = _uiLayerObject.transform.Find("ZuxiLoggerUI").gameObject.GetComponent<TextMeshProUGUI>();
             _uiStatus = _uiLayerObject.transform.Find("ZuxiStatsUI").gameObject.GetComponent<TextMeshProUGUI>();
             _uiLayerObject.transform.Find("ZuxiStatsUI").gameObject.SetActive(false);
-            Dev("UILayer", "UI INIT SUCCESSFULLY!");
-
+            Dev("UILayer", "OnScreen Logger Created!");
+            AddString("HelloWorld!");
             #endregion
         }
 
         internal override void Debug()
         {
-           // Console.WriteLine("[UI DEBUG]: \n" + BuildUIList() + "[END.]");
+            Console.WriteLine("[UI DEBUG]: \n" + BuildUIList() + "[END.]");
         }
         internal override void OnGUI()
         {
@@ -57,11 +59,11 @@ namespace Vanilla.Modules
             // Hack job to make status always Shown and not have to use assetbundle alot more fps intensive thogh
 
             // USER INFO 
-            UnityEngine.GUI.Label(new Rect(3f, 0f, 160f, 90f),
-                $"<color=cyan>UID: </color><color=cyan>0\n</color>");
-            UnityEngine.GUI.Label(new Rect(3f, 12f, 160f, 90f),
-                $"<color=cyan>User: </color><color=cyan>ANARCHY\n</color>");
-
+            /*  UnityEngine.GUI.Label(new Rect(3f, 0f, 160f, 90f),
+                  $"<color=cyan>UID: </color><color=cyan>0\n</color>");
+              UnityEngine.GUI.Label(new Rect(3f, 12f, 160f, 90f),
+                  $"<color=cyan>User: </color><color=cyan>ANARCHY\n</color>");
+              */
             // General Stats
             UnityEngine.GUI.Label(new Rect(3f, 1000f, 160f, 90f),
                 $"<color=cyan>Day: </color><color=cyan>{DateTime.Now.DayOfWeek}\n</color>");
@@ -85,6 +87,9 @@ namespace Vanilla.Modules
 
         internal static void AddString(string newString)
         {
+            if (string.IsNullOrEmpty(newString))
+            { OnGUIUpdateRequested(); return; }
+               
             stringList.Add(newString + "<color=#00ffff> | " + FormatTimeWithTimeZone(DateTime.Now) + " </color>");
 
             // Check if the list size exceeds the maximum capacity

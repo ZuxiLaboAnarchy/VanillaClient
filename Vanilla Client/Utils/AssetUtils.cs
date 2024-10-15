@@ -19,10 +19,10 @@ namespace Vanilla.Utils
 
         internal static Texture2D LoadTexture(string textureName)
         {
-            LogHandler.Log("Assets", "Requested " + textureName);
+           // LogHandler.Log("Assets", "Requested " + textureName); 
             if (cachedAssetBundle == null)
-            {
-               LogHandler.Log("Assets", "AssetBundleNull", ConsoleColor.Red);
+            { 
+               LogHandler.Log("Assets", "asset bundle was null", ConsoleColor.Red);
                 return null;
             } 
             string text = "Assets/" + textureName + ".png";
@@ -33,7 +33,7 @@ namespace Vanilla.Utils
             Texture2D texture2D = null;
             texture2D = cachedAssetBundle.LoadAsset_Internal(text, Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             texture2D.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            assetCache.Add(text, texture2D);
+            assetCache.Add(text, texture2D); 
             return texture2D;
         }
 
@@ -83,6 +83,22 @@ namespace Vanilla.Utils
                 return (GameObject)assetCache[text];
             }
             GameObject gameObject = cachedAssetBundle.LoadAsset_Internal(text, Il2CppType.Of<GameObject>()).Cast<GameObject>();
+            gameObject.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            assetCache.Add(text, gameObject);
+            return gameObject;
+        }
+        internal static Cubemap LoadCubeMap(string cubemapName)
+        {
+            if (cachedAssetBundle == null)
+            {
+                return null;
+            }
+            string text = "Assets/" + cubemapName + ".png";
+            if (assetCache.ContainsKey(text))
+            {
+                return (Cubemap)assetCache[text];
+            }
+            Cubemap gameObject = cachedAssetBundle.LoadAsset_Internal(text, Il2CppType.Of<Cubemap>()).Cast<Cubemap>();
             gameObject.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             assetCache.Add(text, gameObject);
             return gameObject;

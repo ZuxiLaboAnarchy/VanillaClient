@@ -61,11 +61,11 @@
 
         internal static string largeImageText = "By Zuxi";
 
-        internal static string smallimage = "";
+        internal static string smallimage = "discordrpcsmall";
 
-        internal static string smallImageText = "";
+        internal static string smallImageText = "When in The light You are still in the dark";
 
-        internal static string details = $"Oppsie Woopsie";
+        internal static string details = $"Opsie Woopsie";
 
         internal static string state = "upset.moe";
     }

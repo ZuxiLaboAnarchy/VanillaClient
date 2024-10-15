@@ -38,3 +38,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: MelonInfo(typeof(CoreMain), "Vanilla Client", "1", "Zuxi", null)]
 [assembly: MelonPriority(-99)]
+[assembly: MelonOptionalDependencies("WSManager", "Vanilla.Tomlyn", "Vanilla.JSON", "Vanilla.Refs")]

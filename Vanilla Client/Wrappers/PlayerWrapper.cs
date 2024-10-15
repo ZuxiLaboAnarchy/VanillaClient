@@ -12,6 +12,8 @@ namespace Vanilla.Wrappers
 {
     internal static class PlayerWrapper
     {
+        private static SelectedUserMenuQM _selectedUserMenu;
+
         internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
         internal static VRCPlayer GetLocalPlayer()
         {
@@ -20,11 +22,18 @@ namespace Vanilla.Wrappers
 
         public static VRCPlayer GetSelectedUser()
         {
-            //   var a = UnityEngine.Object.FindObjectOfType<SelectedUserMenuQM>().;
 
-            //   var SelectedGameObject = GameObject.Find("Canvas_QuickMenu(Clone)/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").transform.GetComponent<SelectedUserMenuQM>();
-           
-            return PlayerWrapper.GetPlayerInformationByID(QuickMenu.prop_QuickMenu_0.prop_APIUser_0.id).vrcPlayer;
+            if (_selectedUserMenu == null)
+                _selectedUserMenu = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponent<SelectedUserMenuQM>();
+
+            if (_selectedUserMenu == null)
+            {
+                Log("Selected User", "_selectedUserMenu is null!");
+                return null;
+            }
+
+            var iUser = _selectedUserMenu.field_Private_IUser_0.Cast<Object1PublicOb1ApStBo1SiStBoTeUnique>();
+            return PlayerWrapper.GetPlayerInformationByID(iUser.prop_String_0).vrcPlayer;
         }
 
 
@@ -72,9 +81,8 @@ namespace Vanilla.Wrappers
         {
             new ApiAvatar() { id = avatarId }.Get(new System.Action<ApiContainer>(x =>
             {
-                //TODO: Fix Page Avatar Lol
-                //  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = x.Model.Cast<ApiAvatar>();
-                //  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().ChangeToSelectedAvatar();
+                  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = x.Model.Cast<ApiAvatar>();
+                  GameObject.Find("MenuContent/Screens/Avatar").GetComponent<PageAvatar>().ChangeToSelectedAvatar();
             }),
             new System.Action<ApiContainer>(x =>
             {
@@ -94,6 +102,18 @@ namespace Vanilla.Wrappers
             }
             return null;
         }
+
+       internal static List<VRCPlayer> GetAllVRCPlayers()
+        {
+            List<VRCPlayer> vrcPlayer = new(); 
+            foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerWrapper.playerCachingList)
+            {
+                vrcPlayer.Add(playerCaching.Value.vrcPlayer);
+            }
+            return vrcPlayer;
+        }
+
+        internal static Il2CppSystem.Collections.Generic.List<VRC.Player> GetAllPlayers() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0;
         internal static void Start(this IEnumerator instance)
         {
             MelonCoroutines.Start(instance);
@@ -213,7 +233,7 @@ namespace Vanilla.Wrappers
                 {
                     return playerCaching.Value;
                 }
-            }
+            } 
             return null;
         }
 

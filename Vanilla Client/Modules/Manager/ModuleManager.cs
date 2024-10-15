@@ -3,13 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Vanilla.Helpers;
-using Vanilla.QM;
-using Vanilla.ServerAPI;
-using Vanilla.Utils;
+using UnityEngine;
 using Vanilla.Wrappers;
 using VRC;
-using VRC.Core;
 
 namespace Vanilla.Modules
 {
@@ -25,8 +21,16 @@ namespace Vanilla.Modules
 
             foreach (Type type in InternalTypes)
             {
-              //  Console.WriteLine(type.FullName);
-                Modules.Add((VanillaModule)Activator.CreateInstance(type));
+                //  Console.WriteLine(type.FullName);
+                VanillaModule _ = (VanillaModule)Activator.CreateInstance(type);
+                Modules.Add(_);
+                if (_.GetModuleName() == "Undefined Module")
+                {
+                    LogHandler.Dev("construct modules on start", $"Type: {type.Name} doesnt have a module name");
+                }
+               else { 
+                    LogHandler.Dev("construct modules on start", $"loaded module: {_.GetModuleName()}");
+                }
             }
 
             /*
@@ -58,6 +62,8 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) Modules[i].LateStart();
             MelonCoroutines.Start(WaitForAPIUser());
             MelonCoroutines.Start(WaitForPlayer());
+            MelonCoroutines.Start(WaitForUiManager());
+            MelonCoroutines.Start(WaitForQMLoad());
         }
 
         protected internal static void OnGUI()
@@ -95,8 +101,8 @@ namespace Vanilla.Modules
         protected internal static void PlayerJoin(Player __0)
         {
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].PlayerJoin(__0); }
-                catch (Exception e){ ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
-        } 
+                catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+        }
 
         protected internal static void PlayerLeave(Player __0)
         {
@@ -108,7 +114,6 @@ namespace Vanilla.Modules
         protected internal static void OnApplicationFocus(bool __0)
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].AppFocus(__0); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
-        // TODO: fix this
         protected internal static void DebugKey()
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].Debug(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
@@ -126,7 +131,7 @@ namespace Vanilla.Modules
 
 
 
-            
+
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForAPIUser(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 
@@ -138,8 +143,21 @@ namespace Vanilla.Modules
             yield return null;
         }
 
+        protected internal static IEnumerator WaitForUiManager()
+        {
+            while (VRCUiManager.field_Private_Static_VRCUiManager_0 == null) yield return null;
+            Dev("ModuleManager", "UI manager initialized");
+            for (int i = 0; i < Modules.Count; i++) try { Modules[i].OnUiManagerInit(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+            yield return null;
+        }
 
-
+        internal static IEnumerator WaitForQMLoad()
+        {
+            while (GameObject.Find($"UserInterface/Canvas_QuickMenu(Clone)") == null) yield return null;
+            Dev("ModuleManager", "Quick Menu Loaded");
+            for (int i = 0; i < Modules.Count; i++) try { Modules[i].OnQuickMenuLoaded(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+            yield return null;
+        }
 
     }
 }

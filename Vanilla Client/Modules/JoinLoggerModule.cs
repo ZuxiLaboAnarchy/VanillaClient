@@ -14,7 +14,7 @@ namespace Vanilla.Modules
 
         internal override void PlayerJoin(Player __0)
         {
-            if (!MainConfig.JoinLogger)
+            if (!MainConfig.GetInstance().JoinLogger)
                 return;
 
             if (__0.field_Private_APIUser_0.id == VRC.Core.APIUser.CurrentUser.id)
@@ -45,7 +45,7 @@ namespace Vanilla.Modules
 
         internal override void PlayerLeave(Player __0)
         {
-            if (!MainConfig.JoinLogger)
+            if (!MainConfig.GetInstance().JoinLogger)
                 return;
 
             if (__0.field_Private_APIUser_0.id == VRC.Core.APIUser.CurrentUser.id)

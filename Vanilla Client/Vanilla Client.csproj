@@ -9,10 +9,11 @@
     <LangVersion>10</LangVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vanilla</RootNamespace>
-    <AssemblyName>core</AssemblyName>
+    <AssemblyName>VanillaClientCore</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -24,6 +25,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,7 +69,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
     <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat\Core_vrchat.dll" /Y /I</PostBuildEvent>
+    <DocumentationFile>
+    </DocumentationFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x64 Build Release|ARM64'">
     <OutputPath>bin\ARM64\x64 Build Release\</OutputPath>
@@ -85,6 +95,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
     <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
 echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
 </PreBuildEvent>
@@ -99,6 +110,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PlatformTarget>ARM64</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
     <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Debug\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMonoBehave|AnyCPU'">
@@ -116,6 +128,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PlatformTarget>ARM64</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
     <PreBuildEvent>xcopy "D:\UnityProjects\VanillaClient\Assets\Bundles\clientbundle" "D:\Visual Studio\VanillaClient\Vanilla Client\Resources\ClientBundle" /y 
 echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
 </PreBuildEvent>
@@ -130,41 +143,42 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <PlatformTarget>ARM64</PlatformTarget>
     <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
     <PostBuildEvent>xcopy "D:\Visual Studio\VanillaClient\Vanilla Client\bin\Vanilla\Release\core.dll" "C:\Users\Cypher\AppData\Roaming\Vanilla\Cheats\VRChat" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="DataModel, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
+      <HintPath>..\..\..\Games\VRChat_Old\MelonLoader\Managed\DataModel.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChatDupped\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>..\..\..\VRChat_OldDupped\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Photon-DotNet, Version=4.1.6.18, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -177,64 +191,64 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnhollowerBaseLib">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
     </Reference>
     <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.InputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
     <Reference Include="Vanilla.JSON">
       <HintPath>Resources\Vanilla.JSON.dll</HintPath>
@@ -247,93 +261,93 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     </Reference>
     <Reference Include="VRC.Collections, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Collections.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Collections.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Dynamics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Dynamics.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Dynamics.dll</HintPath>
     </Reference>
     <Reference Include="VRC.SDK3.Dynamics.Contact, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.SDK3.Dynamics.Contact.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.SDK3.Dynamics.Contact.dll</HintPath>
     </Reference>
     <Reference Include="VRC.SDK3.Dynamics.PhysBone, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.SDK3.Dynamics.PhysBone.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.SDK3.Dynamics.PhysBone.dll</HintPath>
     </Reference>
     <Reference Include="VRC.SDKBase.Editor.BuildPipeline">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.SDKBase.Editor.BuildPipeline.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.SDKBase.Editor.BuildPipeline.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.ClientBindings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.ClientBindings.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.ClientBindings.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.Security.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.Security.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.Serialization.AOT">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.Serialization.AOT.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.Serialization.AOT.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.Serialization.OdinSerializer, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.Serialization.OdinSerializer.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.Serialization.OdinSerializer.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.VM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.VM.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.VM.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.VRCWrapperModules">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.VRCWrapperModules.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.VRCWrapperModules.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Udon.Wrapper">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Udon.Wrapper.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Udon.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="VRC.UI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
     </Reference>
     <Reference Include="VRC.UI.Elements, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
     </Reference>
     <Reference Include="VRC.UI.Shared, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
     </Reference>
     <Reference Include="VRC.Utility">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRC.Utility.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRC.Utility.dll</HintPath>
     </Reference>
     <Reference Include="VRCCore-Editor">
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
     </Reference>
     <Reference Include="VRCCore-Standalone, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDK2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCSDK2.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCSDK2.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDK3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCSDK3.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCSDK3.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDK3A, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDKBase, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ZuxiOT\Desktop\VRChat_Old\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
+      <HintPath>G:\Games\VRChat_Old\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
     </Reference>
     <Reference Include="WSManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -343,8 +357,10 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   <ItemGroup>
     <Compile Include="APIs\ServerAPI\Upload.cs" />
     <Compile Include="APIs\ServerAPI\TempContainer.cs" />
+    <Compile Include="Config\ColorConverter.cs" />
     <Compile Include="Config\UploadQueConfig.cs" />
     <Compile Include="Helpers\UploadHelper.cs" />
+    <Compile Include="Menu\ActionWheel\AWLoader.cs" />
     <Compile Include="Misc\AvatarFavorites\AvatarFavoritesModel.cs" />
     <Compile Include="Misc\AvatarFavorites\FavoriteAvatarHandler.cs" />
     <Compile Include="Misc\BotHandle.cs" />
@@ -353,6 +369,11 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Exploits\PlayerAttach.cs" />
     <Compile Include="Exploits\EarRape.cs" />
     <Compile Include="Exploits\VideoPlayer.cs" />
+    <Compile Include="Misc\ModCompatibility.cs" />
+    <Compile Include="Misc\MonoBehaviors\EnableDisableListener.cs" />
+    <Compile Include="Modules\AutoLoginModule.cs" />
+    <Compile Include="Modules\LoadScreen.cs" />
+    <Compile Include="Modules\MenuModifcation.cs" />
     <Compile Include="Modules\Photon\PhotonEventCodes.cs" />
     <Compile Include="Modules\Anticrash.cs" />
     <Compile Include="Modules\DebugManager.cs" />
@@ -362,8 +383,12 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Modules\PerfModule.cs" />
     <Compile Include="Modules\Photon\Photon.cs" />
     <Compile Include="Modules\Photon\PhotonModerationCodes.cs" />
+    <Compile Include="Modules\Photon\RPC.cs" />
     <Compile Include="Modules\PlayerController.cs" />
     <Compile Include="Modules\PlayerHandler.cs" />
+    <Compile Include="Modules\VanillaGameObject\EnableDisableListener.cs" />
+    <Compile Include="Modules\VanillaGameObject\SteamVRDirectINput.cs" />
+    <Compile Include="Modules\VanillaGameObject\SteamVRSDK.cs" />
     <Compile Include="Modules\VRCPlusRemover.cs" />
     <Compile Include="Helpers\Compatibility.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
@@ -375,27 +400,34 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Modules\Manager\ModuleManager.cs" />
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
+    <Compile Include="Patches\EventHandlerPatch.cs" />
     <Compile Include="Patches\Harmony\ImgDownloader.cs" />
     <Compile Include="Patches\Harmony\QuickMenuPatch.cs" />
     <Compile Include="Patches\Harmony\VRCPlayer.cs" />
-    <Compile Include="QM\ButtonAPI.cs" />
-    <Compile Include="QM\Menu\AmongUsHacks.cs" />
-    <Compile Include="QM\Menu\DevMenu.cs" />
-    <Compile Include="QM\Menu\DevSelectedMenu.cs" />
-    <Compile Include="QM\Menu\GeneralMenu.cs" />
-    <Compile Include="QM\Menu\MaliciousMenu.cs" />
-    <Compile Include="QM\Menu\Micfuckery.cs" />
-    <Compile Include="QM\Menu\MurderHacks.cs" />
-    <Compile Include="QM\Menu\Safetymenu.cs" />
-    <Compile Include="QM\Menu\MovementMenu.cs" />
-    <Compile Include="QM\Menu\SelectedPlayer.cs" />
-    <Compile Include="QM\QMAPI\MenuPanelButton.cs" />
-    <Compile Include="QM\QMAPI\MenuPanelAPI.cs" />
+    <Compile Include="Patches\Native\AvatarManager.cs" />
+    <Compile Include="Menu\ActionWheel\API\AWAPI.cs" />
+    <Compile Include="Menu\QM\API\ButtonAPI.cs" />
+    <Compile Include="Menu\QM\API\InfoPanelAPI.cs" />
+    <Compile Include="Menu\QM\Menu\AmongUsHacks.cs" />
+    <Compile Include="Menu\QM\Menu\DevMenu.cs" />
+    <Compile Include="Menu\QM\Menu\DevSelectedMenu.cs" />
+    <Compile Include="Menu\QM\Menu\GeneralMenu.cs" />
+    <Compile Include="Menu\QM\Menu\MaliciousMenu.cs" />
+    <Compile Include="Menu\QM\Menu\Micfuckery.cs" />
+    <Compile Include="Menu\QM\Menu\MurderHacks.cs" />
+    <Compile Include="Menu\QM\Menu\Safetymenu.cs" />
+    <Compile Include="Menu\QM\Menu\MovementMenu.cs" />
+    <Compile Include="Menu\QM\Menu\SelectedPlayer.cs" />
+    <Compile Include="Menu\QM\API\Legacy\MenuPanelButton.cs" />
+    <Compile Include="Menu\QM\API\Legacy\MenuPanelAPI.cs" />
     <Compile Include="RiderDisabler.cs" />
     <Compile Include="Utils\AvatarFavorite.cs" />
     <Compile Include="Utils\CacheUtils.cs" />
     <Compile Include="Utils\CRC32.cs" />
+    <Compile Include="Utils\CustomServerResponse.cs" />
     <Compile Include="Utils\ImgDownloaderStruct.cs" />
+    <Compile Include="Utils\NativePatchUtils.cs" />
+    <Compile Include="Utils\TextureFuckery.cs" />
     <Compile Include="Wrappers\InternalUIManager.cs" />
     <Compile Include="Utils\ResourceUtils.cs" />
     <Compile Include="Utils\AudioHandler.cs" />
@@ -404,19 +436,19 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Utils\Math.cs" />
     <Compile Include="Utils\MiscUtils.cs" />
     <Compile Include="Utils\Protections\EraseHeaders.cs" />
-    <Compile Include="QM\ButtonLoader.cs" />
-    <Compile Include="QM\Menu\Siton.cs" />
-    <Compile Include="QM\Menu\ExploitMenu.cs" />
-    <Compile Include="QM\Menu\Settings.cs" />
-    <Compile Include="QM\QMAPI\QMButtonBase.cs" />
-    <Compile Include="QM\QMAPI\QMMenuBase.cs" />
-    <Compile Include="QM\QMAPI\QMNestedButton.cs" />
-    <Compile Include="QM\QMAPI\QMSingleButton.cs" />
-    <Compile Include="QM\QMAPI\QMTabMenu.cs" />
-    <Compile Include="QM\QMAPI\QMToggleButton.cs" />
+    <Compile Include="Menu\QM\ButtonLoader.cs" />
+    <Compile Include="Menu\QM\Menu\Siton.cs" />
+    <Compile Include="Menu\QM\Menu\ExploitMenu.cs" />
+    <Compile Include="Menu\QM\Menu\Settings.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMButtonBase.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMMenuBase.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMNestedButton.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMSingleButton.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMTabMenu.cs" />
+    <Compile Include="Menu\QM\API\Legacy\QMToggleButton.cs" />
     <Compile Include="Config\MainConfig.cs" />
     <Compile Include="Config\ServerResConfig.cs" />
-    <Compile Include="QM\QMAPI\ButtonsHelperAPI.cs" />
+    <Compile Include="Menu\QM\API\Legacy\ButtonsHelperAPI.cs" />
     <Compile Include="Helpers\DiscordHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\VRCGlobal.cs" />
@@ -424,7 +456,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Helpers\VanillaGlobals.cs" />
     <Compile Include="Helpers\MainHelper.cs" />
     <Compile Include="LoaderHandler.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="Entry.cs" />
     <Compile Include="Modules\DiscordModule.cs" />
     <Compile Include="Modules\KeybindManager.cs" />
     <Compile Include="Modules\LoadMusic.cs" />
@@ -448,7 +480,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Utils\Protections\AntiDebugger.cs" />
     <Compile Include="Utils\Protections\LoaderProtections.cs" />
     <Compile Include="Utils\Protections\MemeryHelper.cs" />
-    <Compile Include="QM\QMImage.cs" />
+    <Compile Include="Menu\QM\QMImage.cs" />
     <Compile Include="APIs\ServerAPI\ServerHelper.cs" />
     <Compile Include="APIs\ServerAPI\ServerRequest.cs" />
     <Compile Include="APIs\ServerAPI\ServerResponceHandler.cs" />
@@ -472,7 +504,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Wrappers\GeneralWrapper.cs" />
     <Compile Include="Wrappers\PlayerWrapper.cs" />
     <Compile Include="Wrappers\RateLimiter.cs" />
+    <Compile Include="Xrefs\Avatar.cs" />
     <Compile Include="Xrefs\Input.cs" />
+    <Compile Include="Xrefs\XrefManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">

@@ -9,6 +9,8 @@ namespace Vanilla.Modules
 {
     internal class VRCPlus : VanillaModule
     {
+        protected override string ModuleName => "AntiVRCPlus";
+
         static object VRCRemoveE = null;
         internal override void LateStart()
         {

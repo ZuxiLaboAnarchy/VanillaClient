@@ -1,6 +1,8 @@
 ﻿
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using UnityEngine;
 using Vanilla.API.ServerAPI;
@@ -52,14 +54,15 @@ namespace Vanilla.Helpers
        
 
            }*/
-
+        static WebClient webClient = new WebClient();
+      
         internal override void Start()
         {
-            MainConfig.Load();
-
+            MainConfig.GetInstance().Load();
+            webClient.Headers["User-Agent"] = "ZuxiUA.Anarchy-AAA7FB29";
             MelonLoader.MelonCoroutines.Start(WaitForUI());
 
-            // FetchUpdates();
+             FetchUpdates();
 
             //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
@@ -107,16 +110,16 @@ namespace Vanilla.Helpers
 
         internal override void Update()
         {
-            return;
+           
             if (Time.realtimeSinceStartup >= nextPop)
             {
-                nextPop = Time.realtimeSinceStartup + 30f;
+                nextPop = Time.realtimeSinceStartup + 10f;
                 //TODO Update API for Anarchy bc this is based off of old VRC stuff wich is still used lol
              //   new Thread(() => { ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString()); }).Start();
              //   new Thread(() => { Upload.SendUpdates(); }).Start();
                 WSBase.KeepAlivePack();
-                LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber + " | Avatar Send Count: " + SentAvatarCount);
-                UpdateNumber++;
+             //   LogHandler.Dev("MainHelper", "Webcock Complete: " + UpdateNumber);
+              //  UpdateNumber++;
             }
 
 
@@ -124,14 +127,16 @@ namespace Vanilla.Helpers
             {
 
                 nextUpdateFetch = Time.realtimeSinceStartup + 60f;
-                //FetchUpdates();
+                FetchUpdates();
                 if (!RuntimeConfig.isBot)
                 {
-                    MainConfig.Save();
-                    if (AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
+                  //  MainConfig.GetInstance().Save();
+                    if (MainConfig.GetInstance().AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
+                    WSBase.KeepAlivePack();
+                    LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber);
                 }
-                new Thread(() => { WSBase.Pop(); }).Start();
-                UpdateNumber++;
+             //   new Thread(() => { WSBase.Pop(); }).Start();
+                //UpdateNumber++;
             }
 
 
@@ -141,8 +146,10 @@ namespace Vanilla.Helpers
         internal static void FetchUpdates()
         {
             Dev("Update", "Fetching Updates");
+           
+            string data = webClient.DownloadString("https://anarchy.zuxi.dev/api/getdata");
 
-
+            ServerResponceHandler.HandleUpdate(data);
         }
 
 

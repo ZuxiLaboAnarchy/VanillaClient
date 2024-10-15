@@ -21,7 +21,7 @@ namespace Vanilla.Patches.Harmony
 
         private static bool OnImageDownloadPatch(string __0, int __1, Il2CppSystem.Action<Texture2D> __2, Il2CppSystem.Action __3, string __4, bool __5)
         {
-            if (MainConfig.ImageCache && !imageDownloadCallOriginal)
+            if (MainConfig.GetInstance().ImageCache && !imageDownloadCallOriginal)
             {
                 Texture2D cachedImage = CacheUtils.GetCachedImage(__0);
                 if (cachedImage != null)

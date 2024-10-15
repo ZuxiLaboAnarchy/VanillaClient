@@ -5,6 +5,8 @@ namespace Vanilla.Modules
 {
     internal class PerfModule : VanillaModule
     {
+
+        protected override string ModuleName => "Performance Module";
         internal override void LateStart()
         {
             Application.targetFrameRate = 1000;

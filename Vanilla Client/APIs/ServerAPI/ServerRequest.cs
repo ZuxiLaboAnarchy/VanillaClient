@@ -25,9 +25,10 @@ namespace Vanilla.ServerAPI
                     if (SendData == null)
                         SendData = new Dictionary<string, string>();
 
-                    SendData.Add("Key", GetKey());
-                    SendData.Add("HWID", GetHWID());
-                    SendData.Add("CTC", GetCurrentTimeInEpoch().ToString());
+                  //  SendData.Add("Key", GetKey());
+                  //  SendData.Add("HWID", GetHWID());
+                  //  SendData.Add("CTC", GetCurrentTimeInEpoch().ToString());
+                    SendData.Add("api_key", MainConfig.GetInstance().ApiKey);
                     #endregion
                     #region Send Post Request Get Responce Values
                     string PostURI = SendServerConfig.APIBaseEndpoint + EndPoint;
@@ -68,6 +69,7 @@ namespace Vanilla.ServerAPI
                             if (onFinished != null)
                                 onFinished(arg2: null, arg1: true);
                             Log("Server API", "Server Down Possibly Report To Cypher", ConsoleColor.Red);
+                            Dev("Server API", DES.Result);
                             return null;
                         }
                         if (onFinished != null)
@@ -98,7 +100,7 @@ namespace Vanilla.ServerAPI
         }
         protected internal class SendServerConfig
         {
-            protected internal static string APIBaseEndpoint = "https://api.zuxi.dev/api/cheats/";
+            protected internal static string APIBaseEndpoint = "https://anarchy.zuxi.dev/api/";
             protected internal readonly static string Version = "V" + "1";
             protected internal readonly static string UA = "VanillaClient" + Version;
             protected internal readonly static string CA = "VanillaClientServerAPI" + Version;

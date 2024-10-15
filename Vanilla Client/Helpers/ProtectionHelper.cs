@@ -79,7 +79,7 @@ namespace Vanilla.Helpers
 
         internal override void LateStart()
         {
-
+            return;
             try
             {
 
@@ -93,6 +93,7 @@ namespace Vanilla.Helpers
 
         internal override void Stop()
         {
+            return;
             try
             {
                 p.Kill();

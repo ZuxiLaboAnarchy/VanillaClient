@@ -4,15 +4,33 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using Vanilla.Modules;
 
 namespace Vanilla.Utils
 {
-    internal class FileHelper
+    internal class FileHelper : VanillaModule
     {
+        protected override string ModuleName => "FileManager";
+
+        internal override void Start()
+        {
+            if (!Directory.Exists(Path.Combine(FileHelper.GetCheatFolder())))
+            {
+                Directory.CreateDirectory(Path.Combine(FileHelper.GetCheatFolder()));
+            }
+        }
 
         static bool _isCleanup = false;
         internal static string GetMainFolder()
         {
+            if (!Directory.Exists(MelonUtils.BaseDirectory + $"\\VanillaClient"))
+            {
+                Directory.CreateDirectory(MelonUtils.BaseDirectory + $"\\VanillaClient");
+            }
+            return MelonUtils.BaseDirectory + $"\\VanillaClient";
+
+
+
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
@@ -29,12 +47,19 @@ namespace Vanilla.Utils
 
         internal static string GetCheatFolder()
         {
-
+            /*
             if (!Directory.Exists(GetMainFolder() + $"\\Cheats\\{GetGameName()}"))
             {
                 Directory.CreateDirectory(GetMainFolder() + $"\\Cheats\\{GetGameName()}");
             }
-            return GetMainFolder() + $"\\Cheats\\{GetGameName()}\\";
+            return GetMainFolder() + $"\\Cheats\\{GetGameName()}\\";*/
+
+            if (!Directory.Exists(MelonUtils.BaseDirectory + $"\\VanillaClient"))
+            {
+                Directory.CreateDirectory(MelonUtils.BaseDirectory + $"\\VanillaClient");
+            }
+            return MelonUtils.BaseDirectory + $"\\VanillaClient";
+
         }
 
 

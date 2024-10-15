@@ -3,7 +3,9 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using UnityEngine;
+using Vanilla.Config;
 using Vanilla.Modules;
+using WebSocketSharp;
 using static Il2CppSystem.TypeIdentifiers;
 
 namespace Vanilla.Utils
@@ -24,7 +26,7 @@ namespace Vanilla.Utils
 
         private static readonly ConcurrentQueue<ConsoleLog> WrittenToConsole = new ConcurrentQueue<ConsoleLog>();
 
-        private static readonly MelonLogger.Instance loggerInstance = new MelonLogger.Instance("VanillaClient");
+        private static readonly MelonLogger.Instance loggerInstance = new MelonLogger.Instance("AbandonWare");
         private static readonly MelonLogger.Instance CypherEngineLogger = new MelonLogger.Instance("CypherEngine");
         private static HUDNotifyGlobal HUDInstance = null; //new();
 
@@ -32,26 +34,17 @@ namespace Vanilla.Utils
 
         internal static void SetupHud()
         {
-
             GameObject HUDObject = GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel");
             HUDInstance = HUDObject.GetComponent<HUDNotifyGlobal>();
 
-
             // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
-
-
-
-
-        }
+        } 
 
         internal static void LogToHud(string message)
         {
             // Sprite sprite= ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo");
-         //   HUDInstance.Method_Public_Void_String_Sprite_0(message, ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
-
-            // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
-
-           
+            // HUDInstance.Method_Public_Void_String_Sprite_0(message, ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
+            // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));  
                 OnScreenUI.AddString(
                     string.Format("<color=#ff0000> {0} </color>", message.ToString()));
 
@@ -67,11 +60,6 @@ namespace Vanilla.Utils
 
         internal static void HudLog(string Identify, object message, ConsoleColor ConsoleColor = ConsoleColor.White, string caller = null)
         {
-
-
-
-
-
             WrittenToConsole.Enqueue(new ConsoleLog
             {
                 identifier = Identify,
@@ -87,6 +75,7 @@ namespace Vanilla.Utils
 
         internal static void Log(string identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
         {
+            if (message is null) return; 
             WrittenToConsole.Enqueue(new ConsoleLog
             {
                 identifier = identify,
@@ -98,6 +87,22 @@ namespace Vanilla.Utils
             });
             Pop();
         }
+
+        internal static void Error(string identify, object message, ConsoleColor color = ConsoleColor.Red, string caller = null)
+        {
+            if (message is null) return;
+            WrittenToConsole.Enqueue(new ConsoleLog
+            {
+                identifier = identify,
+                text = message,
+                textColor = color,
+                callerName = caller,
+                LogToHud = true,
+
+            });
+            Pop();
+        }
+
         internal static int CurCue;
 
         internal static void Pop()
@@ -150,6 +155,7 @@ namespace Vanilla.Utils
 
                 if (result.LogToHud)
                 {
+                    if (string.IsNullOrEmpty(result.text.ToString())) return; 
                       OnScreenUI.AddString("[" + result.identifier + "] <color=#00aeff>" + result.text + "</color>");
                    // LogToHud("[" + result.identifier + "] " + result.text.ToString());
                 }
@@ -179,7 +185,7 @@ namespace Vanilla.Utils
 
         }
 
-
+         
         internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.DarkMagenta)
         {
             if (DevMode)

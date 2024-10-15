@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using Vanilla.Config;
 
 namespace Vanilla.Modules
 {
@@ -10,7 +11,6 @@ namespace Vanilla.Modules
         protected override string ModuleName => "LoadMusic";
         internal override void Start()
         {
-            // Dev("LoadMusic", "Loading Music");
             MelonCoroutines.Start(Starter());
         }
 
@@ -19,16 +19,16 @@ namespace Vanilla.Modules
         internal static IEnumerator Starter()
         {
 
-            if (Config.MainConfig.LoadMusic)
+            if (Config.MainConfig.GetInstance().LoadMusic)
             {
                 AudioClip audioclip = null;
 
-                if (MusicPath == string.Empty)
+                if (MainConfig.GetInstance().MusicPath == string.Empty)
                 { Dev("Audio Handler", "Loading Local Audio"); audioclip = AssetLoader.LoadAudio("LoadMusic"); }
 
                 else
                 {
-                    var clip = UnityWebRequest.Get(MusicPath);
+                    var clip = UnityWebRequest.Get(MainConfig.GetInstance().MusicPath);
 
                     clip.SendWebRequest();
                     while (!clip.isDone) yield return null;
@@ -59,6 +59,9 @@ namespace Vanilla.Modules
                 yield return new WaitForSeconds(0.5f);
 
 
+            } else
+            {
+                Config.MainConfig.GetInstance().LoadMusic = true;
             }
         }
     }

@@ -6,7 +6,11 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Vanilla.Config;
 using Vanilla.Modules;
+using Vanilla.Wrappers;
 using VRC;
+using VRC.SDKBase;
+using VRCSDK2;
+using static MelonLoader.MelonLogger;
 
 
 namespace Vanilla.Patches.Harmony
@@ -30,8 +34,15 @@ namespace Vanilla.Patches.Harmony
 
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)), GetLocalPatch(Strings.PlayerJoin), null);
             PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(Strings.PlayerLeave), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCOnJoinRoom), null, GetLocalPatch(Strings.OnJoinedRoomPatch)); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
-            PatchMethod(typeof(NetworkManager).GetMethod(Strings.VRCOnLeftRoom), null, GetLocalPatch(Strings.OnLeftRoomPatch)); //works
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), null, GetLocalPatch(Strings.OnJoinedRoomPatch)); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null, GetLocalPatch(Strings.OnLeftRoomPatch)); //works
+            
+           /* MethodInfo[] methods = typeof(VRCPlayer).GetMethods().Where(mb => mb.Name.StartsWith("Method_Private_Void_GameObject_VRC_AvatarDescriptor_Boolean_")).ToArray();
+            foreach (MethodInfo method in methods)
+            {
+                PatchMethod(typeof(VRCPlayer).GetMethod(method.Name), GetLocalPatch(nameof(AntiCrashPatch)), null);
+            }
+           */
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)
             //  PatchMethod(PlayerEvents._OnPlayerJoinedMethod, null, GetLocalPatch("PlayerJoin"));
@@ -53,10 +64,14 @@ namespace Vanilla.Patches.Harmony
             //Nebula.Patch(AccessTools.Method(typeof(NetworkManager), nameof(NetworkManager.Method_Public_Void_Player_0)), GetPatch(nameof(playevleave)));
         }
 
+     //   private static bool AntiCrashPatch(VRCPlayer __instance, GameObject __0, VRC_AvatarDescriptor __1, Boolean __2)
+       // {
+     //       return Anticrash.ProcessAvatar(__0, __instance);
+       // }
         private static void OnJoinedRoomPatch()
         {
             RuntimeConfig.isConnectedToInstance = true;
-
+            
         }
 
         private static void OnLeftRoomPatch()
@@ -69,7 +84,10 @@ namespace Vanilla.Patches.Harmony
         {
             try
             {
+                Networking.RPC(RPC.Destination.Others, PlayerWrapper.GetLocalPlayer().gameObject, "Zuxi_Networked_Join_VanillaClient", new Il2CppSystem.Object[0]);
                 ModuleManager.PlayerJoin(__0);
+                // TODO: move this to somewhere else
+               
             }
             catch (Exception e)
             {

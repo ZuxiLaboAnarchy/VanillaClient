@@ -19,6 +19,8 @@
         internal virtual void PlayerJoin(VRC.Player player) { }
         internal virtual void PlayerLeave(VRC.Player player) { }
         internal virtual void AppFocus(bool state) { }
+        internal virtual void OnUiManagerInit() { }
+        internal virtual void OnQuickMenuLoaded() { }
         internal string GetModuleName()
         { return ModuleName; }
     }

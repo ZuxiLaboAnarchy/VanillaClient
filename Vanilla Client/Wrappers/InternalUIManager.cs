@@ -12,7 +12,7 @@ namespace Vanilla.Utils
 
         internal static void RunKeyBoardPopup(string Title, string TextBox, string OKButton, Action<string> RealTimeString, Action<string> EndString, Action OnClose, bool multiLine2 = true, int CharLimit = 0)
         {
-            run(Title, EndString, OnClose);
+            CreateKeyBoardPopup(Title, EndString, OnClose);
         }
         // TODO: Get Old Popup 
         /* internal static void RunAlertPopup(string Header, string Body, string button1, string button2, Il2CppSystem.Action button1Action, Il2CppSystem.Action button2Action)
@@ -22,7 +22,7 @@ namespace Vanilla.Utils
              UIManager.Method_Public_Virtual_Final_New_Void_String_String_Boolean_String_Action_String_Action_1(Header, Body, true, button1, button1Action, button2, button2Action);
          }*/
 
-        public static string run(string name, Action<string> setOutput, Action action)
+        public static string CreateKeyBoardPopup(string name, Action<string> setOutput, Action action)
         {
             string returned = "";
             VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_PDM_0(name, "", InputField.InputType.Standard, false, "Enter",
@@ -31,7 +31,8 @@ namespace Vanilla.Utils
                         (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
                         {
                             setOutput(s);
-                            action.Invoke();
+                            if (action != null)
+                                action.Invoke();
                             ;
 
                         })), null, "", true, null);

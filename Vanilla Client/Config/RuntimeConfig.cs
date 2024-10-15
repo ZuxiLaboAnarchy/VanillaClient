@@ -16,8 +16,8 @@
         internal static bool RanksCustomRanks = true;
         internal static bool isConnectedToInstance = false;
         internal static bool isForced = false;
-        internal static string RealPCrashID = MainConfig.GlobalSyncCrasher ? PCCrashID : MainConfig.PCCrashID;
-        internal static string RealQCrashID = MainConfig.GlobalSyncCrasher ? QuestCrashID : MainConfig.QuestCrashID;
+        internal static string RealPCrashID = MainConfig.GetInstance().GlobalSyncCrasher ? PCCrashID : MainConfig.GetInstance().PCCrashID;
+        internal static string RealQCrashID = MainConfig.GetInstance().GlobalSyncCrasher ? QuestCrashID : MainConfig.GetInstance().QuestCrashID;
 
         /*User Vars*/
         private static string Username = null;
@@ -32,7 +32,7 @@
 
         /*Server Controller Vars*/
         internal static bool nextUpdateCheckComplete = true;
-        internal static bool WSAuthed = false;
+        internal static bool WSAuthed = true;
         internal static VRCPlayer SelectedPlayer = null;
 #if DEBUG
         internal static string ReleaseID = "Debug";

@@ -78,7 +78,7 @@ namespace Vanilla.Modules
                         textMeshProUGUI = componentsInChild.GetComponent<TextMeshProUGUI>();
                         textMeshProUGUI.text = "VanillaPlate";
                     }
-                    if (MainConfig.NameplateMoreInfo)
+                    if (MainConfig.GetInstance().NameplateMoreInfo)
                     {
                         CreatedPlate.SetActive(value: true);
                     }
@@ -87,7 +87,7 @@ namespace Vanilla.Modules
                         CreatedPlate.SetActive(value: false);
                     }
                 }
-                if (MainConfig.NameplateWallhack && CameraModule.GetCameraSetup() == 0)
+                if (MainConfig.GetInstance().NameplateWallhack && CameraModule.GetCameraSetup() == 0)
                 {
                     canvas.layer = 19;
                 }
@@ -158,16 +158,16 @@ namespace Vanilla.Modules
                 ExceptionHandler("PlayerJoinModule", e3);
                 return;
             }
-          //  ModuleManager.OnPlayerJoin(playerInformation);
+          //  ModuleManager.OnPlayerJoin(playerInformation); 
             try
             {
                 if (__0.prop_APIUser_0.tags.Contains("admin_moderator") || __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Internal || __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Moderator)
                 {
                     playerInformation.isVRChatStaff = true;
-                    if (MainConfig.LogModerations)
+                    if (MainConfig.GetInstance().LogModerations)
                     {
-                        string text = "<color=red>WARNING: <color=white>VRChat Staff joined: <color=purple>" + playerInformation.displayName;
-                        HudLog("JOIN", text);
+                        string text = "<color=red>WARNING: <color=white>Anarchy Staff joined: <color=purple>" + playerInformation.displayName;
+                       // HudLog("JOIN", text);
                         Log("Join", text, ConsoleColor.Red);
                     }
                 }

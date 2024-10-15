@@ -44,7 +44,7 @@ namespace Vanilla.ServerAPI
             {
               //  uid = PlayerWrapper.GetLocalAPIUser().id,
 
-                code = "4",
+               type = "ping",
 
                // Key = ServerHelper.GetKey(),
             };
@@ -56,22 +56,20 @@ namespace Vanilla.ServerAPI
         internal static void SetupSocket()
         {
             RuntimeConfig.WSAuthed = true;
-            return;
-            using (wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT()))
+          
+            using (wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT()))
             {
                 Dev("ServerAPI", "Connecting to: " + wss.Url);
                 wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                 Task.Delay(60000);
                 Dev("ServerAPI", $"Connecting");
-
+                 
                 wss.Connect();
 
                 wss.OnClose += (sender, e) =>
                 {
                     if (ShutDown)
                     { Dev("WSBase", "ShutDown Connection"); }
-
-
 
                     if (HasConn && HasConn)
                     {
@@ -111,12 +109,8 @@ namespace Vanilla.ServerAPI
         {
             if (!wss.IsAlive)
                // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
-            wss = new WebSocket("wss://ws.imzuxi.com/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+            wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT());
         }
-
-
-
-
 
         internal static void Pop()
         {
@@ -168,8 +162,6 @@ namespace Vanilla.ServerAPI
 
         internal protected static void sendmsg(string text)
         {
-
-
             if (wss.IsAlive)
             { wss.Send(text); }
             else
@@ -220,20 +212,20 @@ namespace Vanilla.ServerAPI
             {
                 RuntimeConfig.WSAuthed = false;
                 LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
-                if (Server.SendPostRequestInternal("login") != null)
+             /*   if (Server.SendPostRequestInternal("login") != null)
                 {
                     new Thread(() => { SetupSocket(); }).Start();
                 }
-            }
+*/            }
 
             if (e.Data.ToString().ToLower().Contains("tokenexpirederror"))
             {
                 RuntimeConfig.WSAuthed = false;
                 LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
-                if (Server.SendPostRequestInternal("login") != null)
+  /*              if (Server.SendPostRequestInternal("login") != null)
                 {
                     new Thread(() => { SetupSocket(); }).Start();
-                }
+                }*/
             }
 
 
@@ -341,6 +333,7 @@ namespace Vanilla.ServerAPI
         internal string code { get; set; }
         internal string HWID { get; set; }
         internal string Key { get; set; }
+        internal string type { get; set; }
     }
 
 

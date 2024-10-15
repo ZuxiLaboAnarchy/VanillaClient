@@ -54,12 +54,11 @@ namespace Vanilla.Wrappers
             return VRCUiManager.prop_VRCUiManager_0;
         }
 
-
-
         internal static Camera GetPlayerCamera()
         {
             return VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0;
         }
+        
         internal static Camera GetUICamera()
         {
             if (uiCamera == null)
@@ -88,9 +87,9 @@ namespace Vanilla.Wrappers
         }
         public static void CopyInstanceToClipboard()
         {
-
-            GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
-            Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
+            if (RoomManager.field_Internal_Static_ApiWorldInstance_0 is null) return;
+                GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
+                Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
         }
         public static void JoinInstanceFromClipboard()
         {

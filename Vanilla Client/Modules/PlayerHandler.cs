@@ -178,18 +178,18 @@ namespace Vanilla.Modules
                 playerInfo.lagBarrier--;
             }
 
-            if (isOffscreen || !MainConfig.NameplateMoreInfo)
+            if (isOffscreen || !MainConfig.GetInstance().NameplateMoreInfo)
             {
                 return;
             }
             StringBuilder stringBuilder = new StringBuilder();
-            if (MainConfig.ShowActorID)
+            if (MainConfig.GetInstance().ShowActorID)
             {
                 stringBuilder.Append($"ActorID: <color=red>{playerInfo.actorId}<color=white> | ");
             }
             if (playerInfo.isVRChatStaff)
             {
-                stringBuilder.Append("<color=white>[<color=#00FFFF>VRChat Staff<color=white>] | ");
+                stringBuilder.Append("<color=white>[<color=#00FFFF>Anarchy Staff<color=white>] | ");
             }
            
             if (playerInfo.blockedLocalPlayer)
@@ -226,7 +226,7 @@ namespace Vanilla.Modules
                     stringBuilder.Append("<color=white>[<color=green>Public<color=white>] | ");
                 }
             }
-            if (MainConfig.DetectLagOrCrash)
+            if (MainConfig.GetInstance().DetectLagOrCrash)
             {
                 if (num2 > 10f)
                 {

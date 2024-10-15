@@ -2,7 +2,7 @@
 using Vanilla;
 using Vanilla.Config;
 using Vanilla.Helpers;
-using static Vanilla.Main;
+using static Vanilla.Entry;
 using static Vanilla.ServerAPI.Server;
 using static Vanilla.Utils.Performance;
 
@@ -19,7 +19,7 @@ namespace Cypher
         {
             try
             {
-                Log("Core", $"Loading Vanilla Client {RuntimeConfig.ReleaseID}", ConsoleColor.Cyan);
+                Log("Core", $"Loading Abandon Ware {RuntimeConfig.ReleaseID}", ConsoleColor.Cyan);
                 StartProfiling("OnStart");
              
                 if (GeneralUtils.GetGameName() != "VRChat")
@@ -31,11 +31,11 @@ namespace Cypher
                 #region Compile Time & Setups
                 try
                 {
-                    IntPtr window = UnmanagedUtils.FindWindow(null, "VRChat");
+                    /// CAN LEAD TO BAN IN REGULAR VRCHAT IF WINDOW TITLE IS TOUCHED DONT RECOMEND UNCOMMENTING THIS 
+                    // IntPtr window = UnmanagedUtils.FindWindow(null, "VRChat");
+                    // UnmanagedUtils.SetWindowText(window, $"Vanilla Client {RuntimeConfig.ReleaseID} | Build Time: {strCompTime} ");
                     string strCompTime = Vanilla.Properties.Resources.BuildTime.Replace("\n", "").Replace("  ", " ");
-
-                    UnmanagedUtils.SetWindowText(window, $"Vanilla Client {RuntimeConfig.ReleaseID} | Build Time: {strCompTime} ");
-                    Console.Title = $"Vanilla Client {RuntimeConfig.ReleaseID} | Build Time: " + strCompTime;
+                    Console.Title = $"Abandon Ware {RuntimeConfig.ReleaseID} | Build Time: " + strCompTime;
 
                     CypherEngineLog("Core", "Done Setting Up", ConsoleColor.Cyan);
                     Log("Core", "Build Time: " + strCompTime, ConsoleColor.Cyan);
