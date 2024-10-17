@@ -19,7 +19,8 @@ namespace Vanilla.Modules
         internal static IEnumerator Starter()
         {
 
-            if (Config.MainConfig.GetInstance().LoadMusic)
+          //  if (Config.MainConfig.GetInstance().LoadMusic) 
+          if (true)
             {
                 AudioClip audioclip = null;
 

@@ -8,13 +8,10 @@ using static Vanilla.Utils.Performance;
 
 namespace Cypher
 {
-
-
     public class CoreMain : MelonMod
     {
         private static bool _shouldLoad = true;
 
-      
         public override void OnInitializeMelon()
         {
             try
@@ -43,11 +40,10 @@ namespace Cypher
                 }
                 catch (Exception e) { Console.WriteLine(e); }
                 #endregion
-                CallOnStart(BotHandle.CheckBotHandle());
+                CallOnStart();
             }
-            catch (Exception e) { ExceptionHandler("OnAppStart", e); }
+            catch (Exception e) { ExceptionHandler("OnInitializeMelon", e); }
         }
-
 
         #region Forward Declarations
 
@@ -58,8 +54,6 @@ namespace Cypher
 
         public override void OnGUI()
         { if (!_shouldLoad) return; CallOnGUI(); }
-
-
 
         public override void OnUpdate()
         { if (!_shouldLoad) return; CallOnUpdate(); }

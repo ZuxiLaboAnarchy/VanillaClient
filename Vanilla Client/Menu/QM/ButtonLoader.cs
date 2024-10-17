@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vanilla.Buttons.QM;
 using Vanilla.Config;
+using Vanilla.Menu.QM.Scripting;
 using Vanilla.Misc.MonoBehaviors;
 using Vanilla.Modules;
 using Vanilla.QM.Menu;
@@ -113,6 +114,8 @@ namespace Vanilla.QM
             Menu.DevMenu.InitMenu(DevMenuButton);
 
 #endif
+            // TODO Fix button Alignment
+           // ScriptingMenu.CreateScriptButtons(tabMenu);
             // MelonCoroutines.Start(UpdateQuickMenuBackGround());
 
             Vanilla.Modules.MenuModification.UpdateQuickMenuColors(); 

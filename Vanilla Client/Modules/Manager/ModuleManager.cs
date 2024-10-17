@@ -28,33 +28,13 @@ namespace Vanilla.Modules
                 {
                     LogHandler.Dev("construct modules on start", $"Type: {type.Name} doesnt have a module name");
                 }
-               else { 
+                else
+                {
                     LogHandler.Dev("construct modules on start", $"loaded module: {_.GetModuleName()}");
                 }
             }
-
-            /*
-            Modules.Add(new WSBase());
-            Modules.Add(new DiscordManager());
-            Modules.Add(new MainHelper());
-            Modules.Add(new LoadMusic());
-            Modules.Add(new KeybindManager());
-            Modules.Add(new ButtonLoader());
-            Modules.Add(new FlyManager());
-            Modules.Add(new CameraModule());
-            Modules.Add(new PlayerController());
-            Modules.Add(new ESPModule());
-            Modules.Add(new VanillaObject());
-            Modules.Add(new PHelper());
-            Modules.Add(new VRCPlus());
-            Modules.Add(new JoinLoggerModule());
-            Modules.Add(new PlayerHandler());
-            Modules.Add(new PerfModule());
-            */
-
-
             Dev("ScriptManager", $"Current ModuleCount {Modules.Count}");
-            Log("Script Manager", "Script Manager Initilized =)", ConsoleColor.Green);
+            Log("ScriptManager", "Script Manager Initialized =)", ConsoleColor.Green);
         }
 
         protected internal static void LateStart()
@@ -94,7 +74,6 @@ namespace Vanilla.Modules
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].LateUpdate(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 
-
         protected internal static void LevelUnload(int level)
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].WorldUnload(level); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
@@ -110,7 +89,6 @@ namespace Vanilla.Modules
                 catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 
-
         protected internal static void OnApplicationFocus(bool __0)
         { for (int i = 0; i < Modules.Count; i++) try { Modules[i].AppFocus(__0); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); } }
 
@@ -119,19 +97,17 @@ namespace Vanilla.Modules
 
         protected internal static void Stop()
         {
-            for (int i = 0; i < Modules.Count; i++) try { Modules[i].Stop(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
-            Modules.Clear();
-            Log("Script Manager", "Script Manager Destroyed =( See you Next Time", System.ConsoleColor.Yellow);
+            if (Modules.Count != 0)
+            {
+                for (int i = 0; i < Modules.Count; i++) try { Modules[i].Stop(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
+                Modules.Clear();
+                Log("Script Manager", "Script Manager Destroyed =( See you Next Time", System.ConsoleColor.Yellow);
+            }
         }
         protected internal static IEnumerator WaitForAPIUser()
         {
             while (PlayerWrapper.GetLocalAPIUser() == null) yield return null;
             Dev("ModuleManager", "User logged in");
-            Testing.Test();
-
-
-
-
             for (int i = 0; i < Modules.Count; i++) try { Modules[i].WaitForAPIUser(); } catch (Exception e) { ExceptionHandler("Modules", e, Modules[i].GetModuleName()); }
         }
 

@@ -15,6 +15,8 @@
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -169,12 +171,18 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
     </Reference>
+    <Reference Include="KeraLua, Version=1.4.1.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\KeraLua.1.4.1\lib\net46\KeraLua.dll</HintPath>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>..\..\..\VRChat_OldDupped\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\VRChat_Old\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLua, Version=1.7.3.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.7.3\lib\net46\NLua.dll</HintPath>
     </Reference>
     <Reference Include="Photon-DotNet, Version=4.1.6.18, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -361,6 +369,8 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Config\UploadQueConfig.cs" />
     <Compile Include="Helpers\UploadHelper.cs" />
     <Compile Include="Menu\ActionWheel\AWLoader.cs" />
+    <Compile Include="Menu\QM\Scripting\Menu.cs" />
+    <Compile Include="Menu\QM\API\ButtonHelper.cs" />
     <Compile Include="Misc\AvatarFavorites\AvatarFavoritesModel.cs" />
     <Compile Include="Misc\AvatarFavorites\FavoriteAvatarHandler.cs" />
     <Compile Include="Misc\BotHandle.cs" />
@@ -421,6 +431,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Menu\QM\API\Legacy\MenuPanelButton.cs" />
     <Compile Include="Menu\QM\API\Legacy\MenuPanelAPI.cs" />
     <Compile Include="RiderDisabler.cs" />
+    <Compile Include="Scripting\Lua\LuaBase.cs" />
+    <Compile Include="Scripting\Lua\LuaBindings.cs" />
+    <Compile Include="Scripting\Lua\LuaManager.cs" />
     <Compile Include="Utils\AvatarFavorite.cs" />
     <Compile Include="Utils\CacheUtils.cs" />
     <Compile Include="Utils\CRC32.cs" />
@@ -520,6 +533,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\BuildTime.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +561,15 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   <ItemGroup>
     <EmbeddedResource Include="Resources\Vanilla.Refs.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\KeraLua.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\lua54.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\NLua.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy "G:\UnityProjects\ZuxiTesting\Assets\AssetBundles\clientbundle" "G:\Visual Studio\VanillaClientAnarchyEdition\Vanilla Client\Resources\ClientBundle" /y 
@@ -565,4 +588,11 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "G:\Games\VRChat_Old\Mods" /Y /I</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\KeraLua.1.4.1\build\net46\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.4.1\build\net46\KeraLua.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\KeraLua.1.4.1\build\net46\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.4.1\build\net46\KeraLua.targets'))" />
+  </Target>
 </Project>

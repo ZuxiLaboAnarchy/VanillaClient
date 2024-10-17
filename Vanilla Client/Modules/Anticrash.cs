@@ -68,6 +68,7 @@ namespace Vanilla.Modules
         {
             try
             {
+                return true;
                 if (obj == null) { return false; }
                 if (vrcplayer == null) { return false; }
                 if (PlayerWrapper.GetLocalPlayer() == vrcplayer) { return true; }

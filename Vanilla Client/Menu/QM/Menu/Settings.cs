@@ -234,7 +234,7 @@ namespace Vanilla.QM.Menu
             {
                 MainConfig.GetInstance().ImageCache = false;
                 MainConfig.GetInstance().Save();
-            }, "Toggle Cached img Saving", true);
+            }, "Toggle Cached img Saving", MainConfig.GetInstance().ImageCache);
 
 
 
@@ -246,7 +246,7 @@ namespace Vanilla.QM.Menu
             
              */
 
-
+            /*
             if (MainConfig.GetInstance().LoadMusic == true)
             { LoadMusicToggle.ClickMe(); }
             if (MainConfig.GetInstance().ESP == true)
@@ -254,7 +254,7 @@ namespace Vanilla.QM.Menu
             if (MainConfig.GetInstance().JoinLogger == true)
             { JoinLogger.ClickMe(); }
             if (MainConfig.GetInstance().ImageCache == true)
-            { Chachedimg.ClickMe(); }
+            { Chachedimg.ClickMe(); }*/
         }
     }
 }

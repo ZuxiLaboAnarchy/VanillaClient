@@ -18,6 +18,38 @@ namespace Vanilla.Utils
             {
                 Directory.CreateDirectory(Path.Combine(FileHelper.GetCheatFolder()));
             }
+
+            if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
+            { _isCleanup = true; }
+
+            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
+            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\discord-rpc.dll", Properties.Resources.discord_rpc); }
+
+            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\NLua.dll"))
+            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\NLua.dll", Properties.Resources.NLua); }
+
+            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\KeraLua.dll"))
+            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\KeraLua.dll", Properties.Resources.KeraLua); }
+
+            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\lua54.dll"))
+            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\lua54.dll", Properties.Resources.lua54); }
+
+
+            if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
+            { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE").Close(); }
+
+            if (_isCleanup)
+            {
+                Log("Cleaner", "Cleaning up around this will only take a Minute");
+
+                if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
+                {
+                    File.Delete(MelonUtils.BaseDirectory + "\\WSManager.dll");
+                }
+
+
+                Log("Cleaner", "Done...");
+            }
         }
 
         static bool _isCleanup = false;
@@ -78,33 +110,6 @@ namespace Vanilla.Utils
             return GetMainFolder() + "\\Common\\Dependencies";
         }
 
-        internal static void Setup()
-        {
-            if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
-            { _isCleanup = true; }
-
-            if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\discord-rpc.dll"))
-            { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\discord-rpc.dll", Properties.Resources.discord_rpc); }
-
-            if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
-            { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE").Close(); }
-
-
-
-            if (_isCleanup)
-            {
-                Log("Cleaner", "Cleaning up around this will only take a Minute");
-
-                if (File.Exists(MelonUtils.BaseDirectory + "\\WSManager.dll"))
-                {
-                    File.Delete(MelonUtils.BaseDirectory + "\\WSManager.dll");
-                }
-
-
-                Log("Cleaner", "Done...");
-            }
-        }
-
         internal static void CheckDirs()
         {
 
@@ -122,12 +127,11 @@ namespace Vanilla.Utils
 
         }
 
-        
-        [Obfuscation(Feature = "-strenc")]
-
-        internal static string[] EmbededLibraryPaths = new string[4] { "Vanilla.Resources.WSManager.dll", "Vanilla.Resources.Vanilla.Tomlyn.dll", "Vanilla.Resources.Vanilla.JSON.dll", "Vanilla.Resources.Vanilla.Refs.dll" };
+        internal static string[] EmbededLibraryPaths = new string[4] { "Vanilla.Resources.WSManager.dll", "Vanilla.Resources.Vanilla.Tomlyn.dll", "Vanilla.Resources.Vanilla.JSON.dll", "Vanilla.Resources.Vanilla.Refs.dll", 
+            };
         internal static void LoadResources()
         {
+            
             for (int i = 0; i < EmbededLibraryPaths.Length; i++)
             {
                 string EmbededName = EmbededLibraryPaths[i];

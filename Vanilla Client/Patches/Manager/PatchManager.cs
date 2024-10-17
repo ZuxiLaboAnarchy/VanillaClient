@@ -8,15 +8,15 @@ using Vanilla.Patches.Harmony;
 
 namespace Vanilla.Patches
 {
-    internal class PatchManager
+    internal class PatchManager : VanillaModule
     {
         protected virtual string patchName => "Undefined Patch";
         internal static int PatchedMethods = 0;
         internal static List<VanillaPatches> Patches = new();
         internal static string[] Ignore = { };
-        internal static void Patch()
+        internal override void Start()
         {
-
+       
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
 
             IEnumerable<Type> InternalTypes = currentAssembly.GetTypes()
@@ -48,7 +48,7 @@ namespace Vanilla.Patches
             Dev("PatchManager", "Initilized");
         }
 
-        internal static void Stop()
+        internal override void Stop()
         {
             UnpatchAllMethods();
 

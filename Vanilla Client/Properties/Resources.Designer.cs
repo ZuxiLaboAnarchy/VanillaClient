@@ -61,7 +61,7 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon 01/09/2023 18:07:07.50 
+        ///   Looks up a localized string similar to Wed 10/16/2024 23:39:41.80
         ///.
         /// </summary>
         internal static string BuildTime {
@@ -91,11 +91,41 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2022.4.2p1-1275--Release.
+        ///   Looks up a localized string similar to UNKNOWN.
         /// </summary>
         internal static string GameVersion {
             get {
                 return ResourceManager.GetString("GameVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] KeraLua {
+            get {
+                object obj = ResourceManager.GetObject("KeraLua", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lua54 {
+            get {
+                object obj = ResourceManager.GetObject("lua54", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] NLua {
+            get {
+                object obj = ResourceManager.GetObject("NLua", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

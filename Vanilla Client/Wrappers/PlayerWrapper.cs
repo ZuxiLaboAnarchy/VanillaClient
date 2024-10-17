@@ -11,7 +11,7 @@ using VRC.UI.Elements.Menus;
 namespace Vanilla.Wrappers
 {
     internal static class PlayerWrapper
-    {
+    { 
         private static SelectedUserMenuQM _selectedUserMenu;
 
         internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();

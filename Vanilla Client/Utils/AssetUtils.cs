@@ -1,20 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using Vanilla.Modules;
 
 namespace Vanilla.Utils
 {
-    internal class AssetLoader
+    internal class AssetLoader : VanillaModule
     {
         private static readonly Dictionary<string, object> assetCache = new Dictionary<string, object>();
 
         private static AssetBundle cachedAssetBundle = null;
 
-        internal static void LoadAssetBundle()
+        internal override void Start() 
         {
             cachedAssetBundle = AssetBundle.LoadFromMemory_Internal(Properties.Resources.ClientBundle, 0u); //File.ReadAllBytes(filePath), 0u);
             cachedAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             Dev("Assets", "Assets Loaded Successfully");
+        }
+        internal static void LoadAssetBundle()
+        {
+           
         }
 
         internal static Texture2D LoadTexture(string textureName)
