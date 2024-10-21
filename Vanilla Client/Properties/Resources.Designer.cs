@@ -61,7 +61,17 @@ namespace Vanilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wed 10/16/2024 23:39:41.80
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] AnarchyLogCleaner {
+            get {
+                object obj = ResourceManager.GetObject("AnarchyLogCleaner", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sat 10/19/2024 15:13:58.69
         ///.
         /// </summary>
         internal static string BuildTime {

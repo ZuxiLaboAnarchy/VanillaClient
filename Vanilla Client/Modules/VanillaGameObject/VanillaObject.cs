@@ -18,7 +18,7 @@ namespace Vanilla.Modules
 
         internal override void WaitForPlayer()
         {
-            ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
+          //ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
            // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();  
 
             Dev("VanillaObject", "Spawning GameObject");

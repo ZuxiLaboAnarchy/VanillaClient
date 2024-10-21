@@ -2,6 +2,7 @@
 using Vanilla.Modules;
 namespace Vanilla.Behaviours
 {
+    [MelonLoader.RegisterTypeInIl2Cpp]
     public class VanillaBehavior : MonoBehaviour
     {
         public VanillaBehavior(IntPtr ptr) : base(ptr) { }
@@ -9,8 +10,6 @@ namespace Vanilla.Behaviours
         public void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
-
-         
         }
         public void OnApplicationFocus(bool hasFocus) => ModuleManager.OnApplicationFocus(hasFocus);
 

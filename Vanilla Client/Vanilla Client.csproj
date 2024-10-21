@@ -382,7 +382,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Misc\ModCompatibility.cs" />
     <Compile Include="Misc\MonoBehaviors\EnableDisableListener.cs" />
     <Compile Include="Modules\AutoLoginModule.cs" />
+    <Compile Include="Modules\GifModule.cs" />
     <Compile Include="Modules\LoadScreen.cs" />
+    <Compile Include="Modules\LogCleanerOnExit.cs" />
     <Compile Include="Modules\MenuModifcation.cs" />
     <Compile Include="Modules\Photon\PhotonEventCodes.cs" />
     <Compile Include="Modules\Anticrash.cs" />
@@ -569,6 +571,9 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\NLua.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnarchyLogCleaner.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
