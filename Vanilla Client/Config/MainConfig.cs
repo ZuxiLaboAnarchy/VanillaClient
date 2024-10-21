@@ -96,7 +96,9 @@ namespace Vanilla.Config
 
         private bool _QuickMenuMusic = true;
         public bool QuickMenuMusic { get => _QuickMenuMusic; set { _QuickMenuMusic = value; Save(); } }
-      
+        private bool _ClearLogsOnExit = true;
+        public bool ClearLogsOnExit { get => _ClearLogsOnExit; set { _ClearLogsOnExit = value; Save(); } }
+
 
         public static MainConfig GetInstance()
         {

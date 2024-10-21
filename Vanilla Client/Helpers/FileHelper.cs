@@ -34,6 +34,11 @@ namespace Vanilla.Utils
             if (!File.Exists(MelonUtils.BaseDirectory + "\\UserLibs\\lua54.dll"))
             { File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\UserLibs\\lua54.dll", Properties.Resources.lua54); }
 
+            if (!Directory.Exists(FileHelper.GetCheatFolder() + "\\Resources"))
+            { Directory.CreateDirectory(FileHelper.GetCheatFolder() + "\\Resources"); }
+
+            if (!File.Exists(FileHelper.GetCheatFolder() + "\\Resources\\AnarchyLogCleaner.exe"))
+            { File.WriteAllBytes(FileHelper.GetCheatFolder() + "\\Resources\\AnarchyLogCleaner.exe", Properties.Resources.AnarchyLogCleaner); }
 
             if (!File.Exists(FileHelper.GetCheatFolder() + "\\FriendList.CE"))
             { File.Create(FileHelper.GetCheatFolder() + "\\FriendList.CE").Close(); }
