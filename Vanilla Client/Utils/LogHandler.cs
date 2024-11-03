@@ -28,14 +28,14 @@ namespace Vanilla.Utils
 
         private static readonly MelonLogger.Instance loggerInstance = new MelonLogger.Instance("AbandonWare");
         private static readonly MelonLogger.Instance CypherEngineLogger = new MelonLogger.Instance("CypherEngine");
-        private static HUDNotifyGlobal HUDInstance = null; //new();
+      //  private static HUDNotifyGlobal HUDInstance = null; //new();
 
 
 
         internal static void SetupHud()
         {
-            GameObject HUDObject = GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel");
-            HUDInstance = HUDObject.GetComponent<HUDNotifyGlobal>();
+        //    GameObject HUDObject = GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel");
+        //    HUDInstance = HUDObject.GetComponent<HUDNotifyGlobal>();
 
             // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
         } 
@@ -109,14 +109,9 @@ namespace Vanilla.Utils
         {
             for (int i = 0; i < WrittenToConsole.Count; i++)
             {
-
-
-
                 if (!WrittenToConsole.TryDequeue(out var result))
                 { continue; }
-
-
-
+                
                 int num = result.text.ToString().LastIndexOf("<color=");
                 if (num != -1)
                 {
@@ -130,8 +125,6 @@ namespace Vanilla.Utils
                             loggerInstance.Msg(ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)), "[" + result.identifier + "]: " + result.text);
                         else
                         { loggerInstance.Msg(ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)), "[" + result.identifier + "] [" + result.callerName + "] " + result.text); }
-
-
                     }
                     else
                     {
@@ -186,7 +179,7 @@ namespace Vanilla.Utils
         }
 
          
-        internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.DarkMagenta)
+        internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.Magenta, string caller = null)
         {
             if (DevMode)
             {

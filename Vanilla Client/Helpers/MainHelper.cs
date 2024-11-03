@@ -83,7 +83,7 @@ namespace Vanilla.Helpers
             }
             Dev("HudManager", "HUD Loaded Injecting Alert Panel");
 
-            LogHandler.SetupHud();
+            //LogHandler.SetupHud();
 
             //GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog/Background_Scrim").SetActive(false);
 

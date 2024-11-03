@@ -9,13 +9,10 @@ namespace Vanilla.Refs
 {
     public class Strings
     {
-
-        //Patching
+        // TODO: move back into the main dll again
+        // Patching
         public static readonly string deviceUniqueIdentifier = "deviceUniqueIdentifier";
-       
         public static readonly string DownloadImageInternal = "DownloadImageInternal";
-        
-       
         public static readonly string VRCPlayerJoin = "Method_Public_Void_Player_0";
         public static readonly string VRCPlayerLeave = "Method_Public_Void_Player_1";
         public static readonly string VRCOnJoinRoom = "Method_Public_Void_PDM_0";
@@ -32,7 +29,7 @@ namespace Vanilla.Refs
         public static readonly string GetColorForSocialRank = "Method_Public_Static_Color_APIUser_0";
 
 
-        //Local Mehod Names
+        //Local Method Names
         public static readonly string PlayerJoin = "PlayerJoin";
         public static readonly string PlayerLeave = "PlayerLeave";
         public static readonly string OnJoinedRoomPatch = "OnJoinedRoomPatch";

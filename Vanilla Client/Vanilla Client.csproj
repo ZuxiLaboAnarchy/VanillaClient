@@ -382,6 +382,7 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Misc\ModCompatibility.cs" />
     <Compile Include="Misc\MonoBehaviors\EnableDisableListener.cs" />
     <Compile Include="Modules\AutoLoginModule.cs" />
+    <Compile Include="Modules\CurserChanger.cs" />
     <Compile Include="Modules\GifModule.cs" />
     <Compile Include="Modules\LoadScreen.cs" />
     <Compile Include="Modules\LogCleanerOnExit.cs" />
@@ -413,6 +414,8 @@ echo %25date%25 %25time%25&gt; "$(ProjectDir)\Resources\BuildTime.txt"
     <Compile Include="Modules\WorldHistoryManager.cs" />
     <Compile Include="Modules\FlyManager.cs" />
     <Compile Include="Patches\EventHandlerPatch.cs" />
+    <Compile Include="Patches\Harmony\AntiConsoleClearPatch.cs" />
+    <Compile Include="Patches\Harmony\CrackPatcher.cs" />
     <Compile Include="Patches\Harmony\ImgDownloader.cs" />
     <Compile Include="Patches\Harmony\QuickMenuPatch.cs" />
     <Compile Include="Patches\Harmony\VRCPlayer.cs" />
