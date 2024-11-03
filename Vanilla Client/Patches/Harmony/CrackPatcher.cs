@@ -12,7 +12,7 @@ using System.Text;
 using UnityEngine.Networking;
 using Vanilla.Patches.Manager;
 
-#if DEBUG
+
 namespace Vanilla.Patches.Harmony
 {
     internal class CrackPatcher : VanillaPatches
@@ -51,6 +51,7 @@ namespace Vanilla.Patches.Harmony
                     typeof(WebClient).GetMethod(nameof(WebClient.UploadValues),
                         new[] { typeof(string), typeof(NameValueCollection) }),
                     GetLocalPatch(nameof(ReturnEmptyForUploadValues)), null);
+
                 // PatchMethod(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Put), new[] { typeof(string), typeof(string) }), GetLocalPatch(nameof(UnityWebRequestPut)), null);
                 //  PatchMethod(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new[] { typeof(string) }), GetLocalPatch("UnityWebRequestGet"), null);
                 //  PatchMethod(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Post), new[] { typeof(string) }), GetLocalPatch("UnityWebRequestPut"), null);
@@ -152,4 +153,3 @@ namespace Vanilla.Patches.Harmony
         }
     }
 }
-#endif

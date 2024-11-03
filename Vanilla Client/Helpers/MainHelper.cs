@@ -107,7 +107,6 @@ namespace Vanilla.Helpers
             if (Time.realtimeSinceStartup >= nextPop)
             {
                 nextPop = Time.realtimeSinceStartup + 10f;
-                //TODO Update API for Anarchy bc this is based off of old VRC stuff wich is still used lol
                 //   new Thread(() => { ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString()); }).Start();
                 //   new Thread(() => { Upload.SendUpdates(); }).Start();
                 WSBase.KeepAlivePack();
