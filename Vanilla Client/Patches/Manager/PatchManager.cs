@@ -45,7 +45,8 @@ namespace Vanilla.Patches
 #endif
             for (int i = 0; i < PatchManager.Patches.Count; i++) { try { PatchManager.Patches[i].Patch(); } catch (Exception e) { ExceptionHandler("Patches", e, Patches[i].GetPatchName()); } }
 
-            Dev("PatchManager", "Initilized");
+            Dev("PatchManager", "Initialized");
+            Log("PatchManager", $"Patched {PatchedMethods} methods.", ConsoleColor.Green);
         }
 
         internal override void Stop()

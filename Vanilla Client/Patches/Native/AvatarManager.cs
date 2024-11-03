@@ -81,13 +81,7 @@ namespace Vanilla.Patches.Native
                     NativePatchUtils.NativePatch(originalMethodPointer, out originalDelegate, patchDelegate);
                 }
             }
-
-
         }
-
-
-
-
 
         private static IntPtr ObjectInstantiatePatch(IntPtr assetPtr, Vector3 pos, Quaternion rot,
             byte allowCustomShaders, byte isUI, byte validate, IntPtr nativeMethodPointer, ObjectInstantiateDelegate originalInstantiateDelegate)

@@ -18,7 +18,7 @@ namespace Vanilla.ServerAPI
 
         internal static void HandlePostRequest(string PostRequestData)
         {
-            Dev("ServerAPI", "Handleing \n " + PostRequestData);
+            Dev("ServerAPI", "Handling \n " + PostRequestData, logToHud: false);
             string text = PostRequestData.Trim();
             if (string.IsNullOrEmpty(text))
             {
@@ -34,31 +34,24 @@ namespace Vanilla.ServerAPI
         static string LastUpdate = null;
         internal static void HandleUpdate(string WSResponce)
         {
-            Dev("RH", "Handleing Update");
-            //  Dev("WSSRH", WSResponce);
-            
-
-          /*  if (WSResponce.IsNullOrEmpty())
-            {
-                Dev("Dev", "Update Was Null Returning");
-                return;
-            }
-          */
+            Dev("RH", "Handleing Update", logToHud: false);
+          
+          string text = WSResponce.Trim();
+          if (string.IsNullOrEmpty(text))
+          {
+              return;
+          }
 
             if (WSResponce == LastUpdate && !RuntimeConfig.isForced)
             {
-                Dev("PlayerChanges", "Update Was Same Returning");
+                Dev("PlayerChanges", "Update Was Same Returning", logToHud: false);
                 return;
             }
             LastUpdate = WSResponce;
 
             RuntimeConfig.isForced = false;
 
-            string text = WSResponce.Trim();
-            if (string.IsNullOrEmpty(text))
-            {
-                return;
-            }
+           
             JObject jObject = JObject.Parse(text);
             //   WSDone = false;
 
@@ -91,17 +84,18 @@ namespace Vanilla.ServerAPI
                         customTagColorEnabled = TagEnabled,
                         customTagColor = color
                     };
-
-
-                    Dev("SRH", "Adding: " + VRChatID + " To Tag List");
-
-
+                    
                     if (!PlayerUtils.playerCustomTags.ContainsKey(VRChatID) && VRChatID != string.Empty)
-                    { PlayerUtils.playerCustomTags.Add(VRChatID, customtag); }
+                    { 
+                        Dev("SRH", "Adding: " + VRChatID + " To Tag List");
+                        PlayerUtils.playerCustomTags.Add(VRChatID, customtag);
+                    }
                     else
-                    { PlayerUtils.playerCustomTags[VRChatID] = customtag; }
+                    {
+                        PlayerUtils.playerCustomTags[VRChatID] = customtag;
+                    }
 
-                        PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
+                    PlayerInformation playerInformationByID = PlayerWrapper.GetPlayerInformationByID(VRChatID);
                     if (playerInformationByID != null && TagEnabled)
                     {
                         PlayerUtils.playerColorCache[playerInformationByID.displayName] = color;
@@ -112,10 +106,10 @@ namespace Vanilla.ServerAPI
                 for (int k = 0; k < jArray10.Count; k++)
                 {
                    if(! MainConfig.GetInstance().WhiteListedShaderList.Contains(jArray10[k].ToString()))
-                    {
+                   {
                         if (string.IsNullOrEmpty(jArray10[k].ToString())) continue;
                         MainConfig.GetInstance().WhiteListedShaderList.Add(jArray10[k].ToString());
-                    }
+                   }
                 }
 
                 JArray jArray11 = (JArray)jObject["AvatarWhiteList"];
@@ -128,7 +122,7 @@ namespace Vanilla.ServerAPI
                     }
                 }
 
-                Dev("SRH", "Finished Handleing TagList ");
+                Dev("SRH", "Finished Handling TagList ", logToHud: false);
 
 
 

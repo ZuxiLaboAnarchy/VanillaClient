@@ -26,11 +26,11 @@ namespace Vanilla.Patches
         {
             if (targetMethod == null)
             {
-                Log("PatchManager", $"Cannot patch null method Patch Name {patchName}", ConsoleColor.Gray);
+                Log("PatchManager", $"Cannot patch null method Patch Name {patchName}", ConsoleColor.Red);
             }
             else if (preMethod == null && postMethod == null)
             {
-                Log("PatchManager", "Cannot patch " + targetMethod.Name + $" since no valid Pre/Post method was found {patchName}", ConsoleColor.Gray);
+                Log("PatchManager", "Cannot patch " + targetMethod.Name + $" since no valid Pre/Post method was found {patchName}", ConsoleColor.Red);
             }
             else
             {

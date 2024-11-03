@@ -7,9 +7,6 @@ namespace Vanilla.Utils
         internal static void InformHudText(string identifier, string text, bool logToConsole = false)
         {
 
-             
-
-
             try
             {
 
@@ -29,7 +26,7 @@ namespace Vanilla.Utils
                 string htmlString = text.Substring(num + 7, num2 - (num + 7));
                 if (ColorUtility.TryParseHtmlString(htmlString, out var color))
                 {
-                    Log(identifier, text, ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)), "InformHudText");
+                    Log(identifier, text, color.ClosestConsoleColor(), "InformHudText");
                 }
                 else
                 {

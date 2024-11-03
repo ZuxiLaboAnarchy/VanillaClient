@@ -28,36 +28,8 @@ namespace Vanilla.Utils
 
         private static readonly MelonLogger.Instance loggerInstance = new MelonLogger.Instance("AbandonWare");
         private static readonly MelonLogger.Instance CypherEngineLogger = new MelonLogger.Instance("CypherEngine");
-      //  private static HUDNotifyGlobal HUDInstance = null; //new();
-
-
-
-        internal static void SetupHud()
-        {
-        //    GameObject HUDObject = GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel");
-        //    HUDInstance = HUDObject.GetComponent<HUDNotifyGlobal>();
-
-            // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
-        } 
-
-        internal static void LogToHud(string message)
-        {
-            // Sprite sprite= ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo");
-            // HUDInstance.Method_Public_Void_String_Sprite_0(message, ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
-            // HUDInstance.Method_Public_Void_String_Sprite_0(message, null);//ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));  
-                OnScreenUI.AddString(
-                    string.Format("<color=#ff0000> {0} </color>", message.ToString()));
-
-
-        }
-
-        internal static void CypherEngineLog(string Identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
-        {
-            CypherEngineLogger.Msg(color, "[" + Identify + "] " + message);
-
-        }
-
-
+        internal static void LogToHud(string message) =>  OnScreenUI.AddString(string.Format("<color=#ff0000> {0} </color>", message.ToString()));
+        internal static void CypherEngineLog(string Identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null) =>   CypherEngineLogger.Msg(color, "[" + Identify + "] " + message);
         internal static void HudLog(string Identify, object message, ConsoleColor ConsoleColor = ConsoleColor.White, string caller = null)
         {
             WrittenToConsole.Enqueue(new ConsoleLog
@@ -72,7 +44,6 @@ namespace Vanilla.Utils
             Pop();
 
         }
-
         internal static void Log(string identify, object message, ConsoleColor color = ConsoleColor.White, string caller = null)
         {
             if (message is null) return; 
@@ -103,6 +74,22 @@ namespace Vanilla.Utils
             Pop();
         }
 
+        internal static void Dev(string identify, object message, ConsoleColor color = ConsoleColor.Magenta, string caller = null, bool logToHud = true)
+        {
+            if (DevMode)
+            {
+                WrittenToConsole.Enqueue(new ConsoleLog
+                {
+                    identifier = identify,
+                    text = message,
+                    textColor = color,
+                    callerName = caller,
+                    LogToHud = logToHud,
+
+                });
+                Pop();
+            }
+        }
         internal static int CurCue;
 
         internal static void Pop()
@@ -122,42 +109,34 @@ namespace Vanilla.Utils
                         //  Log(Identify, message, ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)));
 
                         if (result.callerName == null)
-                            loggerInstance.Msg(ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)), "[" + result.identifier + "]: " + result.text);
+                            loggerInstance.Msg(color.ClosestConsoleColor(), "[" + result.identifier + "]: " + result.text.StripHtml());
                         else
-                        { loggerInstance.Msg(ClosestConsoleColor((byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f)), "[" + result.identifier + "] [" + result.callerName + "] " + result.text); }
+                        { loggerInstance.Msg(color.ClosestConsoleColor(), "[" + result.identifier + "] [" + result.callerName + "] " + result.text.StripHtml()); }
                     }
                     else
                     {
                         if (result.callerName == null)
-                            loggerInstance.Msg(result.textColor, "[" + result.identifier + "]: " + result.text);
+                            loggerInstance.Msg(result.textColor, "[" + result.identifier + "]: " + result.text.StripHtml()  );
                         else
-                        { loggerInstance.Msg(result.textColor, "[" + result.identifier + "] [" + result.callerName + "] " + result.text); }
+                        { loggerInstance.Msg(result.textColor, "[" + result.identifier + "] [" + result.callerName + "] " + result.text.StripHtml()); }
                     }
                 }
                 else
                 {
                     if (result.callerName == null)
-                        loggerInstance.Msg(result.textColor, "[" + result.identifier + "]: " + result.text);
+                        loggerInstance.Msg(result.textColor, "[" + result.identifier + "]: " + result.text.StripHtml());
                     else
-                    { loggerInstance.Msg(result.textColor, "[" + result.identifier + "] [" + result.callerName + "] " + result.text); }
+                    { loggerInstance.Msg(result.textColor, "[" + result.identifier + "] [" + result.callerName + "] " + result.text.StripHtml()); }
                 }
-
-
-
-
 
                 if (result.LogToHud)
                 {
                     if (string.IsNullOrEmpty(result.text.ToString())) return; 
-                      OnScreenUI.AddString("[" + result.identifier + "] <color=#00aeff>" + result.text + "</color>");
+                      OnScreenUI.AddString($"[{ result.identifier }] <color={result.textColor.ToHex()}> { result.text } </color>");
                    // LogToHud("[" + result.identifier + "] " + result.text.ToString());
                 }
-
             }
-
-
         }
-
 
         internal static void RePop()
         {
@@ -174,18 +153,10 @@ namespace Vanilla.Utils
                 { loggerInstance.Msg(result.textColor, "[" + result.identifier + "] [" + result.callerName + "] " + result.text); }
                 CurCue++;
             }
-
-
         }
 
          
-        internal static void Dev(string Identify, object message, ConsoleColor color = ConsoleColor.Magenta, string caller = null)
-        {
-            if (DevMode)
-            {
-                loggerInstance.Msg(color, $"[{Identify}]: {message} ");
-            }
-        }
+      
 
         internal static void WriteNewLog()
         {
@@ -199,10 +170,13 @@ namespace Vanilla.Utils
         }
 
 
-        internal static void ExceptionHandler(string Identify, Exception message, object Info = null)
+        internal static void ExceptionHandler(string Identify, Exception message, object Info = null, bool IsCritError = false)
         {
-            loggerInstance.Error($"[{Identify}]: An Exception Occoured \n\n{Info}\n\n" +
-
+            if (IsCritError)
+            {
+             loggerInstance.Error("ALERT ZUXI THIS IS A CRITICAL ERROR!");   
+            }
+            loggerInstance.Error($"[{Identify}]: An Oopsie Woopsie occurred  \n\n{Info}\n\n" +
                 "----------{Where?}----------\n\n" +
                 $"{message.TargetSite}\n\n" +
                 "----------{Message}----------\n\n" +
@@ -215,33 +189,11 @@ namespace Vanilla.Utils
                 $"{message.InnerException}\n\n" +
                 "---------{EndOfException}----------\n\n" +
                 $"");
+            
         }
 
 
-        internal static ConsoleColor ClosestConsoleColor(byte r, byte g, byte b)
-        {
-            ConsoleColor result = ConsoleColor.White;
-            double num = (int)r;
-            double num2 = (int)g;
-            double num3 = (int)b;
-            double num4 = double.MaxValue;
-            foreach (ConsoleColor value in Enum.GetValues(typeof(ConsoleColor)))
-            {
-                string name = Enum.GetName(typeof(ConsoleColor), value);
-                System.Drawing.Color color = System.Drawing.Color.FromName((name == "DarkYellow") ? "Orange" : name);
-                double num5 = Math.Pow((double)(int)color.R - num, 2.0) + Math.Pow((double)(int)color.G - num2, 2.0) + Math.Pow((double)(int)color.B - num3, 2.0);
-                if (num5 == 0.0)
-                {
-                    return value;
-                }
-                if (num5 < num4)
-                {
-                    num4 = num5;
-                    result = value;
-                }
-            }
-            return result;
-        }
+       
 
     }
 
@@ -258,4 +210,6 @@ namespace Vanilla.Utils
         internal bool LogToHud;
 
     }
+    
+ 
 }

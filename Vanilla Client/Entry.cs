@@ -17,7 +17,7 @@ namespace Vanilla
 
             FileHelper.LoadResources();
             ModuleManager.InitModules();
-            Log("Patch Manager", $"Patched {PatchManager.PatchedMethods} Methods", ConsoleColor.Green);
+         
             try { for (int i = 0; i < ModuleManager.Modules.Count; i++) ModuleManager.Modules[i].Start(); } catch (Exception e) { ExceptionHandler("Modules", e); }
             Dev("OnStart", "On App Start Complete");
             Log("Performance", $"Client Start Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
