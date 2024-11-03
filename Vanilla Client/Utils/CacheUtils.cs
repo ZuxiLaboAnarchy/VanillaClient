@@ -1,12 +1,14 @@
-﻿using System;
+﻿// /*
+//  *
+//  * VanillaClient - CacheUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
+using Vanilla.Helpers;
 
 namespace Vanilla.Utils
 {

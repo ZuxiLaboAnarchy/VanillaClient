@@ -1,8 +1,16 @@
-﻿using System.Linq;
+﻿// /*
+//  *
+//  * VanillaClient - HWID.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {
@@ -43,7 +51,7 @@ namespace Vanilla.Patches.Harmony
                         new System.Random().Next(0, 9),
                         new System.Random().Next(0, 9),
                         new System.Random().Next(0, 9)
-                    }))).Select(delegate(byte x)
+                    }))).Select(delegate (byte x)
                 {
                     var b = x;
                     return b.ToString("x2");

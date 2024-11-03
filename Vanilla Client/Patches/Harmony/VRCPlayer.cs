@@ -1,7 +1,15 @@
-﻿using MelonLoader.TinyJSON;
+﻿// /*
+//  *
+//  * VanillaClient - VRCPlayer.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Reflection;
 using UnityEngine;
 using Vanilla.Config;
+using Vanilla.Misc;
+using Vanilla.Patches.Manager;
 using VRC.Core;
 
 namespace Vanilla.Patches.Harmony

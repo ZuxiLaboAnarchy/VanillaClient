@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - TomlObject.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 
 namespace Vanilla.Tomlyn.Model
@@ -35,10 +39,10 @@ namespace Vanilla.Tomlyn.Model
             if (value is TomlObject tomlObj) return tomlObj;
             var type = value.GetType();
             if (type == typeof(string)) return new TomlString((string)value);
-            if (type == typeof(long)) return new TomlInteger((long) value);
+            if (type == typeof(long)) return new TomlInteger((long)value);
             if (type == typeof(bool)) return new TomlBoolean((bool)value);
             if (type == typeof(double)) return new TomlFloat((double)value);
-            if (type == typeof(DateTime)) return new TomlDateTime(ObjectKind.LocalDateTime, (DateTime) value);
+            if (type == typeof(DateTime)) return new TomlDateTime(ObjectKind.LocalDateTime, (DateTime)value);
 
             throw new InvalidOperationException($"The type `{type}` of the object is invalid. Only long, bool, double, DateTime and TomlObject are supported");
         }

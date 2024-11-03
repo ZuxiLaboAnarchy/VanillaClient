@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - ArraySyntax.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 
 namespace Vanilla.Tomlyn.Syntax
@@ -32,7 +36,7 @@ namespace Vanilla.Tomlyn.Syntax
             CloseBracket = SyntaxFactory.Token(TokenKind.CloseBracket);
             for (int i = 0; i < values.Length; i++)
             {
-                var item = new ArrayItemSyntax {Value = new IntegerValueSyntax(values[i])};
+                var item = new ArrayItemSyntax { Value = new IntegerValueSyntax(values[i]) };
                 if (i + 1 < values.Length)
                 {
                     item.Comma = SyntaxFactory.Token(TokenKind.Comma);

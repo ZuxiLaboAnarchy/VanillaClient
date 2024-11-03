@@ -1,5 +1,12 @@
-﻿using System.Reflection;
-using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - Curser.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Reflection;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {

@@ -1,12 +1,18 @@
-﻿using MelonLoader;
-using Newtonsoft.Json;
+﻿// /*
+//  *
+//  * VanillaClient - FileHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
-using Vanilla.Modules;
+using Vanilla.Modules.Manager;
 
-namespace Vanilla.Utils
+namespace Vanilla.Helpers
 {
     internal class FileHelper : VanillaModule
     {

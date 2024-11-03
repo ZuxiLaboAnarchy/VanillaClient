@@ -1,4 +1,11 @@
-﻿using ExitGames.Client.Photon;
+﻿// /*
+//  *
+//  * VanillaClient - PhotonUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 

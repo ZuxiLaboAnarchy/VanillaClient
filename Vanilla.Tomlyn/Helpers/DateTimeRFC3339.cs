@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - DateTimeRFC3339.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Globalization;
 
@@ -30,7 +34,7 @@ namespace Vanilla.Tomlyn.Helpers
         //date-time       = full-date "T" full-time
 
         private static readonly string[] OffsetDateTimeFormats = new[]
-        {            
+        {
             "yyyy-MM-ddTHH:mm:ssZ",            // With Z postfix
             "yyyy-MM-ddTHH:mm:ss.fZ",
             "yyyy-MM-ddTHH:mm:ss.ffZ",

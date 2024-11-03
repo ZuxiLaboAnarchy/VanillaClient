@@ -1,5 +1,13 @@
-using System.Reflection;
+// /*
+//  *
+//  * VanillaClient - ConsoleLogSuppresser.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using MelonLoader;
+using System.Reflection;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {

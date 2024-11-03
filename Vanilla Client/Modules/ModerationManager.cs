@@ -1,11 +1,13 @@
-﻿using ExitGames.Client.Photon;
+﻿// /*
+//  *
+//  * VanillaClient - ModerationManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
-using Photon.Realtime;
-using System.Runtime.Remoting.Messaging;
-using Vanilla.Helpers;
-using Vanilla.Misc;
 using Vanilla.Modules.Photon;
-using Vanilla.Wrappers;
 
 
 namespace Vanilla.Modules

@@ -1,8 +1,15 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - LoadMusic.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using Vanilla.Config;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Modules
 {
@@ -18,7 +25,7 @@ namespace Vanilla.Modules
 
         internal static IEnumerator Starter()
         {
-            //  if (Config.MainConfig.GetInstance().LoadMusic) 
+            //  if (Config.MainConfig.GetInstance().LoadMusic)
             if (true)
             {
                 AudioClip audioclip = null;

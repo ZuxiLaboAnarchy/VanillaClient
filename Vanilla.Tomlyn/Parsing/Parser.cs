@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - Parser.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Collections.Generic;
 using Vanilla.Tomlyn.Syntax;
@@ -47,7 +51,7 @@ namespace Vanilla.Tomlyn.Parsing
             while (TryParseTableEntry(out var itemEntry))
             {
                 if (itemEntry == null) continue;
-                 
+
                 if (itemEntry is TableSyntaxBase table)
                 {
                     _currentTable = table;
@@ -258,7 +262,7 @@ namespace Vanilla.Tomlyn.Parsing
         {
             var boolean = Open<BooleanValueSyntax>();
             boolean.Value = (bool)_token.Value;
-            boolean.Token = EatToken();            
+            boolean.Token = EatToken();
             return Close(boolean);
         }
 
@@ -293,7 +297,7 @@ namespace Vanilla.Tomlyn.Parsing
         {
             var i64 = Open<IntegerValueSyntax>();
             i64.Value = (long)_token.Value;
-            i64.Token = EatToken();            
+            i64.Token = EatToken();
             return Close(i64);
         }
 
@@ -478,19 +482,19 @@ namespace Vanilla.Tomlyn.Parsing
             NextToken();
             return null;
         }
-        
+
         private StringValueSyntax ParseString()
         {
             var str = Open<StringValueSyntax>();
             str.Value = (string)_token.Value;
-            str.Token = EatToken();            
+            str.Token = EatToken();
             return Close(str);
         }
         private DottedKeyItemSyntax ParseDotKey()
         {
             var dotKey = Open<DottedKeyItemSyntax>();
             dotKey.Dot = EatToken();
-            dotKey.Key = ParseBaseKey();            
+            dotKey.Key = ParseBaseKey();
             return Close(dotKey);
         }
 
@@ -541,7 +545,7 @@ namespace Vanilla.Tomlyn.Parsing
             var syntax = Open<SyntaxToken>();
             syntax.TokenKind = _token.Kind;
             syntax.Text = _token.Kind.ToText() ?? _token.GetText(_lexer.Source);
-            NextToken();            
+            NextToken();
             return Close(syntax);
         }
 
@@ -592,7 +596,7 @@ namespace Vanilla.Tomlyn.Parsing
         private T Close<T>(T syntax) where T : SyntaxNode
         {
             syntax.Span.End = _previousToken.End;
-            
+
             if (_currentTrivias.Count > 0)
             {
                 syntax.TrailingTrivia = new List<SyntaxTrivia>(_currentTrivias);
@@ -644,7 +648,7 @@ namespace Vanilla.Tomlyn.Parsing
         {
             LogError(GetSpanForToken(tokenArg), text);
         }
-        
+
         //private void LogError<T>(SyntaxValueNode<T> tokenArg, string text)
         //{
         //    LogError(tokenArg.Token, text);

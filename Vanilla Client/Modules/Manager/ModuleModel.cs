@@ -1,4 +1,11 @@
-﻿namespace Vanilla.Modules
+﻿// /*
+//  *
+//  * VanillaClient - ModuleModel.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+namespace Vanilla.Modules.Manager
 {
     internal abstract class VanillaModule
     {

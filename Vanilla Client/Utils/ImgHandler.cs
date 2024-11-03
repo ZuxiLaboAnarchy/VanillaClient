@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - ImgHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
 
 //using Galaxy.API;
 

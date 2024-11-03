@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - CRC32.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace Vanilla.Utils

@@ -1,8 +1,16 @@
+// /*
+//  *
+//  * VanillaClient - CrackPatcher.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
 using UnityEngine.Networking;
+using Vanilla.Patches.Manager;
 
 #if DEBUG
 namespace Vanilla.Patches.Harmony
@@ -117,7 +125,7 @@ namespace Vanilla.Patches.Harmony
         {
             Log("CrackManager", $"Patching URL: {addr}", ConsoleColor.DarkGreen);
             if (!string.IsNullOrEmpty(data) &&
-                data.Length < 100) // Check if its a mb in size dont want to output that lol 
+                data.Length < 100) // Check if its a mb in size dont want to output that lol
             {
                 Log("CrackManager", $"Sending Data: {data}", ConsoleColor.DarkGreen);
             }

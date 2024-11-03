@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// /*
+//  *
+//  * VanillaClient - AmongUsHacks.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.Buttons.QM;
+using Vanilla.Menu.QM.API;
 using VRC.Udon;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class AmongUsHacks
     {

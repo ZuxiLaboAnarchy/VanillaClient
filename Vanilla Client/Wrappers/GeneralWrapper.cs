@@ -1,4 +1,11 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - GeneralWrapper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UnityEngine;
@@ -6,7 +13,6 @@ using VRC;
 using VRC.Core;
 using VRC.SDKBase;
 using VRC.UI;
-using VRC.UserCamera;
 
 namespace Vanilla.Wrappers
 {

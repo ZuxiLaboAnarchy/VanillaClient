@@ -1,6 +1,13 @@
-﻿using Vanilla.Buttons.QM;
+﻿// /*
+//  *
+//  * VanillaClient - Micfuckery.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.QM.Menu
+using Vanilla.Menu.QM.API;
+
+namespace Vanilla.Menu.QM.Menu
 {
     internal class Micfuckery
     {

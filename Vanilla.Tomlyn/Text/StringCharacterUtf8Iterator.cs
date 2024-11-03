@@ -1,7 +1,9 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
-using System.Runtime.CompilerServices;
+// /*
+//  *
+//  * VanillaClient - StringCharacterUtf8Iterator.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
 namespace Vanilla.Tomlyn.Text
 {
@@ -15,7 +17,7 @@ namespace Vanilla.Tomlyn.Text
             this._text = text;
             // Check if we have a BOM, if we have it, move right after
             // 0xEF,0xBB,0xBF
-            _start = (text.Length >= 3 && text[0] == (byte) 0xEF && text[1] == (byte) 0xBB && text[0] == (byte) 0xBF) ? 3 : 0;
+            _start = (text.Length >= 3 && text[0] == (byte)0xEF && text[1] == (byte)0xBB && text[0] == (byte)0xBF) ? 3 : 0;
         }
 
         public int Start => _start;

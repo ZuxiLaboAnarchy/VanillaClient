@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxNodeExtensions.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Collections.Generic;
 
@@ -43,7 +47,7 @@ namespace Vanilla.Tomlyn.Syntax
             if (list == null) throw new ArgumentNullException(nameof(list));
             list.Add(new KeyValueSyntax(name, new ArraySyntax(values)));
         }
-        
+
         public static void Add(this SyntaxList<KeyValueSyntax> list, string name, string[] values)
         {
             if (list == null) throw new ArgumentNullException(nameof(list));
@@ -51,10 +55,10 @@ namespace Vanilla.Tomlyn.Syntax
         }
 
         public static void Add(this SyntaxList<KeyValueSyntax> list, string name, DateTimeValueSyntax value)
-		{
-			if (list == null) throw new ArgumentNullException(nameof(list));
-			list.Add(new KeyValueSyntax(name, value));
-		}
+        {
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            list.Add(new KeyValueSyntax(name, value));
+        }
 
         public static KeyValueSyntax AddComment(this KeyValueSyntax keyValue, string comment)
         {

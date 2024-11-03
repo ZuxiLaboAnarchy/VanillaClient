@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - AudioHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using UnityEngine;
 using Vanilla.Wrappers;
 

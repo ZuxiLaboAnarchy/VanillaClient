@@ -1,8 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// /*
+//  *
+//  * VanillaClient - DebugManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 
 namespace Vanilla.Modules

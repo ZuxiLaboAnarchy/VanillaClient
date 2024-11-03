@@ -1,7 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - WorldWrapper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Collections;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 

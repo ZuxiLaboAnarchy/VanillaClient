@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxTokenValue.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using Vanilla.Tomlyn.Syntax;
 using Vanilla.Tomlyn.Text;
@@ -80,16 +84,16 @@ namespace Vanilla.Tomlyn.Parsing
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is SyntaxTokenValue && Equals((SyntaxTokenValue) obj);
+            return obj is SyntaxTokenValue && Equals((SyntaxTokenValue)obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                var hashCode = (int) Kind;
-                hashCode = (hashCode*397) ^ Start.GetHashCode();
-                hashCode = (hashCode*397) ^ End.GetHashCode();
+                var hashCode = (int)Kind;
+                hashCode = (hashCode * 397) ^ Start.GetHashCode();
+                hashCode = (hashCode * 397) ^ End.GetHashCode();
                 return hashCode;
             }
         }

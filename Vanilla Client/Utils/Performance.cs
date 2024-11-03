@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - Performance.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vanilla.Utils

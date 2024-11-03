@@ -1,4 +1,11 @@
-﻿namespace Vanilla.Menu.QM.Scripting
+﻿// /*
+//  *
+//  * VanillaClient - ButtonHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+namespace Vanilla.Menu.QM.API
 {
     internal class ButtonHelper
     {

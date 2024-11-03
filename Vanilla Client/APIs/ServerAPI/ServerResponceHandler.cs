@@ -1,12 +1,18 @@
-﻿using Newtonsoft.Json.Linq;
+﻿// /*
+//  *
+//  * VanillaClient - ServerResponceHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Newtonsoft.Json.Linq;
 using UnityEngine;
-using Vanilla.AvatarFavorites;
 using Vanilla.Config;
-using Vanilla.Modules;
-using Vanilla.TagManager;
+using Vanilla.Misc.AvatarFavorites;
+using Vanilla.Misc.TagManager;
 using Vanilla.Wrappers;
 
-namespace Vanilla.ServerAPI
+namespace Vanilla.APIs.ServerAPI
 {
     internal class ServerResponceHandler
     {

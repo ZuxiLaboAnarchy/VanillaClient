@@ -1,11 +1,12 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Modules;
-using static Blaze.API.AW.ActionWheelAPI;
+﻿// /*
+//  *
+//  * VanillaClient - AWLoader.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Modules.Manager;
+using static Vanilla.Menu.ActionWheel.API.ActionWheelAPI;
 
 namespace Vanilla.Menu.ActionWheel
 {

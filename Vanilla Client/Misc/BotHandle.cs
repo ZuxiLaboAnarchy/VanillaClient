@@ -1,11 +1,19 @@
-﻿using Vanilla.Config;
-using Vanilla.Helpers;
-using Vanilla.Modules;
-using Vanilla.Patches;
-using Vanilla.Patches.Harmony;
-using Vanilla.ServerAPI;
+﻿// /*
+//  *
+//  * VanillaClient - BotHandle.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla
+using Vanilla.APIs.ServerAPI;
+using Vanilla.Config;
+using Vanilla.Helpers;
+using Vanilla.Modules.Manager;
+using Vanilla.Patches.Harmony;
+using Vanilla.Patches.Manager;
+using Vanilla.Patches.Native;
+
+namespace Vanilla.Misc
 {
     internal class BotHandle
     {

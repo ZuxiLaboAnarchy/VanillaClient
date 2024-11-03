@@ -1,5 +1,9 @@
-﻿using System.IO;
-using System.Reflection;
+﻿// /*
+//  *
+//  * VanillaClient - LoadEmbeded.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
 namespace Vanilla.Utils
 {

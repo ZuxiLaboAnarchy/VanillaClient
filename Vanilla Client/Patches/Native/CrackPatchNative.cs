@@ -1,9 +1,9 @@
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using UnityEngine.Networking;
-using Vanilla.Utils;
+// /*
+//  *
+//  * VanillaClient - CrackPatchNative.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
 namespace Vanilla.Patches.Native
 {

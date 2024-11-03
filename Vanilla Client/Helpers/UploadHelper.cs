@@ -1,16 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿// /*
+//  *
+//  * VanillaClient - UploadHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.API.ServerAPI;
-using Vanilla.AvatarFavorites;
+using Vanilla.APIs.ServerAPI;
 using Vanilla.Config;
 using Vanilla.JSON;
-using VRC.Core;
+using Vanilla.Misc.AvatarFavorites;
 
 namespace Vanilla.Helpers
 {

@@ -1,13 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿// /*
+//  *
+//  * VanillaClient - ServerRequest.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Vanilla.Config;
-using Vanilla.Helpers;
-using static Vanilla.Utils.ServerHelper;
 
-namespace Vanilla.ServerAPI
+namespace Vanilla.APIs.ServerAPI
 {
     internal class Server
     {

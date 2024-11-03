@@ -1,8 +1,14 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿// /*
+//  *
+//  * VanillaClient - ProtectionHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
-using Vanilla.Modules;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Helpers
 {

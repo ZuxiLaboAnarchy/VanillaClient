@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - AWAPI.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
-namespace Blaze.API.AW
+namespace Vanilla.Menu.ActionWheel.API
 {
     public static class ActionWheelAPI
     {
@@ -74,7 +80,7 @@ namespace Blaze.API.AW
                 if (baseMenu == ActionMenuBaseMenu.MainMenu)
                 {
                     menuEntryButton = new ActionMenuButton(ActionMenuBaseMenu.MainMenu, buttonText,
-                        delegate() { OpenMenu(); }, buttonIcon);
+                        delegate () { OpenMenu(); }, buttonIcon);
                 }
             }
 
@@ -84,7 +90,7 @@ namespace Blaze.API.AW
 
                 previousPage = basePage;
                 menuEntryButton =
-                    new ActionMenuButton(previousPage, buttonText, delegate() { page.OpenMenu(); }, buttonIcon);
+                    new ActionMenuButton(previousPage, buttonText, delegate () { page.OpenMenu(); }, buttonIcon);
             }
 
             public void OpenMenu()
@@ -124,7 +130,7 @@ namespace Blaze.API.AW
             {
                 buttonText = text;
                 buttonIcon = icon;
-                buttonAction = delegate()
+                buttonAction = delegate ()
                 {
                     action();
 
@@ -141,7 +147,7 @@ namespace Blaze.API.AW
             {
                 buttonText = text;
                 buttonIcon = icon;
-                buttonAction = delegate()
+                buttonAction = delegate ()
                 {
                     action();
 

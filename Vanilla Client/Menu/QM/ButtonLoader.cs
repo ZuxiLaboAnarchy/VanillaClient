@@ -1,19 +1,21 @@
-﻿using MelonLoader;
-using System.Collections;
+﻿// /*
+//  *
+//  * VanillaClient - ButtonLoader.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
-using Vanilla.Buttons.QM;
 using Vanilla.Config;
-using Vanilla.Menu.QM.Scripting;
-using Vanilla.Misc.MonoBehaviors;
+using Vanilla.Menu.QM.API;
+using Vanilla.Menu.QM.Menu;
 using Vanilla.Modules;
-using Vanilla.QM.Menu;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
-using VRC.SDKBase;
 using VRC.UI.Core.Styles;
 
-namespace Vanilla.QM
+namespace Vanilla.Menu.QM
 {
     //[Zuxi.SDK.DoNotObfuscate]
     internal class ButtonLoader : VanillaModule
@@ -31,17 +33,17 @@ namespace Vanilla.QM
 
             var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord",
                 delegate { Process.Start("https://imzuxi.com/galaxydiscord/"); }, "Join The Discord");
-/*
-            var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
-            {
+            /*
+                        var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
+                        {
 
-                string roomid = null;
-                Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () =>
-                {
-                    Networking.GoToRoom(roomid);
-                });
-            }, "Go To Room");
-*/
+                            string roomid = null;
+                            Xrefs.Input.PopOutInput("Room Instance Id", value => roomid = value, () =>
+                            {
+                                Networking.GoToRoom(roomid);
+                            });
+                        }, "Go To Room");
+            */
             var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID",
                 delegate
                 {
@@ -127,7 +129,7 @@ namespace Vanilla.QM
 
             MenuModification.UpdateQuickMenuColors();
 
-            //QMImage.LoadQMImage(); 
+            //QMImage.LoadQMImage();
             // ButInfo.Info(tabMenu);
             //Exploitable.ButtonExploits(tabMenu);
             //ButtSettings.SettingsMenu(tabMenu);

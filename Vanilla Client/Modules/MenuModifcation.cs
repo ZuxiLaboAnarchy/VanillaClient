@@ -1,14 +1,18 @@
-﻿using MelonLoader;
-using System.Collections;
+﻿// /*
+//  *
+//  * VanillaClient - MenuModifcation.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.Config;
 using Vanilla.Misc;
 using Vanilla.Misc.MonoBehaviors;
-using Vanilla.Utils;
+using Vanilla.Modules.Manager;
 using VRC.UI.Core.Styles;
 
 namespace Vanilla.Modules
@@ -73,7 +77,7 @@ namespace Vanilla.Modules
         }
 
 
-        // Update Avatar Pane 
+        // Update Avatar Pane
 
         internal static void GetAvatarAndUpdate()
         {
@@ -101,7 +105,7 @@ namespace Vanilla.Modules
         internal static void UpdateBigMenuColorsToPastel()
         {
             /// CYAN
-            /// 
+            ///
             var _bigMenuMenuContent = GameObject.Find("/UserInterface").transform.Find("MenuContent").gameObject;
             foreach (var _button in _bigMenuMenuContent.GetComponentsInChildren<Button>(true))
             {

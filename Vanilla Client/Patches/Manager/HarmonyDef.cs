@@ -1,7 +1,14 @@
-﻿using HarmonyLib;
+﻿// /*
+//  *
+//  * VanillaClient - HarmonyDef.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using HarmonyLib;
 using System.Reflection;
 
-namespace Vanilla.Patches
+namespace Vanilla.Patches.Manager
 {
     internal abstract class VanillaPatches
     {

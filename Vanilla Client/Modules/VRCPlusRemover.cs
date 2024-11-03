@@ -1,9 +1,14 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - VRCPlusRemover.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using UnityEngine;
-using Vanilla.Modules;
-using VRC.UI.Elements.Controls;
-using VRTK;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Modules
 {
@@ -55,17 +60,17 @@ namespace Vanilla.Modules
             UnityEngine.Object.Destroy(Controls_Right);
             UnityEngine.Object.Destroy(Controls_Left);
 
-/*
-            GameObject MainBanner = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK");
-            GameObject MainBanerClone = UnityEngine.Object.Instantiate(MainBanner, MainBanner.transform.parent);
-            Component BannerChangerClone= MainBanerClone.GetComponent<MonoBehaviourPublicLi1ObAc1ObOb1ObUnique>();
-            UnityEngine.Object.Destroy(BannerChangerClone);
-            Transform transform = MainBanerClone.transform.Find("Horizontal");
+            /*
+                        GameObject MainBanner = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK");
+                        GameObject MainBanerClone = UnityEngine.Object.Instantiate(MainBanner, MainBanner.transform.parent);
+                        Component BannerChangerClone= MainBanerClone.GetComponent<MonoBehaviourPublicLi1ObAc1ObOb1ObUnique>();
+                        UnityEngine.Object.Destroy(BannerChangerClone);
+                        Transform transform = MainBanerClone.transform.Find("Horizontal");
 
 
-            "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Banners/IPS_Template_Banner(Clone)"
+                        "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Banners/IPS_Template_Banner(Clone)"
 
-*/
+            */
 
 
             try

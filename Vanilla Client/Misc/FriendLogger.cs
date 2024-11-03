@@ -1,8 +1,16 @@
-﻿using System.IO;
+﻿// /*
+//  *
+//  * VanillaClient - FriendLogger.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.IO;
 using System.Linq;
+using Vanilla.Helpers;
 using VRC.Core;
 
-namespace Vanilla.Modules
+namespace Vanilla.Misc
 {
     internal class FriendLogger
     {

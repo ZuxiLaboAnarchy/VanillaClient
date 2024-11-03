@@ -1,12 +1,18 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - FavoriteAvatarHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.Helpers;
 using Vanilla.Wrappers;
 using VRC.Core;
 
-namespace Vanilla.AvatarFavorites
+namespace Vanilla.Misc.AvatarFavorites
 {
     internal class FavoriteAvatarHandler
     {
@@ -60,7 +66,7 @@ namespace Vanilla.AvatarFavorites
             if (!VanillaAvatarsFav.ContainsKey(avi.id))
             {
                 var source = VanillaAvatarsFav.ToList().OrderByDescending(
-                    delegate(KeyValuePair<string, FavoriteAvatar> entry)
+                    delegate (KeyValuePair<string, FavoriteAvatar> entry)
                     {
                         var keyValuePair = entry;
                         return keyValuePair.Value.AvatarSortIndex;

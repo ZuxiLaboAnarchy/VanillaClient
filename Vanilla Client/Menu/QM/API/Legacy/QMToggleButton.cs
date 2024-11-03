@@ -1,9 +1,11 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿// /*
+//  *
+//  * VanillaClient - QMToggleButton.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     internal class QMToggleButton : QMButtonBase

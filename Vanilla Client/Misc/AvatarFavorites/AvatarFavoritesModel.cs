@@ -1,6 +1,13 @@
-﻿using VRC.Core;
+﻿// /*
+//  *
+//  * VanillaClient - AvatarFavoritesModel.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.AvatarFavorites
+using VRC.Core;
+
+namespace Vanilla.Misc.AvatarFavorites
 {
     public class FavoriteAvatar
     {

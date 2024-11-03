@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
-using Vanilla.Helpers;
-using Vanilla.ServerAPI;
-using Vanilla.JSON;
-using System.Threading;
+﻿// /*
+//  *
+//  * VanillaClient - Upload.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.API.ServerAPI
+using System.Collections.Generic;
+using System.Threading;
+using Vanilla.Helpers;
+
+namespace Vanilla.APIs.ServerAPI
 {
     internal class Upload
     {

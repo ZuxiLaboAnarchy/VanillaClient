@@ -1,9 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using VRC.UI.Elements;
-using VRC.UI.Elements.Controls;
+﻿// /*
+//  *
+//  * VanillaClient - ButtonsHelperAPI.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     public static class APIUtils

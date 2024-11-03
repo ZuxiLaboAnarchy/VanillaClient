@@ -1,4 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿// /*
+//  *
+//  * VanillaClient - UnmanagedUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Runtime.InteropServices;
 
 namespace Vanilla.Utils
 {

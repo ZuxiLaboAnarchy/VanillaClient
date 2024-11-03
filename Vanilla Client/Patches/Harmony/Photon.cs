@@ -1,13 +1,17 @@
-﻿using ExitGames.Client.Photon;
+﻿// /*
+//  *
+//  * VanillaClient - Photon.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using UnhollowerBaseLib;
 using Vanilla.Config;
-using Vanilla.Helpers;
-using Vanilla.Misc;
-using Vanilla.Modules;
 using Vanilla.Modules.Photon;
+using Vanilla.Patches.Manager;
 using Vanilla.Wrappers;
 using VRC.Core;
 

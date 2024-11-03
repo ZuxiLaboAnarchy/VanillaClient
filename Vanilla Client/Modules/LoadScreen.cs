@@ -1,12 +1,14 @@
-﻿using MelonLoader;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - LoadScreen.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Vanilla.Config;
+using Vanilla.Modules.Manager;
 using Object = UnityEngine.Object;
 
 namespace Vanilla.Modules

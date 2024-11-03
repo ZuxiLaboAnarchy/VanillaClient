@@ -1,12 +1,13 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - LogCleanerOnExit.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Config;
+using Vanilla.Helpers;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Modules
 {

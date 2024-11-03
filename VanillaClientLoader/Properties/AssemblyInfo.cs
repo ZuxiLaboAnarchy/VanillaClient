@@ -1,6 +1,12 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
+﻿// /*
+//  *
+//  * VanillaClient - AssemblyInfo.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using MelonLoader;
+using System.Reflection;
 using VanillaClientLoader;
 
 // General Information about an assembly is controlled through the following 

@@ -1,14 +1,11 @@
-﻿using System.Linq;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC.UI.Elements;
-using VRC.UI.Elements.Controls;
-using VRC.UI.Elements.Menus;
+﻿// /*
+//  *
+//  * VanillaClient - QMNestedButton.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-//using TransitionType = VRC.UI.Elements.UIPage.TransitionType;
-
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     internal class QMNestedButton : QMMenuBase

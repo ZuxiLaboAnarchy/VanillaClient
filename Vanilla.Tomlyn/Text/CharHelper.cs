@@ -1,9 +1,12 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - CharHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Vanilla.Tomlyn.Text
@@ -275,12 +278,12 @@ namespace Vanilla.Tomlyn.Text
         {
             if (utf32 < 65536)
             {
-                builder.Append((char) utf32);
+                builder.Append((char)utf32);
                 return;
             }
             utf32 -= 65536;
-            builder.Append((char) (utf32 / 1024 + 55296));
-            builder.Append((char) (utf32 % 1024 + 56320));
+            builder.Append((char)(utf32 / 1024 + 55296));
+            builder.Append((char)(utf32 % 1024 + 56320));
         }
     }
 }

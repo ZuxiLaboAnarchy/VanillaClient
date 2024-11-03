@@ -1,11 +1,15 @@
-﻿using System.IO;
+﻿// /*
+//  *
+//  * VanillaClient - Input.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Linq;
 using System.Reflection;
-using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.DataModel;
 
 namespace Vanilla.Xrefs
 {

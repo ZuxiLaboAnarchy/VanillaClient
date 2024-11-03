@@ -1,4 +1,11 @@
-﻿using System;
+﻿// /*
+//  *
+//  * VanillaClient - Program.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;

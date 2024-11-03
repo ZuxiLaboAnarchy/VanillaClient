@@ -1,11 +1,15 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - StringUtf8SourceView.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Text;
 
 namespace Vanilla.Tomlyn.Text
 {
-    internal struct StringUtf8SourceView: ISourceView<StringCharacterUtf8Iterator>
+    internal struct StringUtf8SourceView : ISourceView<StringCharacterUtf8Iterator>
     {
         private readonly byte[] _text;
 

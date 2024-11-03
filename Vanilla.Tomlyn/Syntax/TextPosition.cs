@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - TextPosition.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 
 namespace Vanilla.Tomlyn.Syntax
@@ -10,7 +14,7 @@ namespace Vanilla.Tomlyn.Syntax
     /// </summary>
     public struct TextPosition : IEquatable<TextPosition>
     {
-        public static readonly TextPosition Eof = new TextPosition(-1, -1, -1);   
+        public static readonly TextPosition Eof = new TextPosition(-1, -1, -1);
 
         /// <summary>
         /// Creates a new instance of a <see cref="TextPosition"/>
@@ -42,7 +46,7 @@ namespace Vanilla.Tomlyn.Syntax
 
         public override string ToString()
         {
-            return $"({Line+1},{Column+1})";
+            return $"({Line + 1},{Column + 1})";
         }
 
         public bool Equals(TextPosition other)
@@ -53,7 +57,7 @@ namespace Vanilla.Tomlyn.Syntax
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is TextPosition && Equals((TextPosition) obj);
+            return obj is TextPosition && Equals((TextPosition)obj);
         }
 
         public override int GetHashCode()

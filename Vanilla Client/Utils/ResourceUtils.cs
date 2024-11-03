@@ -1,7 +1,13 @@
-﻿using System.IO;
+﻿// /*
+//  *
+//  * VanillaClient - ResourceUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Reflection;
 
-namespace Vanilla
+namespace Vanilla.Utils
 {
     internal class ResourceUtils
     {

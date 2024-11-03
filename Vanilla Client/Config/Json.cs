@@ -1,4 +1,11 @@
-﻿namespace Vanilla.Config
+﻿// /*
+//  *
+//  * VanillaClient - Json.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+namespace Vanilla.Config
 {
     internal class JsonConfig
     {

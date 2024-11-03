@@ -1,7 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - AssetUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using Vanilla.Modules;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Utils
 {
@@ -26,7 +33,7 @@ namespace Vanilla.Utils
 
         internal static Texture2D LoadTexture(string textureName)
         {
-            // LogHandler.Log("Assets", "Requested " + textureName); 
+            // LogHandler.Log("Assets", "Requested " + textureName);
             if (cachedAssetBundle == null)
             {
                 Log("Assets", "asset bundle was null", ConsoleColor.Red);

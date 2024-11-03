@@ -1,7 +1,14 @@
-﻿using UnityEngine;
-using Vanilla.Modules;
+﻿// /*
+//  *
+//  * VanillaClient - MonoBehavior.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Behaviours
+using UnityEngine;
+using Vanilla.Modules.Manager;
+
+namespace Vanilla.Modules.VanillaGameObject
 {
     [MelonLoader.RegisterTypeInIl2Cpp]
     public class VanillaBehavior : MonoBehaviour

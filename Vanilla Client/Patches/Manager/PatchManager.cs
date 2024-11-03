@@ -1,12 +1,18 @@
-﻿using HarmonyLib;
+﻿// /*
+//  *
+//  * VanillaClient - PatchManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
-using Vanilla.Modules;
-using Vanilla.Patches.Harmony;
+using Vanilla.Modules.Manager;
 
-namespace Vanilla.Patches
+namespace Vanilla.Patches.Manager
 {
     internal class PatchManager : VanillaModule
     {

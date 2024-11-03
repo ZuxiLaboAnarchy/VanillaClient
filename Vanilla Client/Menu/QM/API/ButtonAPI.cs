@@ -1,4 +1,10 @@
-﻿using System;
+﻿// /*
+//  *
+//  * VanillaClient - ButtonAPI.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -10,7 +16,7 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API
 {
     public class BlazesButtonAPI
     {
@@ -628,7 +634,7 @@ namespace Vanilla.Buttons.QM
             sliderComp.wholeNumbers = true;
             sliderComp.onValueChanged = new Slider.SliderEvent();
             sliderComp.onValueChanged.AddListener(sliderAction);
-            sliderComp.onValueChanged.AddListener(new Action<float>(delegate(float f)
+            sliderComp.onValueChanged.AddListener(new Action<float>(delegate (float f)
             {
                 slider.transform.Find("Fill Area/Label").GetComponent<Text>().text =
                     $"{sliderComp.value / maxValue * 100}%";

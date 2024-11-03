@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - Math.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
 
 namespace Vanilla.Utils
 {

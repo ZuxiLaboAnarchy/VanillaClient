@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - UploadQueConfig.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.API.ServerAPI;
+using Vanilla.APIs.ServerAPI;
 
 namespace Vanilla.Config
 {

@@ -1,13 +1,17 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - ITokenProvider.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
 using Vanilla.Tomlyn.Syntax;
 using Vanilla.Tomlyn.Text;
 
 namespace Vanilla.Tomlyn.Parsing
 {
-    internal interface ITokenProvider<out TSourceView>  where TSourceView : ISourceView 
+    internal interface ITokenProvider<out TSourceView> where TSourceView : ISourceView
     {
         /// <summary>
         /// Gets a boolean indicating whether this lexer has errors.

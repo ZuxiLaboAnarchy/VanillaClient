@@ -1,13 +1,17 @@
-﻿using Harmony;
+﻿// /*
+//  *
+//  * VanillaClient - Anticrash.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using UnityEngine;
-using Vanilla.Config;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 using Vanilla.Xrefs;
-using static Vanilla.QM.Menu.SafetyMenu;
+using static Vanilla.Menu.QM.Menu.SafetyMenu;
 using Object = UnityEngine.Object;
 
 namespace Vanilla.Modules

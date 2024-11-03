@@ -1,9 +1,11 @@
-﻿using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿// /*
+//  *
+//  * VanillaClient - MenuPanelButton.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.QM.QMAPI
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     internal class MenuPanelButton

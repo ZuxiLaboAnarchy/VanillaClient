@@ -1,10 +1,14 @@
-﻿using System;
+﻿// /*
+//  *
+//  * VanillaClient - OnScreenUI.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Modules
 {
@@ -32,14 +36,14 @@ namespace Vanilla.Modules
                 UnityEngine.Object.Instantiate(AssetLoader.LoadGameObject("ZuxiCanvas"), gobject.transform, true);
 
 
-            // Set it active bc unity 
+            // Set it active bc unity
             _uiLayerObject.SetActive(true);
-            // Set its name bc its yes while not important the user won't see it it's just a nice touch also so other devs know it's ours and can latch into it 
+            // Set its name bc its yes while not important the user won't see it it's just a nice touch also so other devs know it's ours and can latch into it
             // @note back when this was private this required a proxy DLL that allowed for attaching however the method is public now
             // so feel free to check if loaded or load this and use it
             _uiLayerObject.name = "ZuxiOnScreenLogger";
 
-            // Find our objects and get there text mesh pro components so we don't have to get it when updating it since IT SHOULD NEVER CHANGE 
+            // Find our objects and get there text mesh pro components so we don't have to get it when updating it since IT SHOULD NEVER CHANGE
             _uiLogger = _uiLayerObject.transform.Find("ZuxiLoggerUI").gameObject.GetComponent<TextMeshProUGUI>();
             _uiStatus = _uiLayerObject.transform.Find("ZuxiStatsUI").gameObject.GetComponent<TextMeshProUGUI>();
             _uiLayerObject.transform.Find("ZuxiStatsUI").gameObject.SetActive(false);
@@ -60,7 +64,7 @@ namespace Vanilla.Modules
 
             // Hack job to make status always Shown and not have to use assetbundle alot more fps intensive thogh
 
-            // USER INFO 
+            // USER INFO
             /*  UnityEngine.GUI.Label(new Rect(3f, 0f, 160f, 90f),
                   $"<color=cyan>UID: </color><color=cyan>0\n</color>");
               UnityEngine.GUI.Label(new Rect(3f, 12f, 160f, 90f),
@@ -101,7 +105,7 @@ namespace Vanilla.Modules
 
             // Check if the list size exceeds the maximum capacity
             if (stringList.Count > MaxCapacity)
-                // Remove the oldest string (the one at index 0)
+            // Remove the oldest string (the one at index 0)
             {
                 stringList.RemoveAt(0);
             }

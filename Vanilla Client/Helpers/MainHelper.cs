@@ -1,14 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿// /*
+//  *
+//  * VanillaClient - MainHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading;
 using UnityEngine;
-using Vanilla.API.ServerAPI;
-using Vanilla.AvatarFavorites;
+using Vanilla.APIs.ServerAPI;
 using Vanilla.Config;
-using Vanilla.Modules;
-using Vanilla.ServerAPI;
+using Vanilla.Misc;
+using Vanilla.Misc.AvatarFavorites;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 using static MelonLoader.MelonLogger;
 

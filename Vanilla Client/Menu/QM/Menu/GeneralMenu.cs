@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - GeneralMenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using UnityEngine;
-using Vanilla.Buttons.QM;
+using Vanilla.Menu.QM.API;
 using Vanilla.Modules;
 using Vanilla.Wrappers;
-using VRC;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class GeneralMenu
     {

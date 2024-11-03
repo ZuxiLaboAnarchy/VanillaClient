@@ -1,8 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿// /*
+//  *
+//  * VanillaClient - QMSingleButton.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     internal class QMSingleButton : QMButtonBase

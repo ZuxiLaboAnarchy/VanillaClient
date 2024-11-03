@@ -1,18 +1,12 @@
-﻿using ExitGames.Client.Photon;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - EventHandlerPatch.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerBaseLib;
-using UnityEngine;
-using Vanilla.Config;
-using Vanilla.Wrappers;
-using VRC.Core;
-using VRC.Networking;
-using VRC.SDKBase;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches
 {

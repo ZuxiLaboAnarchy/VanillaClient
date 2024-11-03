@@ -1,10 +1,15 @@
-﻿using TMPro;
+﻿// /*
+//  *
+//  * VanillaClient - InternalUIManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.DataModel;
 
-namespace Vanilla.Utils
+namespace Vanilla.Wrappers
 {
     internal class InternalUIManager
     {
@@ -16,7 +21,7 @@ namespace Vanilla.Utils
         {
             CreateKeyBoardPopup(Title, EndString, OnClose);
         }
-        // TODO: Get Old Popup 
+        // TODO: Get Old Popup
         /* internal static void RunAlertPopup(string Header, string Body, string button1, string button2, Il2CppSystem.Action button1Action, Il2CppSystem.Action button2Action)
          {
              UIManagerPublicBoObBoAc1BoAcGa1MeUnique UIManager = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
@@ -34,7 +39,7 @@ namespace Vanilla.Utils
                         .ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>,
                             Text>>
                         (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>
-                        (delegate(string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
+                        (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
                         {
                             setOutput(s);
                             if (action != null)

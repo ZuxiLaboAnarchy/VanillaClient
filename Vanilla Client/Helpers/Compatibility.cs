@@ -1,6 +1,11 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - Compatibility.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.IO;
-using Vanilla.Config;
 
 namespace Vanilla.Helpers
 {

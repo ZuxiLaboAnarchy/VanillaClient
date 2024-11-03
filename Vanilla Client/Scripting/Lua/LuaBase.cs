@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Modules;
-using NLua;
-using VRC.UI.Core;
+﻿// /*
+//  *
+//  * VanillaClient - LuaBase.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Scripting.Lua
 {

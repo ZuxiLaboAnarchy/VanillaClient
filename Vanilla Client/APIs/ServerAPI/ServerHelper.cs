@@ -1,8 +1,15 @@
-﻿using Microsoft.Win32;
-using System.IO;
-using static Vanilla.Utils.FileHelper;
+﻿// /*
+//  *
+//  * VanillaClient - ServerHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Utils
+using Microsoft.Win32;
+using System.IO;
+using static Vanilla.Helpers.FileHelper;
+
+namespace Vanilla.APIs.ServerAPI
 {
     internal class ServerHelper
     {

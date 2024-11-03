@@ -1,11 +1,16 @@
-﻿using System.Collections;
+﻿// /*
+//  *
+//  * VanillaClient - Safetymenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections;
 using UnityEngine;
-using Vanilla.Buttons.QM;
-using Vanilla.Config;
-using Vanilla.Modules;
+using Vanilla.Menu.QM.API;
 using Vanilla.Wrappers;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class SafetyMenu
     {
@@ -47,7 +52,7 @@ namespace Vanilla.QM.Menu
             }
 
             var ReloadShaderList = new QMSingleButton(Anticrash, 4, 3, "Line Renderers Anti",
-                delegate { Vanilla.Modules.Anticrash.Reload(); }, "Reload Shader List");
+                delegate { Modules.Anticrash.Reload(); }, "Reload Shader List");
         }
 
 

@@ -1,8 +1,14 @@
-﻿using MelonLoader.TinyJSON;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - QuickMenuPatch.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Reflection;
 using Vanilla.Config;
 using Vanilla.Modules;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {

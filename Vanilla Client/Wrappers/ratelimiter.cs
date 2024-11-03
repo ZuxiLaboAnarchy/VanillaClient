@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - RateLimiter.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +41,9 @@ namespace Vanilla.Wrappers
         public void CleanupAfterDeparture()
         {
             lock (BlacklistedUsers)
+            {
                 BlacklistedUsers.Clear();
+            }
 
             SendsPerSecond.Clear();
 
@@ -48,11 +57,15 @@ namespace Vanilla.Wrappers
         public void OnlyAllowPerSecond(string eventName, int amount)
         {
             if (AllowedSendsPerSecond == null)
+            {
                 return;
+            }
 
             // We only need to set the anti-spam value once
             if (AllowedSendsPerSecond.ContainsKey(eventName))
+            {
                 return;
+            }
 
             AllowedSendsPerSecond[eventName] = amount;
         }
@@ -62,7 +75,9 @@ namespace Vanilla.Wrappers
         public void ForgiveUser(int peerID)
         {
             lock (BlacklistedUsers)
+            {
                 BlacklistedUsers.Remove(peerID);
+            }
         }
 
         public bool IsRateLimited(int senderID)
@@ -75,7 +90,9 @@ namespace Vanilla.Wrappers
             if (!IsRateLimited(senderID))
             {
                 lock (BlacklistedUsers)
+                {
                     BlacklistedUsers.Add(senderID);
+                }
 
                 new Thread(() =>
                 {
@@ -92,10 +109,14 @@ namespace Vanilla.Wrappers
         public bool IsSafeToRun(string eventName, int senderID)
         {
             if (SendsPerSecond == null || AllowedSendsPerSecond == null)
+            {
                 return true;
+            }
 
             if (BlacklistedUsers.Contains(senderID))
+            {
                 return false;
+            }
 
             // If their ID is below or equal to 0
             // It means the event is from the server
@@ -113,7 +134,9 @@ namespace Vanilla.Wrappers
                 foreach (var sends in SendsPerSecond)
                 {
                     if (sends.Value == null)
+                    {
                         continue;
+                    }
 
                     sends.Value.Clear();
                 }
@@ -124,13 +147,19 @@ namespace Vanilla.Wrappers
                 // We only add new entries when an ActorID we haven't encountered appears
                 // This is to save memory so we're not generating any obsolete entries
                 if (!SendsPerSecond.ContainsKey(senderID))
+                {
                     SendsPerSecond.Add(senderID, new Dictionary<string, int>());
+                }
 
                 // This is their first send, so we should initialize it as 1
                 if (!SendsPerSecond[senderID].ContainsKey(eventName))
+                {
                     SendsPerSecond[senderID][eventName] = 1;
+                }
                 else
+                {
                     SendsPerSecond[senderID][eventName]++;
+                }
 
                 // A small check incase we forgot to setup the ratelimit
                 if (!AllowedSendsPerSecond.ContainsKey(eventName))
@@ -143,7 +172,9 @@ namespace Vanilla.Wrappers
                 if (SendsPerSecond[senderID][eventName] > AllowedSendsPerSecond[eventName])
                 {
                     lock (BlacklistedUsers)
+                    {
                         BlacklistedUsers.Add(senderID);
+                    }
 
                     // Optional code to forgive after 3 seconds (thread-safe)
 
@@ -168,10 +199,7 @@ namespace Vanilla.Wrappers
             BlacklistedUsers = new HashSet<int>();
             CurrentTime = DateTime.Now;
 
-            SceneManager.add_sceneUnloaded(new Action<Scene>(s =>
-            {
-                CleanupAfterDeparture();
-            }));
+            SceneManager.add_sceneUnloaded(new Action<Scene>(s => { CleanupAfterDeparture(); }));
         }
     }
 }

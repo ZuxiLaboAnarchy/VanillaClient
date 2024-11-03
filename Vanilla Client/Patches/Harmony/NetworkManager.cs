@@ -1,16 +1,22 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - NetworkManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Vanilla.Config;
-using Vanilla.Modules;
+using Vanilla.Modules.Manager;
+using Vanilla.Patches.Manager;
 using Vanilla.Wrappers;
 using VRC;
 using VRC.SDKBase;
-using VRCSDK2;
-using static MelonLoader.MelonLogger;
 
 
 namespace Vanilla.Patches.Harmony
@@ -207,7 +213,7 @@ namespace Vanilla.Patches.Harmony
                     return _OnPlayerJoinedMethod;
                 }
 
-                return _OnPlayerJoinedMethod = typeof(NetworkManager).GetMethods().Single(delegate(MethodInfo it)
+                return _OnPlayerJoinedMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
                 {
                     if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 &&
                         it.GetParameters()[0].ParameterType == typeof(Player))
@@ -248,7 +254,7 @@ namespace Vanilla.Patches.Harmony
                     return _OnPlayerLeftMethod;
                 }
 
-                return _OnPlayerLeftMethod = typeof(NetworkManager).GetMethods().Single(delegate(MethodInfo it)
+                return _OnPlayerLeftMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
                 {
                     if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 &&
                         it.GetParameters()[0].ParameterType == typeof(Player))

@@ -1,8 +1,15 @@
-﻿using System.Diagnostics;
+﻿// /*
+//  *
+//  * VanillaClient - AntiDebugger.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Vanilla.Protections
+namespace Vanilla.Utils.Protections
 {
     internal static class ProcessExtensions
     {
@@ -70,7 +77,7 @@ namespace Vanilla.Protections
         private static bool ByteArrayCompare(byte[] b1, byte[] b2)
         {
             // Validate buffers are the same length.
-            // This also ensures that the count does not exceed the length of either buffer.  
+            // This also ensures that the count does not exceed the length of either buffer.
             return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
         }
 

@@ -1,9 +1,11 @@
-﻿using TMPro;
-using UnityEngine;
-using VRC.UI.Elements;
-using VRC.UI.Elements.Controls;
+﻿// /*
+//  *
+//  * VanillaClient - QMMenuBase.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Buttons.QM
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
         internal class QMMenuBase

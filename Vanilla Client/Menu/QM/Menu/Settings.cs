@@ -1,15 +1,22 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - Settings.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
-using Vanilla.Buttons.QM;
+using Vanilla.APIs.ServerAPI;
 using Vanilla.Config;
 using Vanilla.Helpers;
-using Vanilla.ServerAPI;
+using Vanilla.Menu.QM.API;
 using VRC.SDKBase;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class Settings
     {

@@ -1,14 +1,20 @@
-﻿using System.Collections.Concurrent;
+﻿// /*
+//  *
+//  * VanillaClient - WebSocketMan.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Vanilla.Config;
-using Vanilla.Modules;
 using Vanilla.JSON;
-using Vanilla.Wrappers;
+using Vanilla.Modules.Manager;
 using WebSocketSharp;
 
-namespace Vanilla.ServerAPI
+namespace Vanilla.APIs.ServerAPI
 {
     internal class WSBase : VanillaModule
     {
@@ -111,7 +117,7 @@ namespace Vanilla.ServerAPI
         internal static void ConnectNewJWT()
         {
             if (!wss.IsAlive)
-                // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+            // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
             {
                 wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT());
             }

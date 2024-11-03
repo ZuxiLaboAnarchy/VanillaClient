@@ -1,16 +1,20 @@
-﻿using MelonLoader;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - AvatarManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
-using VRC.Core;
-using Vanilla.Utils;
 using Vanilla.Modules;
+using Vanilla.Patches.Manager;
+using VRC.Core;
 
 namespace Vanilla.Patches.Native
 {

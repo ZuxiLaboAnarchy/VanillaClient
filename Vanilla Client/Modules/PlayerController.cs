@@ -1,15 +1,19 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - PlayerController.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using Photon.Pun;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 using TMPro;
 using UnityEngine;
-using Vanilla.Wrappers;
-using VRC.Core;
-using VRC.SDKBase.Validation.Performance;
-using VRC;
-using Vanilla.Config;
 using UnityEngine.UI;
-using VRC.SDK.Internal.ModularPieces;
+using Vanilla.Config;
+using Vanilla.Modules.Manager;
+using Vanilla.Wrappers;
+using VRC;
+using VRC.Core;
 
 namespace Vanilla.Modules
 {
@@ -21,7 +25,7 @@ namespace Vanilla.Modules
 
         #region Nameplates
 
-        // TODO: Fix Nameplates 
+        // TODO: Fix Nameplates
         /*public static Transform GetBasePlate(VRC.Player PlayerData, MonoBehaviour1PublicSiObSiBoObAcSi1MeSiUnique[] Nameplates)
         {
             foreach (MonoBehaviour1PublicSiObSiBoObAcSi1MeSiUnique NameplateContainer in Nameplates)
@@ -173,7 +177,7 @@ namespace Vanilla.Modules
                 return;
             }
 
-            //  ModuleManager.OnPlayerJoin(playerInformation); 
+            //  ModuleManager.OnPlayerJoin(playerInformation);
             try
             {
                 if (__0.prop_APIUser_0.tags.Contains("admin_moderator") ||

@@ -1,4 +1,12 @@
-﻿using System.Reflection;
+﻿// /*
+//  *
+//  * VanillaClient - Player.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Reflection;
+using Vanilla.Patches.Manager;
 using VRC.Core;
 
 namespace Vanilla.Patches.Harmony

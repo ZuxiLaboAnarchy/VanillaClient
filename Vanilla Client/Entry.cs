@@ -1,8 +1,13 @@
-﻿using System.Runtime.CompilerServices;
-using Vanilla.Modules;
-using Vanilla.Patches;
-using Vanilla.Patches.Harmony;
-using Vanilla.ServerAPI;
+﻿// /*
+//  *
+//  * VanillaClient - Entry.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Runtime.CompilerServices;
+using Vanilla.Helpers;
+using Vanilla.Modules.Manager;
 using static Vanilla.Utils.Performance;
 
 namespace Vanilla
@@ -17,18 +22,57 @@ namespace Vanilla
 
             FileHelper.LoadResources();
             ModuleManager.InitModules();
-         
-            try { for (int i = 0; i < ModuleManager.Modules.Count; i++) ModuleManager.Modules[i].Start(); } catch (Exception e) { ExceptionHandler("Modules", e); }
+
+            try
+            {
+                for (var i = 0; i < ModuleManager.Modules.Count; i++)
+                {
+                    ModuleManager.Modules[i].Start();
+                }
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler("Modules", e);
+            }
+
             Dev("OnStart", "On App Start Complete");
             Log("Performance", $"Client Start Took: " + GetProfiling("OnStart").ToString() + " ms", ConsoleColor.Green);
         }
+
         // Forward Defs (these should really be in melonmod instance)
-        internal protected static void CallOnGUI() => ModuleManager.OnGUI();
-        internal protected static void CallOnGameQuit() => ModuleManager.Stop();
-        internal protected static void CallOnUpdate() => ModuleManager.Update();
-        internal protected static void CallOnLateStart() => ModuleManager.LateStart();
-        internal protected static void CallOnLevelInit(int level) => ModuleManager.LevelInit(level);
-        internal protected static void CallOnLevelUnload(int level) => ModuleManager.LevelUnload(level);
-        internal protected static void CallOnLateUpdate() => ModuleManager.LateUpdates();
+        protected internal static void CallOnGUI()
+        {
+            ModuleManager.OnGUI();
+        }
+
+        protected internal static void CallOnGameQuit()
+        {
+            ModuleManager.Stop();
+        }
+
+        protected internal static void CallOnUpdate()
+        {
+            ModuleManager.Update();
+        }
+
+        protected internal static void CallOnLateStart()
+        {
+            ModuleManager.LateStart();
+        }
+
+        protected internal static void CallOnLevelInit(int level)
+        {
+            ModuleManager.LevelInit(level);
+        }
+
+        protected internal static void CallOnLevelUnload(int level)
+        {
+            ModuleManager.LevelUnload(level);
+        }
+
+        protected internal static void CallOnLateUpdate()
+        {
+            ModuleManager.LateUpdates();
+        }
     }
 }

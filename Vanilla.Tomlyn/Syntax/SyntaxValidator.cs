@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxValidator.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -167,7 +171,7 @@ namespace Vanilla.Tomlyn.Syntax
             if (bareKey.Key == null)
             {
                 _diagnostics.Error(bareKey.Span, $"A BareKeySyntax must have a non null property Key");
-            }            
+            }
             base.Visit(bareKey);
         }
 
@@ -194,7 +198,7 @@ namespace Vanilla.Tomlyn.Syntax
             var isTableArray = table is TableArraySyntax;
             if (table.OpenBracket == null)
             {
-                _diagnostics.Error(table.Span, $"The table{(isTableArray? " array" : string.Empty)} must have an {table.OpenTokenKind} `{table.OpenTokenKind.ToText()}`");
+                _diagnostics.Error(table.Span, $"The table{(isTableArray ? " array" : string.Empty)} must have an {table.OpenTokenKind} `{table.OpenTokenKind.ToText()}`");
             }
             if (table.CloseBracket == null)
             {
@@ -242,7 +246,7 @@ namespace Vanilla.Tomlyn.Syntax
             {
                 if (!((existingValue.IsImplicit || isImplicit) && (existingValue.Kind == kind || isImplicit && existingValue.Kind == ObjectKind.TableArray && kind == ObjectKind.Table)))
                 {
-                    _diagnostics.Error(node.Span, $"The element `{node.ToString().TrimEnd('\r','\n').ToPrintableString()}` with the key `{currentPath}` is already defined at {existingValue.Node.Span.Start} with `{existingValue.Node.ToString().TrimEnd('\r', '\n').ToPrintableString()}` and cannot be redefined");
+                    _diagnostics.Error(node.Span, $"The element `{node.ToString().TrimEnd('\r', '\n').ToPrintableString()}` with the key `{currentPath}` is already defined at {existingValue.Node.Span.Start} with `{existingValue.Node.ToString().TrimEnd('\r', '\n').ToPrintableString()}` and cannot be redefined");
                 }
                 else if (existingValue.Kind == ObjectKind.TableArray)
                 {
@@ -266,7 +270,7 @@ namespace Vanilla.Tomlyn.Syntax
             }
             else
             {
-                result = ((StringValueSyntax) value).Value;
+                result = ((StringValueSyntax)value).Value;
             }
 
             if (string.IsNullOrEmpty(result))
@@ -292,7 +296,7 @@ namespace Vanilla.Tomlyn.Syntax
 
             var items = array.Items;
             SyntaxKind firstKind = default;
-            for(int i = 0; i < items.ChildrenCount; i++)
+            for (int i = 0; i < items.ChildrenCount; i++)
             {
                 var item = items.GetChildren(i);
                 var value = item.Value;
@@ -360,12 +364,12 @@ namespace Vanilla.Tomlyn.Syntax
 
             public ObjectPath Clone()
             {
-                return (ObjectPath) MemberwiseClone();
+                return (ObjectPath)MemberwiseClone();
             }
 
             public override bool Equals(object obj)
             {
-                var other = (ObjectPath) obj;
+                var other = (ObjectPath)obj;
                 if (other.Count != Count) return false;
                 if (other._hashCode != _hashCode) return false;
                 for (int i = 0; i < Count; i++)
@@ -411,7 +415,7 @@ namespace Vanilla.Tomlyn.Syntax
 
             public int ArrayIndex;
         }
-        
+
         private readonly struct ObjectPathItem : IEquatable<ObjectPathItem>
         {
             public ObjectPathItem(string key) : this()

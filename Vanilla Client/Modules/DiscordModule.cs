@@ -1,4 +1,14 @@
-﻿namespace Vanilla.Modules
+﻿// /*
+//  *
+//  * VanillaClient - DiscordModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Helpers;
+using Vanilla.Modules.Manager;
+
+namespace Vanilla.Modules
 {
     internal class DiscordManager : VanillaModule
     {
@@ -10,7 +20,7 @@
         internal override void Start()
         {
             eventHandlers = default;
-            eventHandlers.errorCallback = delegate(int code, string message) { };
+            eventHandlers.errorCallback = delegate (int code, string message) { };
             presence.state = $"upset.moe";
 
             presence.details = "Sweet Like Candy";

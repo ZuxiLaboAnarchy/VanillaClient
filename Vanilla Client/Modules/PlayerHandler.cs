@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - PlayerHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Linq;
 using System.Text;
-using Il2CppSystem;
-using Il2CppSystem.Collections.Generic;
-using MelonLoader;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using Vanilla.Config;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
-using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine;
 
 namespace Vanilla.Modules
 {

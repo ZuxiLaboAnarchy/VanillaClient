@@ -1,4 +1,10 @@
-﻿using Harmony;
+﻿// /*
+//  *
+//  * VanillaClient - GeneralUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using MelonLoader;
 using System.Collections;
 using System.Diagnostics;

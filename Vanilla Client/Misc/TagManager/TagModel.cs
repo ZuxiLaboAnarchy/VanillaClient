@@ -1,6 +1,13 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - TagModel.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.TagManager
+using UnityEngine;
+
+namespace Vanilla.Misc.TagManager
 {
     internal class CustomTagInfo
     {

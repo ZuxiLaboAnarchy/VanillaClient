@@ -1,4 +1,13 @@
-﻿namespace Vanilla.Patches.Harmony
+﻿// /*
+//  *
+//  * VanillaClient - Ani.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Patches.Manager;
+
+namespace Vanilla.Patches.Harmony
 {
     internal class Ani : VanillaPatches
     {

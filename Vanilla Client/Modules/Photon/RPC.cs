@@ -1,13 +1,13 @@
-﻿using ExitGames.Client.Photon;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// /*
+//  *
+//  * VanillaClient - RPC.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
 using Vanilla.Wrappers;
-using VRCSDK2;
-using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
 namespace Vanilla.Modules.Photon
 {

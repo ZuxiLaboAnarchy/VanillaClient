@@ -1,4 +1,11 @@
-﻿namespace Vanilla.Protections
+﻿// /*
+//  *
+//  * VanillaClient - LoaderProtections.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+namespace Vanilla.Utils.Protections
 {
     internal class LoaderProtections
     {

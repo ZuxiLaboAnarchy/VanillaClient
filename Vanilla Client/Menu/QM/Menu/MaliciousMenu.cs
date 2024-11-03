@@ -1,17 +1,19 @@
-﻿using MelonLoader;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - MaliciousMenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Vanilla.Buttons.QM;
 using Vanilla.Config;
+using Vanilla.Menu.QM.API;
 using Vanilla.Wrappers;
 using VRC.SDKBase;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class MaliciousMenu
     {

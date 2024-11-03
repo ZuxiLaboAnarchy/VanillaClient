@@ -1,7 +1,13 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - PlayerWrapper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using VRC;
 using VRC.Core;

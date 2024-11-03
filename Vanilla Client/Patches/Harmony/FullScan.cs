@@ -1,7 +1,12 @@
-﻿using System.Reflection;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿// /*
+//  *
+//  * VanillaClient - FullScan.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Reflection;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {

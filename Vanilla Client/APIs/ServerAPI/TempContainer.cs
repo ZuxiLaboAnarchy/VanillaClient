@@ -1,6 +1,13 @@
-﻿using Vanilla.AvatarFavorites;
+﻿// /*
+//  *
+//  * VanillaClient - TempContainer.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.API.ServerAPI
+using Vanilla.Misc.AvatarFavorites;
+
+namespace Vanilla.APIs.ServerAPI
 {
     public struct TempUploadContainer
     {
@@ -12,7 +19,7 @@ namespace Vanilla.API.ServerAPI
 
         //internal string player_name;
 
-//        internal string player_custom_name;
+        //        internal string player_custom_name;
 
         //      internal string player_custom_color;
 

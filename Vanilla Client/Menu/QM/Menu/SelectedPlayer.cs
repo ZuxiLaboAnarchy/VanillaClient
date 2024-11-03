@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Buttons.QM;
-using Vanilla.Config;
+﻿// /*
+//  *
+//  * VanillaClient - SelectedPlayer.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using Vanilla.Exploits;
+using Vanilla.Menu.QM.API;
 using Vanilla.Modules;
-using Vanilla.ServerAPI;
 using Vanilla.Wrappers;
 using Vanilla.Xrefs;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class SelectedPlayer
     {

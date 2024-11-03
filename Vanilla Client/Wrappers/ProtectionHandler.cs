@@ -1,7 +1,12 @@
-﻿using ExitGames.Client.Photon;
+﻿// /*
+//  *
+//  * VanillaClient - ProtectionHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
-using Vanilla.Config;
-using Vanilla.QM.Menu;
 
 namespace Vanilla.Wrappers
 {

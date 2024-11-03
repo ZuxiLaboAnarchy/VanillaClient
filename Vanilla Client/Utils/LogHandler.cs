@@ -1,11 +1,15 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - LogHandler.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections.Concurrent;
 using System.Reflection;
 using UnityEngine;
-using Vanilla.Config;
 using Vanilla.Modules;
-using WebSocketSharp;
-using static Il2CppSystem.TypeIdentifiers;
 
 namespace Vanilla.Utils
 {

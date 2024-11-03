@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - GifModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
 namespace Vanilla.Modules
 {

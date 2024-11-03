@@ -1,8 +1,15 @@
-﻿using TMPro;
+﻿// /*
+//  *
+//  * VanillaClient - PlayerUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using TMPro;
 using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.UI;
-using Vanilla.TagManager;
+using Vanilla.Misc.TagManager;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;

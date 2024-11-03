@@ -1,15 +1,17 @@
-﻿using Il2CppSystem.Runtime.Serialization.Formatters.Binary;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Buttons.QM;
-using Vanilla.Config;
-using Vanilla.ServerAPI;
+﻿// /*
+//  *
+//  * VanillaClient - DevMenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.QM.Menu
+using System.Collections.Generic;
+using Vanilla.APIs.ServerAPI;
+using Vanilla.Config;
+using Vanilla.Menu.QM.API;
+using Vanilla.Wrappers;
+
+namespace Vanilla.Menu.QM.Menu
 {
     internal class DevMenu
     {

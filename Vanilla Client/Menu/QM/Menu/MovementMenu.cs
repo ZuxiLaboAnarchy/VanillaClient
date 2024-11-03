@@ -1,10 +1,16 @@
-﻿using UnityEngine;
-using Vanilla.Buttons.QM;
+﻿// /*
+//  *
+//  * VanillaClient - MovementMenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
+using Vanilla.Menu.QM.API;
 using Vanilla.Wrappers;
-using VRC.DataModel;
 using VRC.SDKBase;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class Movement
     {

@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Config;
+﻿// /*
+//  *
+//  * VanillaClient - JoinLoggerModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Modules.Manager;
 using VRC;
 
 namespace Vanilla.Modules

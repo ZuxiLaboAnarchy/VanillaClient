@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - PerfModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
+using Vanilla.Modules.Manager;
 using Vanilla.Patches.Harmony;
 
 namespace Vanilla.Modules
@@ -35,7 +43,7 @@ namespace Vanilla.Modules
                     ImageDownloaderPatch.imageDownloadQueue.TryDequeue(out var imageContainer))
                 {
                     ImageDownloaderPatch.DownloadImage(imageContainer.imageUrl, imageContainer.imageSize,
-                        (Action<Texture2D>)delegate(Texture2D tex)
+                        (Action<Texture2D>)delegate (Texture2D tex)
                         {
                             CacheUtils.AddCachedImage(imageContainer.imageUrl, tex);
                             imageContainer.onImageDownload.Invoke(tex);

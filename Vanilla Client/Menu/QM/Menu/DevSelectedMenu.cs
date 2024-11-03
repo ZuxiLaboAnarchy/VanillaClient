@@ -1,12 +1,19 @@
-﻿using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - DevSelectedMenu.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Generic;
 using System.Net;
-using Vanilla.Buttons.QM;
+using Vanilla.APIs.ServerAPI;
 using Vanilla.Config;
 using Vanilla.Helpers;
-using Vanilla.ServerAPI;
+using Vanilla.Menu.QM.API;
 using Vanilla.Wrappers;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class DevSelectedMenu
     {

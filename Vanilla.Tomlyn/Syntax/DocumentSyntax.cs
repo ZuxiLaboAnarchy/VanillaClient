@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - DocumentSyntax.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 namespace Vanilla.Tomlyn.Syntax
 {
     /// <summary>
@@ -13,7 +17,7 @@ namespace Vanilla.Tomlyn.Syntax
         /// </summary>
         public DocumentSyntax() : base(SyntaxKind.Document)
         {
-            KeyValues = new SyntaxList<KeyValueSyntax>() {Parent = this};
+            KeyValues = new SyntaxList<KeyValueSyntax>() { Parent = this };
             Tables = new SyntaxList<TableSyntaxBase>() { Parent = this };
             Diagnostics = new DiagnosticsBag();
         }
@@ -42,7 +46,7 @@ namespace Vanilla.Tomlyn.Syntax
         {
             visitor.Visit(this);
         }
-        
+
         public override int ChildrenCount => 2;
 
         protected override SyntaxNode GetChildrenImpl(int index)

@@ -1,5 +1,13 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - FlyManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
 using Vanilla.Config;
+using Vanilla.Modules.Manager;
 
 namespace Vanilla.Modules
 {

@@ -1,12 +1,18 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - QMImage.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using Vanilla.Config;
 using Object = UnityEngine.Object;
 
-namespace Vanilla.QM
+namespace Vanilla.Menu.QM
 {
     internal class QMImage
     {

@@ -1,17 +1,20 @@
-﻿using Il2CppSystem.Runtime.Serialization.Formatters.Binary;
-using System;
+﻿// /*
+//  *
+//  * VanillaClient - MurderHacks.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Vanilla.Buttons.QM;
+using Vanilla.Menu.QM.API;
 using Vanilla.Wrappers;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     internal class MurderHacks
     {

@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxVisitor.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Collections.Generic;
 
 namespace Vanilla.Tomlyn.Syntax
@@ -64,7 +68,7 @@ namespace Vanilla.Tomlyn.Syntax
         {
             DefaultVisit(dateTime);
         }
-        
+
         public virtual void Visit(ArraySyntax array)
         {
             DefaultVisit(array);

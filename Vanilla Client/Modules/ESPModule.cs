@@ -1,5 +1,12 @@
-﻿using UnityEngine;
-using Vanilla.Config;
+﻿// /*
+//  *
+//  * VanillaClient - ESPModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using UnityEngine;
+using Vanilla.Modules.Manager;
 using VRC;
 using VRC.Core;
 

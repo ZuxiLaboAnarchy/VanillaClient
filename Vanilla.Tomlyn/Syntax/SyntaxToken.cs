@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxToken.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 namespace Vanilla.Tomlyn.Syntax
 {
     /// <summary>
@@ -38,9 +42,9 @@ namespace Vanilla.Tomlyn.Syntax
 
         public override void Accept(SyntaxVisitor visitor)
         {
-            visitor.Visit(this);            
+            visitor.Visit(this);
         }
-        
+
         public override int ChildrenCount => 0;
 
         protected override SyntaxNode GetChildrenImpl(int index)

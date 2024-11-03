@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Vanilla.Config;
+﻿// /*
+//  *
+//  * VanillaClient - WorldHistoryManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
 namespace Vanilla.Modules
 {

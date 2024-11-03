@@ -1,3 +1,12 @@
+// /*
+//  *
+//  * VanillaClient - AntiConsoleClearPatch.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Vanilla.Patches.Manager;
+
 namespace Vanilla.Patches.Harmony
 {
     internal class AntiConsoleClearPatch : VanillaPatches

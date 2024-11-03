@@ -1,16 +1,27 @@
-﻿using System;
-namespace Vanilla.JSON {
+﻿// /*
+//  *
+//  * VanillaClient - JsonAttributes.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-	public class JsonPropertyAttribute : Attribute {
-		public string Name { get; private set; }
+using System;
+namespace Vanilla.JSON
+{
 
-		public JsonPropertyAttribute(string name) {
-			Name = name;
-		}
-	}
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public class JsonPropertyAttribute : Attribute
+    {
+        public string Name { get; private set; }
 
-	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-	public class MatchSnakeCaseAttribute : Attribute {
-	}
+        public JsonPropertyAttribute(string name)
+        {
+            Name = name;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public class MatchSnakeCaseAttribute : Attribute
+    {
+    }
 }

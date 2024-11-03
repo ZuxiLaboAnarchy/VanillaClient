@@ -1,10 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿// /*
+//  *
+//  * VanillaClient - MainConfig.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using Vanilla.Tomlyn;
-using Vanilla.Tomlyn.Model;
-using Vanilla.Tomlyn.Syntax;
+using Vanilla.Helpers;
 
 namespace Vanilla.Config
 {

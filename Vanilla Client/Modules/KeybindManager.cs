@@ -1,9 +1,12 @@
-﻿using System.Reflection;
-using TMPro;
-using UnhollowerRuntimeLib;
+﻿// /*
+//  *
+//  * VanillaClient - KeybindManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using UnityEngine;
-using UnityEngine.UI;
-using Vanilla.Config;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 
 

@@ -1,7 +1,15 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - CameraModule.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vanilla.Modules.Manager;
 using Vanilla.Wrappers;
 
 namespace Vanilla.Modules

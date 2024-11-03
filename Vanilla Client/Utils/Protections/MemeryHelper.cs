@@ -1,9 +1,15 @@
-﻿using System;
+﻿// /*
+//  *
+//  * VanillaClient - MemeryHelper.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Vanilla.Protections
+namespace Vanilla.Utils.Protections
 {
     internal class Memory
     {
@@ -291,7 +297,7 @@ namespace Vanilla.Protections
 
 
                 if (!hThread.Equals(0))
-                    //native method example
+                //native method example
                 {
                     CloseHandle(hThread);
                 }

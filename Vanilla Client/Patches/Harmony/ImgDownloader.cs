@@ -1,6 +1,13 @@
-﻿using System.Collections.Concurrent;
+﻿// /*
+//  *
+//  * VanillaClient - ImgDownloader.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using System.Collections.Concurrent;
 using UnityEngine;
-using Vanilla.Config;
+using Vanilla.Patches.Manager;
 
 namespace Vanilla.Patches.Harmony
 {

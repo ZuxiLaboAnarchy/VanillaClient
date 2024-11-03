@@ -1,4 +1,11 @@
-﻿using MelonLoader;
+﻿// /*
+//  *
+//  * VanillaClient - ModuleManager.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using MelonLoader;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +14,7 @@ using UnityEngine;
 using Vanilla.Wrappers;
 using VRC;
 
-namespace Vanilla.Modules
+namespace Vanilla.Modules.Manager
 {
     internal class ModuleManager
     {

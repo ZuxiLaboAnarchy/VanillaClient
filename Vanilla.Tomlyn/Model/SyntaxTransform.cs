@@ -1,6 +1,10 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - SyntaxTransform.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using Vanilla.Tomlyn.Syntax;
 
@@ -13,7 +17,7 @@ namespace Vanilla.Tomlyn.Model
     {
         private readonly TomlTable _rootTable;
         private TomlTable _currentTable;
-        private object _currentValue; 
+        private object _currentValue;
 
         public SyntaxTransform(TomlTable rootTable)
         {
@@ -87,7 +91,7 @@ namespace Vanilla.Tomlyn.Model
                 {
                     throw new InvalidOperationException($"Cannot transform the key `{key}` to a table while the existing underlying object is a `{subTableObject.GetType()}");
                 }
-                return (TomlTable) subTableObject;
+                return (TomlTable)subTableObject;
             }
 
             var newTable = new TomlTable();
@@ -101,7 +105,7 @@ namespace Vanilla.Tomlyn.Model
             {
                 return basicKey.Key.Text;
             }
-            return ((StringValueSyntax) value).Value;
+            return ((StringValueSyntax)value).Value;
         }
 
         public override void Visit(BooleanValueSyntax boolValue)
@@ -147,7 +151,7 @@ namespace Vanilla.Tomlyn.Model
         {
             var tomlArray = new TomlArray(array.ChildrenCount);
             var items = array.Items;
-            for(int i = 0; i < items.ChildrenCount; i++)
+            for (int i = 0; i < items.ChildrenCount; i++)
             {
                 var item = items.GetChildren(i);
                 item.Accept(this);

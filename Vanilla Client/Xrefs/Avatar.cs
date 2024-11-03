@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// /*
+//  *
+//  * VanillaClient - Avatar.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using VRC;
 
 namespace Vanilla.Xrefs

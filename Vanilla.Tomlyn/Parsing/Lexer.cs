@@ -1,12 +1,15 @@
-// Copyright (c) Alexandre Mutel. All rights reserved.
-// Licensed under the BSD-Clause 2 license. 
-// See license.txt file in the project root for full license information.
+// /*
+//  *
+//  * VanillaClient - Lexer.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Vanilla.Tomlyn.Helpers;
 using Vanilla.Tomlyn.Syntax;
@@ -548,7 +551,7 @@ namespace Vanilla.Tomlyn.Parsing
                         NextChar();
                     }
                 }
-                
+
                 var dateTimeAsString = _textBuilder.ToString();
 
                 if (hasLeadingSign)
@@ -647,7 +650,7 @@ namespace Vanilla.Tomlyn.Parsing
                 {
                     AddError($"Unable to parse floating point `{numberAsText}`", start, end);
                 }
-                int firstDigit = (int) doubleValue;
+                int firstDigit = (int)doubleValue;
                 if (firstDigit != 0 && hasLeadingZero)
                 {
                     AddError($"Unexpected leading zero (`0`) for float `{numberAsText}`", positionFirstDigit, positionFirstDigit);
@@ -733,7 +736,7 @@ namespace Vanilla.Tomlyn.Parsing
             // Reset the current string buffer
             _textBuilder.Length = 0;
 
-            continue_parsing_string:
+        continue_parsing_string:
             while (_c != '\"' && _c != Eof)
             {
                 if (!TryReadEscapeChar(ref end))
@@ -878,32 +881,32 @@ namespace Vanilla.Tomlyn.Parsing
 
                     case 'u':
                     case 'U':
-                    {
-                        var start = _position;
-                        end = _position;
-                        var maxCount = _c == 'u' ? 4 : 8;
-                        NextChar();
-
-                        // Must be followed 0 to 8 hex numbers (0-FFFFFFFF)
-                        int i = 0;
-                        int value = 0;
-                        for (; CharHelper.IsHexFunc(_c) && i < maxCount; i++)
                         {
-                            value = (value << 4) + CharHelper.HexToDecimal(_c);
+                            var start = _position;
                             end = _position;
+                            var maxCount = _c == 'u' ? 4 : 8;
                             NextChar();
-                        }
 
-                        if (i == maxCount)
-                        {
-                            if (!CharHelper.IsValidUnicodeScalarValue(value))
+                            // Must be followed 0 to 8 hex numbers (0-FFFFFFFF)
+                            int i = 0;
+                            int value = 0;
+                            for (; CharHelper.IsHexFunc(_c) && i < maxCount; i++)
                             {
-                                AddError($"Invalid Unicode scalar value [{value:X}]",start, start);
+                                value = (value << 4) + CharHelper.HexToDecimal(_c);
+                                end = _position;
+                                NextChar();
                             }
-                            _textBuilder.AppendUtf32((char32)value);
-                            return true;
+
+                            if (i == maxCount)
+                            {
+                                if (!CharHelper.IsValidUnicodeScalarValue(value))
+                                {
+                                    AddError($"Invalid Unicode scalar value [{value:X}]", start, start);
+                                }
+                                _textBuilder.AppendUtf32((char32)value);
+                                return true;
+                            }
                         }
-                    }
                         break;
                 }
 
@@ -943,7 +946,7 @@ namespace Vanilla.Tomlyn.Parsing
             }
 
             _textBuilder.Length = 0;
-            continue_parsing_string:
+        continue_parsing_string:
             while (_c != '\'' && _c != Eof)
             {
                 if (!isMultiLine && CharHelper.IsNewLine(_c))
@@ -1007,7 +1010,7 @@ namespace Vanilla.Tomlyn.Parsing
                 _token = new SyntaxTokenValue(TokenKind.StringLiteral, start, end, _textBuilder.ToString());
             }
         }
-        
+
 
         private void ReadComment(TextPosition start)
         {
@@ -1107,14 +1110,14 @@ namespace Vanilla.Tomlyn.Parsing
         {
             // Initialize the position at -1 when starting
             _preview1 = null;
-            _current = new LexerInternalState {Position = new TextPosition(_reader.Start, 0, 0)};
+            _current = new LexerInternalState { Position = new TextPosition(_reader.Start, 0, 0) };
             // It is important to initialize this separately from the previous line
             _current.CurrentChar = NextCharFromReader();
             _token = new SyntaxTokenValue();
             _errors = null;
         }
     }
-    
+
     [DebuggerDisplay("{Position} {Character}")]
     internal struct LexerInternalState
     {

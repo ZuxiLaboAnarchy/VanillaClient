@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Vanilla.Buttons.QM;
-using Vanilla.QM.Menu;
-using Vanilla.Exploits;
-using Vanilla.Modules;
+﻿// /*
+//  *
+//  * VanillaClient - Siton.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.QM.Menu
+namespace Vanilla.Menu.QM.Menu
 {
     /*
         internal class Siton : VanillaModule

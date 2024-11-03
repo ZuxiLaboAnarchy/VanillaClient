@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿// /*
+//  *
+//  * VanillaClient - MenuPanelAPI.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.QM.QMAPI
+namespace Vanilla.Menu.QM.API.Legacy
 {
     /*
     internal class MenuPanelAPI

@@ -1,12 +1,15 @@
-﻿using HarmonyLib;
+﻿// /*
+//  *
+//  * VanillaClient - NativePatchUtils.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
+
+using HarmonyLib;
 using MelonLoader;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnhollowerBaseLib;
 
 namespace Vanilla.Utils

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using Vanilla.Behaviours;
-using VRC.SDK3.Components;
+﻿// /*
+//  *
+//  * VanillaClient - VanillaObject.cs
+//  * Copyright 2023 - 2024 Zuxi and contributors
+//  *
+//  */
 
-namespace Vanilla.Modules
+using UnityEngine;
+using Vanilla.Modules.Manager;
+
+namespace Vanilla.Modules.VanillaGameObject
 {
     internal class VanillaObject : VanillaModule
     {
@@ -19,7 +18,7 @@ namespace Vanilla.Modules
         internal override void WaitForPlayer()
         {
             //ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
-            // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();  
+            // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();
 
             Dev("VanillaObject", "Spawning GameObject");
 
