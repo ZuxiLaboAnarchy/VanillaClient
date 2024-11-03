@@ -18,7 +18,7 @@ namespace Vanilla.Patches.Native
 
         internal override void Patch()
         {
-          
+
 
             // Get MethodInfo for UnityWebRequest.Put
             var methodInfo = typeof(UnityWebRequest).GetMethod("Put",

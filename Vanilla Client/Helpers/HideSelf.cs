@@ -10,9 +10,5 @@ namespace Vanilla.Helpers
 {
     internal class AviUtils
     {
-      
-
-
-    
     }
 }

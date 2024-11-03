@@ -30,8 +30,9 @@ namespace Vanilla.Utils
             {
                 throw new PlatformNotSupportedException("Not supported on Big Endian processors");
             }
+
             table = InitializeTable(polynomial);
-            this.seed = (hash = seed);
+            this.seed = hash = seed;
         }
 
         public override void Initialize()
@@ -53,13 +54,14 @@ namespace Vanilla.Utils
         {
             try
             {
-                Crc32 crc = new Crc32();
-                string text = string.Empty;
-                byte[] array = crc.ComputeHash(bytes);
-                for (int i = 0; i < array.Length; i++)
+                var crc = new Crc32();
+                var text = string.Empty;
+                var array = crc.ComputeHash(bytes);
+                for (var i = 0; i < array.Length; i++)
                 {
                     text += array[i].ToString("x2").ToLower();
                 }
+
                 return text;
             }
             catch (Exception e)
@@ -90,40 +92,46 @@ namespace Vanilla.Utils
             {
                 return defaultTable;
             }
-            uint[] array = new uint[256];
-            for (int i = 0; i < 256; i++)
+
+            var array = new uint[256];
+            for (var i = 0; i < 256; i++)
             {
-                uint num = (uint)i;
-                for (int j = 0; j < 8; j++)
+                var num = (uint)i;
+                for (var j = 0; j < 8; j++)
                 {
-                    num = (((num & 1) != 1) ? (num >> 1) : ((num >> 1) ^ polynomial));
+                    num = (num & 1) != 1 ? num >> 1 : (num >> 1) ^ polynomial;
                 }
+
                 array[i] = num;
             }
+
             if (polynomial == 3988292384u)
             {
                 defaultTable = array;
             }
+
             return array;
         }
 
         internal static uint CalculateHash(uint[] table, uint seed, IList<byte> buffer, int start, int size)
         {
-            uint num = seed;
-            for (int i = start; i < start + size; i++)
+            var num = seed;
+            for (var i = start; i < start + size; i++)
             {
                 num = (num >> 8) ^ table[buffer[i] ^ (num & 0xFF)];
             }
+
             return num;
         }
 
         internal static byte[] UInt32ToBigEndianBytes(uint uint32)
         {
-            byte[] bytes = BitConverter.GetBytes(uint32);
+            var bytes = BitConverter.GetBytes(uint32);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(bytes);
             }
+
             return bytes;
         }
     }

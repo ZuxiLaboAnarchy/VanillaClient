@@ -9,11 +9,12 @@ namespace Vanilla.Wrappers
     {
         internal static bool IsEvent1Bad(EventData eventData)
         {
-            if (MainConfig.GetInstance().AntiE1)
+            if (GetInstance().AntiE1)
             {
                 byte[] voiceData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
-                return (AudioHandler.IsVoiceDataBad(eventData.Sender, voiceData));
+                return AudioHandler.IsVoiceDataBad(eventData.Sender, voiceData);
             }
+
             return false;
         }
     }

@@ -16,8 +16,7 @@ namespace Vanilla.Helpers
 {
     internal class UploadHelper
     {
-
-        internal static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
+        internal static readonly JsonSerializerSettings jsonSerializerSettings = new()
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             ContractResolver = new CustomContractResolver("normalized")
@@ -28,7 +27,6 @@ namespace Vanilla.Helpers
 
         private static bool uploadQueueConfigSaving = false;
 
-       
 
         private static readonly string ConfigLocation = FileHelper.GetCheatFolder() + "UploadQueue.json";
 
@@ -38,6 +36,7 @@ namespace Vanilla.Helpers
             {
                 CreateUploadQueueConfig();
             }
+
             return uploadQueueConfig;
         }
 
@@ -49,58 +48,51 @@ namespace Vanilla.Helpers
 
         internal static void SaveUploadQueueConfig(bool forceSave = false)
         {
-
             if (uploadQueueConfigSaving && !forceSave)
             {
-              
                 return;
             }
-            
+
             uploadQueueConfigSaving = true;
             try
             {
-                
                 File.WriteAllText(ConfigLocation, Json.Encode(uploadQueueConfig, true));
             }
             catch (Exception e2)
             {
                 ExceptionHandler("UploadAPI", e2);
             }
+
             uploadQueueConfigSaving = false;
         }
 
         internal static void UploadAvatarToGlobalDatabase(FavoriteAvatar avatar)
         {
-            TempUploadContainer tempUploadContainer = default(TempUploadContainer);
+            var tempUploadContainer = default(TempUploadContainer);
             //tempUploadContainer.uploadType = 7;
             tempUploadContainer.saved_avatar = avatar;
-            Dev("AVILOG" , "Added: " + avatar.AvatarID);
-            TempUploadContainer item = tempUploadContainer;
+            Dev("AVILOG", "Added: " + avatar.AvatarID);
+            var item = tempUploadContainer;
             GetUploadQueueConfig().UploadQueue.Enqueue(item);
             SaveUploadQueueConfig();
-
-
-
-
-
         }
     }
 
-        internal class CustomContractResolver : DefaultContractResolver
+    internal class CustomContractResolver : DefaultContractResolver
+    {
+        private readonly string propertyNameToExclude;
+
+        internal CustomContractResolver(string propertyNameToExclude)
         {
-            private readonly string propertyNameToExclude;
+            this.propertyNameToExclude = propertyNameToExclude;
+        }
 
-            internal CustomContractResolver(string propertyNameToExclude)
-            {
-                this.propertyNameToExclude = propertyNameToExclude;
-            }
-
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-            {
-                IList<JsonProperty> source = base.CreateProperties(type, memberSerialization);
-                return source.Where((JsonProperty p) => string.Compare(p.PropertyName, propertyNameToExclude, StringComparison.OrdinalIgnoreCase) != 0).ToList();
-            }
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            var source = base.CreateProperties(type, memberSerialization);
+            return source.Where((JsonProperty p) =>
+                    string.Compare(p.PropertyName, propertyNameToExclude, StringComparison.OrdinalIgnoreCase) != 0)
+                .ToList();
         }
     }
-
-
+}

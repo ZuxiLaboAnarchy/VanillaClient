@@ -11,7 +11,8 @@ namespace Vanilla.Modules
     {
         protected override string ModuleName => "AntiVRCPlus";
 
-        static object VRCRemoveE = null;
+        private static object VRCRemoveE = null;
+
         internal override void LateStart()
         {
             VRCRemoveE = MelonCoroutines.Start(WaitForMMLoad());
@@ -19,26 +20,41 @@ namespace Vanilla.Modules
 
         internal static IEnumerator WaitForMMLoad()
         {
-            while (GameObject.Find("Canvas_MainMenu(Clone)/Container/PageButtons/HorizontalLayoutGroup/Page_VRCPlus") == null) yield return null;
+            while (GameObject.Find("Canvas_MainMenu(Clone)/Container/PageButtons/HorizontalLayoutGroup/Page_VRCPlus") ==
+                   null)
+            {
+                yield return null;
+            }
+
             ToggleVRCPlus(false);
-            
         }
-      
+
         internal static void ToggleVRCPlus(bool state)
         {
-
-            GameObject AVIUPSELL = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Avatars/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation/ScrollRect_Content/Viewport/VerticalLayoutGroup/VRC+ Upsell/");
+            var AVIUPSELL =
+                GameObject.Find(
+                    "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Avatars/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation/ScrollRect_Content/Viewport/VerticalLayoutGroup/VRC+ Upsell/");
             UnityEngine.Object.Destroy(AVIUPSELL);
 
-            GameObject.Find("Canvas_MainMenu(Clone)/Container/PageButtons/HorizontalLayoutGroup/Page_VRCPlus").gameObject.SetActive(state);
-            GameObject ImgLines = GameObject.Find("Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/").gameObject; //SetActive(state);
+            GameObject.Find("Canvas_MainMenu(Clone)/Container/PageButtons/HorizontalLayoutGroup/Page_VRCPlus")
+                .gameObject.SetActive(state);
+            var ImgLines = GameObject
+                .Find(
+                    "Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/")
+                .gameObject; //SetActive(state);
             UnityEngine.Object.Destroy(ImgLines);
-            GameObject Banner = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Banners");
-            GameObject Controls_Right = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Controls_Right");
-            GameObject Controls_Left = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Controls_Left");
+            var Banner =
+                GameObject.Find(
+                    "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Banners");
+            var Controls_Right =
+                GameObject.Find(
+                    "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Controls_Right");
+            var Controls_Left =
+                GameObject.Find(
+                    "Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK/Image/Controls_Left");
             UnityEngine.Object.Destroy(Controls_Right);
             UnityEngine.Object.Destroy(Controls_Left);
-           
+
 /*
             GameObject MainBanner = GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Dashboard/ScrollRect_MM/Viewport/Content/Panel/Carousel_Banners/Image_MASK");
             GameObject MainBanerClone = UnityEngine.Object.Instantiate(MainBanner, MainBanner.transform.parent);
@@ -52,17 +68,15 @@ namespace Vanilla.Modules
 */
 
 
-
-
-
-
             try
             {
                 MelonCoroutines.Stop(VRCRemoveE);
                 Dev("VRC+", "Stopped Coroutines");
             }
-            catch (Exception e) { ExceptionHandler("VRC+", e); }
+            catch (Exception e)
+            {
+                ExceptionHandler("VRC+", e);
+            }
         }
-
     }
 }

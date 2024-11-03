@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 //using Galaxy.API;
 
 namespace Vanilla.Utils
@@ -8,20 +9,16 @@ namespace Vanilla.Utils
         internal static byte[] _PageIcon { get; set; }
 
 
-
-
         internal static byte[] tabImage;
-
-
-
 
 
         internal static Sprite CreateSprite(Texture2D texture)
         {
-            Rect rect = new Rect(0f, 0f, texture.width, texture.height);
-            Vector2 pivot = new Vector2(0.5f, 0.5f);
-            Vector4 border = Vector4.zero;
-            Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100f, 0u, SpriteMeshType.Tight, ref border, generateFallbackPhysicsShape: false);
+            var rect = new Rect(0f, 0f, texture.width, texture.height);
+            var pivot = new Vector2(0.5f, 0.5f);
+            var border = Vector4.zero;
+            var sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100f, 0u, SpriteMeshType.Tight,
+                ref border, false);
             sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             return sprite;
         }
@@ -30,17 +27,16 @@ namespace Vanilla.Utils
         {
             // Texture2D texture = CreateTextureFromBase64(data);
 
-            Rect rect = new Rect(0.0f, 0.0f, texture.width, texture.height);
+            var rect = new Rect(0.0f, 0.0f, texture.width, texture.height);
 
-            Vector2 pivot = new Vector2(0.5f, 0.5f);
-            Vector4 border = Vector4.zero;
+            var pivot = new Vector2(0.5f, 0.5f);
+            var border = Vector4.zero;
 
-            Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100.0f, 0, SpriteMeshType.Tight, ref border, false);
+            var sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100.0f, 0, SpriteMeshType.Tight,
+                ref border, false);
 
             return sprite;
         }
-
-
 
 
         /*
@@ -91,6 +87,5 @@ namespace Vanilla.Utils
         }
 
         */
-
     }
 }

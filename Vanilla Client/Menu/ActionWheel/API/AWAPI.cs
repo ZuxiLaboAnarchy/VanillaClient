@@ -7,7 +7,7 @@ namespace Blaze.API.AW
 {
     public static class ActionWheelAPI
     {
-        private static readonly List<ActionMenuButton> mainMenuButtons = new List<ActionMenuButton>();
+        private static readonly List<ActionMenuButton> mainMenuButtons = new();
 
         public static ActionMenu activeActionMenu;
 
@@ -23,14 +23,18 @@ namespace Blaze.API.AW
 
         private static ActionMenuOpener GetActionMenuOpener()
         {
-            if (ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_0.IsOpen() == false &&
-                ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_1.IsOpen() == true)
+            if (ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_0.IsOpen() ==
+                false &&
+                ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_1.IsOpen() ==
+                true)
             {
                 return ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_1;
             }
 
-            if (ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_0.IsOpen() == true &&
-                ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_1.IsOpen() == false)
+            if (ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_0.IsOpen() ==
+                true &&
+                ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_1.IsOpen() ==
+                false)
             {
                 return ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.field_Public_ActionMenuOpener_0;
             }
@@ -41,13 +45,14 @@ namespace Blaze.API.AW
         public static void OpenMainPage(ActionMenu menu)
         {
             activeActionMenu = menu;
-          
-            foreach (ActionMenuButton button in mainMenuButtons)
+
+            foreach (var button in mainMenuButtons)
             {
-                PedalOption pedalOption = activeActionMenu.Method_Private_PedalOption_0();
+                var pedalOption = activeActionMenu.Method_Private_PedalOption_0();
 
                 pedalOption.prop_String_0 = button.buttonText;
-                pedalOption.field_Public_Func_1_Boolean_0 = DelegateSupport.ConvertDelegate<Il2CppSystem.Func<bool>>(button.buttonAction);
+                pedalOption.field_Public_Func_1_Boolean_0 =
+                    DelegateSupport.ConvertDelegate<Il2CppSystem.Func<bool>>(button.buttonAction);
 
                 if (button.buttonIcon != null)
                 {
@@ -60,7 +65,7 @@ namespace Blaze.API.AW
 
         public class ActionMenuPage
         {
-            public List<ActionMenuButton> buttons = new List<ActionMenuButton>();
+            public List<ActionMenuButton> buttons = new();
             public ActionMenuPage previousPage;
             public ActionMenuButton menuEntryButton;
 
@@ -68,43 +73,42 @@ namespace Blaze.API.AW
             {
                 if (baseMenu == ActionMenuBaseMenu.MainMenu)
                 {
-                    menuEntryButton = new ActionMenuButton(ActionMenuBaseMenu.MainMenu, buttonText, delegate ()
-                    {
-                        OpenMenu();
-                    }, buttonIcon);
+                    menuEntryButton = new ActionMenuButton(ActionMenuBaseMenu.MainMenu, buttonText,
+                        delegate() { OpenMenu(); }, buttonIcon);
                 }
             }
 
             public ActionMenuPage(ActionMenuPage basePage, string buttonText, Texture2D buttonIcon = null)
             {
-                ActionMenuPage page = this;
+                var page = this;
 
                 previousPage = basePage;
-                menuEntryButton = new ActionMenuButton(previousPage, buttonText, delegate ()
-                {
-                    page.OpenMenu();
-                }, buttonIcon);
+                menuEntryButton =
+                    new ActionMenuButton(previousPage, buttonText, delegate() { page.OpenMenu(); }, buttonIcon);
             }
-             
+
             public void OpenMenu()
             {
-                GetActionMenuOpener().field_Public_ActionMenu_0.Method_Public_Page_Action_Action_Texture2D_String_0(new Action(() =>
-                {
-                    foreach (ActionMenuButton button in buttons)
+                GetActionMenuOpener().field_Public_ActionMenu_0.Method_Public_Page_Action_Action_Texture2D_String_0(
+                    new Action(() =>
                     {
-                        PedalOption pedalOption = GetActionMenuOpener().field_Public_ActionMenu_0.Method_Private_PedalOption_0();
-
-                        pedalOption.prop_String_0 = button.buttonText;
-                        pedalOption.field_Public_Func_1_Boolean_0 = DelegateSupport.ConvertDelegate<Il2CppSystem.Func<bool>>(button.buttonAction);
-
-                        if (button.buttonIcon != null)
+                        foreach (var button in buttons)
                         {
-                            pedalOption.Method_Public_Virtual_Final_New_Void_Texture2D_0(button.buttonIcon);
-                        }
+                            var pedalOption = GetActionMenuOpener().field_Public_ActionMenu_0
+                                .Method_Private_PedalOption_0();
 
-                        button.currentPedalOption = pedalOption;
-                    }
-                }));
+                            pedalOption.prop_String_0 = button.buttonText;
+                            pedalOption.field_Public_Func_1_Boolean_0 =
+                                DelegateSupport.ConvertDelegate<Il2CppSystem.Func<bool>>(button.buttonAction);
+
+                            if (button.buttonIcon != null)
+                            {
+                                pedalOption.Method_Public_Virtual_Final_New_Void_Texture2D_0(button.buttonIcon);
+                            }
+
+                            button.currentPedalOption = pedalOption;
+                        }
+                    }));
             }
         }
 
@@ -120,7 +124,7 @@ namespace Blaze.API.AW
             {
                 buttonText = text;
                 buttonIcon = icon;
-                buttonAction = delegate ()
+                buttonAction = delegate()
                 {
                     action();
 
@@ -137,7 +141,7 @@ namespace Blaze.API.AW
             {
                 buttonText = text;
                 buttonIcon = icon;
-                buttonAction = delegate ()
+                buttonAction = delegate()
                 {
                     action();
 

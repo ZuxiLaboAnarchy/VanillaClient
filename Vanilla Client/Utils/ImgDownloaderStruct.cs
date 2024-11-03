@@ -1,5 +1,4 @@
-﻿
-namespace Vanilla.Utils
+﻿namespace Vanilla.Utils
 {
     internal struct ImageDownloadContainer
     {

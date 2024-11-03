@@ -5,8 +5,8 @@ namespace Vanilla.Modules
 {
     internal class PerfModule : VanillaModule
     {
-
         protected override string ModuleName => "Performance Module";
+
         internal override void LateStart()
         {
             Application.targetFrameRate = 1000;
@@ -15,35 +15,32 @@ namespace Vanilla.Modules
 
         internal override void AppFocus(bool state)
         {
-            
             if (!state)
             {
-              //  GeneralUtils.ClearVRAM();
+                //  GeneralUtils.ClearVRAM();
                 Application.targetFrameRate = 20;
                 Dev("PerfModule", "Set Framerate to 20 Successfully");
                 return;
             }
-         
+
             Application.targetFrameRate = 1000;
             Dev("PerfModule", "Set Framerate to 1000 Successfully");
         }
 
         internal override void Update()
         {
-
             try
             {
-                if (ImageDownloaderPatch.imageDownloadQueue.Count > 0 && ImageDownloaderPatch.imageDownloadQueue.TryDequeue(out var imageContainer))
+                if (ImageDownloaderPatch.imageDownloadQueue.Count > 0 &&
+                    ImageDownloaderPatch.imageDownloadQueue.TryDequeue(out var imageContainer))
                 {
-
-                    ImageDownloaderPatch.DownloadImage(imageContainer.imageUrl, imageContainer.imageSize, (Action<Texture2D>)delegate (Texture2D tex)
-                    {
-                        CacheUtils.AddCachedImage(imageContainer.imageUrl, tex);
-                        imageContainer.onImageDownload.Invoke(tex);
-                    }, (Action)delegate
-                    {
-                        imageContainer.onImageDownloadFailed.Invoke();
-                    }, imageContainer.fallbackImageUrl, imageContainer.isRetry);
+                    ImageDownloaderPatch.DownloadImage(imageContainer.imageUrl, imageContainer.imageSize,
+                        (Action<Texture2D>)delegate(Texture2D tex)
+                        {
+                            CacheUtils.AddCachedImage(imageContainer.imageUrl, tex);
+                            imageContainer.onImageDownload.Invoke(tex);
+                        }, (Action)delegate { imageContainer.onImageDownloadFailed.Invoke(); },
+                        imageContainer.fallbackImageUrl, imageContainer.isRetry);
                 }
             }
 
@@ -51,8 +48,6 @@ namespace Vanilla.Modules
             {
                 ExceptionHandler("Perf", e5);
             }
-
         }
     }
-
 }

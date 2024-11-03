@@ -12,16 +12,24 @@ namespace Vanilla.Wrappers
 {
     internal static class GeneralWrappers
     {
-     
+        public static Player LocalPlayer()
+        {
+            return Player.prop_Player_0;
+        }
 
-     
-        public static Player LocalPlayer() => Player.prop_Player_0;
-        private static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
-        internal static bool IsFriend(this VRC.Player player) => APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);
+        private static Player[] GetAllPlayers()
+        {
+            return PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+        }
+
+        internal static bool IsFriend(this Player player)
+        {
+            return APIUser.CurrentUser.friendIDs.Contains(player.field_Private_APIUser_0.id);
+        }
+
         private static Camera uiCamera;
         private static Camera photoCamera;
         private static GameObject reticleObj;
-
 
 
         internal static ApiWorld GetWorld()
@@ -40,6 +48,7 @@ namespace Vanilla.Wrappers
             {
                 return GetWorldInstance() != null;
             }
+
             return true;
         }
 
@@ -58,13 +67,14 @@ namespace Vanilla.Wrappers
         {
             return VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0;
         }
-        
+
         internal static Camera GetUICamera()
         {
             if (uiCamera == null)
             {
                 uiCamera = GetPlayerCamera().transform.Find("StackedCamera : Cam_InternalUI").GetComponent<Camera>();
             }
+
             return uiCamera;
         }
 
@@ -72,8 +82,10 @@ namespace Vanilla.Wrappers
         {
             if (photoCamera == null)
             {
-                photoCamera = FPVCameraController.field_Public_Static_FPVCameraController_0.field_Public_GameObject_0.GetComponent<Camera>();
+                photoCamera = FPVCameraController.field_Public_Static_FPVCameraController_0.field_Public_GameObject_0
+                    .GetComponent<Camera>();
             }
+
             return photoCamera;
         }
 
@@ -83,17 +95,24 @@ namespace Vanilla.Wrappers
             {
                 reticleObj = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud/ReticleParent");
             }
+
             return reticleObj;
         }
+
         public static void CopyInstanceToClipboard()
         {
-            if (RoomManager.field_Internal_Static_ApiWorldInstance_0 is null) return;
-                GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
-                Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
+            if (RoomManager.field_Internal_Static_ApiWorldInstance_0 is null)
+            {
+                return;
+            }
+
+            GeneralUtils.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
+            Log("World", "Copied \"" + RoomManager.field_Internal_Static_ApiWorldInstance_0.id + "\".");
         }
+
         public static void JoinInstanceFromClipboard()
         {
-            string text = Clipboard.GetText();
+            var text = Clipboard.GetText();
             if (string.IsNullOrEmpty(text))
             {
                 Log("JoinWorld", "World ID Was empty", ConsoleColor.Red);
@@ -103,43 +122,49 @@ namespace Vanilla.Wrappers
                 GoToRoom(text);
             }
         }
+
         internal static bool IsClientUser(PlayerInformation player)
         {
             if (player.isClientUser)
             {
                 return true;
             }
+
             if (player.lastNetworkedUpdatePacketNumber <= 1)
             {
                 return false;
             }
+
             if (player.GetPing() < 10)
             {
-               Log("Detector", player.displayName + " is a client user (2)", System.ConsoleColor.Gray, "IsClientUser");
+                Log("Detector", player.displayName + " is a client user (2)", ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
+
             if (player.GetFPS() < 1)
             {
-                Log("Detector", player.displayName + " is a client user (3)", System.ConsoleColor.Gray, "IsClientUser");
+                Log("Detector", player.displayName + " is a client user (3)", ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
+
             if (player.isQuestUser)
             {
                 if (player.GetFPS() > 120 || !player.isVRUser)
                 {
-                    Log("Detector", player.displayName + " is a client user (4)", System.ConsoleColor.Gray, "IsClientUser");
+                    Log("Detector", player.displayName + " is a client user (4)", ConsoleColor.Gray, "IsClientUser");
                     player.isClientUser = true;
                     return true;
                 }
             }
             else if (player.GetFPS() > 144 || player.GetPing() > 3000)
             {
-                Log("Detector", player.displayName + " is a client user (5)", System.ConsoleColor.Gray, "IsClientUser");
+                Log("Detector", player.displayName + " is a client user (5)", ConsoleColor.Gray, "IsClientUser");
                 player.isClientUser = true;
                 return true;
             }
+
             if (player.detectedFirstGround)
             {
                 if (player.GetVelocity().y == 0f && !player.IsGrounded())
@@ -147,7 +172,8 @@ namespace Vanilla.Wrappers
                     player.airstuckDetections++;
                     if (player.airstuckDetections >= 5)
                     {
-                        Log("Detector", player.displayName + " is a client user (6)", System.ConsoleColor.Gray, "IsClientUser");
+                        Log("Detector", player.displayName + " is a client user (6)", ConsoleColor.Gray,
+                            "IsClientUser");
                         player.isClientUser = true;
                         return true;
                     }
@@ -161,31 +187,37 @@ namespace Vanilla.Wrappers
             {
                 player.detectedFirstGround = true;
             }
+
             return false;
         }
-        internal static List<T> FindAllComponentsInGameObject<T>(GameObject gameObject, bool includeInactive = true, bool searchParent = true, bool searchChildren = true) where T : class
+
+        internal static List<T> FindAllComponentsInGameObject<T>(GameObject gameObject, bool includeInactive = true,
+            bool searchParent = true, bool searchChildren = true) where T : class
         {
-            List<T> list = new List<T>();
+            var list = new List<T>();
             if (gameObject == null)
             {
                 return list;
             }
+
             try
             {
-                foreach (T component in gameObject.GetComponents<T>())
+                foreach (var component in gameObject.GetComponents<T>())
                 {
                     list.Add(component);
                 }
+
                 if (searchParent && gameObject.transform.parent != null)
                 {
-                    foreach (T item in gameObject.GetComponentsInParent<T>(includeInactive))
+                    foreach (var item in gameObject.GetComponentsInParent<T>(includeInactive))
                     {
                         list.Add(item);
                     }
                 }
+
                 if (searchChildren && gameObject.transform.childCount > 0)
                 {
-                    foreach (T componentsInChild in gameObject.GetComponentsInChildren<T>(includeInactive))
+                    foreach (var componentsInChild in gameObject.GetComponentsInChildren<T>(includeInactive))
                     {
                         list.Add(componentsInChild);
                     }
@@ -195,18 +227,22 @@ namespace Vanilla.Wrappers
             {
                 MelonLogger.Error("Misc", "FindAllComponentsInGameObject", e, "FindAllComponentsInGameObject", 388);
             }
+
             return list;
         }
+
         private static PageUserInfo pageUserInfo;
+
         internal static PageUserInfo GetPageUserInfo()
         {
             if (pageUserInfo == null)
             {
-                pageUserInfo = GameObject.Find("MenuContent/Screens/UserInfo").GetComponent<PageUserInfo>(); //adjusted for guid change
+                pageUserInfo =
+                    GameObject.Find("MenuContent/Screens/UserInfo")
+                        .GetComponent<PageUserInfo>(); //adjusted for guid change
             }
+
             return pageUserInfo;
         }
-
-
     }
 }

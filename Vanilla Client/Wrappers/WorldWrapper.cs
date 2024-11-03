@@ -9,18 +9,11 @@ namespace Vanilla.Wrappers
 {
     internal class WorldWrapper
     {
-
-       
-
-     
-
         private static int _countedPickups;
 
         private static int _countedPens;
 
-       
 
-        
         private static VRC_Pickup[] GetAllPickups { get; set; }
 
         private static VRC_MirrorReflection[] _mirrorReflectionArray;
@@ -29,38 +22,46 @@ namespace Vanilla.Wrappers
 
         private static List<VRC_Pickup> _penComponentList;
 
-        private static readonly List<string> PenComponentNameList = new List<string> { "pen", "marker", "grip" };
+        private static readonly List<string> PenComponentNameList = new() { "pen", "marker", "grip" };
 
-        internal static void GoToRoom(string ID) => Networking.GoToRoom(ID);
+        internal static void GoToRoom(string ID)
+        {
+            Networking.GoToRoom(ID);
+        }
 
 
         private static IEnumerator FindComponentsOnSceneLoad()
         {
             _countedPickups = 0;
             _countedPens = 0;
-           
+
             _penComponentList = new List<VRC_Pickup>();
             //_videoPlayerArray = Resources.FindObjectsOfTypeAll<VideoPlayer>().ToArray();
             _mirrorReflectionArray = Resources.FindObjectsOfTypeAll<VRC_MirrorReflection>().ToArray();
             _sdk3MirrorReflectionArray = Resources.FindObjectsOfTypeAll<VRCMirrorReflection>().ToArray();
-            VRC_Pickup[] getAllPickups = GetAllPickups;
-            foreach (VRC_Pickup pickup in getAllPickups)
+            var getAllPickups = GetAllPickups;
+            foreach (var pickup in getAllPickups)
             {
-                foreach (string item in PenComponentNameList.Where((string name) => pickup.name.ToLower().Contains(name) && !pickup.transform.parent.name.ToLower().Contains("eraser")))
+                foreach (var item in PenComponentNameList.Where((string name) =>
+                             pickup.name.ToLower().Contains(name) &&
+                             !pickup.transform.parent.name.ToLower().Contains("eraser")))
                 {
                     _ = item;
                     _penComponentList.Add(pickup);
                 }
+
                 _countedPens++;
             }
-            VRC_Pickup[] getAllPickups2 = GetAllPickups;
-            foreach (VRC_Pickup pickup2 in getAllPickups2)
+
+            var getAllPickups2 = GetAllPickups;
+            foreach (var pickup2 in getAllPickups2)
             {
                 if (pickup2 != null)
                 {
                     _countedPickups++;
                 }
             }
+
             yield break;
         }
 
@@ -70,18 +71,18 @@ namespace Vanilla.Wrappers
             {
                 return;
             }
-            VRC_Pickup[] getAllPickups = GetAllPickups;
+
+            var getAllPickups = GetAllPickups;
             if (state)
             {
-                VRC_Pickup[] array = getAllPickups;
-                foreach (VRC_Pickup vRC_Pickup in array)
+                var array = getAllPickups;
+                foreach (var vRC_Pickup in array)
                 {
                     if (vRC_Pickup != null)
                     {
-                        vRC_Pickup.gameObject.SetActive(value: false);
+                        vRC_Pickup.gameObject.SetActive(false);
                     }
                 }
-                
             }
             else
             {
@@ -89,12 +90,13 @@ namespace Vanilla.Wrappers
                 {
                     return;
                 }
-                VRC_Pickup[] array2 = getAllPickups;
-                foreach (VRC_Pickup vRC_Pickup2 in array2)
+
+                var array2 = getAllPickups;
+                foreach (var vRC_Pickup2 in array2)
                 {
                     if (vRC_Pickup2 != null)
                     {
-                        vRC_Pickup2.gameObject.SetActive(value: true);
+                        vRC_Pickup2.gameObject.SetActive(true);
                     }
                 }
             }
@@ -106,25 +108,25 @@ namespace Vanilla.Wrappers
             {
                 return;
             }
+
             if (state)
             {
-                foreach (VRC_Pickup penComponent in _penComponentList)
+                foreach (var penComponent in _penComponentList)
                 {
                     if (penComponent != null)
                     {
-                        penComponent.gameObject.SetActive(value: false);
+                        penComponent.gameObject.SetActive(false);
                     }
                 }
-                
             }
-            foreach (VRC_Pickup penComponent2 in _penComponentList)
+
+            foreach (var penComponent2 in _penComponentList)
             {
                 if (penComponent2 != null)
                 {
-                    penComponent2.gameObject.SetActive(value: true);
+                    penComponent2.gameObject.SetActive(true);
                 }
             }
-            
         }
     }
 }

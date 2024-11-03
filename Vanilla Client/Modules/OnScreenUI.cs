@@ -18,7 +18,7 @@ namespace Vanilla.Modules
         private static readonly List<string> stringList = new();
         private const int MaxCapacity = 30; // 23 if using game object
 
-       
+
         internal static void AfterGameObjectInit(GameObject gobject)
         {
             #region Onscreen Logger Initlizer
@@ -28,9 +28,9 @@ namespace Vanilla.Modules
 
 
             // Create and Instantiate our object that contains the onscreen UI & Parent it to our base object
-            _uiLayerObject = UnityEngine.Object.Instantiate(AssetLoader.LoadGameObject("ZuxiCanvas"), gobject.transform, true);
+            _uiLayerObject =
+                UnityEngine.Object.Instantiate(AssetLoader.LoadGameObject("ZuxiCanvas"), gobject.transform, true);
 
-          
 
             // Set it active bc unity 
             _uiLayerObject.SetActive(true);
@@ -45,6 +45,7 @@ namespace Vanilla.Modules
             _uiLayerObject.transform.Find("ZuxiStatsUI").gameObject.SetActive(false);
             Dev("UILayer", "OnScreen Logger Created!");
             AddString("HelloWorld!");
+
             #endregion
         }
 
@@ -52,6 +53,7 @@ namespace Vanilla.Modules
         {
             Console.WriteLine("[UI DEBUG]: \n" + BuildUIList() + "[END.]");
         }
+
         internal override void OnGUI()
         {
             #region Status
@@ -65,13 +67,13 @@ namespace Vanilla.Modules
                   $"<color=cyan>User: </color><color=cyan>ANARCHY\n</color>");
               */
             // General Stats
-            UnityEngine.GUI.Label(new Rect(3f, 1000f, 160f, 90f),
+            GUI.Label(new Rect(3f, 1000f, 160f, 90f),
                 $"<color=cyan>Day: </color><color=cyan>{DateTime.Now.DayOfWeek}\n</color>");
-            UnityEngine.GUI.Label(new Rect(3f, 1012f, 160f, 90f),
+            GUI.Label(new Rect(3f, 1012f, 160f, 90f),
                 $"<color=cyan>Date: </color><color=cyan>{DateTime.Now.ToString("MM/dd/yyyy")}\n</color>");
-            UnityEngine.GUI.Label(new Rect(3f, 1024f, 160f, 90f),
+            GUI.Label(new Rect(3f, 1024f, 160f, 90f),
                 $"<color=cyan>Time: </color><color=cyan>{DateTime.Now.ToString("h:m:s tt")}\n</color>");
-            UnityEngine.GUI.Label(new Rect(3f, 1036f, 160f, 90f),
+            GUI.Label(new Rect(3f, 1036f, 160f, 90f),
                 $"<color=cyan>FPS: </color><color=cyan>{(int)(1.0f / Time.smoothDeltaTime)}\n</color>");
 
             #endregion
@@ -82,20 +84,27 @@ namespace Vanilla.Modules
         private static void OnGUIUpdateRequested()
         {
             if (_uiLogger != null)
+            {
                 _uiLogger.SetText(BuildUIList());
+            }
         }
 
         internal static void AddString(string newString)
         {
             if (string.IsNullOrEmpty(newString))
-            { OnGUIUpdateRequested(); return; }
-               
+            {
+                OnGUIUpdateRequested();
+                return;
+            }
+
             stringList.Add(newString + "<color=#00ffff> | " + FormatTimeWithTimeZone(DateTime.Now) + " </color>");
 
             // Check if the list size exceeds the maximum capacity
             if (stringList.Count > MaxCapacity)
                 // Remove the oldest string (the one at index 0)
+            {
                 stringList.RemoveAt(0);
+            }
 
             OnGUIUpdateRequested();
         }

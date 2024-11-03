@@ -8,6 +8,6 @@ namespace Vanilla.Misc
 {
     internal class ModCompatibility
     {
-       internal static bool BetterLoadingScreen; 
+        internal static bool BetterLoadingScreen;
     }
 }

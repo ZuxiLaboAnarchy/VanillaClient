@@ -9,11 +9,8 @@ namespace Vanilla
 {
     internal class BotHandle
     {
-
         internal static bool CheckBotHandle()
         {
-
-
             if (GeneralUtils.GetCommandLine().ToLower().Contains("--vanillabot"))
             {
                 Log("VanillaBot", "Bot Mode Enabled");
@@ -36,7 +33,5 @@ namespace Vanilla
             Log("Bot Manager", "Bot Manager Initilized =)", ConsoleColor.Green);
             Dev("VanillaBot", "BotHandler Setup");
         }
-
-
     }
 }

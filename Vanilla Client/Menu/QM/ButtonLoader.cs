@@ -20,17 +20,17 @@ namespace Vanilla.QM
     {
         protected override string ModuleName => "QM Loader";
 
-       
-        // [Zuxi.SDK.DoNotObfuscate]
-        internal override void  OnQuickMenuLoaded()
-        {
 
-            var tabMenu = new QMTabMenu("Vanilla", "Abandon Ware", ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
+        // [Zuxi.SDK.DoNotObfuscate]
+        internal override void OnQuickMenuLoaded()
+        {
+            var tabMenu = new QMTabMenu("Vanilla", "Abandon Ware",
+                ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
 
             //  GameObject.Find("Canvas_QuickMenu(Clone)/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/").gameObject.SetActive(false);
 
-            var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord", delegate
-            { Process.Start("https://imzuxi.com/galaxydiscord/"); }, "Join The Discord");
+            var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord",
+                delegate { Process.Start("https://imzuxi.com/galaxydiscord/"); }, "Join The Discord");
 /*
             var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
             {
@@ -42,17 +42,19 @@ namespace Vanilla.QM
                 });
             }, "Go To Room");
 */
-            var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID", delegate
-            {
-                InternalUIManager.RunKeyBoardPopup("Enter Avatar ID", "AvatarID", "Change Avatar", null, PlayerWrapper.ChangePlayerAvatar, null);
+            var AvatarID = new QMSingleButton(tabMenu, 3, 0, "AvatarID",
+                delegate
+                {
+                    InternalUIManager.RunKeyBoardPopup("Enter Avatar ID", "AvatarID", "Change Avatar", null,
+                        PlayerWrapper.ChangePlayerAvatar, null);
+                }, "Change Avatar By ID");
 
-
-            }, "Change Avatar By ID");
-
-            var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "JoinWorld", delegate
-            {
-                InternalUIManager.RunKeyBoardPopup("Enter WorldID", "WorldID", "Go to World", null, WorldWrapper.GoToRoom, null);
-            }, "Change Your Current World");
+            var JoinWorld = new QMSingleButton(tabMenu, 2, 0, "JoinWorld",
+                delegate
+                {
+                    InternalUIManager.RunKeyBoardPopup("Enter WorldID", "WorldID", "Go to World", null,
+                        WorldWrapper.GoToRoom, null);
+                }, "Change Your Current World");
 
 
             var RestartAndRejoin = new QMSingleButton(tabMenu, 1, 1, "Restart And Rejoin", delegate
@@ -62,14 +64,18 @@ namespace Vanilla.QM
             }, "Change Your Current World");
 
             // var SelectedPlayerMenu = new QMNestedButton("", 2, 2, "Mic Settings", "Vanilla", "AbandonWare");
-            var selectedmenu = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
+            var selectedmenu =
+                GameObject.Find(
+                    "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
             //selectedmenu.FindObject
 
 
             //  var selectedGroup = UnityEngine.Object.Instantiate(selectedmenu.gameObject,selectedmenu.gameObject.transform.parent);
-            var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla", "Target functions for AbandonWare", "Vanilla");
+            var Selected = new QMNestedButton("Menu_SelectedUser_Local", 0, 0, "Vanilla",
+                "Target functions for AbandonWare", "Vanilla");
 
-            Selected.GetMainButton().SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
+            Selected.GetMainButton()
+                .SetBackgroundImage(ImageUtils.CreateSprite(AssetLoader.LoadTexture("VanillaClientLogo")));
             Selected.GetMainButton().GetGameObject().transform.SetParent(selectedmenu.transform);
 
             UnityEngine.Object.Destroy(Selected.GetMainButton().GetGameObject().GetComponent<StyleElement>());
@@ -89,7 +95,8 @@ namespace Vanilla.QM
             var GeneralMenuButton = new QMNestedButton(tabMenu, 4, 0, "General\nMenu", "Vanilla", "AbandonWare");
             GeneralMenu.InitMenu(GeneralMenuButton);
 
-            var MovementMenu = new QMNestedButton(GeneralMenuButton, 4, 0, "Movement Settings", "Vanilla", "AbandonWare");
+            var MovementMenu =
+                new QMNestedButton(GeneralMenuButton, 4, 0, "Movement Settings", "Vanilla", "AbandonWare");
             Movement.InitMenu(MovementMenu);
 
             var ExploitMenuButton = new QMNestedButton(tabMenu, 2, 3, "Exploits", "Vanilla", "AbandonWare");
@@ -111,14 +118,14 @@ namespace Vanilla.QM
             SafetyMenu.InitMenu(SafeMenu);
 #if DEBUG
             var DevMenuButton = new QMNestedButton(tabMenu, 4, 3, "DevMenu", "Vanilla", "AbandonWare");
-            Menu.DevMenu.InitMenu(DevMenuButton);
+            DevMenu.InitMenu(DevMenuButton);
 
 #endif
             // TODO Fix button Alignment
-           // ScriptingMenu.CreateScriptButtons(tabMenu);
+            // ScriptingMenu.CreateScriptButtons(tabMenu);
             // MelonCoroutines.Start(UpdateQuickMenuBackGround());
 
-            Vanilla.Modules.MenuModification.UpdateQuickMenuColors(); 
+            MenuModification.UpdateQuickMenuColors();
 
             //QMImage.LoadQMImage(); 
             // ButInfo.Info(tabMenu);
@@ -134,9 +141,5 @@ namespace Vanilla.QM
 
             //just an alert that the buttons should of loaded properly
         }
-
-    
     }
 }
-
-

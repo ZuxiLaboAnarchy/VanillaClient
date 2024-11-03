@@ -10,6 +10,6 @@ namespace Vanilla.Config
 {
     internal class UploadQueueConfig
     {
-        public Queue<TempUploadContainer> UploadQueue = new Queue<TempUploadContainer>();
+        public Queue<TempUploadContainer> UploadQueue = new();
     }
 }

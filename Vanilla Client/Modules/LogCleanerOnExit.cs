@@ -14,18 +14,23 @@ namespace Vanilla.Modules
     {
         internal override void Stop()
         {
-            if (!MainConfig.GetInstance().ClearLogsOnExit) { return;  }
-            string arguments = "--silent";
-            foreach (string stringi in Environment.GetCommandLineArgs())
+            if (!GetInstance().ClearLogsOnExit)
+            {
+                return;
+            }
+
+            var arguments = "--silent";
+            foreach (var stringi in Environment.GetCommandLineArgs())
             {
                 arguments += $"{stringi} ";
             }
-            System.Diagnostics.Process vrcProcess = new System.Diagnostics.Process();
+
+            var vrcProcess = new Process();
             vrcProcess.StartInfo.FileName = FileHelper.GetCheatFolder() + "\\Resources\\AnarchyLogCleaner.exe";
             vrcProcess.StartInfo.Arguments = arguments;
             vrcProcess.Start();
 
-         //   Process.GetCurrentProcess().Kill();
+            //   Process.GetCurrentProcess().Kill();
         }
     }
 }

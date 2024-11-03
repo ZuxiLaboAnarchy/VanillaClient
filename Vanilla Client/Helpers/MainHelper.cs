@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -24,8 +23,7 @@ namespace Vanilla.Helpers
 
         private float nextPop = 0f;
         private float nextUpdateFetch = 0f;
-        public static List<string> AvatarList = new List<string>();
-
+        public static List<string> AvatarList = new();
 
 
         /*private static System.Timers.Timer WSHelperTimer;
@@ -51,49 +49,44 @@ namespace Vanilla.Helpers
 
 
 
-       
+
 
            }*/
-        static WebClient webClient = new WebClient();
-      
+        private static WebClient webClient = new();
+
         internal override void Start()
         {
-            MainConfig.GetInstance().Load();
+            GetInstance().Load();
             webClient.Headers["User-Agent"] = "ZuxiUA.Anarchy-AAA7FB29";
             MelonLoader.MelonCoroutines.Start(WaitForUI());
 
-             FetchUpdates();
+            FetchUpdates();
 
             //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
-
-
         protected internal static IEnumerator WaitForUI()
         {
-
             // while (GeneralWrappers.GetVRCUiManager() == null)
-
 
 
             while (GameObject.Find("HUD_UI 2(Clone)/VR Canvas/Container/Center/F2/User Event Carousel") == null)
             {
                 yield return null;
             }
+
             Dev("HudManager", "HUD Loaded Injecting Alert Panel");
 
             //LogHandler.SetupHud();
 
             //GameObject.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_MM_WorldDialog/Background_Scrim").SetActive(false);
-
         }
-
 
 
         internal override void Debug()
         {
-            string text = "<color=green>DEBUG <color=purple>" + "Debug Key Pressed ";
+            var text = "<color=green>DEBUG <color=purple>" + "Debug Key Pressed ";
 
             // LogToHud(text);
 
@@ -101,139 +94,120 @@ namespace Vanilla.Helpers
 
             // InformHudText("PlayerJoin", text);
             Log("DebugKey", text);
-
         }
-
-
-
 
 
         internal override void Update()
         {
-           
             if (Time.realtimeSinceStartup >= nextPop)
             {
                 nextPop = Time.realtimeSinceStartup + 10f;
                 //TODO Update API for Anarchy bc this is based off of old VRC stuff wich is still used lol
-             //   new Thread(() => { ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString()); }).Start();
-             //   new Thread(() => { Upload.SendUpdates(); }).Start();
+                //   new Thread(() => { ServerResponceHandler.HandleUpdate(Server.SendPostRequestInternal("FetchVRChatUpdates", null, null).ToString()); }).Start();
+                //   new Thread(() => { Upload.SendUpdates(); }).Start();
                 WSBase.KeepAlivePack();
-             //   LogHandler.Dev("MainHelper", "Webcock Complete: " + UpdateNumber);
-              //  UpdateNumber++;
+                //   LogHandler.Dev("MainHelper", "Webcock Complete: " + UpdateNumber);
+                //  UpdateNumber++;
             }
 
 
             if (Time.realtimeSinceStartup >= nextUpdateFetch && PlayerWrapper.GetCurrentPlayerObject() != null)
             {
-
                 nextUpdateFetch = Time.realtimeSinceStartup + 60f;
                 FetchUpdates();
                 if (!RuntimeConfig.isBot)
                 {
-                  //  MainConfig.GetInstance().Save();
-                    if (MainConfig.GetInstance().AutoFrends) { FriendLogger.AutoLogFriendsToFile(); }
+                    //  MainConfig.GetInstance().Save();
+                    if (GetInstance().AutoFrends)
+                    {
+                        FriendLogger.AutoLogFriendsToFile();
+                    }
+
                     WSBase.KeepAlivePack();
-                    LogHandler.Dev("MainHelper", "Update Complete: " + UpdateNumber);
+                    Dev("MainHelper", "Update Complete: " + UpdateNumber);
                 }
-             //   new Thread(() => { WSBase.Pop(); }).Start();
+                //   new Thread(() => { WSBase.Pop(); }).Start();
                 //UpdateNumber++;
             }
-
-
-
         }
 
         internal static void FetchUpdates()
         {
             Dev("Update", "Fetching Updates");
-           
-            string data = webClient.DownloadString("https://anarchy.zuxi.dev/api/getdata");
+
+            var data = webClient.DownloadString("https://anarchy.zuxi.dev/api/getdata");
 
             ServerResponceHandler.HandleUpdate(data);
         }
-
-
-
-
-
 
 
         internal static bool AvatarLogHandler()
         {
             try
             {
-
-                foreach (VRCPlayer __instance in UnityEngine.Object.FindObjectsOfType<VRCPlayer>())
+                foreach (var __instance in UnityEngine.Object.FindObjectsOfType<VRCPlayer>())
                 {
-
-                    if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
+                    if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null &&
+                        __instance.field_Private_ApiAvatar_0 != null)
                     {
                         var a = __instance.field_Private_ApiAvatar_0;
                         if (AvatarList.Contains(a.id))
-                        { continue; }
+                        {
+                            continue;
+                        }
+
                         AvatarList.Add(a.id);
                         SentAvatarCount++;
-                        UploadHelper.UploadAvatarToGlobalDatabase(new FavoriteAvatar(__instance.field_Private_ApiAvatar_0));
-
-
+                        UploadHelper.UploadAvatarToGlobalDatabase(
+                            new FavoriteAvatar(__instance.field_Private_ApiAvatar_0));
                     }
-                    else { Dev("Avatar", "Found Avatar Already"); }
+                    else
+                    {
+                        Dev("Avatar", "Found Avatar Already");
+                    }
                 }
             }
             catch (Exception e)
             {
-                LogHandler.ExceptionHandler("AvatarLogger", e);
+                ExceptionHandler("AvatarLogger", e);
             }
+
             return true;
         }
 
         internal static void PopAvatarLog()
         {
-            for (int i = 0; i < AvatarLog.Count; i++)
+            for (var i = 0; i < AvatarLog.Count; i++)
             {
-
                 if (!AvatarLog.TryDequeue(out var a))
-                { continue; }
+                {
+                    continue;
+                }
 
 
-
-
-                Dictionary<string, string> AvatarsUploadPram = new Dictionary<string, string>
-                            {
-                                { "avatar_id", a.avatar_id },
-                                { "avatar_name", a.avatar_name },
-                                { "avatar_author_name", a.avatar_author_name },
-                                { "avatar_author_id", a.avatar_author_id },
-                                { "avatar_asset_url", a.avatar_asset_url },
-                                { "avatar_thumbnail", a.avatar_thumbnail },
-                                { "avatar_supported_platforms", a.avatar_supported_platforms },
-                                { "avatar_release_status", a.avatar_release_status }
-                            };
-
+                var AvatarsUploadPram = new Dictionary<string, string>
+                {
+                    { "avatar_id", a.avatar_id },
+                    { "avatar_name", a.avatar_name },
+                    { "avatar_author_name", a.avatar_author_name },
+                    { "avatar_author_id", a.avatar_author_id },
+                    { "avatar_asset_url", a.avatar_asset_url },
+                    { "avatar_thumbnail", a.avatar_thumbnail },
+                    { "avatar_supported_platforms", a.avatar_supported_platforms },
+                    { "avatar_release_status", a.avatar_release_status }
+                };
 
 
                 // AvatarList.Add(a.avatar_id);
                 SentAvatarCount++;
 
 
-
                 AvatarsUploadPram.Clear();
             }
-
-
-
         }
 
-        internal protected static readonly System.Collections.Concurrent.ConcurrentQueue<AvatarLog> AvatarLog = new System.Collections.Concurrent.ConcurrentQueue<AvatarLog>();
-
+        protected internal static readonly System.Collections.Concurrent.ConcurrentQueue<AvatarLog> AvatarLog = new();
     }
-
-
-
-
-
-
-
 
 
     internal struct AvatarLog

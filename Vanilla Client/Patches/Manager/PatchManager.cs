@@ -14,36 +14,47 @@ namespace Vanilla.Patches
         internal static int PatchedMethods = 0;
         internal static List<VanillaPatches> Patches = new();
         internal static string[] Ignore = { };
+
         internal override void Start()
         {
-       
-            Assembly currentAssembly = Assembly.GetExecutingAssembly();
+            var currentAssembly = Assembly.GetExecutingAssembly();
 
-            IEnumerable<Type> InternalTypes = currentAssembly.GetTypes()
-           .Where(type => type.IsSubclassOf(typeof(VanillaPatches)));
+            var InternalTypes = currentAssembly.GetTypes()
+                .Where(type => type.IsSubclassOf(typeof(VanillaPatches)));
 
-            foreach (Type type in InternalTypes)
+            foreach (var type in InternalTypes)
             {
-              //  Console.WriteLine(type.FullName);
-                if (!Ignore.Contains<string>(type.FullName.ToLower())){
+                //  Console.WriteLine(type.FullName);
+                if (!Ignore.Contains<string>(type.FullName.ToLower()))
+                {
                     Patches.Add((VanillaPatches)Activator.CreateInstance(type));
-                }               
+                }
             }
 
-        /*    //BotPatches
-            Patches.Add(new SteamworksPatch());
-            Patches.Add(new HWIDPatch());
-            Patches.Add(new PhotonPatch());
-            Patches.Add(new VRCPlayerPatch());
-            Patches.Add(new NetworkManagerPatch());
-            Patches.Add(new PlayerPatch());
-            Patches.Add(new ImageDownloaderPatch());
-            // Patches.Add(new Scanner());
-            // Patches.Add(new UnityExplorerPatch());*/
+            /*    //BotPatches
+                Patches.Add(new SteamworksPatch());
+                Patches.Add(new HWIDPatch());
+                Patches.Add(new PhotonPatch());
+                Patches.Add(new VRCPlayerPatch());
+                Patches.Add(new NetworkManagerPatch());
+                Patches.Add(new PlayerPatch());
+                Patches.Add(new ImageDownloaderPatch());
+                // Patches.Add(new Scanner());
+                // Patches.Add(new UnityExplorerPatch());*/
 #if DEBUG
             // Patches.Add(new CurserPatch());
 #endif
-            for (int i = 0; i < PatchManager.Patches.Count; i++) { try { PatchManager.Patches[i].Patch(); } catch (Exception e) { ExceptionHandler("Patches", e, Patches[i].GetPatchName()); } }
+            for (var i = 0; i < Patches.Count; i++)
+            {
+                try
+                {
+                    Patches[i].Patch();
+                }
+                catch (Exception e)
+                {
+                    ExceptionHandler("Patches", e, Patches[i].GetPatchName());
+                }
+            }
 
             Dev("PatchManager", "Initialized");
             Log("PatchManager", $"Patched {PatchedMethods} methods.", ConsoleColor.Green);
@@ -53,7 +64,7 @@ namespace Vanilla.Patches
         {
             UnpatchAllMethods();
 
-            Dev("PatchManager", $"Unpatched {PatchManager.PatchedMethods} Methods");
+            Dev("PatchManager", $"Unpatched {PatchedMethods} Methods");
             Patches.Clear();
             Dev("PatchManager", $"Patch Manager Destroyed");
         }
@@ -69,10 +80,11 @@ namespace Vanilla.Patches
 
         internal static void UnpatchAllMethods()
         {
-            for (int i = 0; i < patchedMethods.Count; i++)
+            for (var i = 0; i < patchedMethods.Count; i++)
             {
                 EncryptedPatch.Unpatch(patchedMethods[i], HarmonyPatchType.All, EncryptedPatch.Id);
             }
+
             patchedMethods.Clear();
         }
 
@@ -80,15 +92,18 @@ namespace Vanilla.Patches
         {
             if (patchType == null)
             {
-                Log("PatchManager", "Cannot use GetLocalPatch as LocalPatchHandler hasn't been called yet", ConsoleColor.Gray);
+                Log("PatchManager", "Cannot use GetLocalPatch as LocalPatchHandler hasn't been called yet",
+                    ConsoleColor.Gray);
                 return null;
             }
-            MethodInfo method = patchType.GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic);
+
+            var method = patchType.GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic);
             if (method == null)
             {
                 Log("PatchManager", "Failed to find valid method named: " + name, ConsoleColor.Gray);
                 return null;
             }
+
             return new HarmonyMethod(method);
         }
 
@@ -96,18 +111,20 @@ namespace Vanilla.Patches
         {
             try
             {
-                foreach (XrefInstance item in XrefScanner.XrefScan(methodBase))
+                foreach (var item in XrefScanner.XrefScan(methodBase))
                 {
                     if (item.Type != 0 || !item.ReadAsObject().ToString().Contains(match))
                     {
                         continue;
                     }
+
                     return true;
                 }
             }
             catch
             {
             }
+
             return false;
         }
 
@@ -115,35 +132,39 @@ namespace Vanilla.Patches
         {
             try
             {
-                foreach (XrefInstance item in XrefScanner.UsedBy(methodBase))
+                foreach (var item in XrefScanner.UsedBy(methodBase))
                 {
-                    MethodBase methodBase2 = item.TryResolve();
-                    if (methodBase2 == null || !methodBase2.Name.Contains(methodName) || (maxMethodNameLength > 0 && (maxMethodNameLength <= 0 || methodBase2.Name.Length > maxMethodNameLength)))
+                    var methodBase2 = item.TryResolve();
+                    if (methodBase2 == null || !methodBase2.Name.Contains(methodName) || (maxMethodNameLength > 0 &&
+                            (maxMethodNameLength <= 0 || methodBase2.Name.Length > maxMethodNameLength)))
                     {
                         continue;
                     }
+
                     return true;
                 }
             }
             catch
             {
             }
+
             return false;
         }
 
         internal static bool CheckUsing(MethodInfo methodBase, string match, Type type)
         {
-            foreach (XrefInstance item in XrefScanner.XrefScan(methodBase))
+            foreach (var item in XrefScanner.XrefScan(methodBase))
             {
                 if (item.Type == XrefType.Method)
                 {
-                    MethodBase methodBase2 = item.TryResolve();
+                    var methodBase2 = item.TryResolve();
                     if (!(methodBase2 == null) && methodBase2.DeclaringType == type && methodBase2.Name.Contains(match))
                     {
                         return true;
                     }
                 }
             }
+
             return false;
         }
 
@@ -153,8 +174,8 @@ namespace Vanilla.Patches
             Log("AnalyzeFunction", "Starting analyze of function: " + methodBase.Name, ConsoleColor.Gray);
             try
             {
-                int num = 0;
-                foreach (XrefInstance item in XrefScanner.XrefScan(methodBase))
+                var num = 0;
+                foreach (var item in XrefScanner.XrefScan(methodBase))
                 {
                     if (item.Type == XrefType.Global)
                     {
@@ -162,26 +183,30 @@ namespace Vanilla.Patches
                     }
                     else
                     {
-                        MethodBase methodBase2 = item.TryResolve();
+                        var methodBase2 = item.TryResolve();
                         if (methodBase2 == null)
                         {
                             continue;
                         }
+
                         Log("AnalyzeFunction", "XrefScan Method: " + methodBase2.Name, ConsoleColor.Gray);
                     }
+
                     num++;
                 }
+
                 Log("AnalyzeFunction", $"XrefScan Instances: {num}", ConsoleColor.Gray);
-                int num2 = 0;
-                foreach (XrefInstance item2 in XrefScanner.UsedBy(methodBase))
+                var num2 = 0;
+                foreach (var item2 in XrefScanner.UsedBy(methodBase))
                 {
-                    MethodBase methodBase3 = item2.TryResolve();
+                    var methodBase3 = item2.TryResolve();
                     if (!(methodBase3 == null))
                     {
                         Log("AnalyzeFunction", "UsedBy: " + methodBase3.Name, ConsoleColor.Gray);
                         num2++;
                     }
                 }
+
                 Log("AnalyzeFunction", $"UsedBy Instances: {num2}", ConsoleColor.Gray);
             }
             catch (Exception e)
@@ -190,19 +215,20 @@ namespace Vanilla.Patches
                 Log("AnalyzeFunction", "Analyze Complete!", ConsoleColor.Gray);
                 Log("AnalyzeFunction", "-------------------------------------------", ConsoleColor.Gray);
             }
-
         }
 
         internal static bool CheckNonGlobalMethod(MethodBase methodBase, string methodName, int maxMethodNameLength = 0)
         {
             try
             {
-                foreach (XrefInstance item in XrefScanner.XrefScan(methodBase))
+                foreach (var item in XrefScanner.XrefScan(methodBase))
                 {
                     if (item.Type == XrefType.Method)
                     {
-                        MethodBase methodBase2 = item.TryResolve();
-                        if (!(methodBase2 == null) && methodBase2.Name.Contains(methodName) && (maxMethodNameLength <= 0 || (maxMethodNameLength > 0 && methodBase2.Name.Length <= maxMethodNameLength)))
+                        var methodBase2 = item.TryResolve();
+                        if (!(methodBase2 == null) && methodBase2.Name.Contains(methodName) &&
+                            (maxMethodNameLength <= 0 ||
+                             (maxMethodNameLength > 0 && methodBase2.Name.Length <= maxMethodNameLength)))
                         {
                             return true;
                         }
@@ -212,16 +238,13 @@ namespace Vanilla.Patches
             catch
             {
             }
+
             return false;
         }
 
 
+        private static readonly HarmonyLib.Harmony EncryptedPatch = new("VanillaClient");
 
-
-        private static readonly HarmonyLib.Harmony EncryptedPatch = new HarmonyLib.Harmony("VanillaClient");
-
-        private static readonly List<MethodBase> patchedMethods = new List<MethodBase>();
-
-
+        private static readonly List<MethodBase> patchedMethods = new();
     }
 }

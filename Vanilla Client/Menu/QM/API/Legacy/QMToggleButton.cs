@@ -32,7 +32,7 @@ namespace Vanilla.Buttons.QM
             btnQMLoc = location;
             Initialize(btnXPos, btnYPos, btnText, onAction, offAction, btnToolTip, defaultState);
         }
-         
+
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState)
         {
             button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/" + btnQMLoc).transform, true);

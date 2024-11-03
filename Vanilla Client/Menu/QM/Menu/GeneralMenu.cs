@@ -19,43 +19,43 @@ namespace Vanilla.QM.Menu
 
         internal static void InitMenu(QMNestedButton GeneralMenu)
         {
-
-            var FlyToggle = new QMToggleButton(GeneralMenu, 1, 0, "Fly", delegate
-            {
-                FlyManager.ToggleFly();
-            }, delegate
-            {
-                FlyManager.ToggleFly();
-            }, "I believe i can Fly");
+            var FlyToggle = new QMToggleButton(GeneralMenu, 1, 0, "Fly", delegate { FlyManager.ToggleFly(); },
+                delegate { FlyManager.ToggleFly(); }, "I believe i can Fly");
 
 
             var Hidequest = new QMToggleButton(GeneralMenu, 2, 0, "Hidequest", delegate
             {
                 var playes = PlayerWrapper.GetAllPlayers();
-                for (int i = 0; i < playes._size; i++)
+                for (var i = 0; i < playes._size; i++)
                 {
                     if (playes[i].prop_APIUser_0.last_platform != "standalonewindows" && !playes[i].IsFriend())
+                    {
                         playes[i].gameObject.SetActive(false);
+                    }
                 }
+
                 LogToHud("Quest are Hidden");
             }, delegate
             {
                 var playes = PlayerWrapper.GetAllPlayers();
-                for (int i = 0; i < playes._size; i++)
+                for (var i = 0; i < playes._size; i++)
                 {
                     if (playes[i].prop_APIUser_0.last_platform != "standalonewindows" && !playes[i].IsFriend())
+                    {
                         playes[i].gameObject.SetActive(true);
+                    }
                 }
+
                 LogToHud("Quest are Shown");
             }, "Hide Quest (Does not block but local hide them)");
 
             var forceJump = new QMToggleButton(GeneralMenu, 3, 0, "ForceJump", delegate
             {
-                EnableDisableJumping(state: true);
+                EnableDisableJumping(true);
                 LogToHud("Force Jump Enabled");
             }, delegate
             {
-                EnableDisableJumping(state: false);
+                EnableDisableJumping(false);
                 LogToHud("Force Jump Disabled");
             }, "Force Jump for those annoying worlds");
 
@@ -75,13 +75,15 @@ namespace Vanilla.QM.Menu
                     UnmanagedUtils.keybd_event(0xA0, 0, 0x0002, 0);
                     UnmanagedUtils.keybd_event(0x4D, 0, 0x0002, 0);
                 }
-                catch (Exception ex) { ExceptionHandler("Settings", ex, "Mute"); }
+                catch (Exception ex)
+                {
+                    ExceptionHandler("Settings", ex, "Mute");
+                }
+
                 Thread.Sleep(100);
                 UnmanagedUtils.SetForegroundWindow(_hwnd);
-
             }, "Mutes Discord");
 
-            
 
             var Deafndisc = new QMSingleButton(GeneralMenu, 1, 1, "Deafen Discord", delegate
             {
@@ -98,21 +100,22 @@ namespace Vanilla.QM.Menu
                     UnmanagedUtils.keybd_event(0xA0, 0, 2, 0);
                     UnmanagedUtils.keybd_event(0x44, 0, 2, 0);
                 }
-                catch (Exception ex) { ExceptionHandler("Buttons", ex, "Defen"); }
+                catch (Exception ex)
+                {
+                    ExceptionHandler("Buttons", ex, "Defen");
+                }
+
                 Thread.Sleep(100);
                 UnmanagedUtils.SetForegroundWindow(_hwnd);
-
             }, "Deafen Discord");
 
-            var ClearVRam = new QMSingleButton(GeneralMenu, 3, 1, "ClearVRAM", delegate
-            {
-                GeneralUtils.ClearVRAM();
-            }, "ClearVRAM");
+            var ClearVRam = new QMSingleButton(GeneralMenu, 3, 1, "ClearVRAM", delegate { GeneralUtils.ClearVRAM(); },
+                "ClearVRAM");
         }
 
-        static void EnableDisableJumping(bool state)
+        private static void EnableDisableJumping(bool state)
         {
-            GameObject gameObject = VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject;
+            var gameObject = VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject;
             if (state && gameObject.GetComponent<PlayerModComponentJump>() == null)
             {
                 gameObject.AddComponent<PlayerModComponentJump>();
@@ -124,6 +127,7 @@ namespace Vanilla.QM.Menu
                 gameObject.GetComponent<PlayerModComponentJump>().field_Private_Single_0 = 3f;
                 gameObject.GetComponent<PlayerModComponentJump>().field_Private_Single_1 = 3f;
             }
+
             if (!state && gameObject.GetComponent<PlayerModComponentJump>() != null)
             {
                 gameObject.GetComponent<PlayerModComponentJump>().field_Private_Single_0 = 0f;
@@ -131,7 +135,5 @@ namespace Vanilla.QM.Menu
                 UnityEngine.Object.Destroy(gameObject.GetComponent<PlayerModComponentJump>());
             }
         }
-
-        
     }
 }

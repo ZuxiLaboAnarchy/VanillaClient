@@ -11,15 +11,21 @@ namespace Vanilla.Misc.MonoBehaviors
     [MelonLoader.RegisterTypeInIl2Cpp]
     public class EnableDisableListener : MonoBehaviour
     {
-        public EnableDisableListener(IntPtr obj) : base(obj) { }
+        public EnableDisableListener(IntPtr obj) : base(obj)
+        {
+        }
 
-        [method: HideFromIl2Cpp]
-        public event Action OnDisabled;
-        [method: HideFromIl2Cpp]
-        public event Action OnEnabled;
+        [method: HideFromIl2Cpp] public event Action OnDisabled;
+        [method: HideFromIl2Cpp] public event Action OnEnabled;
 
-        private void OnDisable() => OnDisabled?.Invoke();
-        private void OnEnable() => OnEnabled?.Invoke();
+        private void OnDisable()
+        {
+            OnDisabled?.Invoke();
+        }
+
+        private void OnEnable()
+        {
+            OnEnabled?.Invoke();
+        }
     }
 }
- 

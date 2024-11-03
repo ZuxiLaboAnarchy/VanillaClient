@@ -29,6 +29,7 @@ namespace Vanilla.Protections
             QueryLimitedInformation = 0x00001000,
             Synchronize = 0x00100000
         }
+
         [Flags]
         private enum SnapshotFlags : uint
         {
@@ -57,10 +58,12 @@ namespace Vanilla.Protections
             internal uint th32ParentProcessID;
             internal int pcPriClassBase;
             internal uint dwFlags;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)] internal string szExeFile;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            internal string szExeFile;
         };
 
-        [StructLayout(LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Ansi)]
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         internal struct MODULEENTRY32
         {
             internal uint dwSize;
@@ -81,14 +84,16 @@ namespace Vanilla.Protections
 
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool ReadProcessMemory(
-        IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesRead);
+            IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out IntPtr lpNumberOfBytesRead);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool WriteProcessMemory(
-        IntPtr hProcess, IntPtr lpBaseAddress, [MarshalAs(UnmanagedType.AsAny)] object lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesWritten);
+            IntPtr hProcess, IntPtr lpBaseAddress, [MarshalAs(UnmanagedType.AsAny)] object lpBuffer, int nSize,
+            out IntPtr lpNumberOfBytesWritten);
 
         [DllImport("kernel32.dll")]
-        internal static extern bool VirtualProtect(IntPtr lpAddress, int dwSize, uint flNewProtect, out uint lpflOldProtect);
+        internal static extern bool VirtualProtect(IntPtr lpAddress, int dwSize, uint flNewProtect,
+            out uint lpflOldProtect);
 
         [DllImport("kernel32.dll")]
         private static extern bool Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
@@ -116,8 +121,8 @@ namespace Vanilla.Protections
 
         [DllImport("kernel32.dll")]
         private static extern IntPtr CreateRemoteThread(IntPtr hProcess,
-           IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress,
-           IntPtr lpParameter, uint dwCreationFlags, out IntPtr lpThreadId);
+            IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress,
+            IntPtr lpParameter, uint dwCreationFlags, out IntPtr lpThreadId);
 
         [Flags]
         internal enum AllocationType
@@ -151,11 +156,11 @@ namespace Vanilla.Protections
 
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         private static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress,
-                            uint dwSize, AllocationType flAllocationType, MemoryProtection flProtect);
+            uint dwSize, AllocationType flAllocationType, MemoryProtection flProtect);
 
         internal static IntPtr GetModuleBaseAddress(Process proc, string modName)
         {
-            IntPtr addr = IntPtr.Zero;
+            var addr = IntPtr.Zero;
 
             foreach (ProcessModule m in proc.Modules)
             {
@@ -165,18 +170,19 @@ namespace Vanilla.Protections
                     break;
                 }
             }
+
             return addr;
         }
 
         internal static IntPtr GetModuleBaseAddress(int procId, string modName)
         {
-            IntPtr modBaseAddr = IntPtr.Zero;
+            var modBaseAddr = IntPtr.Zero;
 
-            IntPtr hSnap = CreateToolhelp32Snapshot(SnapshotFlags.Module | SnapshotFlags.Module32, procId);
+            var hSnap = CreateToolhelp32Snapshot(SnapshotFlags.Module | SnapshotFlags.Module32, procId);
 
             if (hSnap.ToInt64() != INVALID_HANDLE_VALUE)
             {
-                MODULEENTRY32 modEntry = new MODULEENTRY32();
+                var modEntry = new MODULEENTRY32();
                 modEntry.dwSize = (uint)Marshal.SizeOf(typeof(MODULEENTRY32));
 
                 if (Module32First(hSnap, ref modEntry))
@@ -198,13 +204,13 @@ namespace Vanilla.Protections
 
         internal static int GetProcId(string procname)
         {
-            int procid = 0;
+            var procid = 0;
 
-            IntPtr hSnap = CreateToolhelp32Snapshot(SnapshotFlags.Process, 0);
+            var hSnap = CreateToolhelp32Snapshot(SnapshotFlags.Process, 0);
 
             if (hSnap.ToInt64() != INVALID_HANDLE_VALUE)
             {
-                PROCESSENTRY32 procEntry = new PROCESSENTRY32();
+                var procEntry = new PROCESSENTRY32();
                 procEntry.dwSize = (uint)Marshal.SizeOf(typeof(PROCESSENTRY32));
 
                 if (Process32First(hSnap, ref procEntry))
@@ -228,35 +234,39 @@ namespace Vanilla.Protections
         {
             var buffer = new byte[IntPtr.Size];
 
-            foreach (int i in offsets)
+            foreach (var i in offsets)
             {
                 ReadProcessMemory(hProc, ptr, buffer, buffer.Length, out
-                var read);
-                ptr = (IntPtr.Size == 4) ? IntPtr.Add(new IntPtr(BitConverter.ToInt32(buffer, 0)), i) : ptr = IntPtr.Add(new IntPtr(BitConverter.ToInt64(buffer, 0)), i);
+                    var read);
+                ptr = IntPtr.Size == 4
+                    ? IntPtr.Add(new IntPtr(BitConverter.ToInt32(buffer, 0)), i)
+                    : ptr = IntPtr.Add(new IntPtr(BitConverter.ToInt64(buffer, 0)), i);
             }
+
             return ptr;
         }
 
         internal static bool InjectDLL(string dllpath, string procname)
         {
-            Process[] procs = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(procname));
+            var procs = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(procname));
 
             if (procs.Length == 0)
             {
                 return false;
             }
 
-            Process proc = procs[0];
+            var proc = procs[0];
 
             //redundant native method example - GetProcessesByName will automatically open a handle
-            int procid = GetProcId(procname);
-            IntPtr hProc = OpenProcess(ProcessAccessFlags.All, false, proc.Id);
+            var procid = GetProcId(procname);
+            var hProc = OpenProcess(ProcessAccessFlags.All, false, proc.Id);
             //
 
             if (proc.Handle != IntPtr.Zero)
             {
                 //proc.Handle = managed
-                IntPtr loc = VirtualAllocEx(proc.Handle, IntPtr.Zero, MAX_PATH, AllocationType.Commit | AllocationType.Reserve,
+                var loc = VirtualAllocEx(proc.Handle, IntPtr.Zero, MAX_PATH,
+                    AllocationType.Commit | AllocationType.Reserve,
                     MemoryProtection.ReadWrite);
 
                 if (loc.Equals(0))
@@ -264,28 +274,36 @@ namespace Vanilla.Protections
                     return false;
                 }
 
-                IntPtr bytesRead = IntPtr.Zero;
+                var bytesRead = IntPtr.Zero;
 
-                bool result = WriteProcessMemory(proc.Handle, loc, dllpath.ToCharArray(), dllpath.Length, out bytesRead);
+                var result = WriteProcessMemory(proc.Handle, loc, dllpath.ToCharArray(), dllpath.Length, out bytesRead);
 
                 if (!result || bytesRead.Equals(0))
                 {
                     return false;
                 }
 
-                IntPtr loadlibAddy = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
+                var loadlibAddy = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
                 //redundant native method example - MUST BE CASE SENSITIVE CORRECT
                 loadlibAddy = GetProcAddress(GetModuleBaseAddress(proc.Id, "KERNEL32.DLL"), "LoadLibraryA");
 
-                IntPtr hThread = CreateRemoteThread(proc.Handle, IntPtr.Zero, 0, loadlibAddy, loc, 0, out _);
+                var hThread = CreateRemoteThread(proc.Handle, IntPtr.Zero, 0, loadlibAddy, loc, 0, out _);
 
 
                 if (!hThread.Equals(0))
                     //native method example
+                {
                     CloseHandle(hThread);
-                else return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else return false;
+            else
+            {
+                return false;
+            }
 
             //this will CloseHandle automatically using the managed method
             proc.Dispose();

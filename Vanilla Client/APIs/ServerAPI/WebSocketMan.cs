@@ -12,17 +12,15 @@ namespace Vanilla.ServerAPI
 {
     internal class WSBase : VanillaModule
     {
-        
         protected override string ModuleName => "WSBase";
+
         internal override void WaitForAPIUser()
         {
             new Thread(() => { SetupSocket(); }).Start();
-
         }
 
         internal override void Stop()
         {
-
             Pop();
             ShutDown = true;
             wss.Close();
@@ -34,99 +32,115 @@ namespace Vanilla.ServerAPI
         internal static void KeepAlivePack()
         {
             if (wss is null)
+            {
                 return;
-          
+            }
+
             if (!wss.IsAlive && HasConn)
+            {
                 return;
+            }
 
 
             var FetchModelRaw = new sendsinglemsg()
             {
-              //  uid = PlayerWrapper.GetLocalAPIUser().id,
+                //  uid = PlayerWrapper.GetLocalAPIUser().id,
 
-               type = "ping",
+                type = "ping"
 
-               // Key = ServerHelper.GetKey(),
+                // Key = ServerHelper.GetKey(),
             };
-            WSBase.sendmsg($"{Json.Encode(FetchModelRaw)}");
-             
+            sendmsg($"{Json.Encode(FetchModelRaw)}");
         }
 
 
         internal static void SetupSocket()
         {
             RuntimeConfig.WSAuthed = true;
-          
+
             using (wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT()))
             {
                 Dev("ServerAPI", "Connecting to: " + wss.Url);
                 wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                 Task.Delay(60000);
                 Dev("ServerAPI", $"Connecting");
-                 
+
                 wss.Connect();
 
                 wss.OnClose += (sender, e) =>
                 {
                     if (ShutDown)
-                    { Dev("WSBase", "ShutDown Connection"); }
+                    {
+                        Dev("WSBase", "ShutDown Connection");
+                    }
 
                     if (HasConn && HasConn)
                     {
                         //   Log("ServerAPI", $"Disconnected", ConsoleColor.Red);
                         // Log("ServerAPI", $"Attempting Reconnect in 3 Seconds", ConsoleColor.Yellow);
                     }
+
                     Task.Delay(3000);
                     tryrecconect();
                 };
                 wss.OnOpen += (sender, e) =>
                 {
                     if (!HasConn)
+                    {
                         Log("ServerAPI", $"Connected", ConsoleColor.Green);
+                    }
+
                     HasConn = true;
 
                     var sendidtosv = new sendsinglemsg()
                     {
-                        uid = null,//APIUser.CurrentUser.id,
+                        uid = null, //APIUser.CurrentUser.id,
 
                         code = "3",
 
-                        Key = ServerHelper.GetKey(),
-
-
+                        Key = ServerHelper.GetKey()
                     };
                     sendmsg(Json.Encode(sendidtosv));
                     Pop();
-
                 };
                 wss.OnMessage += Ws_OnMessage;
                 wss.Log.Output = (_, __) => { };
-
             }
         }
 
         internal static void ConnectNewJWT()
         {
             if (!wss.IsAlive)
-               // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
-            wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT());
+                // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
+            {
+                wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT());
+            }
         }
 
         internal static void Pop()
         {
             if (!RuntimeConfig.WSAuthed)
-            { return; }
+            {
+                return;
+            }
 
-            for (int i = 0; i < toSend.Count; i++)
+            for (var i = 0; i < toSend.Count; i++)
             {
                 if (!wss.IsAlive && HasConn)
-                { wss.Connect(); continue; }
+                {
+                    wss.Connect();
+                    continue;
+                }
 
                 if (!toSend.TryDequeue(out var result))
-                { continue; }
+                {
+                    continue;
+                }
 
                 if (result.code == null)
-                { Log("Server API", "Failed To Send Message Message Identifyer wass Null", ConsoleColor.Red, "OnPop"); }
+                {
+                    Log("Server API", "Failed To Send Message Message Identifyer wass Null", ConsoleColor.Red, "OnPop");
+                }
 
                 var PopMessage = new sendsinglemsg()
                 {
@@ -136,13 +150,13 @@ namespace Vanilla.ServerAPI
 
                     Key = ServerHelper.GetKey(),
 
-                    HWID = ServerHelper.GetHWID(),
+                    HWID = ServerHelper.GetHWID()
                 };
                 sendmsg($"{Json.Encode(PopMessage)}");
             }
         }
 
-        internal protected static void sendmessage(string Message, string Code, bool pop = true)
+        protected internal static void sendmessage(string Message, string Code, bool pop = true)
         {
             // Dev("WSBase", $"Added Message {Message} with code {Code}");
 
@@ -154,34 +168,43 @@ namespace Vanilla.ServerAPI
             });
 
 
-
             if (pop)
+            {
                 Pop();
-
+            }
         }
 
-        internal protected static void sendmsg(string text)
+        protected internal static void sendmsg(string text)
         {
             if (wss.IsAlive)
-            { wss.Send(text); }
+            {
+                wss.Send(text);
+            }
             else
-            { tryrecconect(); }
+            {
+                tryrecconect();
+            }
         }
 
         internal static void IsConnected()
         {
-
             if (!wss.IsAlive && HasConn)
+            {
                 wss.Connect();
+            }
+
             Pop();
         }
-        internal protected static void tryrecconect()
+
+        protected internal static void tryrecconect()
         {
             try
             {
                 Task.Delay(50000);
                 if (!wss.IsAlive)
+                {
                     wss.Connect();
+                }
             }
             catch (Exception error)
             {
@@ -191,17 +214,19 @@ namespace Vanilla.ServerAPI
             }
         }
 
-        internal protected static void Ws_OnMessage(object sender, MessageEventArgs e)
+        protected internal static void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             //  Dev("ServerAPI", "Raw Data: " + e.Data.ToString());
 
             if (e.Data.ToString().ToLower().Contains("authed"))
-            { RuntimeConfig.WSAuthed = true; LogHandler.Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green); }
+            {
+                RuntimeConfig.WSAuthed = true;
+                Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green);
+            }
 
             if (e.Data.ToString().ToLower().Contains("update packet"))
             {
-
-              //  ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
+                //  ServerResponceHandler.HandleWSUpdate(e.Data.ToString());
                 // new Thread(() => {  }).Start();
 
 
@@ -211,38 +236,36 @@ namespace Vanilla.ServerAPI
             if (e.Data.ToString().ToLower().Contains("invalid token"))
             {
                 RuntimeConfig.WSAuthed = false;
-                LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
-             /*   if (Server.SendPostRequestInternal("login") != null)
-                {
-                    new Thread(() => { SetupSocket(); }).Start();
-                }
-*/            }
+                Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
+                /*   if (Server.SendPostRequestInternal("login") != null)
+                   {
+                       new Thread(() => { SetupSocket(); }).Start();
+                   }
+   */
+            }
 
             if (e.Data.ToString().ToLower().Contains("tokenexpirederror"))
             {
                 RuntimeConfig.WSAuthed = false;
-                LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
-  /*              if (Server.SendPostRequestInternal("login") != null)
-                {
-                    new Thread(() => { SetupSocket(); }).Start();
-                }*/
+                Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
+                /*              if (Server.SendPostRequestInternal("login") != null)
+                              {
+                                  new Thread(() => { SetupSocket(); }).Start();
+                              }*/
             }
 
 
-
-
-
-
-
-
-
-            var message = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(e.Data));
+            var message = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(e.Data));
 
             if (message.ToString() == "authed")
-            { RuntimeConfig.WSAuthed = true; LogHandler.Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green); }
+            {
+                RuntimeConfig.WSAuthed = true;
+                Log("ServerAPI", "Authenticated with RealtimeNetwork", ConsoleColor.Green);
+            }
 
             if (message.Contains("AvatarName") && message.Contains("Authorid") && message.Contains("Asseturl"))
-            { }
+            {
+            }
 
             if (message.ToString() == "JUSTSAYHI")
             {
@@ -252,32 +275,45 @@ namespace Vanilla.ServerAPI
             }
 
             if (message.ToString() == "UserNotAuthInvalidHWID")
-            { Console.WriteLine("Invalid HWID", "Auth"); }
+            {
+                Console.WriteLine("Invalid HWID", "Auth");
+            }
 
             if (message.ToString() == "UserNotAuthUnknownWhy")
-            { Console.WriteLine("Weird Issue with Auth", "Auth"); }
+            {
+                Console.WriteLine("Weird Issue with Auth", "Auth");
+            }
 
             if (message.Contains("UserNotAuth"))
-            { Process.GetCurrentProcess().Kill(); }
+            {
+                Process.GetCurrentProcess().Kill();
+            }
 
             if (message.ToString() == "Server Error 1")
-            { Console.WriteLine("Unknown Issue With Server Cypher is working on it dont wory", "Server"); }
+            {
+                Console.WriteLine("Unknown Issue With Server Cypher is working on it dont wory", "Server");
+            }
 
             if (message.ToString() == "Server Error 2")
             {
                 Console.WriteLine("Server Mantinace", "Server");
-                Console.WriteLine("please wait for server to come back online Server required Features will not work", "Server");
+                Console.WriteLine("please wait for server to come back online Server required Features will not work",
+                    "Server");
             }
+
             if (message.ToString() == "Close Connection")
             {
                 Console.WriteLine("Server Mantinace", "Server");
-                Console.WriteLine("please wait for server to come back online Server required Features will not work", "Server");
+                Console.WriteLine("please wait for server to come back online Server required Features will not work",
+                    "Server");
                 // System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
-            if (message.ToLower().Contains("tokenexpirederror") || e.Data.ToString().ToLower().Contains("tokenexpirederror"))
+
+            if (message.ToLower().Contains("tokenexpirederror") ||
+                e.Data.ToString().ToLower().Contains("tokenexpirederror"))
             {
                 RuntimeConfig.WSAuthed = false;
-                LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
+                Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
                 if (Server.SendPostRequestInternal("login") != null)
                 {
                     new Thread(() => { SetupSocket(); }).Start();
@@ -287,7 +323,7 @@ namespace Vanilla.ServerAPI
             if (message.ToLower().Contains("invalid token") || e.Data.ToString().ToLower().Contains("invalid token"))
             {
                 RuntimeConfig.WSAuthed = false;
-                LogHandler.Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
+                Log("ServerAPI", "Disconnected From Realtime Network Reauthing", ConsoleColor.Red);
                 if (Server.SendPostRequestInternal("login") != null)
                 {
                     new Thread(() => { SetupSocket(); }).Start();
@@ -297,11 +333,9 @@ namespace Vanilla.ServerAPI
 
             if (message.Contains("Update Packet"))
             {
-            //    new Thread(() => { ServerResponceHandler.HandleWSUpdate(message); }).Start();
+                //    new Thread(() => { ServerResponceHandler.HandleWSUpdate(message); }).Start();
                 // LogHandler.Log("ServerAPI", "Fetched Latest Update");
             }
-
-
 
 
             /*
@@ -316,16 +350,16 @@ namespace Vanilla.ServerAPI
                 }
             }
             */
-
         }
 
         internal static bool HasConn = false;
-        internal protected static readonly ConcurrentQueue<WSSender> toSend = new ConcurrentQueue<WSSender>();
-        internal protected static WebSocket wss;
-        internal protected static bool ath = false;
-        internal protected static bool ShutDown = false;
+        protected internal static readonly ConcurrentQueue<WSSender> toSend = new();
+        protected internal static WebSocket wss;
+        protected internal static bool ath = false;
+        protected internal static bool ShutDown = false;
         internal static string aviserchl = "";
     }
+
     internal class sendsinglemsg
     {
         internal string uid { get; set; }
@@ -341,6 +375,5 @@ namespace Vanilla.ServerAPI
     {
         internal string Message;
         internal string code;
-
     }
 }

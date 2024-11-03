@@ -8,9 +8,11 @@ namespace Vanilla.Utils
 {
     internal class InternalUIManager
     {
-       // static MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique KeyBoardMonoBehav = null;
+        // static MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique KeyBoardMonoBehav = null;
 
-        internal static void RunKeyBoardPopup(string Title, string TextBox, string OKButton, Action<string> RealTimeString, Action<string> EndString, Action OnClose, bool multiLine2 = true, int CharLimit = 0)
+        internal static void RunKeyBoardPopup(string Title, string TextBox, string OKButton,
+            Action<string> RealTimeString, Action<string> EndString, Action OnClose, bool multiLine2 = true,
+            int CharLimit = 0)
         {
             CreateKeyBoardPopup(Title, EndString, OnClose);
         }
@@ -24,43 +26,45 @@ namespace Vanilla.Utils
 
         public static string CreateKeyBoardPopup(string name, Action<string> setOutput, Action action)
         {
-            string returned = "";
-            VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_PDM_0(name, "", InputField.InputType.Standard, false, "Enter",
-                    DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>
+            var returned = "";
+            VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0
+                .Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_PDM_0(
+                    name, "", InputField.InputType.Standard, false, "Enter",
+                    DelegateSupport
+                        .ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>,
+                            Text>>
                         (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>
-                        (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
+                        (delegate(string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
                         {
                             setOutput(s);
                             if (action != null)
+                            {
                                 action.Invoke();
-                            ;
+                            }
 
+                            ;
                         })), null, "", true, null);
             return returned;
         }
 
         internal static void KAction1(string a)
         {
-
         }
 
         internal static void KAction2(string a)
         {
-
-
-
-            LogHandler.Log("TestKeyboard Action 2 ", a);
+            Log("TestKeyboard Action 2 ", a);
         }
 
         internal static Il2CppSystem.Action KAction3()
         {
-            LogHandler.Log("Test Action 3 ", "I Was Invoked");
+            Log("Test Action 3 ", "I Was Invoked");
             return null;
         }
 
         internal static Il2CppSystem.Action KAction4()
         {
-            LogHandler.Log("Test Action 4 ", "I Was Invoked");
+            Log("Test Action 4 ", "I Was Invoked");
             return null;
         }
     }

@@ -18,8 +18,8 @@ namespace Vanilla.Modules
 
         internal override void WaitForPlayer()
         {
-          //ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
-           // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();  
+            //ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
+            // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();  
 
             Dev("VanillaObject", "Spawning GameObject");
 
@@ -28,20 +28,15 @@ namespace Vanilla.Modules
             VanillaGObject.AddComponent<VanillaBehavior>();
             //VanillaGObject.AddComponent<OpenVRThumbstickInputDirect>();
             VanillaGObject.AddComponent<MonoBehaviour>();
-         //Old Keyboard Data LOL
+            //Old Keyboard Data LOL
             //   VanillaGObject.AddComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>();
-            
-          //  VanillaGObject.GetComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>()
+
+            //  VanillaGObject.GetComponent<MonoBehaviour1PublicTe_p_dTeKe_kBo_mStBuUnique>()
 
 
             //  VanillaGObject.name = "";
             VanillaGObject.SetActive(true);
             OnScreenUI.AfterGameObjectInit(VanillaGObject);
         }
-         
-
-        
-
-
     }
 }

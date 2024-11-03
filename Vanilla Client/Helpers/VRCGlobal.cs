@@ -4,3 +4,4 @@
 //global using VRCUiManager = MonoBehaviourPublicObBoStTrStSiTr_qStSiUnique;
 //global using MenuTab = MonoBehaviourPublicStInBoGaObObObUnique;
 //global using HUDNotifyGlobal = MonoBehaviourPublicObusQu1VaObQu12StUnique;
+

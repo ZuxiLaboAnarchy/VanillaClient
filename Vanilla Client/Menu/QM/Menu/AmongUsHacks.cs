@@ -14,43 +14,33 @@ namespace Vanilla.QM.Menu
     {
         internal static void InitMenu(QMNestedButton AmonUsMenu)
         {
+            var Imposter = new QMSingleButton(AmonUsMenu, 1, 0, "Show Imposter", delegate { IWantSpiderman(); },
+                "Logs to Console who imposter is");
 
+            var repair = new QMSingleButton(AmonUsMenu, 2, 0, "Repair All", delegate { RepairAll(); },
+                "Repair All sabotage");
 
-          
+            var killall = new QMSingleButton(AmonUsMenu, 3, 0, "Sabotage All", delegate { sabotageeverything(); },
+                "sabotage all stuffs");
 
-            var Imposter = new QMSingleButton(AmonUsMenu, 1, 0, "Show Imposter", delegate
-            {
-                IWantSpiderman();
-            }, "Logs to Console who imposter is");
+            var ejectall = new QMSingleButton(AmonUsMenu, 4, 0, "Air Lock All", delegate { ejecteveryone(); },
+                "Ejects all player");
 
-            var repair = new QMSingleButton(AmonUsMenu, 2, 0, "Repair All", delegate
-            {
-                RepairAll();
-            }, "Repair All sabotage");
-
-            var killall = new QMSingleButton(AmonUsMenu, 3, 0, "Sabotage All", delegate
-            {
-                sabotageeverything();
-            }, "sabotage all stuffs");
-
-            var ejectall = new QMSingleButton(AmonUsMenu, 4, 0, "Air Lock All", delegate
-            {
-                ejecteveryone();
-            }, "Ejects all player");
-
-            var closevote = new QMSingleButton(AmonUsMenu, 1, 1, "Close out Vote", delegate
-            {
-                closevotey();
-            }, "Closes the vote menu");
+            var closevote = new QMSingleButton(AmonUsMenu, 1, 1, "Close out Vote", delegate { closevotey(); },
+                "Closes the vote menu");
         }
 
         internal static void IWantSpiderman()
         {
-            foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
+            foreach (var gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
             {
-                if (gameObject.name.Contains("Player Entry") && gameObject.GetComponentInChildren<Text>().text != "PlayerName" && gameObject.GetComponent<Image>().color.r > 0f)
+                if (gameObject.name.Contains("Player Entry") &&
+                    gameObject.GetComponentInChildren<Text>().text != "PlayerName" &&
+                    gameObject.GetComponent<Image>().color.r > 0f)
                 {
-                    Log("Amongus", gameObject.GetComponentInChildren<Text>().text + " is the imposter (U want pictures of Spiderman!!!)");
+                    Log("Amongus",
+                        gameObject.GetComponentInChildren<Text>().text +
+                        " is the imposter (U want pictures of Spiderman!!!)");
                 }
             }
         }
@@ -58,7 +48,7 @@ namespace Vanilla.QM.Menu
 
         internal static void RepairAll()
         {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            foreach (var udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairComms");
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairReactor");
@@ -66,9 +56,10 @@ namespace Vanilla.QM.Menu
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairLights");
             }
         }
+
         internal static void sabotageeverything()
         {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            foreach (var udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageComms");
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageReactor");
@@ -76,9 +67,10 @@ namespace Vanilla.QM.Menu
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageLights");
             }
         }
+
         internal static void ejecteveryone()
         {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            foreach (var udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncVotedOut");
             }
@@ -86,7 +78,7 @@ namespace Vanilla.QM.Menu
 
         internal static void closevotey()
         {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            foreach (var udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncCloseVoting");
             }

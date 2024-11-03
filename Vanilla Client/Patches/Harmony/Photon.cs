@@ -26,41 +26,48 @@ namespace Vanilla.Patches.Harmony
             try
             {
                 InitializeLocalPatchHandler(typeof(PhotonPatch));
-              
-                PatchMethod(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetLocalPatch(nameof(OnEvent)) , null);
+
+                PatchMethod(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)),
+                    GetLocalPatch(nameof(OnEvent)), null);
 
                 //PatchMethod(typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("OnEventSent"), null);
 
-              //  LoadBalancingClient
+                //  LoadBalancingClient
 
-              //  PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
-
+                //  PatchMethod(typeof().GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0"), GetLocalPatch("PhotonRaiseEventPatch"), null);
             }
             catch (Exception e)
             {
-                Utils.LogHandler.ExceptionHandler(patchName, e);
+                ExceptionHandler(patchName, e);
             }
         }
 
         private static bool OnEventWrapper(ref EventData __0)
         {
-            bool state = OnEvent(ref __0);
+            var state = OnEvent(ref __0);
             if (state)
             {
-
-                PhotonEventCodes.EventCodes eventCode = (PhotonEventCodes.EventCodes)__0.Code;
+                var eventCode = (PhotonEventCodes.EventCodes)__0.Code;
                 if (eventCode == PhotonEventCodes.EventCodes.PhotonHeartbeat)
+                {
                     return true;
-                LogHandler.Log("PhotonDebug", eventCode.ToString() + " Returned " + state.ToString() );
+                }
+
+                Log("PhotonDebug", eventCode.ToString() + " Returned " + state.ToString());
             }
+
             return state;
         }
 
         private static bool OnEvent(ref EventData __0)
         {
-            PhotonEventCodes.EventCodes eventCode = (PhotonEventCodes.EventCodes)__0.Code;
-           // Dev("Event", eventCode.ToString());
-            if (__0 == null) return true;
+            var eventCode = (PhotonEventCodes.EventCodes)__0.Code;
+            // Dev("Event", eventCode.ToString());
+            if (__0 == null)
+            {
+                return true;
+            }
+
             try
             {
                 if (eventCode == PhotonEventCodes.EventCodes.VoiceData)
@@ -82,31 +89,34 @@ namespace Vanilla.Patches.Harmony
                         Dev("Event 6", Convert.ToBase64String(E6));
                     }
                 }
+
                 return eventCode switch
                 {
                     PhotonEventCodes.EventCodes.VoiceData => !ProtectionHandler.IsEvent1Bad(__0),
-                    PhotonEventCodes.EventCodes.Moderations => true,// ModerationManager.OnEvent(__0),
-                    PhotonEventCodes.EventCodes.SetPlayerData => true,//MainHelper.AvatarLogHandler(),
+                    PhotonEventCodes.EventCodes.Moderations => true, // ModerationManager.OnEvent(__0),
+                    PhotonEventCodes.EventCodes.SetPlayerData => true, //MainHelper.AvatarLogHandler(),
                     PhotonEventCodes.EventCodes.AuthEvent => true,
                     PhotonEventCodes.EventCodes.VRChatRPC => RPC.IsGoodRPC(__0),
-                    _ => true, 
-                };   
+                    _ => true
+                };
             }
-            catch (Exception e) { ExceptionHandler("OnEvent", e); return true; }
+            catch (Exception e)
+            {
+                ExceptionHandler("OnEvent", e);
+                return true;
+            }
         }
 
-        
-           internal static bool OnEventSent(byte eventCode, ref Il2CppSystem.Object eventData, ref RaiseEventOptions raiseEventOptions)
+
+        internal static bool OnEventSent(byte eventCode, ref Il2CppSystem.Object eventData,
+            ref RaiseEventOptions raiseEventOptions)
         {
             Log("Code", eventCode);
             Log("eventData", eventData.ToString());
             Log("raiseEventOptions", raiseEventOptions.ToString());
 
-            
+
             return true;
         }
-   
-
-
     }
 }

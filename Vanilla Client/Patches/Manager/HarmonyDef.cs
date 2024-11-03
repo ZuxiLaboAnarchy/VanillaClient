@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System.Reflection;
+
 namespace Vanilla.Patches
 {
     internal abstract class VanillaPatches
@@ -8,9 +9,13 @@ namespace Vanilla.Patches
 
         protected virtual string patchName => "Undefined Patch";
 
-        internal virtual void Patch() { }
+        internal virtual void Patch()
+        {
+        }
 
-        internal virtual void Unpatch() { }
+        internal virtual void Unpatch()
+        {
+        }
 
         internal string GetPatchName()
         {
@@ -30,7 +35,9 @@ namespace Vanilla.Patches
             }
             else if (preMethod == null && postMethod == null)
             {
-                Log("PatchManager", "Cannot patch " + targetMethod.Name + $" since no valid Pre/Post method was found {patchName}", ConsoleColor.Red);
+                Log("PatchManager",
+                    "Cannot patch " + targetMethod.Name + $" since no valid Pre/Post method was found {patchName}",
+                    ConsoleColor.Red);
             }
             else
             {
@@ -62,6 +69,5 @@ namespace Vanilla.Patches
         {
             return PatchManager.CheckNonGlobalMethod(methodBase, match);
         }
-
     }
 }

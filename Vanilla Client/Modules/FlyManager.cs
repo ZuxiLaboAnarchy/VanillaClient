@@ -26,49 +26,81 @@ namespace Vanilla.Modules
                 RuntimeConfig.ShouldFly = false;
                 VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = true;
             }
-
-
         }
-        private Transform camera() => GameObject.Find("Camera (eye)").transform;
+
+        private Transform camera()
+        {
+            return GameObject.Find("Camera (eye)").transform;
+        }
+
         internal override void Update()
         {
-            if (!RuntimeConfig.ShouldFly) return;
+            if (!RuntimeConfig.ShouldFly)
+            {
+                return;
+            }
 
-            if (VRC.Player.prop_Player_0 == null) return;
+            if (VRC.Player.prop_Player_0 == null)
+            {
+                return;
+            }
 
-            float flyspeed = UnityEngine.Input.GetKey(KeyCode.LeftShift) ? Time.deltaTime * 50 : Time.deltaTime * 25;
+            var flyspeed = Input.GetKey(KeyCode.LeftShift) ? Time.deltaTime * 50 : Time.deltaTime * 25;
             if (VRC.Player.prop_Player_0.field_Private_VRCPlayerApi_0.IsUserInVR())
             {
-                if (UnityEngine.Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+                {
                     VRC.Player.prop_Player_0.transform.position += camera().up * flyspeed;
-                if (UnityEngine.Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+                }
+
+                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+                {
                     VRC.Player.prop_Player_0.transform.position -= camera().up * flyspeed;
+                }
 
-                if (UnityEngine.Input.GetAxis("Vertical") != 0f)
-                    VRC.Player.prop_Player_0.transform.position += camera().forward * (flyspeed * UnityEngine.Input.GetAxis("Vertical"));
+                if (Input.GetAxis("Vertical") != 0f)
+                {
+                    VRC.Player.prop_Player_0.transform.position +=
+                        camera().forward * (flyspeed * Input.GetAxis("Vertical"));
+                }
 
-                if (UnityEngine.Input.GetAxis("Horizontal") != 0f)
-                    VRC.Player.prop_Player_0.transform.position += camera().transform.right * (flyspeed * UnityEngine.Input.GetAxis("Horizontal"));
+                if (Input.GetAxis("Horizontal") != 0f)
+                {
+                    VRC.Player.prop_Player_0.transform.position +=
+                        camera().transform.right * (flyspeed * Input.GetAxis("Horizontal"));
+                }
             }
             else
             {
-                if (UnityEngine.Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W))
+                {
                     VRC.Player.prop_Player_0.transform.position += camera().forward * flyspeed;
+                }
 
-                if (UnityEngine.Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S))
+                {
                     VRC.Player.prop_Player_0.transform.position -= camera().forward * flyspeed;
+                }
 
-                if (UnityEngine.Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A))
+                {
                     VRC.Player.prop_Player_0.transform.position -= camera().right * (flyspeed / 2);
+                }
 
-                if (UnityEngine.Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D))
+                {
                     VRC.Player.prop_Player_0.transform.position += camera().right * (flyspeed / 2);
+                }
 
-                if (UnityEngine.Input.GetKey(KeyCode.LeftControl))
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
                     VRC.Player.prop_Player_0.transform.position -= camera().up * (flyspeed / 2);
+                }
 
-                if (UnityEngine.Input.GetKey(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Space))
+                {
                     VRC.Player.prop_Player_0.transform.position += camera().up * (flyspeed / 2);
+                }
             }
         }
     }

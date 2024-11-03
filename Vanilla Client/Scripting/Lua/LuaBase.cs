@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Vanilla.Modules;
 using NLua;
 using VRC.UI.Core;
+
 namespace Vanilla.Scripting.Lua
 {
     internal class LuaBase : VanillaModule
     {
         /*
 
-        NLua.Lua lua = new NLua.Lua(); 
+        NLua.Lua lua = new NLua.Lua();
         internal override void Start()
         {
             // Create a new player object
@@ -22,8 +23,8 @@ namespace Vanilla.Scripting.Lua
          //   lua["player"] = player;
 
                 // Lua script using the player object
-               
-            
+
+
         }
 
         internal override void Update()
@@ -38,8 +39,8 @@ namespace Vanilla.Scripting.Lua
             @"
                   function Update()
                     print('Lua Update:', dt)
-                    
-                
+
+
                 ");
         }*/
     }

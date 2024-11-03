@@ -9,8 +9,6 @@ namespace Vanilla.Scripting.Lua
 {
     public class LuaManager
     {
-
-
         private static LuaManager instance = null;
         internal NLua.Lua lua;
 
@@ -18,7 +16,6 @@ namespace Vanilla.Scripting.Lua
         private LuaManager()
         {
             lua = new NLua.Lua();
-           
         }
 
         // Get the singleton instance of LuaManager
@@ -30,6 +27,7 @@ namespace Vanilla.Scripting.Lua
                 {
                     instance = new LuaManager();
                 }
+
                 return instance;
             }
         }
@@ -43,7 +41,7 @@ namespace Vanilla.Scripting.Lua
         // Call a Lua function
         public void CallLuaFunction(string functionName, params object[] args)
         {
-            LuaFunction luaFunction = lua[functionName] as LuaFunction;
+            var luaFunction = lua[functionName] as LuaFunction;
             if (luaFunction != null)
             {
                 luaFunction.Call(args);

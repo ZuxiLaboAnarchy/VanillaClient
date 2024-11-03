@@ -3,9 +3,9 @@
     internal class RuntimeConfig
     {
         /*Read Only Vars*/
-        internal readonly static string GameVER = "2023.1.1p3-1282--Release";
-        
-        
+        internal static readonly string GameVER = "2023.1.1p3-1282--Release";
+
+
         /*Unsaved Global Vars*/
         internal static bool isBot = false;
         internal static bool ShouldFly = false;
@@ -16,8 +16,10 @@
         internal static bool RanksCustomRanks = true;
         internal static bool isConnectedToInstance = false;
         internal static bool isForced = false;
-        internal static string RealPCrashID = MainConfig.GetInstance().GlobalSyncCrasher ? PCCrashID : MainConfig.GetInstance().PCCrashID;
-        internal static string RealQCrashID = MainConfig.GetInstance().GlobalSyncCrasher ? QuestCrashID : MainConfig.GetInstance().QuestCrashID;
+        internal static string RealPCrashID = GetInstance().GlobalSyncCrasher ? PCCrashID : GetInstance().PCCrashID;
+
+        internal static string RealQCrashID =
+            GetInstance().GlobalSyncCrasher ? QuestCrashID : GetInstance().QuestCrashID;
 
         /*User Vars*/
         private static string Username = null;
@@ -43,7 +45,7 @@
 
         internal static void SetStaff(string id)
         {
-           IsStaff = id.Equals("1") ? true : false;
+            IsStaff = id.Equals("1") ? true : false;
         }
 
         internal static bool GetIsStaff()
@@ -53,26 +55,42 @@
 
 
         internal static void SetUserName(string username)
-        { if (Username is not null) 
+        {
+            if (Username is not null)
+            {
                 return;
-             Username = username;
+            }
+
+            Username = username;
             Log("Core", "Welcome " + Username);
         }
 
         internal static string GetUserName()
-        { return Username; }
+        {
+            return Username;
+        }
 
         internal static void SetUUID(string id)
-        { int.TryParse(id, out UUID); }
+        {
+            int.TryParse(id, out UUID);
+        }
 
-        internal static int GetUUID() { return UUID;  }
+        internal static int GetUUID()
+        {
+            return UUID;
+        }
 
-        internal static void SetSubTime(string subtime) { SubTime = subtime; }
+        internal static void SetSubTime(string subtime)
+        {
+            SubTime = subtime;
+        }
 
 
-        internal static string GetSubtime() { return SubTime; }
+        internal static string GetSubtime()
+        {
+            return SubTime;
+        }
 
-        
 
         internal static void SetCrashingAvatarPC(string id)
         {

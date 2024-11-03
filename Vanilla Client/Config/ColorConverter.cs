@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace Vanilla.Config
 {
-
     public class ColorConverter : JsonConverter<Color>
     {
         public override void WriteJson(JsonWriter writer, Color value, JsonSerializer serializer)
@@ -27,7 +26,8 @@ namespace Vanilla.Config
         }
 
 
-        public override Color ReadJson(JsonReader reader, Type objectType, Color existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override Color ReadJson(JsonReader reader, Type objectType, Color existingValue, bool hasExistingValue,
+            JsonSerializer serializer)
         {
             // Deserialize the JSON object back to Color
             float r = 0, g = 0, b = 0, a = 1; // Default alpha to 1 for fully opaque
@@ -36,7 +36,7 @@ namespace Vanilla.Config
             {
                 if (reader.TokenType == JsonToken.PropertyName)
                 {
-                    string propertyName = reader.Value.ToString();
+                    var propertyName = reader.Value.ToString();
                     reader.Read(); // Move to the value
                     switch (propertyName)
                     {

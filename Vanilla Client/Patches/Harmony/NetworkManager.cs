@@ -22,27 +22,32 @@ namespace Vanilla.Patches.Harmony
     internal class NetworkManagerPatch : VanillaPatches
     {
         protected override string patchName => "PlayerEventPatch";
+
         internal override void Patch()
         {
             //   var instance = new HarmonyLib.Harmony("StartDONTGETRIDOFTag");
             InitializeLocalPatchHandler(typeof(NetworkManagerPatch));
 
 
-
             //    PatchMethod(typeof(Player).GetMethod(nameof(VRC.Player.Awake)), GetLocalPatch("OnAvatarChanged"), null); // Post So It Exists.
 
 
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)), GetLocalPatch(Strings.PlayerJoin), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)), GetLocalPatch(Strings.PlayerLeave), null);
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), null, GetLocalPatch(Strings.OnJoinedRoomPatch)); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
-            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null, GetLocalPatch(Strings.OnLeftRoomPatch)); //works
-            
-           /* MethodInfo[] methods = typeof(VRCPlayer).GetMethods().Where(mb => mb.Name.StartsWith("Method_Private_Void_GameObject_VRC_AvatarDescriptor_Boolean_")).ToArray();
-            foreach (MethodInfo method in methods)
-            {
-                PatchMethod(typeof(VRCPlayer).GetMethod(method.Name), GetLocalPatch(nameof(AntiCrashPatch)), null);
-            }
-           */
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_1)),
+                GetLocalPatch(Strings.PlayerJoin), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_Player_0)),
+                GetLocalPatch(Strings.PlayerLeave), null);
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), null,
+                GetLocalPatch(Strings
+                    .OnJoinedRoomPatch)); //fix for the peeps Method_Internal_Void_PDM_0 wont wor                                                                                     //PatchMethod(typeof(NetworkManager).GetMethod("OnJoinedRoom"), null, GetLocalPatch("OnJoinedRoomPatch")); //broken and replaced
+            PatchMethod(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null,
+                GetLocalPatch(Strings.OnLeftRoomPatch)); //works
+
+            /* MethodInfo[] methods = typeof(VRCPlayer).GetMethods().Where(mb => mb.Name.StartsWith("Method_Private_Void_GameObject_VRC_AvatarDescriptor_Boolean_")).ToArray();
+             foreach (MethodInfo method in methods)
+             {
+                 PatchMethod(typeof(VRCPlayer).GetMethod(method.Name), GetLocalPatch(nameof(AntiCrashPatch)), null);
+             }
+            */
 
             //if (PlayerEvents.OnPlayerJoinedMethod != null)
             //  PatchMethod(PlayerEvents._OnPlayerJoinedMethod, null, GetLocalPatch("PlayerJoin"));
@@ -54,7 +59,6 @@ namespace Vanilla.Patches.Harmony
             // instance.Patch(typeof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique).GetMethod(nameof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique.OnDestroy), AccessTools.all), new HarmonyMethod(typeof(PlayerEvents).GetMethod(nameof(Player_OnDestroyM), BindingFlags.NonPublic | BindingFlags.Static)));
 
 
-
             // PatchMethod(AccessTools.Method(typeof(MonoBehaviourPrivateAc1AcOb2AcInStHa2Unique), nameof(.player     .Method_Public_Void_Player_1), GetLocalPatch("PlayerJoin")));
 
             // PatchMethod(AccessTools.Method(typeof(MonoBehaviourPrivateAc1AcOb2AcInStHa2Unique)), nameof(MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique.Awake), GetLocalPatch("OnAvatarChanged"));
@@ -64,14 +68,13 @@ namespace Vanilla.Patches.Harmony
             //Nebula.Patch(AccessTools.Method(typeof(NetworkManager), nameof(NetworkManager.Method_Public_Void_Player_0)), GetPatch(nameof(playevleave)));
         }
 
-     //   private static bool AntiCrashPatch(VRCPlayer __instance, GameObject __0, VRC_AvatarDescriptor __1, Boolean __2)
-       // {
-     //       return Anticrash.ProcessAvatar(__0, __instance);
-       // }
+        //   private static bool AntiCrashPatch(VRCPlayer __instance, GameObject __0, VRC_AvatarDescriptor __1, Boolean __2)
+        // {
+        //       return Anticrash.ProcessAvatar(__0, __instance);
+        // }
         private static void OnJoinedRoomPatch()
         {
             RuntimeConfig.isConnectedToInstance = true;
-            
         }
 
         private static void OnLeftRoomPatch()
@@ -84,18 +87,17 @@ namespace Vanilla.Patches.Harmony
         {
             try
             {
-                Networking.RPC(RPC.Destination.Others, PlayerWrapper.GetLocalPlayer().gameObject, "Zuxi_Networked_Join_VanillaClient", new Il2CppSystem.Object[0]);
+                Networking.RPC(RPC.Destination.Others, PlayerWrapper.GetLocalPlayer().gameObject,
+                    "Zuxi_Networked_Join_VanillaClient", new Il2CppSystem.Object[0]);
                 ModuleManager.PlayerJoin(__0);
                 // TODO: move this to somewhere else
-               
             }
             catch (Exception e)
             {
                 ExceptionHandler("PJP", e);
-
             }
-            return true;
 
+            return true;
         }
 
         private static bool PlayerLeave(Player __0)
@@ -107,8 +109,8 @@ namespace Vanilla.Patches.Harmony
             catch (Exception e)
             {
                 ExceptionHandler("PJP", e);
-
             }
+
             return true;
         }
 
@@ -155,7 +157,7 @@ namespace Vanilla.Patches.Harmony
                             Status = a.releaseStatus,
 
 
-                          
+
                             code = "9",
 
                         };
@@ -177,8 +179,11 @@ namespace Vanilla.Patches.Harmony
 
             IEnumerator RunMe()
             {
-                while (__instance?.gameObject?.GetComponent<Player>()?.field_Private_APIUser_0 == null) // Wait For APIUser To Exist, Tempermental If Not Done.
+                while (__instance?.gameObject?.GetComponent<Player>()?.field_Private_APIUser_0 ==
+                       null) // Wait For APIUser To Exist, Tempermental If Not Done.
+                {
                     yield return new WaitForEndOfFrame();
+                }
 
                 //OnPlayerJoin(__instance.gameObject.GetComponent<Player>());
 
@@ -201,16 +206,18 @@ namespace Vanilla.Patches.Harmony
                 {
                     return _OnPlayerJoinedMethod;
                 }
-                return _OnPlayerJoinedMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
+
+                return _OnPlayerJoinedMethod = typeof(NetworkManager).GetMethods().Single(delegate(MethodInfo it)
                 {
-                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 && it.GetParameters()[0].ParameterType == typeof(VRC.Player))
+                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 &&
+                        it.GetParameters()[0].ParameterType == typeof(Player))
                     {
                         return XrefScanner.XrefScan(it).Any(jt =>
                         {
                             if (jt.Type == XrefType.Global
-                            )
+                               )
                             {
-                                Il2CppSystem.Object @object = jt.ReadAsObject();
+                                var @object = jt.ReadAsObject();
                                 if (@object != null)
                                 {
                                     if (@object.ToString().Contains("OnPlayerJoined"))
@@ -219,15 +226,19 @@ namespace Vanilla.Patches.Harmony
                                         return true;
                                     }
                                 }
+
                                 return false;
                             }
+
                             return false;
                         });
                     }
+
                     return false;
                 });
             }
         }
+
         internal static MethodInfo OnPlayerLeftMethod
         {
             get
@@ -236,16 +247,18 @@ namespace Vanilla.Patches.Harmony
                 {
                     return _OnPlayerLeftMethod;
                 }
-                return _OnPlayerLeftMethod = typeof(NetworkManager).GetMethods().Single(delegate (MethodInfo it)
+
+                return _OnPlayerLeftMethod = typeof(NetworkManager).GetMethods().Single(delegate(MethodInfo it)
                 {
-                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 && it.GetParameters()[0].ParameterType == typeof(VRC.Player))
+                    if (it.ReturnType == typeof(void) && it.GetParameters().Length == 1 &&
+                        it.GetParameters()[0].ParameterType == typeof(Player))
                     {
                         return XrefScanner.XrefScan(it).Any(jt =>
                         {
                             if (jt.Type == XrefType.Global
-                            )
+                               )
                             {
-                                Il2CppSystem.Object @object = jt.ReadAsObject();
+                                var @object = jt.ReadAsObject();
                                 if (@object != null)
                                 {
                                     if (@object.ToString().Contains("OnPlayerLeft"))
@@ -254,20 +267,17 @@ namespace Vanilla.Patches.Harmony
                                         return true;
                                     }
                                 }
+
                                 return false;
                             }
+
                             return false;
                         });
                     }
+
                     return false;
                 });
             }
         }
-
     }
-
-
-
-
 }
-

@@ -11,7 +11,8 @@ namespace Vanilla.Menu.ActionWheel
 {
     internal class AWLoader : VanillaModule
     {
-        static ActionMenuPage mainAW = null;
+        private static ActionMenuPage mainAW = null;
+
         internal override void LateStart()
         {
         }
@@ -19,7 +20,8 @@ namespace Vanilla.Menu.ActionWheel
 
         internal override void OnQuickMenuLoaded()
         {
-            mainAW = new ActionMenuPage(ActionMenuBaseMenu.MainMenu, "Vanilla Client", AssetLoader.LoadTexture("VanillaClientLogo"));
+            mainAW = new ActionMenuPage(ActionMenuBaseMenu.MainMenu, "Vanilla Client",
+                AssetLoader.LoadTexture("VanillaClientLogo"));
         }
     }
 }

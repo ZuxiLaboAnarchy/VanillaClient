@@ -14,18 +14,19 @@ namespace Vanilla.Modules
     {
         internal static bool OnEvent(EventData eventData)
         {
-            bool returnvalue = true;
-            Dictionary<byte, Il2CppSystem.Object> dictionary = eventData.Parameters[eventData.CustomDataKey].Cast<Dictionary<byte, Il2CppSystem.Object>>();
-            PhotonModerationCodes ModerationEventCode = (PhotonModerationCodes)dictionary[0].Unbox<byte>();
+            var returnvalue = true;
+            var dictionary = eventData.Parameters[eventData.CustomDataKey]
+                .Cast<Dictionary<byte, Il2CppSystem.Object>>();
+            var ModerationEventCode = (PhotonModerationCodes)dictionary[0].Unbox<byte>();
 
             return ModerationEventCode switch
             {
                 PhotonModerationCodes.MuteAndBlock => false,
-              //  PhotonEventCodes.EventCodes.Moderations => false,
-              //  PhotonEventCodes.EventCodes.SetPlayerData => MainHelper.AvatarLogHandler(),
-              //  PhotonEventCodes.EventCodes.AuthEvent => MainHelper.AvatarLogHandler(),
-                _ => true,
+                //  PhotonEventCodes.EventCodes.Moderations => false,
+                //  PhotonEventCodes.EventCodes.SetPlayerData => MainHelper.AvatarLogHandler(),
+                //  PhotonEventCodes.EventCodes.AuthEvent => MainHelper.AvatarLogHandler(),
+                _ => true
             };
-        } 
+        }
     }
 }

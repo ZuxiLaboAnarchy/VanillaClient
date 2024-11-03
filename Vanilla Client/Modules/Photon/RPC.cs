@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using Vanilla.Wrappers;
 using VRCSDK2;
+using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
 namespace Vanilla.Modules.Photon
 {
@@ -48,7 +49,8 @@ namespace Vanilla.Modules.Photon
             Il2CppSystem.Object param_2;
             try
             {
-                Il2CppStructArray<byte> param_ = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer).Cast<Il2CppStructArray<byte>>();
+                var param_ = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer)
+                    .Cast<Il2CppStructArray<byte>>();
                 BinarySerializer.Method_Public_Static_Boolean_ArrayOf_Byte_byref_Object_0(param_, out param_2);
             }
             catch (Il2CppException)
@@ -56,9 +58,10 @@ namespace Vanilla.Modules.Photon
                 // FilterPlayer(eventData.Sender, eventData.Code);
                 return false;
             }
-            VRC_EventLog.EventLogEntry eventLogEntry = param_2.TryCast<VRC_EventLog.EventLogEntry>();
-            VRC_EventHandler.VrcEvent field_Private_VrcEvent_ = eventLogEntry.field_Private_VrcEvent_0;
-            PlayerInformation playerInformationByInstagatorID = PlayerWrapper.GetPlayerInformationByInstagatorID(eventData.Sender);
+
+            var eventLogEntry = param_2.TryCast<VRC_EventLog.EventLogEntry>();
+            var field_Private_VrcEvent_ = eventLogEntry.field_Private_VrcEvent_0;
+            var playerInformationByInstagatorID = PlayerWrapper.GetPlayerInformationByInstagatorID(eventData.Sender);
             if (playerInformationByInstagatorID != null && playerInformationByInstagatorID.isLocalPlayer)
             {
                 return true;
@@ -72,9 +75,9 @@ namespace Vanilla.Modules.Photon
                     case "Zuxi_Networked_Join_VanillaClient":
                         Dev("RPC", $"{playerInformationByInstagatorID.apiUser.username} Is Using Vanilla");
                         return false;
-
                 }
             }
+
             return true;
         }
         /*
@@ -95,5 +98,4 @@ namespace Vanilla.Modules.Photon
             return true;
         }*/
     }
-
 }

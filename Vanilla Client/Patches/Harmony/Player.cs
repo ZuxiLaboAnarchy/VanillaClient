@@ -10,14 +10,15 @@ namespace Vanilla.Patches.Harmony
     internal class PlayerPatch : VanillaPatches
     {
         protected override string patchName => "PlayerPatch";
+
         internal override void Patch()
         {
             //   var instance = new HarmonyLib.Harmony("StartDONTGETRIDOFTag");
 
             InitializeLocalPatchHandler(typeof(PlayerPatch));
 
-            PatchMethod(typeof(APIUser).GetProperty(nameof(Strings.allowAvatarCopying)).GetSetMethod(), GetLocalPatch(Strings.ForceClone), null);
-
+            PatchMethod(typeof(APIUser).GetProperty(nameof(Strings.allowAvatarCopying)).GetSetMethod(),
+                GetLocalPatch(Strings.ForceClone), null);
         }
 
 
@@ -27,4 +28,3 @@ namespace Vanilla.Patches.Harmony
         }
     }
 }
-

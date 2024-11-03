@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,7 +84,7 @@ namespace Vanilla.Buttons.QM
 
         internal void SetToolTip(string newText)
         {//TODO: Fix ToolTips
-            return; 
+            return;
          //   MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 

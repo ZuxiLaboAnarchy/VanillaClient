@@ -6,17 +6,21 @@ namespace Vanilla.Utils
     {
         internal static bool IsInvalid(Vector2 vector)
         {
-            return float.IsNaN(vector.x) || float.IsInfinity(vector.x) || float.IsNaN(vector.y) || float.IsInfinity(vector.y);
+            return float.IsNaN(vector.x) || float.IsInfinity(vector.x) || float.IsNaN(vector.y) ||
+                   float.IsInfinity(vector.y);
         }
 
         internal static bool IsInvalid(Vector3 vector)
         {
-            return float.IsNaN(vector.x) || float.IsInfinity(vector.x) || float.IsNaN(vector.y) || float.IsInfinity(vector.y) || float.IsNaN(vector.z) || float.IsInfinity(vector.z);
+            return float.IsNaN(vector.x) || float.IsInfinity(vector.x) || float.IsNaN(vector.y) ||
+                   float.IsInfinity(vector.y) || float.IsNaN(vector.z) || float.IsInfinity(vector.z);
         }
 
         internal static bool IsInvalid(Quaternion quaternion)
         {
-            return float.IsNaN(quaternion.x) || float.IsInfinity(quaternion.x) || float.IsNaN(quaternion.y) || float.IsInfinity(quaternion.y) || float.IsNaN(quaternion.z) || float.IsInfinity(quaternion.z) || float.IsNaN(quaternion.w) || float.IsInfinity(quaternion.w);
+            return float.IsNaN(quaternion.x) || float.IsInfinity(quaternion.x) || float.IsNaN(quaternion.y) ||
+                   float.IsInfinity(quaternion.y) || float.IsNaN(quaternion.z) || float.IsInfinity(quaternion.z) ||
+                   float.IsNaN(quaternion.w) || float.IsInfinity(quaternion.w);
         }
 
         internal static int Clamp(int value, int min, int max)
@@ -25,10 +29,12 @@ namespace Vanilla.Utils
             {
                 return min;
             }
+
             if (value > max)
             {
                 return max;
             }
+
             return value;
         }
 
@@ -38,10 +44,12 @@ namespace Vanilla.Utils
             {
                 return min;
             }
+
             if (value > max)
             {
                 return max;
             }
+
             return value;
         }
 
@@ -51,10 +59,12 @@ namespace Vanilla.Utils
             {
                 return min;
             }
+
             if (value > max)
             {
                 return max;
             }
+
             return value;
         }
 
@@ -64,10 +74,12 @@ namespace Vanilla.Utils
             {
                 return min;
             }
+
             if (value > max)
             {
                 return max;
             }
+
             return value;
         }
 
@@ -77,19 +89,23 @@ namespace Vanilla.Utils
             {
                 return min;
             }
+
             if (value > max)
             {
                 return max;
             }
+
             return value;
         }
 
         internal static bool IsBeyondLimit(Vector3 vector, float lowerLimit, float higherLimit)
         {
-            if (vector.x < lowerLimit || vector.x > higherLimit || vector.y < lowerLimit || vector.y > higherLimit || vector.z < lowerLimit || vector.z > higherLimit)
+            if (vector.x < lowerLimit || vector.x > higherLimit || vector.y < lowerLimit || vector.y > higherLimit ||
+                vector.z < lowerLimit || vector.z > higherLimit)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -97,8 +113,9 @@ namespace Vanilla.Utils
         {
             if (value < 0)
             {
-                return (byte)(-value);
+                return (byte)-value;
             }
+
             return value;
         }
     }

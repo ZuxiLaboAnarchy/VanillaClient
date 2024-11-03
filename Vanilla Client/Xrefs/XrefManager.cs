@@ -5,16 +5,18 @@ using UnhollowerRuntimeLib.XrefScans;
 
 namespace Vanilla.Xrefs
 {
-
     internal static class XRefManager
     {
         internal static bool CheckUsed(MethodBase methodBase, string methodName)
         {
             try
             {
-                return XrefScanner.UsedBy(methodBase).Where(instance => instance.TryResolve() != null && instance.TryResolve().Name.Contains(methodName)).Any();
+                return XrefScanner.UsedBy(methodBase).Where(instance =>
+                    instance.TryResolve() != null && instance.TryResolve().Name.Contains(methodName)).Any();
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }
@@ -26,11 +28,17 @@ namespace Vanilla.Xrefs
                 foreach (var instance in XrefScanner.XrefScan(method))
                 {
                     if (instance.Type == XrefType.Global && instance.ReadAsObject().ToString().Contains(match))
+                    {
                         return true;
+                    }
                 }
+
                 return false;
             }
-            catch { }
+            catch
+            {
+            }
+
             return false;
         }
 
@@ -42,12 +50,18 @@ namespace Vanilla.Xrefs
                 {
                     try
                     {
-                        if ((type == null || instance.TryResolve().DeclaringType == type) && instance.TryResolve().Name.Contains(methodName))
+                        if ((type == null || instance.TryResolve().DeclaringType == type) &&
+                            instance.TryResolve().Name.Contains(methodName))
+                        {
                             return true;
+                        }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
+
             return false;
         }
 
@@ -59,12 +73,18 @@ namespace Vanilla.Xrefs
                 {
                     try
                     {
-                        if ((type == null || instance.TryResolve().DeclaringType == type) && instance.TryResolve().Name.Contains(methodName))
+                        if ((type == null || instance.TryResolve().DeclaringType == type) &&
+                            instance.TryResolve().Name.Contains(methodName))
+                        {
                             return true;
+                        }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
+
             return false;
         }
 
@@ -98,24 +118,43 @@ namespace Vanilla.Xrefs
             }
         }
 
-        internal static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string reflectedType = null)
+        internal static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null,
+            string reflectedType = null)
         {
             var found = false;
-            foreach (XrefInstance xref in XrefScanner.XrefScan(methodBase))
+            foreach (var xref in XrefScanner.XrefScan(methodBase))
             {
-                if (xref.Type != XrefType.Method) continue;
-                MethodBase resolved = xref.TryResolve();
-                if (resolved == null) continue;
+                if (xref.Type != XrefType.Method)
+                {
+                    continue;
+                }
+
+                var resolved = xref.TryResolve();
+                if (resolved == null)
+                {
+                    continue;
+                }
+
                 if (!string.IsNullOrEmpty(methodName))
-                    found = !string.IsNullOrEmpty(resolved.Name) && resolved.Name.IndexOf(methodName, StringComparison.OrdinalIgnoreCase) >= 0;
+                {
+                    found = !string.IsNullOrEmpty(resolved.Name) &&
+                            resolved.Name.IndexOf(methodName, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+
                 if (!string.IsNullOrEmpty(reflectedType))
+                {
                     found = !string.IsNullOrEmpty(resolved.ReflectedType?.Name)
-                            && resolved.ReflectedType.Name.IndexOf(reflectedType, StringComparison.OrdinalIgnoreCase) >= 0;
-                if (found) return true;
+                            && resolved.ReflectedType.Name.IndexOf(reflectedType, StringComparison.OrdinalIgnoreCase) >=
+                            0;
+                }
+
+                if (found)
+                {
+                    return true;
+                }
             }
+
             return false;
         }
-
     }
 }
-

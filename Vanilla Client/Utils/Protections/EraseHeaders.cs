@@ -8,6 +8,4 @@ using System.Threading.Tasks;
 
 namespace Vanilla.Protections
 {
-  
 }
- 

@@ -19,21 +19,27 @@ namespace Vanilla.Xrefs
             {
                 if (_reloadAvatarMethod == null)
                 {
-                    _reloadAvatarMethod = typeof(VRCPlayer).GetMethods().First(mi => mi.Name.StartsWith("Method_Private_Void_Boolean_") && mi.Name.Length < 31 && mi.GetParameters().Any(pi => pi.IsOptional) && XRefManager.CheckUsedBy(mi, "ReloadAvatarNetworkedRPC"));
+                    _reloadAvatarMethod = typeof(VRCPlayer).GetMethods().First(mi =>
+                        mi.Name.StartsWith("Method_Private_Void_Boolean_") && mi.Name.Length < 31 &&
+                        mi.GetParameters().Any(pi => pi.IsOptional) &&
+                        XRefManager.CheckUsedBy(mi, "ReloadAvatarNetworkedRPC"));
                 }
+
                 return _reloadAvatarMethod;
             }
         }
 
         public static MethodInfo ReloadAllAvatarsMethod
         {
-            
             get
             {
-
                 if (_reloadAllAvatarsMethod == null)
                 {
-                    _reloadAllAvatarsMethod = typeof(VRCPlayer).GetMethods().First(mi => mi.Name.StartsWith("Method_Public_Void_Boolean_") && mi.Name.Length < 30 && mi.GetParameters().All(pi => pi.IsOptional) && XRefManager.CheckUsedBy(mi, "Method_Public_Void_", typeof(FeaturePermissionManager)));// Both methods seem to do the same thing;
+                    _reloadAllAvatarsMethod = typeof(VRCPlayer).GetMethods().First(mi =>
+                        mi.Name.StartsWith("Method_Public_Void_Boolean_") && mi.Name.Length < 30 &&
+                        mi.GetParameters().All(pi => pi.IsOptional) &&
+                        XRefManager.CheckUsedBy(mi, "Method_Public_Void_",
+                            typeof(FeaturePermissionManager))); // Both methods seem to do the same thing;
                 }
 
                 return _reloadAllAvatarsMethod;
@@ -47,8 +53,7 @@ namespace Vanilla.Xrefs
 
         public static void ReloadAllAvatars(this VRCPlayer instance, bool ignoreSelf = false)
         {
-           ReloadAllAvatarsMethod.Invoke(instance, [ignoreSelf]);
+            ReloadAllAvatarsMethod.Invoke(instance, [ignoreSelf]);
         }
-
     }
 }

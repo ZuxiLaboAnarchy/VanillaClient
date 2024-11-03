@@ -14,50 +14,59 @@ namespace Vanilla.Modules
 
         internal override void PlayerJoin(Player __0)
         {
-            if (!MainConfig.GetInstance().JoinLogger)
+            if (!GetInstance().JoinLogger)
+            {
                 return;
+            }
 
             if (__0.field_Private_APIUser_0.id == VRC.Core.APIUser.CurrentUser.id)
+            {
                 return;
+            }
 
-            string user = __0.field_Private_APIUser_0.displayName;
-            string UID = __0.field_Private_APIUser_0.id;
-            bool Quest = __0.field_Private_APIUser_0.IsOnMobile;
+            var user = __0.field_Private_APIUser_0.displayName;
+            var UID = __0.field_Private_APIUser_0.id;
+            var Quest = __0.field_Private_APIUser_0.IsOnMobile;
 
             if (user == "orchestrapyro")
-            { user = "HyperV"; }
+            {
+                user = "HyperV";
+            }
 
             if (UID == "usr_e49984a4-14de-482d-9899-62d710c7ead8")
-            { UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL"; }
+            {
+                UID = "IM HYPERV DONT WORRY ABOUT MY UID LOL";
+            }
 
             {
+                var text = "<color=green>Player Join: <color=purple>" + user;
+                //   InformHudText("PlayerJoin", text);
+                // ConsoleUtils.Info(LanguageManager.GetUsedLanguage().ProtectionsMenuName, text, ConsoleColor.Red, "OnPlayerJoinPatch", 235);
 
-                string text = "<color=green>Player Join: <color=purple>" + user;
-             //   InformHudText("PlayerJoin", text);
-               // ConsoleUtils.Info(LanguageManager.GetUsedLanguage().ProtectionsMenuName, text, ConsoleColor.Red, "OnPlayerJoinPatch", 235);
+
+                //  UserInterface.AddNotificationToHud($"{user} Joined");
 
 
-              //  UserInterface.AddNotificationToHud($"{user} Joined");
-                
-                
-                Log("Player Join", $"{user}"); }
+                Log("Player Join", $"{user}");
+            }
         }
 
         internal override void PlayerLeave(Player __0)
         {
-            if (!MainConfig.GetInstance().JoinLogger)
+            if (!GetInstance().JoinLogger)
+            {
                 return;
+            }
 
             if (__0.field_Private_APIUser_0.id == VRC.Core.APIUser.CurrentUser.id)
+            {
                 return;
+            }
 
-            string user = __0.field_Private_APIUser_0.displayName;
-            { Log("Player Leave", $"{user}"); }
+            var user = __0.field_Private_APIUser_0.displayName;
+            {
+                Log("Player Leave", $"{user}");
+            }
         }
-
-
-
-
-
     }
 }

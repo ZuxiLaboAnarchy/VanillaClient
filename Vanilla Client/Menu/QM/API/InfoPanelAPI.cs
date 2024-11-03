@@ -58,5 +58,4 @@ namespace Vanilla.Buttons.QM
             }
         }
     */
-    }
-
+}

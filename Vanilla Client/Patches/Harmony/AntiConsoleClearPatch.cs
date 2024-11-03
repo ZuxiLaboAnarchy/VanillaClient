@@ -11,10 +11,10 @@ namespace Vanilla.Patches.Harmony
             }
             catch (Exception e)
             {
-                Utils.LogHandler.ExceptionHandler(patchName, e);
+                ExceptionHandler(patchName, e);
             }
         }
-        
+
         private static bool ReturnFalse()
         {
             return false;

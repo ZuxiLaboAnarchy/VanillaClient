@@ -4,22 +4,22 @@ namespace Vanilla.API.ServerAPI
 {
     public struct TempUploadContainer
     {
-       // internal int uploadType;
+        // internal int uploadType;
 
         internal FavoriteAvatar saved_avatar;
 
-      //  internal string player_id;
+        //  internal string player_id;
 
         //internal string player_name;
 
 //        internal string player_custom_name;
 
-  //      internal string player_custom_color;
+        //      internal string player_custom_color;
 
-    //    internal string discordLink;
+        //    internal string discordLink;
 
-      //  internal string avatar_id;
+        //  internal string avatar_id;
 
-      //  internal bool avatar_quest;
+        //  internal bool avatar_quest;
     }
 }

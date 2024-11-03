@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using Vanilla.Modules;
+
 namespace Vanilla.Behaviours
 {
     [MelonLoader.RegisterTypeInIl2Cpp]
     public class VanillaBehavior : MonoBehaviour
     {
-        public VanillaBehavior(IntPtr ptr) : base(ptr) { }
+        public VanillaBehavior(IntPtr ptr) : base(ptr)
+        {
+        }
 
         public void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
-        public void OnApplicationFocus(bool hasFocus) => ModuleManager.OnApplicationFocus(hasFocus);
 
-    } 
+        public void OnApplicationFocus(bool hasFocus)
+        {
+            ModuleManager.OnApplicationFocus(hasFocus);
+        }
+    }
 }

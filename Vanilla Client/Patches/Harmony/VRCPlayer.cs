@@ -1,5 +1,4 @@
-﻿
-using MelonLoader.TinyJSON;
+﻿using MelonLoader.TinyJSON;
 using System.Reflection;
 using UnityEngine;
 using Vanilla.Config;
@@ -17,14 +16,17 @@ namespace Vanilla.Patches.Harmony
             InitializeLocalPatchHandler(typeof(VRCPlayerPatch));
             if (!BotHandle.CheckBotHandle())
             {
-                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetFriendlyDetailedNameForSocialRank), GetLocalPatch(Strings.GetFriendlyDetailedNameForSocialRankPatch), null);
+                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetFriendlyDetailedNameForSocialRank),
+                    GetLocalPatch(Strings.GetFriendlyDetailedNameForSocialRankPatch), null);
                 //PatchMethod(typeof(VRCPlayer).GetMethod("Method_Public_Static_String_APIUser_1"), GetLocalPatch("GetFriendlyDetailedNameForSocialRankPatch"), null);
-                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetColorForSocialRank), GetLocalPatch(Strings.GetColorForSocialRankPatch), null);
-
+                PatchMethod(typeof(VRCPlayer).GetMethod(Strings.GetColorForSocialRank),
+                    GetLocalPatch(Strings.GetColorForSocialRankPatch), null);
             }
             else
             {
-                PatchMethod(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Virtual_Final_New_Void_Single_Single_0)), GetLocalPatch(nameof(UnknownUpdatePatch)), null);
+                PatchMethod(
+                    typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Method_Public_Virtual_Final_New_Void_Single_Single_0)),
+                    GetLocalPatch(nameof(UnknownUpdatePatch)), null);
             }
         }
 
@@ -39,12 +41,15 @@ namespace Vanilla.Patches.Harmony
             {
                 return true;
             }
-            if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) && PlayerUtils.playerCustomTags[__0.id].customTagEnabled)
+
+            if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) &&
+                PlayerUtils.playerCustomTags[__0.id].customTagEnabled)
             {
-               // Log("USER HAS TAG", __0.displayName,ConsoleColor.Green);
+                // Log("USER HAS TAG", __0.displayName,ConsoleColor.Green);
                 __result = PlayerUtils.playerCustomTags[__0.id].customTag;
                 return false;
             }
+
             return true;
         }
 
@@ -54,13 +59,16 @@ namespace Vanilla.Patches.Harmony
             {
                 return true;
             }
-            if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) && PlayerUtils.playerCustomTags[__0.id].customTagColorEnabled)
+
+            if (RuntimeConfig.RanksCustomRanks && PlayerUtils.playerCustomTags.ContainsKey(__0.id) &&
+                PlayerUtils.playerCustomTags[__0.id].customTagColorEnabled)
             {
-               // Log("USER HAS TAG", __0.displayName, ConsoleColor.Green);
+                // Log("USER HAS TAG", __0.displayName, ConsoleColor.Green);
                 __result = PlayerUtils.playerCustomTags[__0.id].customTagColor;
                 return false;
             }
-            return true; 
+
+            return true;
         }
     }
 }

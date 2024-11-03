@@ -11,13 +11,14 @@ namespace Vanilla.Utils
 {
     internal class PlayerUtils
     {
-        internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList = new System.Collections.Generic.Dictionary<string, PlayerInformation>();
+        internal static readonly System.Collections.Generic.Dictionary<string, PlayerInformation> playerCachingList =
+            new();
 
-        internal static readonly System.Collections.Generic.Dictionary<string, CustomTagInfo> playerCustomTags = new System.Collections.Generic.Dictionary<string, CustomTagInfo>();
+        internal static readonly System.Collections.Generic.Dictionary<string, CustomTagInfo> playerCustomTags = new();
 
-        internal static readonly System.Collections.Generic.Dictionary<string, Color> playerColorCache = new System.Collections.Generic.Dictionary<string, Color>();
+        internal static readonly System.Collections.Generic.Dictionary<string, Color> playerColorCache = new();
 
-        internal static readonly System.Collections.Generic.Dictionary<string, GameObject> playerCloneList = new System.Collections.Generic.Dictionary<string, GameObject>();
+        internal static readonly System.Collections.Generic.Dictionary<string, GameObject> playerCloneList = new();
     }
 
     internal class PlayerInformation
@@ -112,6 +113,7 @@ namespace Vanilla.Utils
             {
                 return false;
             }
+
             try
             {
                 return playerApi.IsPlayerGrounded();
@@ -128,6 +130,7 @@ namespace Vanilla.Utils
             {
                 return Vector3.zero;
             }
+
             try
             {
                 return playerApi.GetVelocity();
@@ -142,7 +145,6 @@ namespace Vanilla.Utils
         {
             return vrcPlayer.field_Internal_GameObject_0;
         }
-
     }
 
     public enum PlayerRankStatus : short

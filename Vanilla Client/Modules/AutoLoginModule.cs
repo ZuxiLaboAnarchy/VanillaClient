@@ -10,5 +10,4 @@ using UnityEngine.UI;
 
 namespace Vanilla.Modules
 {
-   
-} 
+}

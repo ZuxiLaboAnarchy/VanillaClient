@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace Vanilla.Protections
 {
-
     internal static class ProcessExtensions
     {
         private static string FindIndexedProcessName(int pid)
@@ -38,33 +37,37 @@ namespace Vanilla.Protections
         }
     }
 
-    class CAntiReverse
+    internal class CAntiReverse
     {
         [DllImport("Kernel32.dll", SetLastError = true, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool CheckRemoteDebuggerPresent(IntPtr hProcess, [MarshalAs(UnmanagedType.Bool)] ref bool isDebuggerPresent);
+        private static extern bool CheckRemoteDebuggerPresent(IntPtr hProcess,
+            [MarshalAs(UnmanagedType.Bool)] ref bool isDebuggerPresent);
 
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
 
         [DllImport("ntdll.dll", SetLastError = true)]
-        static extern int NtQueryInformationProcess(IntPtr processHandle, int processInformationClass, IntPtr processInformation, uint processInformationLength, IntPtr returnLength);
+        private static extern int NtQueryInformationProcess(IntPtr processHandle, int processInformationClass,
+            IntPtr processInformation, uint processInformationLength, IntPtr returnLength);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool CloseHandle(IntPtr hObject);
+        private static extern bool CloseHandle(IntPtr hObject);
 
         [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
-        static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+        private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
         [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int memcmp(byte[] b1, byte[] b2, long count);
+        private static extern int memcmp(byte[] b1, byte[] b2, long count);
+
         [DllImport("User32.dll", CharSet = CharSet.Unicode)]
         internal static extern int MessageBox(IntPtr h, string m, string c, int type);
 
-        static bool ByteArrayCompare(byte[] b1, byte[] b2)
+        private static bool ByteArrayCompare(byte[] b1, byte[] b2)
         {
             // Validate buffers are the same length.
             // This also ensures that the count does not exceed the length of either buffer.  
@@ -104,7 +107,13 @@ namespace Vanilla.Protections
             MaxProcessInfoClass = 0x64
         }
 
-        private static string[] IllegalProcessName = { "Fiddler", "Wireshark", "dumpcap", "dnSpy", "dnSpy-x86", "cheatengine-x86_64", "HTTPDebuggerUI", "Procmon", "Procmon64", "Procmon64a", "ProcessHacker", "x32dbg", "x64dbg", "DotNetDataCollector32", "DotNetDataCollector64" };
+        private static string[] IllegalProcessName =
+        {
+            "Fiddler", "Wireshark", "dumpcap", "dnSpy", "dnSpy-x86", "cheatengine-x86_64", "HTTPDebuggerUI", "Procmon",
+            "Procmon64", "Procmon64a", "ProcessHacker", "x32dbg", "x64dbg", "DotNetDataCollector32",
+            "DotNetDataCollector64"
+        };
+
         private static string[] IllegalWindowName = { "Progress Telerik Fiddler Web Debugger", "Wireshark" };
         private static string[] VmProcess = { "VBoxService", "VBoxTray" };
         private static string[] VmDriver = { "VBoxGuest.sys", "VBoxMouse.sys", "VBoxSF.sys", "VBoxWddm.sys" };
@@ -118,22 +127,26 @@ namespace Vanilla.Protections
              } */
             if (AntiDebugger())
             {
-
-                Environment.Exit(0); return false;
+                Environment.Exit(0);
+                return false;
             }
+
             if (IntegrityCheck())
             {
-                Environment.Exit(0); return false;
+                Environment.Exit(0);
+                return false;
             }
+
             if (AntiAnalysisTool())
             {
-
-                Environment.Exit(0); return false;
+                Environment.Exit(0);
+                return false;
             }
+
             if (AntiVM())
             {
-
-                Environment.Exit(0); return false;
+                Environment.Exit(0);
+                return false;
             }
 
             // AntiDump(); // maybe cause some problems
@@ -147,18 +160,22 @@ namespace Vanilla.Protections
             {
                 Environment.Exit(0);
             }
+
             if (AntiDebugger())
             {
                 Environment.Exit(0);
             }
+
             if (IntegrityCheck())
             {
                 Environment.Exit(0);
             }
+
             if (AntiAnalysisTool())
             {
                 Environment.Exit(0);
             }
+
             if (AntiVM())
             {
                 Environment.Exit(0);
@@ -168,19 +185,19 @@ namespace Vanilla.Protections
 
         internal static void AntiDump()
         {
-            IntPtr myMod = GetModuleHandle(null);
+            var myMod = GetModuleHandle(null);
             Memory.VirtualProtect(myMod, 0x1000, 0x40, out _);
             Memory.WriteProcessMemory(Process.GetCurrentProcess().Handle, myMod, 0x00, 4, out _); // erase MS DOS HEADER
-            Memory.WriteProcessMemory(Process.GetCurrentProcess().Handle, (myMod + 0x3C), 0x00, 4, out _);
+            Memory.WriteProcessMemory(Process.GetCurrentProcess().Handle, myMod + 0x3C, 0x00, 4, out _);
         }
 
         private static bool AntiVM()
         {
-            bool bVmIsHere = false;
-            Process[] ProcessList = Process.GetProcesses();
-            foreach (Process proc in ProcessList)
+            var bVmIsHere = false;
+            var ProcessList = Process.GetProcesses();
+            foreach (var proc in ProcessList)
             {
-                for (int i = 0; i < VmProcess.Length; i++)
+                for (var i = 0; i < VmProcess.Length; i++)
                 {
                     //check process name
                     if (proc.ProcessName == VmProcess[i])
@@ -190,7 +207,8 @@ namespace Vanilla.Protections
                     }
                 }
             }
-            for (int i = 0; i < VmDriver.Length; i++)
+
+            for (var i = 0; i < VmDriver.Length; i++)
             {
                 if (Directory.Exists("C:\\Windows\\System32\\drivers\\" + VmDriver[i]))
                 {
@@ -198,36 +216,42 @@ namespace Vanilla.Protections
                     return bVmIsHere;
                 }
             }
+
             return bVmIsHere;
         }
 
         private static bool IntegrityCheck()
         {
-
-            byte[] byteRead = new byte[1];
-            byte[] mov = new byte[1] { 0x8B };
-            bool bIntegrityCompromised = false;
-            IntPtr CheckRemoteDebuggerPresentAddr = GetProcAddress(GetModuleHandle("Kernel32.dll"), "CheckRemoteDebuggerPresent");
-            Memory.ReadProcessMemory(Process.GetCurrentProcess().Handle, CheckRemoteDebuggerPresentAddr, byteRead, 2, out _);
-            if (!ByteArrayCompare(byteRead, mov)) // normally the CheckRemoteDebuggerPresent start with mov edi,esi but if dnSpy hooked the function, the function start with a jmp
+            var byteRead = new byte[1];
+            var mov = new byte[1] { 0x8B };
+            var bIntegrityCompromised = false;
+            var CheckRemoteDebuggerPresentAddr =
+                GetProcAddress(GetModuleHandle("Kernel32.dll"), "CheckRemoteDebuggerPresent");
+            Memory.ReadProcessMemory(Process.GetCurrentProcess().Handle, CheckRemoteDebuggerPresentAddr, byteRead, 2,
+                out _);
+            if (!ByteArrayCompare(byteRead,
+                    mov)) // normally the CheckRemoteDebuggerPresent start with mov edi,esi but if dnSpy hooked the function, the function start with a jmp
             {
                 bIntegrityCompromised = true;
             }
+
             return bIntegrityCompromised;
         }
 
         private static bool AntiDebugger()
         {
-            bool DebuggerPresent = false;
-            CheckRemoteDebuggerPresent(OpenProcess(ProcessAccessFlags.All, false, Process.GetCurrentProcess().Id), ref DebuggerPresent);
+            var DebuggerPresent = false;
+            CheckRemoteDebuggerPresent(OpenProcess(ProcessAccessFlags.All, false, Process.GetCurrentProcess().Id),
+                ref DebuggerPresent);
             if (DebuggerPresent == false)
             {
                 //if check debugger is false, make more check
-                IntPtr hProc = OpenProcess(ProcessAccessFlags.All, false, Process.GetCurrentProcess().Id);
-                IntPtr dwReturnLength = Marshal.AllocHGlobal(sizeof(long));
-                IntPtr dwDebugPort = IntPtr.Zero;
+                var hProc = OpenProcess(ProcessAccessFlags.All, false, Process.GetCurrentProcess().Id);
+                var dwReturnLength = Marshal.AllocHGlobal(sizeof(long));
+                var dwDebugPort = IntPtr.Zero;
 
-                if (NtQueryInformationProcess(hProc, (int)ProcessInfo.ProcessDebugPort, dwReturnLength, (uint)Marshal.SizeOf(dwDebugPort), dwReturnLength) >= 0)
+                if (NtQueryInformationProcess(hProc, (int)ProcessInfo.ProcessDebugPort, dwReturnLength,
+                        (uint)Marshal.SizeOf(dwDebugPort), dwReturnLength) >= 0)
                 {
                     CloseHandle(hProc);
                     if (dwDebugPort == (IntPtr)(-1))
@@ -236,19 +260,23 @@ namespace Vanilla.Protections
                         DebuggerPresent = true;
                     }
                 }
+
                 //if someone is debugging the process the parent process will be the debugger and not explorer like almost every process in your computer
                 if (!Process.GetCurrentProcess().Parent().ProcessName.Contains("explorer"))
+                {
                     DebuggerPresent = true;
+                }
             }
+
             return DebuggerPresent;
         }
 
         private static bool AntiAnalysisTool()
         {
-            Process[] ProcessList = Process.GetProcesses();
-            foreach (Process proc in ProcessList)
+            var ProcessList = Process.GetProcesses();
+            foreach (var proc in ProcessList)
             {
-                for (int i = 0; i < IllegalProcessName.Length; i++)
+                for (var i = 0; i < IllegalProcessName.Length; i++)
                 {
                     //check process name
                     if (proc.ProcessName == IllegalProcessName[i])
@@ -257,7 +285,7 @@ namespace Vanilla.Protections
                     }
                 }
 
-                for (int i = 0; i < IllegalWindowName.Length; i++)
+                for (var i = 0; i < IllegalWindowName.Length; i++)
                 {
                     //check process window title
                     if (proc.MainWindowTitle == IllegalWindowName[i])
@@ -266,6 +294,7 @@ namespace Vanilla.Protections
                     }
                 }
             }
+
             return false;
         }
 
@@ -274,9 +303,13 @@ namespace Vanilla.Protections
             //get handle of this dll (this dll is used when someone launch your software with sandboxie)
             //If the dll doesn't exist the handle will be NULL
             if (GetModuleHandle("SbieDll.dll").ToInt32() != 0)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         internal static IntPtr OpenProcess(ProcessAccessFlags flags1, Process proc, ProcessAccessFlags flags)

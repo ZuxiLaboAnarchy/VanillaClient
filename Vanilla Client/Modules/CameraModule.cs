@@ -6,7 +6,6 @@ using Vanilla.Wrappers;
 
 namespace Vanilla.Modules
 {
-
     internal class CameraModule : VanillaModule
     {
         protected override string ModuleName => "CameraModule";
@@ -14,7 +13,7 @@ namespace Vanilla.Modules
 
         private static bool worldFullyLoaded = false;
 
-        private static readonly Queue<bool> clippingStateQueue = new Queue<bool>();
+        private static readonly Queue<bool> clippingStateQueue = new();
 
         private static Camera cameraBack;
 
@@ -38,16 +37,15 @@ namespace Vanilla.Modules
 
         private readonly int CULLING_LAYER_PLAYERLOCAL = 1024;
 
-        internal override void AppFocus(bool state) 
+        internal override void AppFocus(bool state)
         {
-            ChangeCameraActualZoomState(zoom: false);
+            ChangeCameraActualZoomState(false);
         }
 
         internal override void WaitForPlayer()
         {
-            
             camerasInitialized = false;
-            GameObject gameObject = new GameObject("Vanilla Back Camera");
+            var gameObject = new GameObject("Vanilla Back Camera");
             cameraBack = gameObject.AddComponent<Camera>();
             cameraBack.fieldOfView = 60f;
             cameraBack.nearClipPlane = 0.05f;
@@ -60,7 +58,7 @@ namespace Vanilla.Modules
             cameraBack.cullingMask &= ~CULLING_LAYER_PLAYERLOCAL;
             cameraBack.enabled = false;
             UnityEngine.Object.DontDestroyOnLoad(cameraBack.gameObject);
-            GameObject gameObject2 = new GameObject("Vanilla Front Camera");
+            var gameObject2 = new GameObject("Vanilla Front Camera");
             cameraFront = gameObject2.AddComponent<Camera>();
             cameraFront.fieldOfView = 60f;
             cameraFront.nearClipPlane = 0.05f;
@@ -74,7 +72,7 @@ namespace Vanilla.Modules
             cameraFront.cullingMask &= ~CULLING_LAYER_PLAYERLOCAL;
             cameraFront.enabled = false;
             UnityEngine.Object.DontDestroyOnLoad(cameraFront.gameObject);
-            GameObject gameObject3 = new GameObject("Vanilla Freeze Camera");
+            var gameObject3 = new GameObject("Vanilla Freeze Camera");
             cameraFreeze = gameObject3.AddComponent<Camera>();
             cameraFreeze.fieldOfView = 60f;
             cameraFreeze.nearClipPlane = 0.05f;
@@ -95,22 +93,24 @@ namespace Vanilla.Modules
             {
                 return;
             }
+
             if (worldFullyLoaded && clippingStateQueue.Count > 0)
             {
-                bool flag = clippingStateQueue.Dequeue();
-                GeneralWrappers.GetPlayerCamera().nearClipPlane = (flag ? 0.001f : 0.05f);
-                GeneralWrappers.GetUICamera().nearClipPlane = (flag ? 0.001f : 0.05f);
-                GeneralWrappers.GetPhotoCamera().nearClipPlane = (flag ? 0.001f : 0.05f);
-                cameraFront.nearClipPlane = (flag ? 0.001f : 0.05f);
-                cameraBack.nearClipPlane = (flag ? 0.001f : 0.05f);
-                cameraFreeze.nearClipPlane = (flag ? 0.001f : 0.05f);
+                var flag = clippingStateQueue.Dequeue();
+                GeneralWrappers.GetPlayerCamera().nearClipPlane = flag ? 0.001f : 0.05f;
+                GeneralWrappers.GetUICamera().nearClipPlane = flag ? 0.001f : 0.05f;
+                GeneralWrappers.GetPhotoCamera().nearClipPlane = flag ? 0.001f : 0.05f;
+                cameraFront.nearClipPlane = flag ? 0.001f : 0.05f;
+                cameraBack.nearClipPlane = flag ? 0.001f : 0.05f;
+                cameraFreeze.nearClipPlane = flag ? 0.001f : 0.05f;
             }
 
             if (true)
             {
                 if (cameraSetup == 0)
                 {
-                    float fieldOfView = Mathf.Lerp(GeneralWrappers.GetPlayerCamera().fieldOfView, altZoom ? 10f : currentFovZoom, 20f * Time.deltaTime);
+                    var fieldOfView = Mathf.Lerp(GeneralWrappers.GetPlayerCamera().fieldOfView,
+                        altZoom ? 10f : currentFovZoom, 20f * Time.deltaTime);
                     GeneralWrappers.GetPlayerCamera().fieldOfView = fieldOfView;
                     GeneralWrappers.GetUICamera().fieldOfView = fieldOfView;
                 }
@@ -159,6 +159,7 @@ namespace Vanilla.Modules
                 cameraBack.transform.position -= cameraBack.transform.forward * zoomOffset;
                 cameraFront.transform.position += cameraBack.transform.forward * zoomOffset;
             }
+
             OnCameraStateChanged();
         }
 
@@ -174,6 +175,7 @@ namespace Vanilla.Modules
                 freezeCameraTargetRotation = GeneralWrappers.GetPlayerCamera().transform.rotation;
                 cameraSetup = 3;
             }
+
             OnCameraStateChanged();
         }
 
@@ -261,14 +263,17 @@ namespace Vanilla.Modules
             {
                 return cameraFront;
             }
+
             if (cameraBack.enabled)
             {
                 return cameraBack;
             }
+
             if (cameraFreeze.enabled)
             {
                 return cameraFreeze;
             }
+
             return GeneralWrappers.GetPlayerCamera();
         }
 

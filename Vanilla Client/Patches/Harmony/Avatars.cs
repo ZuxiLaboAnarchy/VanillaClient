@@ -2,34 +2,27 @@
 
 namespace Vanilla.Patches.Harmony
 {
-
     [Obfuscation(Feature = "-flow")]
     [Obfuscation(Feature = "-strenc")]
     [Obfuscation(Feature = "-virtualization")]
     [Obfuscation(Feature = "-rename")]
     internal class Avatars : VanillaPatches
     {
-
         protected override string patchName => "AvatarPatch";
+
         internal override void Patch()
         {
-
             try
             {
                 InitializeLocalPatchHandler(typeof(Avatars));
 
 
-
                 //  PatchMethod(typeof(VRC_Player).GetMethod(nameof(VRC_Player.Awake)), null, GetLocalPatch("OnAvatarChanged")); // Post So It Exists.
-
-
-
             }
             catch (Exception e)
             {
-                Utils.LogHandler.ExceptionHandler(patchName, e);
+                ExceptionHandler(patchName, e);
             }
-
         }
 
         /*
@@ -80,7 +73,5 @@ namespace Vanilla.Patches.Harmony
         }
 
         */
-
-
     }
 }

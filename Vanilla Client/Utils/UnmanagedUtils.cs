@@ -35,11 +35,9 @@ namespace Vanilla.Utils
         [StructLayout(LayoutKind.Explicit, Size = 136)]
         internal struct NodeContainer
         {
-            [FieldOffset(112)]
-            internal unsafe NodeContainer** Subs;
+            [FieldOffset(112)] internal unsafe NodeContainer** Subs;
 
-            [FieldOffset(128)]
-            internal long DirectSubCount;
+            [FieldOffset(128)] internal long DirectSubCount;
         }
 
 
@@ -53,7 +51,8 @@ namespace Vanilla.Utils
         internal static extern IntPtr GetModuleHandle(string lpModuleName);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, Protection flNewProtect, out Protection lpflOldProtect);
+        internal static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, Protection flNewProtect,
+            out Protection lpflOldProtect);
 
         [DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall)]
         internal static extern bool SetProcessAffinityMask(IntPtr hProcess, IntPtr dwProcessAffinityMask);
@@ -86,12 +85,12 @@ namespace Vanilla.Utils
         internal static extern IntPtr GetConsoleWindow();
 
         [DllImport("user32.dll", EntryPoint = "SetWindowText")]
-        public static extern bool SetWindowText(System.IntPtr hwnd, System.String lpString);
+        public static extern bool SetWindowText(IntPtr hwnd, string lpString);
 
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
+        public static extern IntPtr FindWindow(string className, string windowName);
 
-        [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hwnd, int message, int wParam, IntPtr lParam);
 
         internal static void VolumeUp()
@@ -136,10 +135,10 @@ namespace Vanilla.Utils
             keybd_event(179, MapVirtualKey(179u, 0u), 3u, 0u);
         }
 
-        internal unsafe static void ChangeInstructionAtAddress(IntPtr address, byte instruction)
+        internal static unsafe void ChangeInstructionAtAddress(IntPtr address, byte instruction)
         {
             VirtualProtect(address, (UIntPtr)4uL, Protection.PAGE_EXECUTE_READWRITE, out var lpflOldProtect);
-            byte* ptr = (byte*)address.ToPointer();
+            var ptr = (byte*)address.ToPointer();
             *ptr = instruction;
             VirtualProtect(address, (UIntPtr)4uL, lpflOldProtect, out var _);
         }

@@ -11,7 +11,7 @@ namespace Vanilla.Patches.Harmony
     {
         //TODO: Fix UnityWebRequest since some clients use that instead not many but still important!
         // TODO: Opttimise some of these functions again cba rn
-        
+
         private static string[] WhitelistedUrlPassthough = new[]
         {
             "anarchy.zuxi.dev",
@@ -19,6 +19,7 @@ namespace Vanilla.Patches.Harmony
             "raw.githubusercontent.com",
             "?t=" //unix has patched this so we can ignore for the noto crack LMAO
         };
+
         protected override string patchName => "CrackPatcher";
 
         internal override void Patch()
@@ -61,6 +62,7 @@ namespace Vanilla.Patches.Harmony
         {
             return ProcessWebRequest(ref __result, address, "");
         }
+
         private static bool ReturnEmptyForUploadData(ref byte[] __result, string address, byte[] data)
         {
             return ProcessWebRequest(ref __result, address, Encoding.UTF8.GetString(data));
@@ -68,7 +70,7 @@ namespace Vanilla.Patches.Harmony
 
         private static bool ReturnEmptyForUploadSData(ref string __result, string address, string data)
         {
-          return ProcessWebRequest(ref __result, address, data);
+            return ProcessWebRequest(ref __result, address, data);
         }
 
         private static bool ReturnEmptyForUploadValues(ref byte[] __result, string address, NameValueCollection data)
@@ -83,10 +85,10 @@ namespace Vanilla.Patches.Harmony
                 }
             }
 
-          return ProcessWebRequest(ref __result, address, dataString);
+            return ProcessWebRequest(ref __result, address, dataString);
         }
         // UnityWebrequest cannot be patched directly aparently lol
-        
+
         private static void UnityWebRequestPut(UnityWebRequest __instance, string uri, string postData)
         {
             // simply pass though active servers // my url so we can still exchange data
@@ -122,25 +124,24 @@ namespace Vanilla.Patches.Harmony
 
             // simply pass though active servers // my url so we can still exchange data
             if (WhitelistedUrlPassthough.Any(x => addr.Contains(x)))
-            { 
+            {
                 return true;
             }
 
             result = new byte[0];
             return false;
         }
-        
+
         private static bool ProcessWebRequest(ref string result, string addr, string data)
         {
             byte[] byteArrayResult = null;
 
-            bool returnVal = ProcessWebRequest(ref byteArrayResult, addr, data);
+            var returnVal = ProcessWebRequest(ref byteArrayResult, addr, data);
 
             result = byteArrayResult != null ? Encoding.UTF8.GetString(byteArrayResult) : string.Empty;
 
             return returnVal;
         }
-
     }
 }
 #endif

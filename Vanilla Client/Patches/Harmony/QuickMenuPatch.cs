@@ -16,32 +16,36 @@ namespace Vanilla.Patches.Harmony
         internal override void Patch()
         {
             InitializeLocalPatchHandler(typeof(QuickMenuPatch));
-            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnEnable), null, GetLocalPatch(Strings.OnQuickMenuOpenPatch));
-            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnDisable), null, GetLocalPatch(Strings.OnQuickMenuClosePatch));
+            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnEnable), null,
+                GetLocalPatch(Strings.OnQuickMenuOpenPatch));
+            PatchMethod(typeof(VRC.UI.Elements.QuickMenu).GetMethod(Strings.OnDisable), null,
+                GetLocalPatch(Strings.OnQuickMenuClosePatch));
         }
 
         private static void OnQuickMenuOpenPatch()
         {
-            foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerUtils.playerCachingList)
+            foreach (var playerCaching in PlayerUtils.playerCachingList)
             {
                 if (!playerCaching.Value.isLocalPlayer && playerCaching.Value.customNameplateTransform != null)
                 {
-                    playerCaching.Value.customNameplateTransform.localPosition = MiscUtils.GetNameplateOffset(open: true);
+                    playerCaching.Value.customNameplateTransform.localPosition = MiscUtils.GetNameplateOffset(true);
                 }
             }
-            CameraModule.ChangeCameraClipping(nearClipping: false);
+
+            CameraModule.ChangeCameraClipping(false);
             RuntimeConfig.isQuickMenuOpen = true;
         }
 
         private static void OnQuickMenuClosePatch()
         {
-            foreach (KeyValuePair<string, PlayerInformation> playerCaching in PlayerUtils.playerCachingList)
+            foreach (var playerCaching in PlayerUtils.playerCachingList)
             {
                 if (!playerCaching.Value.isLocalPlayer && playerCaching.Value.customNameplateTransform != null)
                 {
-                    playerCaching.Value.customNameplateTransform.localPosition = MiscUtils.GetNameplateOffset(open: false);
+                    playerCaching.Value.customNameplateTransform.localPosition = MiscUtils.GetNameplateOffset(false);
                 }
             }
+
             //  lastOpenedMenu = QuickMenuUtils.GetQuickMenu().prop_MenuStateController_0.field_Private_UIPage_0.field_Public_String_0;
             //CameraFeaturesHandler.ChangeCameraClipping(Configuration.GetGeneralConfig().MinimumCameraClippingDistance);
             RuntimeConfig.isQuickMenuOpen = false;

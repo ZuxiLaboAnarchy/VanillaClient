@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+
 //using Valve.VR;  // Make sure OpenVR is referenced
 
 public class OpenVRThumbstickInputDirect : MonoBehaviour
 {
+    private OpenVRThumbstickInputDirect(IntPtr ptr) : base(ptr)
+    {
+    }
 
-    OpenVRThumbstickInputDirect(IntPtr ptr) : base(ptr) { }
     // Device index for left controller (can be dynamically queried as needed)
-    private uint leftHandDeviceIndex = 0;//OpenVR.k_unTrackedDeviceIndexInvalid;
+    private uint leftHandDeviceIndex = 0; //OpenVR.k_unTrackedDeviceIndexInvalid;
 /*
     void Update()
     {
@@ -16,7 +19,7 @@ public class OpenVRThumbstickInputDirect : MonoBehaviour
            Dev("SteamVR", "OpenVR System not initialized");
             return;
         }
-         
+
         // Get the left hand device index if it is valid
         leftHandDeviceIndex = GetControllerDeviceIndex(ETrackedControllerRole.LeftHand);
         if (leftHandDeviceIndex == 0)

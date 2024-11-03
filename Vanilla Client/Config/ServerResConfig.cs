@@ -1,6 +1,5 @@
 ﻿namespace Vanilla.Config
 {
-
     internal class ServerResponce
     {
         internal string Username { get; set; }

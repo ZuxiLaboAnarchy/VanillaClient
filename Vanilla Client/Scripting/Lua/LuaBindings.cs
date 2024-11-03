@@ -4,7 +4,7 @@
     {
         public static void LuaPrint(string message)
         {
-            LogHandler.Log("LuaApi", message, ConsoleColor.DarkBlue);
+            Log("LuaApi", message, ConsoleColor.DarkBlue);
         }
     }
 }

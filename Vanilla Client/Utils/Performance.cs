@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+
 namespace Vanilla.Utils
 {
     internal class Performance
     {
-        private static readonly Dictionary<string, float> profiler = new Dictionary<string, float>();
+        private static readonly Dictionary<string, float> profiler = new();
+
         internal static void StartProfiling(string id)
         {
             if (profiler.ContainsKey(id))
@@ -21,10 +23,11 @@ namespace Vanilla.Utils
         {
             if (profiler.ContainsKey(id))
             {
-                float num = (Time.realtimeSinceStartup - profiler[id]) * 1000f;
+                var num = (Time.realtimeSinceStartup - profiler[id]) * 1000f;
                 profiler[id] = num;
                 return num;
             }
+
             return 0f;
         }
 
@@ -34,6 +37,7 @@ namespace Vanilla.Utils
             {
                 return profiler[id];
             }
+
             return -1f;
         }
     }

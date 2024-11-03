@@ -15,49 +15,45 @@ namespace Vanilla.Modules
 
         public static void Test2(string s)
         {
-            LogHandler.Log("Done", "Sucesss");
-            LogHandler.Log("Output", s);
+            Log("Done", "Sucesss");
+            Log("Output", s);
         }
 
         internal static void Test(Action<string> _stringOut, Action _action)
         {
-
-          //  var UIObject = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
+            //  var UIObject = GameObject.Find("UIManager").GetComponent<UIManagerPublicBoObBoAc1BoAcGa1MeUnique>();
 
             //UIObject.Method_Public_Virtual_Final_New_Void_String_String_InputType_Boolean_String_Action_1_String_Action_String_Boolean_Int32_0("Title", "Something2", TMP_InputField.InputType.Standard, false, "String3", _stringOut, _action);
-            
         }
 
 
         internal override void Update()
         {
 #if DEBUG
-            if (UnityEngine.Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L))
             {
-               // InputHandler.RunAlertPopup(null, null);
+                // InputHandler.RunAlertPopup(null, null);
 
                 // LogHandler.LogToHud("Test");
                 ModuleManager.DebugKey();
 
                 //  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
-
             }
 #endif
-            if (UnityEngine.Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O))
             {
                 // InputHandler.RunAlertPopup(null, null);
 
                 // LogHandler.LogToHud("Test");
-               // ModuleManager.DebugKey();
-             //   ModuleManager.WaitForPlayer();
+                // ModuleManager.DebugKey();
+                //   ModuleManager.WaitForPlayer();
 
                 //  GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
-
             }
 
 
-
-            if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F) || (Input.GetKey(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl))))
+            if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F)) ||
+                (Input.GetKey(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl)))
             {
                 FlyManager.ToggleFly();
             }
@@ -72,47 +68,52 @@ namespace Vanilla.Modules
                 GeneralUtils.Restart();
             }
 
-            if ((Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.E) || (UnityEngine.Input.GetKey(KeyCode.E) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl))))
+            if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.E)) ||
+                (Input.GetKey(KeyCode.E) && Input.GetKeyDown(KeyCode.LeftControl)))
             {
                 CameraModule.ChangeCameraState();
             }
-            else if ((Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P)) || (UnityEngine.Input.GetKey(KeyCode.P) && UnityEngine.Input.GetKeyDown(KeyCode.LeftControl)))
+            else if ((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P)) ||
+                     (Input.GetKey(KeyCode.P) && Input.GetKeyDown(KeyCode.LeftControl)))
             {
                 CameraModule.UseFreezeCamera();
             }
-            float axis = Input.GetAxis("Mouse ScrollWheel");
+
+            var axis = Input.GetAxis("Mouse ScrollWheel");
             if (axis != 0f)
             {
                 CameraModule.ApplyThirdpersonSmoothZoom(axis > 0f);
             }
+
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                if (Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetMouseButtonDown(1))
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(1))
                 {
-                    Ray ray = new Ray(GeneralWrappers.GetPlayerCamera().transform.position, GeneralWrappers.GetPlayerCamera().transform.forward);
+                    var ray = new Ray(GeneralWrappers.GetPlayerCamera().transform.position,
+                        GeneralWrappers.GetPlayerCamera().transform.forward);
                     if (Physics.Raycast(ray, out var hitInfo))
                     {
                         //   PlayerWrapper.GetLocalPlayerInformation().vrcPlayer.transform.position = hitInfo.point;
                     }
                 }
+
                 if (Input.GetMouseButtonDown(2))
                 {
-                    CameraModule.ApplyCameraSmoothZoom(incremental: false, 60f);
+                    CameraModule.ApplyCameraSmoothZoom(false, 60f);
                 }
                 else if (axis != 0f)
                 {
-                    CameraModule.ApplyCameraSmoothZoom(incremental: true, axis * 30f);
+                    CameraModule.ApplyCameraSmoothZoom(true, axis * 30f);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
-                CameraModule.ChangeCameraActualZoomState(zoom: true);
+                CameraModule.ChangeCameraActualZoomState(true);
             }
             else if (Input.GetKeyUp(KeyCode.LeftAlt))
             {
-                CameraModule.ChangeCameraActualZoomState(zoom: false);
+                CameraModule.ChangeCameraActualZoomState(false);
             }
         }
     }
 }
-

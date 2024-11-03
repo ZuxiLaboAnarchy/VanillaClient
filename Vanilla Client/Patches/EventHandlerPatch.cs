@@ -16,40 +16,43 @@ using static BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests.SkeinEngine
 
 namespace Vanilla.Patches
 {
-    
     internal class EventHandlerPatch : VanillaPatches
     {
-        private static readonly Dictionary<int, Dictionary<int, float>> eventFilter = new Dictionary<int, Dictionary<int, float>>();
+        private static readonly Dictionary<int, Dictionary<int, float>> eventFilter = new();
 
         private static readonly float eventFilterTimer = 30f;
 
-        private static readonly Dictionary<int, float> lastSpawnEmojiTime = new Dictionary<int, float>();
-        private static readonly List<string> whitelistedRpcs = new List<string>
+        private static readonly Dictionary<int, float> lastSpawnEmojiTime = new();
+
+        private static readonly List<string> whitelistedRpcs = new()
         {
-            "initUSpeakSenderRPC", "SendVoiceSetupToPlayerRPC", "ReceiveVoiceStatsSyncRPC", "InteractWithStationRPC", "_InstantiateObject", "_SendOnSpawn", "_DestroyObject", "SanityCheck", "ChangeVisibility", "Respawn",
-            "ReapObject", "TakeOwnership", "SendStrokeRPC", "SpawnEmojiRPC", "PlayEmoteRPC", "TeleportRPC", "IncrementPortalPlayerCountRPC", "SyncWorldInstanceIdRPC", "SetTimerRPC", "CancelRPC",
-            "ConfigurePortal", "UdonSyncRunProgramAsRPC", "PhotoCapture", "TimerBloop", "PlayEffect", "ReloadAvatarNetworkedRPC", "InternalApplyOverrideRPC", "InformOfBadConnection", "AddURL", "Play",
-            "Pause", "Clear", "RemoteClear", "NetworkedQg", "NetworkedQuack", "NetworkedException", "NetworkedCowboy", "NetworkedAllah", "NetworkedGay", "Zuxi_Networked_Join_VanillaClient"
+            "initUSpeakSenderRPC", "SendVoiceSetupToPlayerRPC", "ReceiveVoiceStatsSyncRPC", "InteractWithStationRPC",
+            "_InstantiateObject", "_SendOnSpawn", "_DestroyObject", "SanityCheck", "ChangeVisibility", "Respawn",
+            "ReapObject", "TakeOwnership", "SendStrokeRPC", "SpawnEmojiRPC", "PlayEmoteRPC", "TeleportRPC",
+            "IncrementPortalPlayerCountRPC", "SyncWorldInstanceIdRPC", "SetTimerRPC", "CancelRPC",
+            "ConfigurePortal", "UdonSyncRunProgramAsRPC", "PhotoCapture", "TimerBloop", "PlayEffect",
+            "ReloadAvatarNetworkedRPC", "InternalApplyOverrideRPC", "InformOfBadConnection", "AddURL", "Play",
+            "Pause", "Clear", "RemoteClear", "NetworkedQg", "NetworkedQuack", "NetworkedException", "NetworkedCowboy",
+            "NetworkedAllah", "NetworkedGay", "Zuxi_Networked_Join_VanillaClient"
         };
+
         protected override string patchName => "EventHandlerPatch";
 
         internal override void Patch()
-        {/*
-            InitializeLocalPatchHandler(typeof(EventHandlerPatch));
-            PatchMethod(typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent"), GetLocalPatch("OnEventDataSentPatch"), null);
-            PatchMethod(typeof(FlatBufferNetworkSerializer).GetMethod("Method_Public_Void_EventData_0"), GetLocalPatch("FlatBufferNetworkSerializeReceivePatch"), null);
-            MethodInfo[] methods = typeof(VRC_EventLog.EventReplicator).GetMethods(BindingFlags.Instance | BindingFlags.Public);
-            foreach (MethodInfo methodInfo in methods)
-            {
-                if (methodInfo.Name.StartsWith("Method_Public_Virtual_Final_New_Void_EventData_"))
+        {
+            /*
+                InitializeLocalPatchHandler(typeof(EventHandlerPatch));
+                PatchMethod(typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent"), GetLocalPatch("OnEventDataSentPatch"), null);
+                PatchMethod(typeof(FlatBufferNetworkSerializer).GetMethod("Method_Public_Void_EventData_0"), GetLocalPatch("FlatBufferNetworkSerializeReceivePatch"), null);
+                MethodInfo[] methods = typeof(VRC_EventLog.EventReplicator).GetMethods(BindingFlags.Instance | BindingFlags.Public);
+                foreach (MethodInfo methodInfo in methods)
                 {
-                    PatchMethod(methodInfo, GetLocalPatch("OnEventDataReceivedPatch"), null);
+                    if (methodInfo.Name.StartsWith("Method_Public_Virtual_Final_New_Void_EventData_"))
+                    {
+                        PatchMethod(methodInfo, GetLocalPatch("OnEventDataReceivedPatch"), null);
+                    }
                 }
-            }
-            */
-
-           
-
+                */
         }
         /*
 
@@ -74,7 +77,7 @@ namespace Vanilla.Patches
             }
             return true;
         }
-         
+
         private static bool IsGoodSerializedData(EventData eventData)
         {
             if (IsPlayerFiltered(eventData.Sender, eventData.Code))
@@ -114,8 +117,5 @@ namespace Vanilla.Patches
                 return false;
             }
             return true;*/
-        }
-     
-
+    }
 }
-

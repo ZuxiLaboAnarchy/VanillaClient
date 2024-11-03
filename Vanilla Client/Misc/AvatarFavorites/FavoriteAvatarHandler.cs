@@ -10,16 +10,17 @@ namespace Vanilla.AvatarFavorites
 {
     internal class FavoriteAvatarHandler
     {
-        internal static Dictionary<string, FavoriteAvatar> VanillaAvatarsFav = new System.Collections.Generic.Dictionary<string, FavoriteAvatar>();
+        internal static Dictionary<string, FavoriteAvatar> VanillaAvatarsFav = new();
 
 
-
-        internal static void AddAvatarByID(string avatarId, Il2CppSystem.Collections.Generic.List<KeyCode> keycodeList, Text text)
+        internal static void AddAvatarByID(string avatarId, Il2CppSystem.Collections.Generic.List<KeyCode> keycodeList,
+            Text text)
         {
-            ApiAvatar apiAvatar = new ApiAvatar();
+            var apiAvatar = new ApiAvatar();
             apiAvatar.id = avatarId;
-            ((ApiModel)apiAvatar).Get((Il2CppSystem.Action<ApiContainer>)(System.Action<ApiContainer>)AvatarFoundHandlerSilent, (Il2CppSystem.Action<ApiContainer>)(System.Action<ApiContainer>)AvatarNotFoundHandlerSilent, (Il2CppSystem.Collections.Generic.Dictionary<string, BestHTTP.JSON.Json.Token>)null, false);
-
+            ((ApiModel)apiAvatar).Get((Il2CppSystem.Action<ApiContainer>)(Action<ApiContainer>)AvatarFoundHandlerSilent,
+                (Il2CppSystem.Action<ApiContainer>)(Action<ApiContainer>)AvatarNotFoundHandlerSilent,
+                (Il2CppSystem.Collections.Generic.Dictionary<string, BestHTTP.JSON.Json.Token>)null, false);
         }
 
         private static void AvatarNotFoundHandlerSilent(ApiContainer apiContainer)
@@ -29,7 +30,7 @@ namespace Vanilla.AvatarFavorites
 
         private static void AvatarFoundHandlerSilent(ApiContainer apiContainer)
         {
-            ApiAvatar apiAvatar = apiContainer.Model.Cast<ApiAvatar>();
+            var apiAvatar = apiContainer.Model.Cast<ApiAvatar>();
             if (apiAvatar.authorId != PlayerWrapper.GetLocalAPIUser().id && apiAvatar.releaseStatus == "private")
             {
                 Log("AvatarAPI", "Avatar Is Private", ConsoleColor.Red);
@@ -40,7 +41,7 @@ namespace Vanilla.AvatarFavorites
             }
             else
             {
-                AddRemoveAvatarToFavoriteList(apiAvatar, notifyUser: false);
+                AddRemoveAvatarToFavoriteList(apiAvatar, false);
             }
         }
 
@@ -52,20 +53,20 @@ namespace Vanilla.AvatarFavorites
                 {
                     //GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().NoticeText, LanguageManager.GetUsedLanguage().AvatarPrivate);
                 }
+
                 return false;
             }
+
             if (!VanillaAvatarsFav.ContainsKey(avi.id))
             {
-            
-
-
-                IOrderedEnumerable<System.Collections.Generic.KeyValuePair<string, FavoriteAvatar>> source = VanillaAvatarsFav.ToList().OrderByDescending(delegate (System.Collections.Generic.KeyValuePair<string, FavoriteAvatar> entry)
-                {
-                    System.Collections.Generic.KeyValuePair<string, FavoriteAvatar> keyValuePair = entry;
-                    return keyValuePair.Value.AvatarSortIndex;
-                });
-                int avatarSortIndex = ((source.Count() <= 0) ? 1 : (source.ElementAt(0).Value.AvatarSortIndex + 1));
-                FavoriteAvatar favoriteAvatar = new FavoriteAvatar(avi)
+                var source = VanillaAvatarsFav.ToList().OrderByDescending(
+                    delegate(KeyValuePair<string, FavoriteAvatar> entry)
+                    {
+                        var keyValuePair = entry;
+                        return keyValuePair.Value.AvatarSortIndex;
+                    });
+                var avatarSortIndex = source.Count() <= 0 ? 1 : source.ElementAt(0).Value.AvatarSortIndex + 1;
+                var favoriteAvatar = new FavoriteAvatar(avi)
                 {
                     AvatarSortIndex = avatarSortIndex
                 };
@@ -87,11 +88,9 @@ namespace Vanilla.AvatarFavorites
                     // GeneralWrappers.AlertPopup(LanguageManager.GetUsedLanguage().SuccessText, LanguageManager.GetUsedLanguage().AvatarUnfavorited.Replace("{name}", avi.name));
                 }
             }
+
             // RefreshList(string.Empty);
             return true;
         }
-
-
-
     }
 }

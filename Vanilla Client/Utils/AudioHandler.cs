@@ -14,7 +14,8 @@ namespace Vanilla.Utils
 
             internal int totalDetections;
         }
-        private static readonly Dictionary<int, List<LoggedRelativeSum>> potentialMaliciousVoicePackets = new Dictionary<int, List<LoggedRelativeSum>>();
+
+        private static readonly Dictionary<int, List<LoggedRelativeSum>> potentialMaliciousVoicePackets = new();
 
         internal static void ClearLoggedVoicePackets()
         {
@@ -30,31 +31,30 @@ namespace Vanilla.Utils
                 Log("Protections", player + "sent Bad Uspeak Data");
                 LogToHud(player + "sent Bad Uspeak Data");
                 return true;
-
             }
 
-            int num = BitConverter.ToInt32(voiceData, 0);
+            var num = BitConverter.ToInt32(voiceData, 0);
 
             if (num != actorId)
             {
                 return true;
             }
 
-            int num2 = 0;
-            for (int i = 8; i < voiceData.Length; i++)
+            var num2 = 0;
+            for (var i = 8; i < voiceData.Length; i++)
             {
                 num2 += voiceData[i];
             }
 
             if (potentialMaliciousVoicePackets.ContainsKey(actorId))
             {
-                bool flag = false;
-                bool flag2 = false;
+                var flag = false;
+                var flag2 = false;
 
-                for (int j = 0; j < potentialMaliciousVoicePackets[actorId].Count; j++)
+                for (var j = 0; j < potentialMaliciousVoicePackets[actorId].Count; j++)
                 {
-                    int num3 = potentialMaliciousVoicePackets[actorId][j].sum - 64;
-                    int num4 = potentialMaliciousVoicePackets[actorId][j].sum + 64;
+                    var num3 = potentialMaliciousVoicePackets[actorId][j].sum - 64;
+                    var num4 = potentialMaliciousVoicePackets[actorId][j].sum + 64;
 
                     if (num2 < num3 || num2 > num4)
                     {
@@ -79,8 +79,8 @@ namespace Vanilla.Utils
                                 });
                             }
 
-                            int totalDetections = potentialMaliciousVoicePackets[actorId][j].totalDetections;
-                            for (int k = 0; k < potentialMaliciousVoicePackets[actorId].Count; k++)
+                            var totalDetections = potentialMaliciousVoicePackets[actorId][j].totalDetections;
+                            for (var k = 0; k < potentialMaliciousVoicePackets[actorId].Count; k++)
                             {
                                 potentialMaliciousVoicePackets[actorId][k].lastSeen = Time.realtimeSinceStartup;
                                 potentialMaliciousVoicePackets[actorId][k].totalDetections = totalDetections;
@@ -91,6 +91,7 @@ namespace Vanilla.Utils
                             potentialMaliciousVoicePackets[actorId][j].lastSeen = Time.realtimeSinceStartup;
                             potentialMaliciousVoicePackets[actorId][j].totalDetections++;
                         }
+
                         break;
                     }
                     else
@@ -119,7 +120,7 @@ namespace Vanilla.Utils
             {
                 potentialMaliciousVoicePackets.Add(actorId, new List<LoggedRelativeSum>
                 {
-                    new LoggedRelativeSum
+                    new()
                     {
                         sum = num2,
                         lastSeen = Time.realtimeSinceStartup,
@@ -127,6 +128,7 @@ namespace Vanilla.Utils
                     }
                 });
             }
+
             return false;
         }
     }

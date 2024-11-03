@@ -1,32 +1,29 @@
 ﻿using System.Reflection;
-
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Vanilla.Patches.Harmony;
-[Obfuscation(Feature = "-flow")]
-[Obfuscation(Feature = "-strenc")]
-[Obfuscation(Feature = "-virtualization")]
-[Obfuscation(Feature = "-rename")]
-internal class Scanner : VanillaPatches
+namespace Vanilla.Patches.Harmony
 {
-    static void FindOBBB()
+    [Obfuscation(Feature = "-flow")]
+    [Obfuscation(Feature = "-strenc")]
+    [Obfuscation(Feature = "-virtualization")]
+    [Obfuscation(Feature = "-rename")]
+    internal class Scanner : VanillaPatches
     {
-      //   Test =;   //       onClick.FindMethod_Impl.Name.ToString();
-
-        
-        //     InitializeLocalPatchHandler(typeof(ImageDownloaderPatch));
-
-        
+        private static void FindOBBB()
+        {
+            //   Test =;   //       onClick.FindMethod_Impl.Name.ToString();
 
 
-       /// PatchMethod(typeof().GetMethod("DownloadImageInternal"), GetLocalPatch("OnImageDownloadPatch"), null);
+            //     InitializeLocalPatchHandler(typeof(ImageDownloaderPatch));
 
-        //Test.
+
+            /// PatchMethod(typeof().GetMethod("DownloadImageInternal"), GetLocalPatch("OnImageDownloadPatch"), null);
+
+            //Test.
         }
 #if DEBUG1
-
                 GameObject.Find("").GetComponent<Button>().onClick.FindMethod_Impl.Name.ToString();
 
     protected override string patchName => "Scanner";
@@ -76,4 +73,5 @@ internal class Scanner : VanillaPatches
     }
 
 #endif
+    }
 }

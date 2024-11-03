@@ -9,7 +9,6 @@ namespace Vanilla.Patches.Harmony
     [Obfuscation(Feature = "-rename")]
     internal class CurserPatch : VanillaPatches
     {
-
         protected override string patchName => "CurserPatch";
 
         internal override void Patch()
@@ -18,16 +17,14 @@ namespace Vanilla.Patches.Harmony
             {
                 InitializeLocalPatchHandler(typeof(CurserPatch));
 
-            //    PatchMethod(typeof(Cursor).GetProperty("lockState").GetSetMethod(), GetLocalPatch("CursorSetLockStatePatch"), null);
-            //    PatchMethod(typeof(Cursor).GetProperty("visible").GetSetMethod(), GetLocalPatch("CursorSetVisiblePatch"), null);
-
+                //    PatchMethod(typeof(Cursor).GetProperty("lockState").GetSetMethod(), GetLocalPatch("CursorSetLockStatePatch"), null);
+                //    PatchMethod(typeof(Cursor).GetProperty("visible").GetSetMethod(), GetLocalPatch("CursorSetVisiblePatch"), null);
             }
             catch (Exception e)
             {
-                Utils.LogHandler.ExceptionHandler(patchName, e);
+                ExceptionHandler(patchName, e);
             }
         }
-
 
 
         private static bool CursorSetLockStatePatch()

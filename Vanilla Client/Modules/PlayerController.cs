@@ -15,12 +15,12 @@ namespace Vanilla.Modules
 {
     internal class PlayerController : VanillaModule
     {
-
         public static GameObject canvas = null;
         protected override string ModuleName => "PlayerController";
 
 
-        #region Nameplates 
+        #region Nameplates
+
         // TODO: Fix Nameplates 
         /*public static Transform GetBasePlate(VRC.Player PlayerData, MonoBehaviour1PublicSiObSiBoObAcSi1MeSiUnique[] Nameplates)
         {
@@ -42,75 +42,87 @@ namespace Vanilla.Modules
 
         internal override void Debug()
         {
-          //  canvas.name = "Vanilla Test Object";
+            //  canvas.name = "Vanilla Test Object";
         }
 
-        internal override void PlayerJoin(VRC.Player __0)
+        internal override void PlayerJoin(Player __0)
         {
-            if ( __0 == null || PlayerWrapper.GetPlayerInformation(__0) != null) { return; }
-            bool flag = __0.prop_APIUser_0.id == APIUser.CurrentUser.id;
-           // GameObject canvas = null;
+            if (__0 == null || PlayerWrapper.GetPlayerInformation(__0) != null)
+            {
+                return;
+            }
+
+            var flag = __0.prop_APIUser_0.id == APIUser.CurrentUser.id;
+            // GameObject canvas = null;
             ImageThreeSlice nameplateBackground = null;
             Image nameplateIconBackground = null;
             GameObject CreatedPlate = null;
             RectTransform rectTransform = null;
             TextMeshProUGUI textMeshProUGUI = null;
-            try 
-            { 
+            try
+            {
                 canvas = __0.prop_VRCPlayer_0.transform.Find("Player Nameplate/Canvas").gameObject;
-                nameplateBackground = canvas.transform.Find("Nameplate/Contents/Main/Background").GetComponent<ImageThreeSlice>();
-                nameplateIconBackground = canvas.transform.Find("Nameplate/Contents/Icon/Background").GetComponent<Image>();
+                nameplateBackground = canvas.transform.Find("Nameplate/Contents/Main/Background")
+                    .GetComponent<ImageThreeSlice>();
+                nameplateIconBackground =
+                    canvas.transform.Find("Nameplate/Contents/Icon/Background").GetComponent<Image>();
                 if (!flag)
                 {
-                    Transform transform = canvas.transform.Find("Nameplate/Contents");
-                    GameObject gameObject3 = transform.transform.Find("Quick Stats").gameObject;
+                    var transform = canvas.transform.Find("Nameplate/Contents");
+                    var gameObject3 = transform.transform.Find("Quick Stats").gameObject;
 
                     CreatedPlate = UnityEngine.Object.Instantiate(gameObject3, transform);
                     rectTransform = CreatedPlate.GetComponent<RectTransform>();
                     rectTransform.localPosition = MiscUtils.GetNameplateOffset(RuntimeConfig.isQuickMenuOpen);
-                    foreach (RectTransform componentsInChild in CreatedPlate.GetComponentsInChildren<RectTransform>())
+                    foreach (var componentsInChild in CreatedPlate.GetComponentsInChildren<RectTransform>())
                     {
                         if (componentsInChild.name != "Trust Text")
                         {
-                            componentsInChild.gameObject.SetActive(value: false);
+                            componentsInChild.gameObject.SetActive(false);
                             continue;
                         }
+
                         textMeshProUGUI = componentsInChild.GetComponent<TextMeshProUGUI>();
                         textMeshProUGUI.text = "VanillaPlate";
                     }
-                    if (MainConfig.GetInstance().NameplateMoreInfo)
+
+                    if (GetInstance().NameplateMoreInfo)
                     {
-                        CreatedPlate.SetActive(value: true);
+                        CreatedPlate.SetActive(true);
                     }
                     else
                     {
-                        CreatedPlate.SetActive(value: false);
+                        CreatedPlate.SetActive(false);
                     }
                 }
-                if (MainConfig.GetInstance().NameplateWallhack && CameraModule.GetCameraSetup() == 0)
+
+                if (GetInstance().NameplateWallhack && CameraModule.GetCameraSetup() == 0)
                 {
                     canvas.layer = 19;
                 }
             }
             catch (Exception e)
             {
-               ExceptionHandler("PlateController", e);
+                ExceptionHandler("PlateController", e);
             }
+
             PlayerInformation playerInformation;
             try
             {
                 playerInformation = new PlayerInformation
                 {
                     actorId = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0,
-                    actorIdData = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 * PhotonNetwork.field_Public_Static_Int32_0 + 1,
-                    actorIdDataOther = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 * PhotonNetwork.field_Public_Static_Int32_0 + 3,
+                    actorIdData = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 *
+                        PhotonNetwork.field_Public_Static_Int32_0 + 1,
+                    actorIdDataOther = ((VRCNetworkBehaviour)__0.prop_VRCPlayer_0).prop_Int32_0 *
+                        PhotonNetwork.field_Public_Static_Int32_0 + 3,
                     id = __0.prop_APIUser_0.id,
                     displayName = __0.prop_APIUser_0.displayName,
                     isLocalPlayer = flag,
                     isInstanceMaster = __0.prop_VRCPlayerApi_0.isMaster,
                     isVRChatStaff = false,
                     isVRUser = __0.prop_VRCPlayerApi_0.IsUserInVR(),
-                    isQuestUser = (__0.prop_APIUser_0.last_platform != "standalonewindows"),
+                    isQuestUser = __0.prop_APIUser_0.last_platform != "standalonewindows",
                     isClientUser = false,
                     blockedLocalPlayer = false,
                     rankStatus = PlayerRankStatus.Unknown,
@@ -139,18 +151,20 @@ namespace Vanilla.Modules
                 ExceptionHandler("PatchManager", e2);
                 return;
             }
+
             try
             {
-
-                
                 if (!PlayerUtils.playerColorCache.ContainsKey(__0.prop_APIUser_0.displayName))
                 {
-                    PlayerUtils.playerColorCache.Add(__0.prop_APIUser_0.displayName, VRCPlayer.Method_Public_Static_Color_APIUser_0(__0.prop_APIUser_0));
+                    PlayerUtils.playerColorCache.Add(__0.prop_APIUser_0.displayName,
+                        VRCPlayer.Method_Public_Static_Color_APIUser_0(__0.prop_APIUser_0));
                 }
                 else
                 {
-                    PlayerUtils.playerColorCache[__0.prop_APIUser_0.displayName] = VRCPlayer.Method_Public_Static_Color_APIUser_0(__0.prop_APIUser_0);
+                    PlayerUtils.playerColorCache[__0.prop_APIUser_0.displayName] =
+                        VRCPlayer.Method_Public_Static_Color_APIUser_0(__0.prop_APIUser_0);
                 }
+
                 PlayerUtils.playerCachingList.Add(playerInformation.displayName, playerInformation);
             }
             catch (Exception e3)
@@ -158,16 +172,20 @@ namespace Vanilla.Modules
                 ExceptionHandler("PlayerJoinModule", e3);
                 return;
             }
-          //  ModuleManager.OnPlayerJoin(playerInformation); 
+
+            //  ModuleManager.OnPlayerJoin(playerInformation); 
             try
             {
-                if (__0.prop_APIUser_0.tags.Contains("admin_moderator") || __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Internal || __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Moderator)
+                if (__0.prop_APIUser_0.tags.Contains("admin_moderator") ||
+                    __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Internal ||
+                    __0.prop_APIUser_0.developerType == APIUser.DeveloperType.Moderator)
                 {
                     playerInformation.isVRChatStaff = true;
-                    if (MainConfig.GetInstance().LogModerations)
+                    if (GetInstance().LogModerations)
                     {
-                        string text = "<color=red>WARNING: <color=white>Anarchy Staff joined: <color=purple>" + playerInformation.displayName;
-                       // HudLog("JOIN", text);
+                        var text = "<color=red>WARNING: <color=white>Anarchy Staff joined: <color=purple>" +
+                                   playerInformation.displayName;
+                        // HudLog("JOIN", text);
                         Log("Join", text, ConsoleColor.Red);
                     }
                 }
@@ -177,16 +195,18 @@ namespace Vanilla.Modules
                 ExceptionHandler("PlayerJoinModule", e4);
             }
         }
+
         #endregion
 
 
-       internal override void PlayerLeave(VRC.Player __0)
+        internal override void PlayerLeave(Player __0)
         {
             if (__0 == null)
             {
                 return;
             }
-            PlayerInformation playerInformation = PlayerWrapper.GetPlayerInformation(__0);
+
+            var playerInformation = PlayerWrapper.GetPlayerInformation(__0);
             if (playerInformation != null && PlayerUtils.playerCachingList.ContainsKey(playerInformation.displayName))
             {
                 PlayerUtils.playerCachingList.Remove(playerInformation.displayName);

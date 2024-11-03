@@ -12,86 +12,48 @@ namespace Vanilla.QM.Menu
         internal static void InitMenu(QMNestedButton Safemenu)
         {
             // TODO: add config values for these;
-          
 
-            var Getoffhead = new QMSingleButton(Safemenu, 1, 0, "Anti Attach", delegate
-            {
-                TeleportToSpace(3f).Start();
-            }, "Ports You to space then reloads crashing user atttached");
+
+            var Getoffhead = new QMSingleButton(Safemenu, 1, 0, "Anti Attach",
+                delegate { TeleportToSpace(3f).Start(); }, "Ports You to space then reloads crashing user atttached");
 
             var Anticrash = new QMNestedButton(Safemenu, 2, 0, "AntiCrash", "Vanilla", "AbandonWare");
 
-            var Particles = new QMToggleButton(Anticrash, 1, 0, "Particles Anti", delegate
-            {
-                particlep = true;
-            }, delegate
-            {
-                particlep = false;
-            }, "Particles anti crash");
+            var Particles = new QMToggleButton(Anticrash, 1, 0, "Particles Anti", delegate { particlep = true; },
+                delegate { particlep = false; }, "Particles anti crash");
 
-            var AudioSources = new QMToggleButton(Anticrash, 2, 0, "Audio Sources Anti", delegate
-            {
-                audiosourcep = true;
-            }, delegate
-            {
-                audiosourcep = false;
-            }, "AudioSources anti");
+            var AudioSources = new QMToggleButton(Anticrash, 2, 0, "Audio Sources Anti",
+                delegate { audiosourcep = true; }, delegate { audiosourcep = false; }, "AudioSources anti");
 
-            var Lightsource = new QMToggleButton(Anticrash, 3, 0, "Light Sources Anti", delegate
-            {
-                lightsp = true;
-            }, delegate
-            {
-                lightsp = false;
-            }, "Light Sources anti");
+            var Lightsource = new QMToggleButton(Anticrash, 3, 0, "Light Sources Anti", delegate { lightsp = true; },
+                delegate { lightsp = false; }, "Light Sources anti");
 
-            var LineRenderers = new QMToggleButton(Anticrash, 4, 0, "Line Renderers Anti", delegate
-            {
-                linerenderp = true;
-            }, delegate
-            {
-                linerenderp = false;
-            }, "Line Renderers anti");
+            var LineRenderers = new QMToggleButton(Anticrash, 4, 0, "Line Renderers Anti",
+                delegate { linerenderp = true; }, delegate { linerenderp = false; }, "Line Renderers anti");
 
-            var Meshes = new QMToggleButton(Anticrash, 1, 1, "Meshes Anti", delegate
-            {
-                meshp = true;
-            }, delegate
-            {
-                meshp = false;
-            }, "Meshes anti");
+            var Meshes = new QMToggleButton(Anticrash, 1, 1, "Meshes Anti", delegate { meshp = true; },
+                delegate { meshp = false; }, "Meshes anti");
 
-            var vertecies = new QMToggleButton(Anticrash, 2, 1, "Vertecies Anti", delegate
-            {
-                verticiesp = true;
-            }, delegate
-            {
-                verticiesp = false;
-            }, "Vertecies anti");
+            var vertecies = new QMToggleButton(Anticrash, 2, 1, "Vertecies Anti", delegate { verticiesp = true; },
+                delegate { verticiesp = false; }, "Vertecies anti");
 
-            var AntiE1 = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate
-            {
-                MainConfig.GetInstance().AntiE1 = true;
-            }, delegate
-            {
-                MainConfig.GetInstance().AntiE1 = false;
-            }, "Anti Event 1 Bad Data");
+            var AntiE1 = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate { GetInstance().AntiE1 = true; },
+                delegate { GetInstance().AntiE1 = false; }, "Anti Event 1 Bad Data");
 
 
-            if (MainConfig.GetInstance().AntiE1 == true)
-            { AntiE1.ClickMe(); }
-
-            var ReloadShaderList = new QMSingleButton(Anticrash, 4, 3, "Line Renderers Anti", delegate
+            if (GetInstance().AntiE1 == true)
             {
-                Vanilla.Modules.Anticrash.Reload();
-            }, "Reload Shader List");
+                AntiE1.ClickMe();
+            }
 
+            var ReloadShaderList = new QMSingleButton(Anticrash, 4, 3, "Line Renderers Anti",
+                delegate { Vanilla.Modules.Anticrash.Reload(); }, "Reload Shader List");
         }
 
 
-    // Safety Handleing
+        // Safety Handleing
 
-    private static Vector3 _currentVector;
+        private static Vector3 _currentVector;
 
         private static Quaternion _currentQuaternion;
 
@@ -105,7 +67,6 @@ namespace Vanilla.QM.Menu
             GeneralWrappers.CopyInstanceToClipboard();
             GeneralWrappers.JoinInstanceFromClipboard();
         }
-
 
 
         // Just going to set the anti Values here
@@ -123,6 +84,6 @@ namespace Vanilla.QM.Menu
         internal static bool linerenderp = true;
         internal static bool lightsp = true;
 
-      //  public static bool Antirape { get; private set; }
+        //  public static bool Antirape { get; private set; }
     }
 }
