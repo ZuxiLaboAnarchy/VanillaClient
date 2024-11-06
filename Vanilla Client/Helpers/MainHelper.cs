@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - MainHelper.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -30,33 +31,6 @@ namespace Vanilla.Helpers
         private float nextUpdateFetch = 0f;
         public static List<string> AvatarList = new();
 
-
-        /*private static System.Timers.Timer WSHelperTimer;
-           internal override void Start()
-           {
-               new Thread(() => { ThreadStart(); }).Start();
-           }
-
-
-           internal static void ThreadStart()
-           {
-               WSHelperTimer = new System.Timers.Timer(10000);
-               WSHelperTimer.Elapsed += CheckConnection;
-               WSHelperTimer.AutoReset = true;
-               WSHelperTimer.Enabled = true;
-               Dev("ServerAPI", "Started Heart Beat");
-           }
-
-
-           private static void CheckConnection(Object source, ElapsedEventArgs e)
-           {
-               WSBase.IsConnected();
-
-
-
-
-
-           }*/
         private static WebClient webClient = new();
 
         internal override void Start()
@@ -66,8 +40,6 @@ namespace Vanilla.Helpers
             MelonLoader.MelonCoroutines.Start(WaitForUI());
 
             FetchUpdates();
-
-            //MelonCoroutines.Start(CustomTags.TagListNetworkManager());
         }
 
 
@@ -121,29 +93,22 @@ namespace Vanilla.Helpers
                 FetchUpdates();
                 if (!RuntimeConfig.isBot)
                 {
-                    //  MainConfig.GetInstance().Save();
                     if (GetInstance().AutoFrends)
                     {
                         FriendLogger.AutoLogFriendsToFile();
                     }
-
                     WSBase.KeepAlivePack();
                     Dev("MainHelper", "Update Complete: " + UpdateNumber);
                 }
-                //   new Thread(() => { WSBase.Pop(); }).Start();
-                //UpdateNumber++;
             }
         }
 
         internal static void FetchUpdates()
         {
             Dev("Update", "Fetching Updates");
-
             var data = webClient.DownloadString("https://anarchy.zuxi.dev/api/getdata");
-
             ServerResponceHandler.HandleUpdate(data);
         }
-
 
         internal static bool AvatarLogHandler()
         {

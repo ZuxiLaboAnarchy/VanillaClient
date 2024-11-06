@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - VanillaObject.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -15,7 +16,8 @@ namespace Vanilla.Modules.VanillaGameObject
         internal static GameObject VanillaGObject { get; private set; }
         protected override string ModuleName => "VanillaObject";
 
-        internal override void WaitForPlayer()
+
+        internal override void OnUiManagerInit()
         {
             //ClassInjector.RegisterTypeInIl2Cpp<VanillaBehavior>();
             // ClassInjector.RegisterTypeInIl2Cpp<OpenVRThumbstickInputDirect>();

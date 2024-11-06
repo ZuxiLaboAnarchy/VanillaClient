@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - FileHelper.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -95,18 +96,20 @@ namespace Vanilla.Helpers
             return MelonUtils.BaseDirectory + $"\\VanillaClient";
 
 
-            var folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            /*
+                        var folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            // Combine the base folder with your specific folder....
-            var AppFolder = Path.Combine(folder, "Vanilla");
+                        // Combine the base folder with your specific folder....
+                        var AppFolder = Path.Combine(folder, "Vanilla");
 
 
-            if (!Directory.Exists(AppFolder))
-            {
-                Directory.CreateDirectory(AppFolder);
-            }
+                        if (!Directory.Exists(AppFolder))
+                        {
+                            Directory.CreateDirectory(AppFolder);
+                        }
 
-            return AppFolder;
+                        return AppFolder;
+            */
         }
 
         internal static string GetCheatFolder()

@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - EventHandlerPatch.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -14,7 +15,7 @@ namespace Vanilla.Patches
     {
         private static readonly Dictionary<int, Dictionary<int, float>> eventFilter = new();
 
-        private static readonly float eventFilterTimer = 30f;
+        //private static readonly float EventFilterTimer = 30f;
 
         private static readonly Dictionary<int, float> lastSpawnEmojiTime = new();
 

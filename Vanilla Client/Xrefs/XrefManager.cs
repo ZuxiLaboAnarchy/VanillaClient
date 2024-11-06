@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - XrefManager.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -95,6 +96,7 @@ namespace Vanilla.Xrefs
             return false;
         }
 
+        [Obsolete("Obsolete")]
         internal static void DumpXRefs(this Type type)
         {
             Dev("Xref", $"{type.Name} XRefs:");

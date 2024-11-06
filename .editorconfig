@@ -88,7 +88,7 @@ trim_trailing_whitespace = true
 
 # Custom header for files
 [*.{cs,cpp,h,html,js}]
-file_header_template = /*\n *\n * VanillaClient - {fileName}\n * Copyright 2023 - 2024 Zuxi and contributors\n *\n */;
+file_header_template = /*\n *\n * VanillaClient - {fileName}\n * Copyright 2023 - 2024 Zuxi and contributors\n * https://zuxi.dev\n *\n */;
 
 
 

@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - Settings.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -14,6 +15,7 @@ using Vanilla.APIs.ServerAPI;
 using Vanilla.Config;
 using Vanilla.Helpers;
 using Vanilla.Menu.QM.API;
+using Vanilla.Modules;
 using VRC.SDKBase;
 
 namespace Vanilla.Menu.QM.Menu
@@ -35,15 +37,14 @@ namespace Vanilla.Menu.QM.Menu
             //  var miscsettings = new QMNestedButton(settingsmenu, 3, 3, "Misc Settings", "Miscellaneous Settings", "Galaxy Client");
 
             var JoinLogger = new QMToggleButton(settingsmenu, 1, 0, "Join Logger", delegate
-
             {
-                GetInstance().ESP = true;
+                GetInstance().JoinLogger = true;
                 GetInstance().Save();
             }, delegate
             {
-                GetInstance().ESP = false;
+                GetInstance().JoinLogger = false;
                 GetInstance().Save();
-            }, "Toggle ESP Saving", true);
+            }, "Toggle ESP Saving",  GetInstance().JoinLogger);
 
             var LoadMusicToggle = new QMToggleButton(settingsmenu, 2, 0, "LoadMusic", delegate
 
@@ -55,7 +56,7 @@ namespace Vanilla.Menu.QM.Menu
             {
                 GetInstance().LoadMusic = false;
                 GetInstance().Save();
-            }, "Toggle Load Music", true);
+            }, "Toggle Load Music",  GetInstance().LoadMusic);
 
 
             var ESP = new QMToggleButton(settingsmenu, 3, 0, "ESP", delegate
@@ -91,11 +92,13 @@ namespace Vanilla.Menu.QM.Menu
             {
                 GetInstance().QuickMenuMusic = true;
                 GetInstance().Save();
+                MenuModification.ToggleMusic();
             }, delegate
             {
                 GetInstance().QuickMenuMusic = false;
                 GetInstance().Save();
-            }, "(Requires Restart)", true);
+                MenuModification.ToggleMusic();
+            }, "",  GetInstance().QuickMenuMusic);
 
             var closeGame = new QMSingleButton(settingsmenu, 2, 1, "Close Game", delegate
             {
@@ -111,6 +114,16 @@ namespace Vanilla.Menu.QM.Menu
                 new Thread(() => { WSBase.Pop(); }).Start();
             }, "Force Server Sync");
 
+            var DisableKeybinds = new QMToggleButton(settingsmenu, 2, 3, "Disable Keybinds", delegate
+            {
+                GetInstance().KeyBindsEnabled = true;
+                GetInstance().Save();
+            }, delegate
+            {
+
+                GetInstance().KeyBindsEnabled = false;
+                GetInstance().Save();
+            }, "Disables Keybinds", GetInstance().KeyBindsEnabled);
 
             var Pickups = new QMNestedButton(settingsmenu, 4, 1, "PickUps", "Vanilla", "AbandonWare");
 

@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - Safetymenu.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -43,13 +44,7 @@ namespace Vanilla.Menu.QM.Menu
                 delegate { verticiesp = false; }, "Vertecies anti");
 
             var AntiE1 = new QMToggleButton(Safemenu, 3, 0, "Anti Earrape", delegate { GetInstance().AntiE1 = true; },
-                delegate { GetInstance().AntiE1 = false; }, "Anti Event 1 Bad Data");
-
-
-            if (GetInstance().AntiE1 == true)
-            {
-                AntiE1.ClickMe();
-            }
+                delegate { GetInstance().AntiE1 = false; }, "Anti Event 1 Bad Data", GetInstance().AntiE1);
 
             var ReloadShaderList = new QMSingleButton(Anticrash, 4, 3, "Line Renderers Anti",
                 delegate { Modules.Anticrash.Reload(); }, "Reload Shader List");

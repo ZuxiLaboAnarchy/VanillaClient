@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - RuntimeConfig.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -49,6 +50,7 @@ namespace Vanilla.Config
         internal static string ReleaseID = "Release";
 #endif
         internal static bool ItemLagger = false;
+        public static bool KeybindsEnabled = true;
 
         internal static void SetStaff(string id)
         {

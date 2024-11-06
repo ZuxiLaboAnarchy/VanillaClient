@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - SteamVRDirectINput.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -18,7 +19,7 @@ namespace Vanilla.Modules.VanillaGameObject
         }
 
         // Device index for left controller (can be dynamically queried as needed)
-        private uint leftHandDeviceIndex = 0; //OpenVR.k_unTrackedDeviceIndexInvalid;
+        //  private uint _leftHandDeviceIndex = 0; //OpenVR.k_unTrackedDeviceIndexInvalid;
         /*
             void Update()
             {

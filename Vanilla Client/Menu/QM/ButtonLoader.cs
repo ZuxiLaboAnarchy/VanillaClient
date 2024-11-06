@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - ButtonLoader.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -32,7 +33,7 @@ namespace Vanilla.Menu.QM
             //  GameObject.Find("Canvas_QuickMenu(Clone)/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/").gameObject.SetActive(false);
 
             var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord",
-                delegate { Process.Start("https://imzuxi.com/galaxydiscord/"); }, "Join The Discord");
+                delegate { Process.Start("https://zuxi.dev/galaxydiscord/"); }, "Join The Discord");
             /*
                         var GoToRoom = new QMSingleButton(tabMenu, 2, 0, "Go to Room", delegate
                         {

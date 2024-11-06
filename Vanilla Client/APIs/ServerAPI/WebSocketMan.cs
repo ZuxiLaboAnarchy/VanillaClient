@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - WebSocketMan.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -64,7 +65,7 @@ namespace Vanilla.APIs.ServerAPI
         {
             RuntimeConfig.WSAuthed = true;
 
-            using (wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT()))
+            using (wss = new WebSocket("wss://ws.zuxi.dev" + ServerHelper.GetJWT()))
             {
                 Dev("ServerAPI", "Connecting to: " + wss.Url);
                 wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
@@ -119,7 +120,7 @@ namespace Vanilla.APIs.ServerAPI
             if (!wss.IsAlive)
             // wss = new WebSocket("wss://hvl.gg/api/cheats/vrchat?token=" + ServerHelper.GetJWT());
             {
-                wss = new WebSocket("wss://ws.imzuxi.com" + ServerHelper.GetJWT());
+                wss = new WebSocket("wss://ws.zuxi.dev" + ServerHelper.GetJWT());
             }
         }
 

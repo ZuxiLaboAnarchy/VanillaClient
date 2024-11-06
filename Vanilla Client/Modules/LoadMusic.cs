@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - LoadMusic.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -85,10 +86,12 @@ namespace Vanilla.Modules
                     .SetActive(false);
                 yield return new WaitForSeconds(0.5f);
             }
-            else
-            {
-                GetInstance().LoadMusic = true;
-            }
+            /*           else
+
+                       {
+                           GetInstance().LoadMusic = true;
+                       }
+           */
         }
     }
 }

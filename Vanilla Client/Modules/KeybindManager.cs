@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - KeybindManager.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -32,6 +33,9 @@ namespace Vanilla.Modules
 
         internal override void Update()
         {
+
+            if (!GetInstance().KeyBindsEnabled)
+                return;
 #if DEBUG
             if (Input.GetKeyDown(KeyCode.L))
             {

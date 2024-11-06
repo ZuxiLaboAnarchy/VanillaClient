@@ -413,6 +413,7 @@
         <Compile Include="Modules\WorldHistoryManager.cs"/>
         <Compile Include="Modules\FlyManager.cs"/>
         <Compile Include="Patches\EventHandlerPatch.cs"/>
+        <Compile Include="Patches\Harmony\ActionMenu.cs" />
         <Compile Include="Patches\Harmony\AntiConsoleClearPatch.cs"/>
         <Compile Include="Patches\Harmony\ConsoleLogSuppresser.cs"/>
         <Compile Include="Patches\Harmony\CrackPatcher.cs"/>

@@ -2,9 +2,11 @@
 //  *
 //  * VanillaClient - NativePatchUtils.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
+#nullable enable
 using HarmonyLib;
 using MelonLoader;
 using System.Collections.Generic;

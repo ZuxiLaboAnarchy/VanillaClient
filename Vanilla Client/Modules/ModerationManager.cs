@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - ModerationManager.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -16,12 +17,12 @@ namespace Vanilla.Modules
     {
         internal static bool OnEvent(EventData eventData)
         {
-            var returnvalue = true;
+
             var dictionary = eventData.Parameters[eventData.CustomDataKey]
                 .Cast<Dictionary<byte, Il2CppSystem.Object>>();
-            var ModerationEventCode = (PhotonModerationCodes)dictionary[0].Unbox<byte>();
+            var moderationEventCode = (PhotonModerationCodes)dictionary[0].Unbox<byte>();
 
-            return ModerationEventCode switch
+            return moderationEventCode switch
             {
                 PhotonModerationCodes.MuteAndBlock => false,
                 //  PhotonEventCodes.EventCodes.Moderations => false,

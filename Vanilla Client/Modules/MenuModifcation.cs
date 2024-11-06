@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - MenuModifcation.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -21,6 +22,7 @@ namespace Vanilla.Modules
     {
         protected override string ModuleName => "Menu Modifier";
 
+        private static GameObject _qmMusicObject;
 
         internal override void OnQuickMenuLoaded()
         {
@@ -205,40 +207,45 @@ namespace Vanilla.Modules
 
         public static void AddQuickMenuAudio()
         {
-            var _qmmusic = new GameObject("QMusic");
-            var _AudioSource = _qmmusic.AddComponent<AudioSource>();
+             _qmMusicObject = new GameObject("QMusic");
+            var _AudioSource = _qmMusicObject.AddComponent<AudioSource>();
             _AudioSource.loop = true;
             _AudioSource.clip = AssetLoader.LoadAudio("QMusic");
             _AudioSource.Play();
 
-            _qmmusic.transform.SetParent(GameObject.Find("UserInterface").transform
+            _qmMusicObject.transform.SetParent(GameObject.Find("UserInterface").transform
                 .Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent").transform);
-            _qmmusic.SetActive(true);
+            _qmMusicObject.SetActive(GetInstance().QuickMenuMusic);
+        }
+
+        internal static void ToggleMusic()
+        {
+            _qmMusicObject.SetActive(GetInstance().QuickMenuMusic);
         }
 
 
-        private static List<Image> normalColorImage;
-        private static List<Image> dimmerColorImage;
-        private static List<Image> darkerColorImage;
-        private static List<Text> normalColorText;
-        private static bool setupSkybox = false;
-        private static GameObject loadingBackground;
-        private static GameObject initialLoadingBackground;
-        private static Dictionary<UnityEngine.Object, Color> originalColours;
-        private static Dictionary<UnityEngine.Object, Texture2D> originalTextures;
-        private static Dictionary<UnityEngine.Object, Sprite> originalSprites;
-        private static Dictionary<UnityEngine.Object, ColorBlock> originalColourBlocks;
-        private static bool collectingColours = false;
+        private static List<Image> _normalColorImage;
+        private static List<Image> _dimmerColorImage;
+        private static List<Image> _darkerColorImage;
+        private static List<Text> _normalColorText;
+        private static bool _setupSkybox = false;
+        private static GameObject _loadingBackground;
+        //  private static GameObject _initialLoadingBackground;
+        private static Dictionary<UnityEngine.Object, Color> _originalColours;
+        private static Dictionary<UnityEngine.Object, Texture2D> _originalTextures;
+        private static Dictionary<UnityEngine.Object, Sprite> _originalSprites;
+        private static Dictionary<UnityEngine.Object, ColorBlock> _originalColourBlocks;
+        private static bool _collectingColours = false;
 
         internal static void ApplyIfApplicable()
         {
-            if (originalColours == null || originalTextures == null || originalSprites == null)
+            if (_originalColours == null || _originalTextures == null || _originalSprites == null)
             {
-                originalColours = new Dictionary<UnityEngine.Object, Color>();
-                originalTextures = new Dictionary<UnityEngine.Object, Texture2D>();
-                originalSprites = new Dictionary<UnityEngine.Object, Sprite>();
-                originalColourBlocks = new Dictionary<UnityEngine.Object, ColorBlock>();
-                collectingColours = true;
+                _originalColours = new Dictionary<UnityEngine.Object, Color>();
+                _originalTextures = new Dictionary<UnityEngine.Object, Texture2D>();
+                _originalSprites = new Dictionary<UnityEngine.Object, Sprite>();
+                _originalColourBlocks = new Dictionary<UnityEngine.Object, ColorBlock>();
+                _collectingColours = true;
             }
 
             //  Color color = Config.MainConfig.GetInstance().UiRecolor ? Configuration.menuColor() : Configuration.defaultMenuColor();
@@ -252,65 +259,65 @@ namespace Vanilla.Modules
             var quickMenu = VRC.UI.UIManagerImpl.prop_UIManagerImpl_0.field_Private_Transform_0.Find("MenuContent")
                 .gameObject;
 
-            if (normalColorImage == null || normalColorImage.Count == 0)
+            if (_normalColorImage == null || _normalColorImage.Count == 0)
             {
                 Dev("MenuRecolor", "Gathering elements to color normally...");
-                normalColorImage = new List<Image>();
-                normalColorImage.Add(quickMenu.transform.Find("Screens/Settings_Safety/_Description_SafetyLevel")
+                _normalColorImage = new List<Image>();
+                _normalColorImage.Add(quickMenu.transform.Find("Screens/Settings_Safety/_Description_SafetyLevel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform
+                _normalColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Custom/ON").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform
+                _normalColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_None/ON").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform
+                _normalColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Normal/ON").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform
+                _normalColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Maxiumum/ON").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/InputKeypadPopup/Rectangle/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/InputKeypadPopup/Rectangle/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/InputKeypadPopup/InputField")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/InputKeypadPopup/InputField")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopupV2/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopupV2/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/InnerDashRing")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/InnerDashRing")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/RingGlow").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/RingGlow").GetComponent<Image>());
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/InputPopup/InputField").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/InputFieldStatus")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/InputPopup/InputField").GetComponent<Image>());
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/InputFieldStatus")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/AdvancedSettingsPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/AdvancedSettingsPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/AddToFavoriteListPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/AddToFavoriteListPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/EditFavoriteListPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/EditFavoriteListPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/PerformanceSettingsPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/PerformanceSettingsPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/AlertPopup/Lighter").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/AlertPopup/Lighter").GetComponent<Image>());
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/ReportWorldPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/ReportWorldPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/ReportUserPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/ReportUserPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/SearchOptionsPopup/Popup/Panel (1)")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/SearchOptionsPopup/Popup/Panel (1)")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/SendInvitePopup/SendInviteMenu/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/SendInvitePopup/SendInviteMenu/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/RequestInvitePopup/RequestInviteMenu/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/RequestInvitePopup/RequestInviteMenu/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/ControllerBindingsPopup/Popup/Panel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/ControllerBindingsPopup/Popup/Panel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/PanelBackground")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/PanelBackground")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/TitlePanel")
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/TitlePanel")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Screens/UserInfo/User Panel/PanelHeaderBackground")
+                _normalColorImage.Add(quickMenu.transform.Find("Screens/UserInfo/User Panel/PanelHeaderBackground")
                     .GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/ArrowLeft").GetComponent<Image>());
-                normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/ArrowRight").GetComponent<Image>());
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/ArrowLeft").GetComponent<Image>());
+                _normalColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/ArrowRight").GetComponent<Image>());
                 //normalColorImage.Add(quickMenu.transform.Find("Screens/UserInfo/User Panel/Panel (1)").GetComponent<Image>());
                 foreach (var obj in quickMenu.GetComponentsInChildren<Transform>(true)
                              .Where(x => x.name.Contains("Panel_Header")))
@@ -319,7 +326,7 @@ namespace Vanilla.Modules
                     {
                         if (img.gameObject.name != "Checkmark")
                         {
-                            normalColorImage.Add(img);
+                            _normalColorImage.Add(img);
                         }
                     }
                 }
@@ -331,31 +338,31 @@ namespace Vanilla.Modules
                     {
                         if (img.gameObject.name != "Checkmark")
                         {
-                            normalColorImage.Add(img);
+                            _normalColorImage.Add(img);
                         }
                     }
                 }
 
                 try
                 {
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find("Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Panel_Backdrop")
                         .GetComponent<Image>());
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find("Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Left")
                         .GetComponent<Image>());
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find("Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Right")
                         .GetComponent<Image>());
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find(
                             "Popups/LoadingPopup/MirroredElements/ProgressPanel (1)/Parent_Loading_Progress/Panel_Backdrop")
                         .GetComponent<Image>());
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find(
                             "Popups/LoadingPopup/MirroredElements/ProgressPanel (1)/Parent_Loading_Progress/Decoration_Left")
                         .GetComponent<Image>());
-                    normalColorImage.Add(quickMenu.transform
+                    _normalColorImage.Add(quickMenu.transform
                         .Find(
                             "Popups/LoadingPopup/MirroredElements/ProgressPanel (1)/Parent_Loading_Progress/Decoration_Right")
                         .GetComponent<Image>());
@@ -366,23 +373,23 @@ namespace Vanilla.Modules
                 }
             }
 
-            if (dimmerColorImage == null || dimmerColorImage.Count == 0)
+            if (_dimmerColorImage == null || _dimmerColorImage.Count == 0)
             {
                 Dev("MenuRecolor", "Gathering elements to color lighter...");
-                dimmerColorImage = new List<Image>();
-                dimmerColorImage.Add(quickMenu.transform
+                _dimmerColorImage = new List<Image>();
+                _dimmerColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Custom/ON/TopPanel_SafetyLevel")
                     .GetComponent<Image>());
-                dimmerColorImage.Add(quickMenu.transform
+                _dimmerColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_None/ON/TopPanel_SafetyLevel")
                     .GetComponent<Image>());
-                dimmerColorImage.Add(quickMenu.transform
+                _dimmerColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Normal/ON/TopPanel_SafetyLevel")
                     .GetComponent<Image>());
-                dimmerColorImage.Add(quickMenu.transform
+                _dimmerColorImage.Add(quickMenu.transform
                     .Find("Screens/Settings_Safety/_Buttons_SafetyLevel/Button_Maxiumum/ON/TopPanel_SafetyLevel")
                     .GetComponent<Image>());
-                dimmerColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/BorderImage")
+                _dimmerColorImage.Add(quickMenu.transform.Find("Popups/ChangeProfilePicPopup/Popup/BorderImage")
                     .GetComponent<Image>());
                 foreach (var obj in quickMenu.GetComponentsInChildren<Transform>(true)
                              .Where(x => x.name.Contains("Fill")))
@@ -391,49 +398,49 @@ namespace Vanilla.Modules
                     {
                         if (img.gameObject.name != "Checkmark")
                         {
-                            dimmerColorImage.Add(img);
+                            _dimmerColorImage.Add(img);
                         }
                     }
                 }
             }
 
-            if (darkerColorImage == null || darkerColorImage.Count == 0)
+            if (_darkerColorImage == null || _darkerColorImage.Count == 0)
             {
                 Dev("MenuRecolor", "Gathering elements to color darker...");
-                darkerColorImage = new List<Image>();
-                darkerColorImage.Add(
+                _darkerColorImage = new List<Image>();
+                _darkerColorImage.Add(
                     quickMenu.transform.Find("Popups/InputKeypadPopup/Rectangle").GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopupV2/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopupV2/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/Rectangle").GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/MidRing").GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/Rectangle").GetComponent<Image>());
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/StandardPopup/MidRing").GetComponent<Image>());
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/UpdateStatusPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/AdvancedSettingsPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/AdvancedSettingsPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/AddToFavoriteListPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/AddToFavoriteListPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/EditFavoriteListPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/EditFavoriteListPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/PerformanceSettingsPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/PerformanceSettingsPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/BorderImage (1)")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/RoomInstancePopup/Popup/BorderImage (1)")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/ReportWorldPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/ReportWorldPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/ReportUserPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/ReportUserPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/SearchOptionsPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/SearchOptionsPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/SendInvitePopup/SendInviteMenu/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/SendInvitePopup/SendInviteMenu/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/RequestInvitePopup/RequestInviteMenu/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/RequestInvitePopup/RequestInviteMenu/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Popups/ControllerBindingsPopup/Popup/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Popups/ControllerBindingsPopup/Popup/BorderImage")
                     .GetComponent<Image>());
-                darkerColorImage.Add(quickMenu.transform.Find("Screens/UserInfo/ModerateDialog/Panel/BorderImage")
+                _darkerColorImage.Add(quickMenu.transform.Find("Screens/UserInfo/ModerateDialog/Panel/BorderImage")
                     .GetComponent<Image>());
                 foreach (var obj in quickMenu.GetComponentsInChildren<Transform>(true).Where(x =>
                              (x.name.Contains("Background") || x.name.Contains("TitlePanel")) &&
@@ -444,153 +451,153 @@ namespace Vanilla.Modules
                     {
                         if (img.gameObject.name != "Checkmark")
                         {
-                            darkerColorImage.Add(img);
+                            _darkerColorImage.Add(img);
                         }
                     }
                 }
             }
 
-            if (normalColorText == null || normalColorText.Count == 0)
+            if (_normalColorText == null || _normalColorText.Count == 0)
             {
                 Dev("MenuRecolor", "Gathering text elements to color...");
-                normalColorText = new List<Text>();
+                _normalColorText = new List<Text>();
                 foreach (var txt in quickMenu.transform.Find("Popups/InputPopup/Keyboard/Keys")
                              .GetComponentsInChildren<Text>(true))
                 {
-                    normalColorText.Add(txt);
+                    _normalColorText.Add(txt);
                 }
 
                 foreach (var txt in quickMenu.transform.Find("Popups/InputKeypadPopup/Keyboard/Keys")
                              .GetComponentsInChildren<Text>(true))
                 {
-                    normalColorText.Add(txt);
+                    _normalColorText.Add(txt);
                 }
 
-                normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld/Label")
+                _normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld/Label")
                     .GetComponentInChildren<Text>(true));
-                normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameVoice/Label")
+                _normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameVoice/Label")
                     .GetComponentInChildren<Text>(true));
-                normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameAvatars/Label")
+                _normalColorText.Add(quickMenu.transform.Find("Screens/Settings/VolumePanel/VolumeGameAvatars/Label")
                     .GetComponentInChildren<Text>(true));
-                normalColorText.AddRange(quickMenu.transform.Find("Screens/Social/UserProfileAndStatusSection")
+                _normalColorText.AddRange(quickMenu.transform.Find("Screens/Social/UserProfileAndStatusSection")
                     .GetComponentsInChildren<Text>(true));
                 //normalColorText.Add(quickMenu.transform.Find("Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Loading Elements/txt_Percent").GetComponentInChildren<Text>(true));
-                normalColorText.Add(quickMenu.transform
+                _normalColorText.Add(quickMenu.transform
                     .Find("Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Loading Elements/txt_LOADING_Size")
                     .GetComponentInChildren<Text>(true));
                 //normalColorText.Add(quickMenu.transform.Find("Popups/LoadingPopup/MirroredElements/ProgressPanel (1)/Parent_Loading_Progress/Loading Elements/txt_Percent").GetComponentInChildren<Text>(true));
-                normalColorText.Add(quickMenu.transform
+                _normalColorText.Add(quickMenu.transform
                     .Find(
                         "Popups/LoadingPopup/MirroredElements/ProgressPanel (1)/Parent_Loading_Progress/Loading Elements/txt_LOADING_Size")
                     .GetComponentInChildren<Text>(true));
             }
 
-            if (collectingColours)
+            if (_collectingColours)
             {
-                foreach (var img in normalColorImage)
+                foreach (var img in _normalColorImage)
                 {
-                    originalColours.Add(img, img.color);
+                    _originalColours.Add(img, img.color);
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        originalSprites.Add(img, img.sprite);
+                        _originalSprites.Add(img, img.sprite);
                     }
                 }
 
-                foreach (var img in dimmerColorImage)
+                foreach (var img in _dimmerColorImage)
                 {
-                    originalColours.Add(img, img.color);
+                    _originalColours.Add(img, img.color);
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        originalSprites.Add(img, img.sprite);
+                        _originalSprites.Add(img, img.sprite);
                     }
                 }
 
-                foreach (var img in darkerColorImage)
+                foreach (var img in _darkerColorImage)
                 {
-                    originalColours.Add(img, img.color);
+                    _originalColours.Add(img, img.color);
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        originalSprites.Add(img, img.sprite);
+                        _originalSprites.Add(img, img.sprite);
                     }
                 }
 
-                foreach (var txt in normalColorText)
+                foreach (var txt in _normalColorText)
                 {
-                    originalColours.Add(txt, txt.color);
+                    _originalColours.Add(txt, txt.color);
                 }
             }
 
             if (GetInstance().UiRecolor)
             {
                 Dev("MenuRecolor", "Coloring normal elements...");
-                foreach (var img in normalColorImage)
+                foreach (var img in _normalColorImage)
                 {
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        img.sprite = originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
+                        img.sprite = _originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
                     }
 
                     img.color = colorT;
                 }
 
                 Dev("MenuRecolor", "Coloring lighter elements...");
-                foreach (var img in dimmerColorImage)
+                foreach (var img in _dimmerColorImage)
                 {
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        img.sprite = originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
+                        img.sprite = _originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
                     }
 
                     img.color = dimmerT;
                 }
 
                 Dev("MenuRecolor", "Coloring darker elements...");
-                foreach (var img in darkerColorImage)
+                foreach (var img in _darkerColorImage)
                 {
                     if (img.sprite != null && img.sprite.texture != null)
                     {
-                        img.sprite = originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
+                        img.sprite = _originalSprites[img].ReplaceTexture(img.sprite.UnpackTexture().Desaturate());
                     }
 
                     img.color = darkerT;
                 }
 
                 Dev("MenuRecolor", "Coloring text elements...");
-                foreach (var txt in normalColorText)
+                foreach (var txt in _normalColorText)
                 {
                     txt.color = color;
                 }
             }
-            else if (!GetInstance().UiRecolor && originalColours != null)
+            else if (!GetInstance().UiRecolor && _originalColours != null)
             {
-                foreach (var img in normalColorImage)
+                foreach (var img in _normalColorImage)
                 {
-                    img.color = originalColours
+                    img.color = _originalColours
                         .FirstOrDefault(a => a.Key.GetType() == typeof(Image) && (Image)a.Key == img).Value;
                 }
 
-                foreach (var img in dimmerColorImage)
+                foreach (var img in _dimmerColorImage)
                 {
-                    img.color = originalColours
+                    img.color = _originalColours
                         .FirstOrDefault(a => a.Key.GetType() == typeof(Image) && (Image)a.Key == img).Value;
                 }
 
-                foreach (var img in darkerColorImage)
+                foreach (var img in _darkerColorImage)
                 {
-                    img.color = originalColours
+                    img.color = _originalColours
                         .FirstOrDefault(a => a.Key.GetType() == typeof(Image) && (Image)a.Key == img).Value;
                 }
 
-                foreach (var txt in normalColorText)
+                foreach (var txt in _normalColorText)
                 {
-                    txt.color = originalColours
+                    txt.color = _originalColours
                         .FirstOrDefault(a => a.Key.GetType() == typeof(Text) && (Text)a.Key == txt).Value;
                 }
             }
 
-            if (!GetInstance().UiRecolor && !collectingColours)
+            if (!GetInstance().UiRecolor && !_collectingColours)
             {
-                foreach (var kvp in originalSprites)
+                foreach (var kvp in _originalSprites)
                 {
                     if (kvp.Key != null && kvp.Key.GetType() == typeof(Image))
                     {
@@ -599,22 +606,22 @@ namespace Vanilla.Modules
                 }
             }
 
-            if (!setupSkybox && !ModCompatibility.BetterLoadingScreen)
+            if (!_setupSkybox && !ModCompatibility.BetterLoadingScreen)
             {
                 try
                 {
                     Dev("MenuRecolor", "Setting up skybox coloring...");
                     //Resources.blankGradient = new Texture2D(16, 16);
                     //UnityEngine.ImageConversion.LoadImage(Resources.blankGradient, Convert.FromBase64String(B64Textures.Gradient), false);
-                    loadingBackground = quickMenu.transform
+                    _loadingBackground = quickMenu.transform
                         .Find("Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject;
-                    loadingBackground.GetComponent<MeshRenderer>().material
+                    _loadingBackground.GetComponent<MeshRenderer>().material
                         .SetTexture("_Tex", AssetLoader.LoadCubeMap("Gradient"));
-                    loadingBackground.GetComponent<MeshRenderer>().material.SetColor("_Tint",
+                    _loadingBackground.GetComponent<MeshRenderer>().material.SetColor("_Tint",
                         new Color(color.r / 2f, color.g / 2f, color.b / 2f, color.a));
-                    loadingBackground.GetComponent<MeshRenderer>().material
+                    _loadingBackground.GetComponent<MeshRenderer>().material
                         .SetTexture("_Tex", AssetLoader.LoadCubeMap("Gradient"));
-                    setupSkybox = true;
+                    _setupSkybox = true;
 
                     //    initialLoadingBackground = UnityEngine.Object.Instantiate(loadingBackground, GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup").transform);
 
@@ -628,10 +635,10 @@ namespace Vanilla.Modules
                 }
             }
 
-            if (setupSkybox && loadingBackground != null && !ModCompatibility.BetterLoadingScreen)
+            if (_setupSkybox && _loadingBackground != null && !ModCompatibility.BetterLoadingScreen)
             {
                 Dev("MenuRecolor", "Coloring skybox...");
-                loadingBackground.GetComponent<MeshRenderer>().material.SetColor("_Tint",
+                _loadingBackground.GetComponent<MeshRenderer>().material.SetColor("_Tint",
                     new Color(color.r / 2f, color.g / 2f, color.b / 2f, color.a));
             }
 
@@ -648,18 +655,18 @@ namespace Vanilla.Modules
             color.a = 0.9f;
             foreach (var highlights in Resources.FindObjectsOfTypeAll<HighlightsFXStandalone>())
             {
-                if (highlights != null && collectingColours)
+                if (highlights != null && _collectingColours)
                 {
-                    originalColours.Add(highlights, highlights.highlightColor);
+                    _originalColours.Add(highlights, highlights.highlightColor);
                 }
 
                 if (GetInstance().UiRecolor)
                 {
                     highlights.highlightColor = color;
                 }
-                else if (!GetInstance().UiRecolor && originalColours != null)
+                else if (!GetInstance().UiRecolor && _originalColours != null)
                 {
-                    highlights.highlightColor = originalColours
+                    highlights.highlightColor = _originalColours
                         .FirstOrDefault(a => a.Key.GetType() == typeof(HighlightsFXStandalone)).Value;
                 }
             }
@@ -743,18 +750,18 @@ namespace Vanilla.Modules
                 theme.normalColor = darker;
                 foreach (var sldr in quickMenu.GetComponentsInChildren<Slider>(true))
                 {
-                    if (collectingColours)
+                    if (_collectingColours)
                     {
-                        originalColourBlocks.Add(sldr, sldr.colors);
+                        _originalColourBlocks.Add(sldr, sldr.colors);
                     }
 
                     if (GetInstance().UiRecolor)
                     {
                         sldr.colors = theme;
                     }
-                    else if (!GetInstance().UiRecolor && !collectingColours)
+                    else if (!GetInstance().UiRecolor && !_collectingColours)
                     {
-                        sldr.colors = originalColourBlocks.FirstOrDefault(a => a.Key != null && a.Key == sldr).Value;
+                        sldr.colors = _originalColourBlocks.FirstOrDefault(a => a.Key != null && a.Key == sldr).Value;
                     }
                 }
 
@@ -771,18 +778,18 @@ namespace Vanilla.Modules
                                                                          btn.transform.parent.name
                                                                              .Contains("WorldInfo"))))
                     {
-                        if (collectingColours)
+                        if (_collectingColours)
                         {
-                            originalColourBlocks.Add(btn, btn.colors);
+                            _originalColourBlocks.Add(btn, btn.colors);
                         }
 
                         if (GetInstance().UiRecolor)
                         {
                             btn.colors = buttonTheme;
                         }
-                        else if (!GetInstance().UiRecolor && !collectingColours)
+                        else if (!GetInstance().UiRecolor && !_collectingColours)
                         {
-                            btn.colors = originalColourBlocks.FirstOrDefault(a => a.Key != null && a.Key == btn).Value;
+                            btn.colors = _originalColourBlocks.FirstOrDefault(a => a.Key != null && a.Key == btn).Value;
                         }
                     }
                 }
@@ -837,7 +844,7 @@ namespace Vanilla.Modules
             }
 
 
-            collectingColours = false;
+            _collectingColours = false;
             //try
             //{
             //    foreach (Image img in ButtonAPI.GetQuickMenuInstance().GetComponentsInChildren<Image>(true))

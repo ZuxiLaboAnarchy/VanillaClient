@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - MainConfig.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -316,6 +317,16 @@ namespace Vanilla.Config
             set
             {
                 _ClearLogsOnExit = value;
+                Save();
+            }
+        }
+
+        private bool _KeyBindsEnabled = true;
+        public bool KeyBindsEnabled  {
+            get => _KeyBindsEnabled;
+            set
+            {
+                _KeyBindsEnabled = value;
                 Save();
             }
         }

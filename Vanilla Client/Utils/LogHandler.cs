@@ -2,6 +2,7 @@
 //  *
 //  * VanillaClient - LogHandler.cs
 //  * Copyright 2023 - 2024 Zuxi and contributors
+//  * https://zuxi.dev
 //  *
 //  */
 
@@ -96,7 +97,7 @@ namespace Vanilla.Utils
         }
 
         internal static void Dev(string identify, object message, ConsoleColor color = ConsoleColor.Magenta,
-            string caller = null, bool logToHud = true)
+            string caller = null, bool logToHud = false)
         {
             if (DevMode)
             {
